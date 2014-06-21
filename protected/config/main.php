@@ -84,8 +84,14 @@ return array(
             'class' => 'ext.eauth.EAuth',
             'popup' => true, // Use the popup window instead of redirecting.
             'services' => array(// You can change the providers and their classes.
-                'google' => array(
+                /*'google' => array(
                     'class' => 'GoogleOpenIDService',
+                ),*/
+                'google-oauth' => array(
+                    'class' => 'GoogleOAuthService',
+                    'client_id' => '180893836341-vcn01hiq0f8okbbgfefs1fpg8nd7hu61.apps.googleusercontent.com',
+                    'client_secret' => 'dIUp4JQarpWJtLd2mMEdr4rn',
+                    'title' => 'Google (OAuth2)',
                 ),
                 'yandex' => array(
                     'class' => 'YandexOpenIDService',
