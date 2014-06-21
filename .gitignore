@@ -1,3 +1,5 @@
 /index.php
 /protected/config/main.php
-nbproject/
+/nbproject/
+/assets/
+/protected/runtime/
