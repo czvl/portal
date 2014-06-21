@@ -266,7 +266,7 @@ ul#menu-main > li > a:hover {
 ---------------------------------------------------------------------------------------------------------- */
 #headerwrap {
     width: 100%;
-    background: url(../img/top-bg.jpg) #0b333f no-repeat center center fixed;
+    background: url(../images/top-bg.jpg) #0b333f no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -359,7 +359,7 @@ section.single-page h1 {
     font-size: 2.25em; /* 36px */
 }
 #feature {
-    background: #fdc300 url("../img/yellow.png") repeat-x 0 0;
+    background: #fdc300 url("../images/yellow.png") repeat-x 0 0;
     //height: 350px;
     z-index: 500;
     box-shadow: 0 5px 16px rgba(0, 0, 0, 0.3);
@@ -486,7 +486,7 @@ section#services .span3:hover {
 
 section#testimonials {
     height:  647px;
-    background: url("../img/yellow_testimonial.png") repeat-x 0 0;
+    background: url("../images/yellow_testimonial.png") repeat-x 0 0;
     padding: 0;
     color: #e4e5e2;
     z-index: 500;
@@ -516,7 +516,7 @@ blockquote.mega .cite {
 }
 /* News */
 section#news {
-    background: url("../img/grey-cardboard-bg.png") repeat 0 0;
+    background: url("../images/grey-cardboard-bg.png") repeat 0 0;
 }
 section#news .align {
     font-size: 6em;
@@ -533,7 +533,7 @@ article.post {
 article .inside {
     margin: 18px 24px 24px;
     padding-top: 1em;
-    background: url("../img/dot-row-2.png") repeat-x scroll 0 0 transparent !important;
+    //background: url("../img/dot-row-2.png") repeat-x scroll 0 0 transparent !important;
 }
 .post-date {
     color: #A5A5A2;
@@ -696,7 +696,7 @@ hr.featurette-divider {
     margin: 3em 0;
     border-width: 0;
     height: 9px;
-    background: url("../img/dot-row-3-lt.png") repeat-x;
+    //background: url("../img/dot-row-3-lt.png") repeat-x;
 }
 /* ---------------------------------------------------------------------------------------------------------- 
 06 Footer ------------------------------------------------------------
