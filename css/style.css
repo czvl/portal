@@ -53,11 +53,7 @@ body {
 }
 /*---------- FORMS ----------*/
 
-input[type=text], input[type=submit], textarea {
-    width: 100%;
-    padding: 0.5em;
-    font-size: 1em;
-    margin-bottom: 1.5em;
+input[type=text], input[type=password], input[type=submit], textarea {
     box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -561,6 +557,19 @@ article .inside {
 section#team, section#contact {
     color: #e4e5e2;
     background:#312A1E;
+}
+section#auth {
+    color: #fff;
+    text-align: left;
+    font-size: 110%;
+    background: url(../images/top-bg.jpg) #0b333f no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    min-height: 350px;
+    margin-top: -60px;
+    padding-top: 160px;
 }
 section#team .align, section#contact .align {
     font-size: 6em;
@@ -1102,4 +1111,23 @@ footer p {
 }
 .fb-like {
     z-index: 1000;
+}
+
+div.form label.inline {display: inline;}
+
+.login_form {
+    display: block;
+    width: 600px;
+    margin: 0px auto;
+}
+
+ul#menu-main > li > a.auth-link {
+    background: #f1505a;
+    padding: 9px 15px;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+}
+ul#menu-main > li > a.auth-link:hover {
+    background: #f0bf00;
 }

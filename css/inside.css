@@ -1,0 +1,30 @@
+.container {
+    width: 100%;
+    margin: 0px;    
+}
+.row-fluid {
+    margin-top: 50px;
+}
+.footer {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-top: 20px;
+  border-top: 1px solid #eee;
+}
+li.nav-header {
+    text-transform: none;
+    margin-top: 7px;
+    font-size: 110%;
+    font-weight: normal;
+}
+.maincontainer {
+    display: block;
+    padding-top: 50px;
+}
+
+.form-signin fieldset {
+    width: 260px;
+    margin: 0px auto;
+}
+
+#editor {overflow:scroll; max-height:300px}

@@ -1,15 +1,10 @@
 <?php
-/* @var $this SiteController */
-/* @var $error array */
-
-$this->pageTitle=Yii::app()->name . ' - Error';
-$this->breadcrumbs=array(
-	'Error',
-);
+$this->pageTitle = Yii::app()->name . ' - Error';
 ?>
 
-<h2>Error <?php echo $code; ?></h2>
-
-<div class="error">
-<?php echo CHtml::encode($message); ?>
+<div id="headerwrap">
+    <header class="clearfix error">
+        <h2><?php echo Yii::t('main', 'Error') . ' ' . $code; ?></h2>
+        <?php echo CHtml::encode($message); ?>
+    </header>
 </div>
