@@ -3,6 +3,7 @@
                     <?php
                         $this->widget('bootstrap.widgets.TbNavbar', array(
                             'brandLabel' => Yii::t('main', Yii::app()->name),
+                            'brandUrl' => array('/manage/'),
                             'collapse' => true,
                             'items' => array(
                                 array(

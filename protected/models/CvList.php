@@ -127,7 +127,7 @@ class CvList extends CActiveRecord
             'documents' => 'Наявні документи (паспорт, права, диплом, трудова книжка)',
             'applicant_type' => 'Діяльність на Майдані / Внутрішні переселенці',
             'assistance_ids[]' => 'Потрібна допомога',
-            'cv_file' => 'Файл резюме',
+            'cv_file' => 'Файл резюме (лінк)',
             'recruiter_id' => 'Рекрутер',
             'recruiter_comments' => 'Коментарі рекрутера',
             'who_filled' => 'Хто заповнив',
