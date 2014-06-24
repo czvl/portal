@@ -19,8 +19,8 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         ),
         array(
             'name' => 'category_id',
-            'value' => '$data->cvCategories->name',
-            'filter' => $model->getCategoriesTypes()
+            'value' => '$data->category->name',
+            'filter' => CHtml::listData(CvCategories::model()->findAll(), 'id', 'name')
         ),
         'first_name',
         'last_name',

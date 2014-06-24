@@ -102,7 +102,10 @@ class ProfilesController extends Controller
 
         if (isset($_POST['CvList'])) {
             $model->attributes = $_POST['CvList'];
-            if ($model->save()) {
+            $model->citiesResidence = $_POST['CvList']['residencies_ids'];
+            $model->citiesJobLocations = $_POST['CvList']['job_locations_ids'];
+            $model->assistanceTypes = $_POST['CvList']['assistance_ids'];
+            if ($model->saveWithRelated(array('citiesResidence', 'citiesJobLocations', 'assistanceTypes'))) {
                 $this->redirect(array('view', 'id' => $model->id));
             }
         }

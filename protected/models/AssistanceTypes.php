@@ -1,13 +1,16 @@
 <?php
 
 /**
- * This is the model class for table "cv_to_residence".
+ * This is the model class for table "assistance_types".
  *
- * The followings are the available columns in table 'cv_to_residence':
- * @property integer $cv_id
- * @property string $city_id
+ * The followings are the available columns in table 'assistance_types':
+ * @property integer $id
+ * @property string $name
+ *
+ * The followings are the available model relations:
+ * @property CvList[] $cvLists
  */
-class CvToResidence extends CActiveRecord
+class AssistanceTypes extends CActiveRecord
 {
 
     /**
@@ -15,7 +18,7 @@ class CvToResidence extends CActiveRecord
      */
     public function tableName()
     {
-        return 'cv_to_residence';
+        return 'assistance_types';
     }
 
     /**
@@ -26,12 +29,11 @@ class CvToResidence extends CActiveRecord
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('cv_id, city_id', 'required'),
-            array('cv_id', 'numerical', 'integerOnly' => true),
-            array('city_id', 'length', 'max' => 5),
+            array('name', 'required'),
+            array('name', 'length', 'max' => 255),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('cv_id, city_id', 'safe', 'on' => 'search'),
+            array('id, name', 'safe', 'on' => 'search'),
         );
     }
 
@@ -43,6 +45,7 @@ class CvToResidence extends CActiveRecord
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
+            'cvLists' => array(self::MANY_MANY, 'CvList', 'cv_to_assistance(assistance_type_id, cv_id)'),
         );
     }
 
@@ -52,8 +55,8 @@ class CvToResidence extends CActiveRecord
     public function attributeLabels()
     {
         return array(
-            'cv_id' => 'Cv',
-            'city_id' => 'City',
+            'id' => 'ID',
+            'name' => 'Name',
         );
     }
 
@@ -75,8 +78,8 @@ class CvToResidence extends CActiveRecord
 
         $criteria = new CDbCriteria;
 
-        $criteria->compare('cv_id', $this->cv_id);
-        $criteria->compare('city_id', $this->city_id, true);
+        $criteria->compare('id', $this->id);
+        $criteria->compare('name', $this->name, true);
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
@@ -87,7 +90,7 @@ class CvToResidence extends CActiveRecord
      * Returns the static model of the specified AR class.
      * Please note that you should have this exact method in all your CActiveRecord descendants!
      * @param string $className active record class name.
-     * @return CvToResidence the static model class
+     * @return AssistanceTypes the static model class
      */
     public static function model($className = __CLASS__)
     {

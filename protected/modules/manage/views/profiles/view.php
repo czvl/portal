@@ -26,7 +26,7 @@ $this->menu = array(
 );
 ?>
 
-<?php echo TbHtml::lead('Анкета &laquo;' . $model->first_name . ' ' . $model->last_name . '&raquo;'); ?>
+<?php echo TbHtml::pageHeader('Анкета "' . $model->first_name . ' ' . $model->last_name . '"', ''); ?>
 
 <p><?php echo TbHtml::submitButton('Редагувати анкету', array('submit' => array('/manage/profiles/update', 'id' => $model->id), 'color' => TbHtml::BUTTON_COLOR_PRIMARY)); ?>
 </p>
@@ -34,15 +34,11 @@ $this->menu = array(
 
 $this->widget('bootstrap.widgets.TbDetailView', array(
     'type' => 'bordered condensed',
-//    'htmlOptions' => array(
-//        'class' => 'table table-striped table-condensed table-hover',
-//    ),
     'data' => $model,
     'attributes' => array(
-        //'category_id',
         array(
             'name' => 'category_id',
-            'value' => CHtml::link($model->cvCategories->name, array('/manage/category', 'id' => $model->cvCategories->id)),
+            'value' => CHtml::link($model->category->name, array('/manage/category', 'id' => $model->category->id)),
             'type' => 'html'
         ),
         'first_name',
@@ -58,23 +54,25 @@ $this->widget('bootstrap.widgets.TbDetailView', array(
         'contact_phone',
         'email:email',
         array(
+            'name' => 'residencies_ids',
+            'value' => implode(', ', array_values(CHtml::listData($model->citiesResidence, 'city_index', 'city_name')))
+        ),
+        array(
             'name' => 'education',
             'value' => $model->educationType
         ),
-        'eduction_info',
-        'work_experience',
-        array(
-            'name' => 'skills',
-            'type' => 'ntext'
-        ),
-        'summary',
+        'eduction_info:ntext',
+        'work_experience:ntext',
+        'skills:ntext',
+        'summary:ntext',
         'desired_position',
+        array(
+            'name' => 'job_locations_ids',
+            'value' => implode(', ', array_values(CHtml::listData($model->citiesJobLocations, 'city_index', 'city_name')))
+        ),
         'documents',
         'applicant_type',
-        array(
-            'name' => 'cv_file',
-            'type' => 'url'
-        ),
+        'cv_file:url',
         array(
             'label' => 'Assistance',
             'value' => $model->assistances,
@@ -85,7 +83,7 @@ $this->widget('bootstrap.widgets.TbDetailView', array(
             'value' => CHtml::link($model->recruiter->first_name. " " .$model->recruiter->last_name, array('/manage/reqruiter', 'id' => $model->recruiter->id)),
             'type' => 'html'
         ),
-        'recruiter_comments',
+        'recruiter_comments:ntext',
         'who_filled',
         array(
             'name' => 'added_time',
