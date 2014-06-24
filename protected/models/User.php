@@ -30,6 +30,8 @@ class User extends CActiveRecord
     public $password_repeat = '';
     public $password_new = '';
     public $roles = array();
+    
+    public $statusTypes;
 
     /**
      * Returns the static model of the specified AR class.
@@ -43,12 +45,16 @@ class User extends CActiveRecord
     public function init()
     {
         parent::init();
-        $temp = $this->loadConfigFromFile(Yii::getPathOfAlias('application.config.auth') . '.php');
+        
+        $controller = Yii::app()->getController();
+        $temp = $controller->loadConfigFromFile(Yii::getPathOfAlias('application.config.auth') . '.php');
         foreach ($temp as $key => $item) {
             if ($key != 'guest') {
                 $this->roles[$key] = $item['description'];
             }
         }
+        
+        $this->statusTypes = $controller->loadConfigFromFile('user_statuses');
     }
 
     public function defaultScope()
@@ -143,22 +149,20 @@ class User extends CActiveRecord
     {
         $criteria = new CDbCriteria;
 
-        $criteria->compare('id', $this->id, true);
+        $criteria->compare('id', $this->id);
         $criteria->compare('username', $this->username, true);
+        $criteria->compare('password', $this->password, true);
+        $criteria->compare('email', $this->email, true);
+        $criteria->compare('first_name', $this->first_name, true);
+        $criteria->compare('last_name', $this->last_name, true);
         $criteria->compare('role', $this->role, true);
+        $criteria->compare('signin_time', $this->signin_time, true);
+        $criteria->compare('last_login', $this->last_login, true);
+        $criteria->compare('status', $this->status);
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
         ));
-    }
-
-    protected function loadConfigFromFile($file)
-    {
-        if (is_file($file)) {
-            return require($file);
-        } else {
-            return array();
-        }
     }
 
 }

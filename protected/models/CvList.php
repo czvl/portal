@@ -36,10 +36,7 @@
  * @property CitiesList[] $citiesJobLocations
  */
 class CvList extends CActiveRecord
-{
-    
-    protected $controller;
-    
+{   
     public $genderTypes;
     public $educationTypes;
     public $statusTypes;
@@ -51,10 +48,10 @@ class CvList extends CActiveRecord
     public function  init() {
         parent::init();
         
-        $this->controller = Yii::app()->getController();
-        $this->genderTypes = $this->controller->loadConfigFromFile('gender_types');
-        $this->educationTypes = $this->controller->loadConfigFromFile('education_types');
-        $this->statusTypes = $this->controller->loadConfigFromFile('cv_statuses');
+        $controller = Yii::app()->getController();
+        $this->genderTypes = $controller->loadConfigFromFile('gender_types');
+        $this->educationTypes = $controller->loadConfigFromFile('education_types');
+        $this->statusTypes = $controller->loadConfigFromFile('cv_statuses');
         
     }
     
@@ -70,21 +67,6 @@ class CvList extends CActiveRecord
         }
         return $html;
         
-    }
-
-    public function getEducationType()
-    {
-        return $this->educationTypes[$this->education];
-    }
-
-    public function getGenderType()
-    {
-        return $this->genderTypes[$this->gender];
-    }
-    
-    public function getCvStatus()
-    {
-        return $this->statusTypes[$this->status];
     }
 
     /**

@@ -45,7 +45,7 @@ $this->widget('bootstrap.widgets.TbDetailView', array(
         'last_name',
         array(
             'name' => 'gender',
-            'value' => $model->genderType
+            'value' => $model->genderTypes[$model->gender]
         ),
         array(
             'name' => 'birth_date',
@@ -59,7 +59,7 @@ $this->widget('bootstrap.widgets.TbDetailView', array(
         ),
         array(
             'name' => 'education',
-            'value' => $model->educationType
+            'value' => $model->educationTypes[$model->education]
         ),
         'eduction_info:ntext',
         'work_experience:ntext',
@@ -92,7 +92,7 @@ $this->widget('bootstrap.widgets.TbDetailView', array(
         ),
         array(
             'name' => 'status',
-            'value' => $model->cvStatus
+            'value' => $model->statusTypes[$model->status]
         )
     ),
 ));

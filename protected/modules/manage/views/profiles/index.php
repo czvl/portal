@@ -26,12 +26,12 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         'last_name',
         array(
             'name' => 'gender',
-            'value' => '$data->genderType',
+            'value' => '$data->genderTypes[$data->gender]',
             'filter' => $model->genderTypes
         ),
         array(
             'name' => 'status',
-            'value' => '$data->cvStatus',
+            'value' => '$data->statusTypes[$data->status]',
             'filter' => $model->statusTypes
         ),
         array(

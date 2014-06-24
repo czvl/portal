@@ -30,11 +30,6 @@ return array(
         'bootstrap.behaviors.TbWidget',
         'bootstrap.widgets.*'
     ),
-    'behaviors' => array(
-        'ESaveRelatedBehavior' => array(
-            'class' => 'application.components.ESaveRelatedBehavior'
-        )
-    ),
     'modules' => array(
         'gii' => array(
             'class' => 'system.gii.GiiModule',
