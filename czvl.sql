@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost:3306
--- Время создания: Июн 23 2014 г., 00:04
+-- Время создания: Июн 24 2014 г., 09:08
 -- Версия сервера: 5.5.34
 -- Версия PHP: 5.5.10
 
@@ -19,6 +19,30 @@ SET time_zone = "+00:00";
 --
 -- База данных: `czvl`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `assistance_types`
+--
+
+CREATE TABLE `assistance_types` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `cities_list`
+--
+
+CREATE TABLE `cities_list` (
+  `city_index` char(5) NOT NULL,
+  `city_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`city_index`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -84,7 +108,7 @@ CREATE TABLE `cv_statuses` (
   PRIMARY KEY (`id`),
   KEY `operator_id` (`operator_id`),
   KEY `cv_id` (`cv_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
@@ -95,7 +119,8 @@ CREATE TABLE `cv_statuses` (
 CREATE TABLE `cv_to_assistance` (
   `cv_id` int(11) NOT NULL,
   `assistance_type_id` int(1) NOT NULL,
-  PRIMARY KEY (`cv_id`,`assistance_type_id`)
+  PRIMARY KEY (`cv_id`,`assistance_type_id`),
+  KEY `assistance_type_id` (`assistance_type_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -106,8 +131,9 @@ CREATE TABLE `cv_to_assistance` (
 
 CREATE TABLE `cv_to_job_location` (
   `cv_id` int(11) NOT NULL,
-  `city_id` char(6) NOT NULL,
-  PRIMARY KEY (`cv_id`,`city_id`)
+  `city_id` char(5) NOT NULL,
+  PRIMARY KEY (`cv_id`,`city_id`),
+  KEY `city_id` (`city_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -118,8 +144,9 @@ CREATE TABLE `cv_to_job_location` (
 
 CREATE TABLE `cv_to_residence` (
   `cv_id` int(11) NOT NULL,
-  `city_id` char(4) NOT NULL,
-  PRIMARY KEY (`cv_id`,`city_id`)
+  `city_id` char(5) NOT NULL,
+  PRIMARY KEY (`cv_id`,`city_id`),
+  KEY `city_id` (`city_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -143,7 +170,7 @@ CREATE TABLE `users` (
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
   KEY `password` (`password`,`status`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
@@ -160,25 +187,28 @@ ALTER TABLE `cv_list`
 -- Ограничения внешнего ключа таблицы `cv_statuses`
 --
 ALTER TABLE `cv_statuses`
-  ADD CONSTRAINT `cv_statuses_ibfk_2` FOREIGN KEY (`operator_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `cv_statuses_ibfk_1` FOREIGN KEY (`cv_id`) REFERENCES `cv_list` (`id`);
+  ADD CONSTRAINT `cv_statuses_ibfk_1` FOREIGN KEY (`cv_id`) REFERENCES `cv_list` (`id`),
+  ADD CONSTRAINT `cv_statuses_ibfk_2` FOREIGN KEY (`operator_id`) REFERENCES `users` (`id`);
 
 --
 -- Ограничения внешнего ключа таблицы `cv_to_assistance`
 --
 ALTER TABLE `cv_to_assistance`
+  ADD CONSTRAINT `cv_to_assistance_ibfk_2` FOREIGN KEY (`assistance_type_id`) REFERENCES `assistance_types` (`id`),
   ADD CONSTRAINT `cv_to_assistance_ibfk_1` FOREIGN KEY (`cv_id`) REFERENCES `cv_list` (`id`);
 
 --
 -- Ограничения внешнего ключа таблицы `cv_to_job_location`
 --
 ALTER TABLE `cv_to_job_location`
-  ADD CONSTRAINT `cv_to_job_location_ibfk_1` FOREIGN KEY (`cv_id`) REFERENCES `cv_list` (`id`);
+  ADD CONSTRAINT `cv_to_job_location_ibfk_1` FOREIGN KEY (`cv_id`) REFERENCES `cv_list` (`id`),
+  ADD CONSTRAINT `cv_to_job_location_ibfk_2` FOREIGN KEY (`city_id`) REFERENCES `cities_list` (`city_index`);
 
 --
 -- Ограничения внешнего ключа таблицы `cv_to_residence`
 --
 ALTER TABLE `cv_to_residence`
+  ADD CONSTRAINT `cv_to_residence_ibfk_2` FOREIGN KEY (`city_id`) REFERENCES `cities_list` (`city_index`),
   ADD CONSTRAINT `cv_to_residence_ibfk_1` FOREIGN KEY (`cv_id`) REFERENCES `cv_list` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
