@@ -60,7 +60,6 @@ class User extends CActiveRecord
     public function defaultScope()
     {
         return array(
-            'condition' => 'id != 1',
             'order' => 'signin_time DESC',
         );
     }
