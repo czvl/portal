@@ -71,7 +71,7 @@ class UsersController extends Controller
         $model = $this->loadModel($id);
         
         $this->performAjaxValidation($model);
-
+        
         if (isset($_POST['User'])) {
             $model->attributes = $_POST['User'];
             if ($model->save())

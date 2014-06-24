@@ -6,7 +6,7 @@
  * The followings are the available columns in table 'edb_users':
  * @property string $id
  * @property string $username
- * @property string $password_hash
+ * @property string $password
  * @property string $email
  * @property string $first_name
  * @property string $last_name
@@ -108,11 +108,13 @@ class User extends CActiveRecord
     protected function beforeSave()
     {
         if (parent::beforeSave()) {
+            $userSalt = base64_encode(mcrypt_create_iv(30));
             if ($this->isNewRecord) {
                 $this->signin_time = new CDbExpression('NOW()');
-                
-                $userSalt = base64_encode(mcrypt_create_iv(30));
                 $this->password = crypt($this->password, $userSalt);
+            }
+            if ($this->password_new) {
+                $this->password = crypt($this->password_new, $userSalt);
             }
             return true;
         } else {
