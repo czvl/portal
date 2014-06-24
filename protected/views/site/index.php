@@ -30,7 +30,9 @@
                         <div class="span12">
                             <article>
                                 <p>Наше завдання – допомогти тим, хто внаслідок участі в акціях протесту втратили роботу і доступ до засобів існування. Тим, хто були вимушені покинути дім через події в Криму та південно-східних регіонах України.</p>
+                                <br />
                                 <p>У базі даних &laquo;Центру зайнятості Вільних людей&raquo; – небайдужі громадяни, які шукають спосіб повернутися в русло мирного життя.</p>
+                                <br />
                                 <p>У базі даних &laquo;Центру зайнятості Вільних людей&raquo; - небайдужі компанії, підприємці та організації, готові допомогти в працевлаштуванні тим, хто сьогодні цього потребує найдужче.</p>
                             </article>
                         </div>
@@ -39,13 +41,14 @@
             </section>
         </div>
         <!--******************** Services Section ********************-->
+        <a name="services"></a>
         <section id="services" class="single-page scrollblock">
             <div class="container">
                 <div class="align"><i class="icon-cog-circled"></i></div>
                 <h1>Як ви можете долучитися?</h1>
                 <div class="row">
                     <div class="span3">
-                        <!--div class="align"> <i class="icon-desktop sev_icon"></i> </div-->
+                        <div class="align"> <i class="icon-rocket sev_icon"></i> </div>
                         <h2>Як волонтер-рекрутер:</h2>
                         <ul>
                             <li>Надавати індивідуальні консультації, допомагати в профорієнтації, складанні резюме;</li>
@@ -55,7 +58,7 @@
                         <p>Зареєструватися: <a href="http://bit.ly/czslvlntr" target="_blank">http://bit.ly/czslvlntr</a>.</p>
                     </div>
                     <div class="span3">
-                        <!--div class="align"> <i class="icon-vector sev_icon"></i> </div-->
+                        <div class="align"> <i class="icon-thumbs-up sev_icon"></i> </div>
                         <h2>Як роботодавець:</h2>
                         <ul>
                             <li>Заповнити Анкету Роботодавця &laquo;Центру зайнятості Вільних людей&raquo; - <a href="http://bit.ly/czslcomp" target="_blank">http://bit.ly/czslcomp</a>;</li>
@@ -64,16 +67,42 @@
                         </ul>
                     </div>
                     <div class="span3">
-                        <!--div class="align"> <i class="icon-basket sev_icon"></i> </div-->
+                        <div class="align"> <i class="icon-vector-pencil sev_icon"></i> </div>
                         <h2>Як кандидат:</h2>
                         <ul>
                             <li>Надіслати резюме на адресу czsl.staff@gmail.com та заповнити анкету онлайн <a href="http://bit.ly/czslstaff" target="_blank">http://bit.ly/czslstaff</a>;</li>
                         </ul>
                     </div>
                 </div>
+                <hr />
+                <h1>Корисна інформація</h1>
+                <div class="row">
+                    <div class="span3">
+                        <div class="align"> <i class="icon-chat sev_icon"></i> </div>
+                        <h2>Як потрапити на зустріч з рекрутерами-волонтерами ЦЗВЛ?</h2>
+                        <ul>
+                            <li><a href="http://bit.ly/czvladvice" target="_blank">http://bit.ly/czvladvice</a></li>
+                        </ul>
+                    </div>
+                    <div class="span3">
+                        <div class="align"> <i class="icon-map sev_icon"></i> </div>
+                        <h2>Інформаційний бюлетень ЦЗВЛ, червень '14:</h2>
+                        <ul>
+                            <li><a href="http://bit.ly/infoczvl062014" target="_blank">http://bit.ly/infoczvl062014</a></li>
+                        </ul>
+                    </div>
+                    <div class="span3">
+                        <div class="align"> <i class="icon-alert sev_icon"></i> </div>
+                        <h2>Корисна інформація для вимушених переселенців з Криму, Донбассу:</h2>
+                        <ul>
+                            <li><a href="http://bit.ly/czvlsosinfo" target="_blank">http://bit.ly/czvlsosinfo</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </section>
         <!--******************** Contact Section ********************-->
+        <a name="contact"></a>
         <section id="contact" class="single-page scrollblock">
             <div class="container">
                 <div class="align"><i class="icon-mail-2"></i></div>
@@ -82,7 +111,7 @@
                     <div class="span12">
                         <p>Для претендентів, волонтерів, а також загальні питання проекту: <strong>Наталія Швайковська</strong>, +380 (63) 241-5213, <a href="mailto:czsl.staff@gmail.com">czsl.staff@gmail.com</a>.</p>
                         <p>Для роботодавців, професійних асоціацій, НУО: <strong>Ірина Коваль</strong>, +380 (97) 650-3125, <a href="mailto:iryna.koval1@gmail.com">iryna.koval1@gmail.com</a>.</p>
-                        <p>Група Ініціативи &laquo;<a href="https://www.facebook.com/groups/MaydanPulse/" target="_blank">Центру зайнятості Вільних людей</a>&raquo; у Facebook.</p>
+                        <p>Рекомендуємо підписатись на нашу сторінку в Facebook, щоб слідкувати за новинами і вакансіями: <a href="https://www.facebook.com/czvl.staff" target="_blank">https://www.facebook.com/czvl.staff</a></p>
                     </div>
                 </div>
             </div>

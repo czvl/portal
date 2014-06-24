@@ -102,9 +102,9 @@ return array(
                     'baseUrl' => '/js/',
                     'js' => array(
                         'jquery.js',
-                        'jquery.scrollTo-1.4.2-min.js',
-                        'jquery.localscroll-1.2.7-min.js',
-                        'bootstrap.js',
+//                        'jquery.scrollTo-1.4.2-min.js',
+//                        'jquery.localscroll-1.2.7-min.js',
+//                        'bootstrap.js',
                         'site.js'
                     ),
                 ),

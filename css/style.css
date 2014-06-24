@@ -383,8 +383,8 @@ section.single-page h1 {
 }
 #feature article p {
     font-family: 'Scada';
-    font-size: 20px;
-    margin-bottom: 0;
+    font-size: 24px;
+    margin-bottom: 5px;
     line-height: 1.35;
     color: #fff;
 }
@@ -446,8 +446,7 @@ section#services {
 }
 section#services h2 {
     font-size: 22px;
-    margin-bottom: 15px;
-    margin-top: 10px;
+    margin: 10px 15px 15px 15px;
     text-align:center;
     color:#f0bf00;
 }

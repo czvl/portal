@@ -7,7 +7,7 @@ Yii::app()->clientScript->registerPackage('main');
 <html lang="uk">
     <head>
         <meta charset="utf-8" />
-        <title><?php echo Yii::t('main', $this->pageTitle); ?></title>
+        <title>Центр Зайнятості Вільних Людей</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="Громадянська ініціатива, покликана допомогти соціальній реабілітації та працевлаштуванню учасників новітньої української революції, а також вимушених переселенців із Криму та інших регіонів України." />
         <meta name="author" content="Nataliya Shvaykovska (czsl.staff@gmail.com)" />
