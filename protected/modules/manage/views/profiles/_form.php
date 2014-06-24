@@ -1,5 +1,5 @@
 
-        <div class="form"></div>
+        <div class="form">
             <?php
                 $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                     'id' => 'cv-list-form',

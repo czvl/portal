@@ -47,8 +47,8 @@ class User extends CActiveRecord
         parent::init();
         
         $controller = Yii::app()->getController();
-        $temp = $controller->loadConfigFromFile(Yii::getPathOfAlias('application.config.auth') . '.php');
-        foreach ($temp as $key => $item) {
+        $authRoles = $controller->loadConfigFromFile('auth');
+        foreach ($authRoles as $key => $item) {
             if ($key != 'guest') {
                 $this->roles[$key] = $item['description'];
             }

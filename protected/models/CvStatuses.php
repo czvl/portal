@@ -11,7 +11,7 @@
  * @property string $added_time
  *
  * The followings are the available model relations:
- * @property Users $operator
+ * @property User $operator
  * @property CvList $cv
  */
 class CvStatuses extends CActiveRecord
@@ -49,7 +49,7 @@ class CvStatuses extends CActiveRecord
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'operator' => array(self::BELONGS_TO, 'Users', 'operator_id'),
+            'operator' => array(self::BELONGS_TO, 'User', 'operator_id'),
             'cv' => array(self::BELONGS_TO, 'CvList', 'cv_id'),
         );
     }

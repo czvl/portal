@@ -28,7 +28,7 @@
  * @property integer $status
  *
  * The followings are the available model relations:
- * @property Users $recruiter
+ * @property User $recruiter
  * @property CvCategories $category
  * @property CvStatuses[] $cvStatuses
  * @property AssistanceTypes[] $assistanceTypes
@@ -102,7 +102,7 @@ class CvList extends CActiveRecord
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'recruiter' => array(self::BELONGS_TO, 'Users', 'recruiter_id'),
+            'recruiter' => array(self::BELONGS_TO, 'User', 'recruiter_id'),
             'category' => array(self::BELONGS_TO, 'CvCategories', 'category_id'),
             'cvStatuses' => array(self::HAS_MANY, 'CvStatuses', 'cv_id'),
             'assistanceTypes' => array(self::MANY_MANY, 'AssistanceTypes', 'cv_to_assistance(cv_id, assistance_type_id)'),

@@ -18,7 +18,7 @@ return array(
     'Role' => 'Роль',
     'First name' => 'Ім’я',
     'Last name' => 'Призвище',
-    'Registration time' => 'Дата регістрації',
+    'Registration time' => 'Дата реєстрації',
     'Last login at' => 'Час останнього входу',
     'Status' => 'Статус',
     'Error' => 'Помилка'
