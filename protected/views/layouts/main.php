@@ -39,6 +39,7 @@ Yii::app()->clientScript->registerPackage('main');
                         <nav class="pull-right nav-collapse collapse">
                             <ul id="menu-main" class="nav">
                                 <li><a title="services" href="#services"><?php echo Yii::t('main', 'How can you get involved?'); ?></a></li>
+                                <li><a title="useful" href="#useful"><?php echo Yii::t('main', 'Useful information'); ?></a></li>
                                 <li><a title="contact" href="#contact"><?php echo Yii::t('main', 'Contacts'); ?></a></li>
                             </ul>
                         </nav>

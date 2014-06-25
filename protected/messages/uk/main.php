@@ -4,6 +4,7 @@ return array(
     'Employment center of free people' => 'Центр Зайнятості Вільних Людей',
     'All rights reserved.' => 'Усі права захищено.',
     'How can you get involved?' => 'Як ви можете долучитися?',
+    'Useful information' => 'Корисна інформація',
     'Contacts' => 'Контакти',
     'Sign in' => 'Авторизація',
     'Logout' => 'Вийти',

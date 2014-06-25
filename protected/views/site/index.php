@@ -75,6 +75,8 @@
                     </div>
                 </div>
                 <hr />
+                <a name="useful"></a>
+                <div class="align"><i class="icon-monitor"></i></div>
                 <h1>Корисна інформація</h1>
                 <div class="row">
                     <div class="span3">
@@ -112,6 +114,7 @@
                         <p>Для претендентів, волонтерів, а також загальні питання проекту: <strong>Наталія Швайковська</strong>, +380 (63) 241-5213, <a href="mailto:czsl.staff@gmail.com">czsl.staff@gmail.com</a>.</p>
                         <p>Для роботодавців, професійних асоціацій, НУО: <strong>Ірина Коваль</strong>, +380 (97) 650-3125, <a href="mailto:iryna.koval1@gmail.com">iryna.koval1@gmail.com</a>.</p>
                         <p>Рекомендуємо підписатись на нашу сторінку в Facebook, щоб слідкувати за новинами і вакансіями: <a href="https://www.facebook.com/czvl.staff" target="_blank">https://www.facebook.com/czvl.staff</a></p>
+                        <p>Телефон гарячої лінії: <strong>+380 (67) 507-0930</strong>.</p>
                     </div>
                 </div>
             </div>
