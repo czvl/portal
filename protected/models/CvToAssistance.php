@@ -50,7 +50,7 @@ class CvToAssistance extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'cv_id' => 'Cv',
+			'cv_id' => 'CV',
 			'assistance_type_id' => 'Assistance Type',
 		);
 	}

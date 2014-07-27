@@ -37,16 +37,11 @@
             </div>
             <div class="row-fluid">
             <?php if (!empty($this->menu)) { ?>
-                <div class="span3">
-                    <div class="well" style="max-width: 340px; padding: 8px 0;">
-                        <?php echo TbHtml::navList($this->menu); ?>
-                    </div>
+                <div class="float-menu">
+                    <span class="sticker"><?php echo TbHtml::icon(TbHtml::ICON_TASKS); ?></span>
+                    <?php echo TbHtml::navList($this->menu); ?>
                 </div>
-                <div class="span9">
-                    <?php echo $content; ?>
-                </div>
-            <?php } else { ?>
-                <?php echo $content; ?>
             <?php } ?>
+                <?php echo $content; ?>
             </div>
 <?php $this->endContent(); ?>

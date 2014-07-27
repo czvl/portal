@@ -18,9 +18,7 @@ Yii::app()->clientScript->registerPackage('main');
         <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/fontello.css" type="text/css" rel="stylesheet" />
         <link href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" type="text/css" rel="stylesheet" />
         <!--[if lt IE 7]><link href="<?php echo Yii::app()->request->baseUrl; ?>/css/fontello-ie7.css" type="text/css" rel="stylesheet" /><![endif]-->
-        <link href="http://fonts.googleapis.com/css?family=Quattrocento:400,700" rel="stylesheet" type="text/css" />
         <link href="http://fonts.googleapis.com/css?family=Scada" rel="stylesheet" type="text/css" />
-        <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css" />
         <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
         <link rel="shortcut icon" href="<?php echo Yii::app()->request->baseUrl; ?>/images/favicon.ico" />
     </head>

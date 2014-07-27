@@ -70,4 +70,27 @@ class SiteController extends Controller
 //        $this->render('contact', array('model' => $model));
 //    }
 
+    public function actionApplicants()
+    {
+        $model = new CvList;
+        
+        $this->performAjaxValidation($model);
+
+        if (isset($_POST['CvList'])) {
+            $model->attributes = $_POST['CvList'];
+            if ($model->save()) {
+                $this->redirect(array('index'));
+            }
+        }
+
+        $this->render('applicants', array('model' => $model));
+    }
+    
+    protected function performAjaxValidation($model)
+    {
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'cv-list-form') {
+            echo CActiveForm::validate($model);
+            Yii::app()->end();
+        }
+    }
 }

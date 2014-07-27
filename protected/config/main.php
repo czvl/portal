@@ -105,7 +105,7 @@ return array(
 //                        'jquery.scrollTo-1.4.2-min.js',
 //                        'jquery.localscroll-1.2.7-min.js',
 //                        'bootstrap.js',
-                        'site.js'
+//                        'site.js'
                     ),
                 ),
                 'inside' => array(

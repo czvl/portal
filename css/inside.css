@@ -28,3 +28,62 @@ li.nav-header {
 }
 
 #editor {overflow:scroll; max-height:300px}
+
+.container-fluid .row-fluid {
+    padding-left: 40px;
+    width: 95%;
+}
+.float-menu {
+    position: fixed;
+    z-index: 100;
+    left: -240px;
+    top: 40px;
+    width: 250px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+}
+.float-menu:hover {
+    left: -1px;
+}
+.float-menu .sticker {
+    float: right;
+}
+
+tr.additional td {
+    font-size: 90%;
+    color: #959595;
+}
+tr.additional td:hover {
+    color: #000;
+}
+
+span.time {
+    font-size: 80%;
+}
+.search-table {
+    width: 100%;
+}
+.search-table tr td {
+    vertical-align: top;
+    padding: 3px;
+}
+.search-table tr td label {
+    display: inline;
+}
+.div-overflow {
+    overflow-y: auto;
+    height: 150px;
+    width: 400px;
+    display: block;
+}
+
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, .5);
+    -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}

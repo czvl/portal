@@ -200,12 +200,12 @@ em {
 .navbar .brand {
     margin-left:0;
     padding: 0;
-    margin-top: 1.05em;
+    margin-top: 1.3em;
 }
 .navbar .brand a {
     padding: 0;
     color: #fff;
-    font-size: 1.4em;
+    font-size: 1em;
     margin-left: 0;
     font-weight: normal;
     font-family: 'Scada';
@@ -268,14 +268,14 @@ ul#menu-main > li > a:hover {
     -o-background-size: cover;
     background-size: cover;
     min-height: 350px;
-    margin-top: -60px;
+    margin-top: -100px;
     padding-top: 160px;
     text-align: center;
 }
 #headerwrap h1 {
     color: #fff;
     font-family: 'Scada';
-    font-size: 2.5em;
+    font-size: 1.8em;
     font-weight: 200;
     margin: 1em 0;
     text-shadow: 1px 1px 1px #333333;
@@ -364,7 +364,6 @@ section.single-page h1 {
     padding-bottom: 50px;
 }
 #feature article {
-    text-align: center;
     margin-top: 60px;
     max-width: 1170px;
 }
@@ -383,9 +382,9 @@ section.single-page h1 {
 }
 #feature article p {
     font-family: 'Scada';
-    font-size: 24px;
-    margin-bottom: 5px;
-    line-height: 1.35;
+    font-size: 20px;
+    //margin-bottom: 5px;
+    //line-height: 1.35;
     color: #fff;
 }
 /* Portfolio */
@@ -1129,4 +1128,25 @@ ul#menu-main > li > a.auth-link {
 }
 ul#menu-main > li > a.auth-link:hover {
     background: #f0bf00;
+}
+
+.logo {
+    margin: 0px auto;
+}
+
+.div-overflow {
+    overflow-y: auto;
+    height: 150px;
+    width: 400px;
+    display: block;
+}
+
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, .5);
+    -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
 }

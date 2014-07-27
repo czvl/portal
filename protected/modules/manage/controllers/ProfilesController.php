@@ -100,17 +100,17 @@ class ProfilesController extends Controller
 
         if (isset($_POST['CvList'])) {
             $model->attributes = $_POST['CvList'];
-            $model->citiesResidence = $_POST['CvList']['residencies_ids'];
-            $model->citiesJobLocations = $_POST['CvList']['job_locations_ids'];
-            $model->assistanceTypes = $_POST['CvList']['assistance_ids'];
-            if ($model->saveWithRelated(array('citiesResidence', 'citiesJobLocations', 'assistanceTypes'))) {
+            $model->categories = $_POST['CvList']['categoryIds'];
+            $model->citiesResidence = $_POST['CvList']['residenciesIds'];
+            $model->driverLicensesTypes = $_POST['CvList']['driverLicensesIds'];
+            $model->citiesJobLocations = $_POST['CvList']['jobLocationsIds'];
+            $model->assistanceTypes = $_POST['CvList']['assistanceIds'];
+            if ($model->saveWithRelated(array('categories', 'citiesResidence', 'citiesJobLocations', 'driverLicensesTypes', 'assistanceTypes'))) {
                 $this->redirect(array('view', 'id' => $model->id));
             }
         }
 
-        $this->render('update', array(
-            'model' => $model,
-        ));
+        $this->render('update', array('model' => $model));
     }
 
     /**
@@ -136,14 +136,25 @@ class ProfilesController extends Controller
      */
     public function actionIndex()
     {
-        $model = new CvList('search');
-        $model->unsetAttributes();
-        if (isset($_GET['CvList'])) {
-            $model->attributes = $_GET['CvList'];
+        $criteria = new CDbCriteria();
+        
+        if (($status = $this->getVariable('status')) !== false && !empty($status)) {
+            $criteria->condition = 'status = :status';
+            $criteria->params = array(':status' => $status);
         }
+//        if (($locations = $this->getVariable('locations')) !== false && !empty($locations)) {
+//            $criteria->with = array('citiesJobLocations');
+//            $criteria->together = true;
+//            $criteria->addInCondition('city_id', $locations);
+//        }
+        
+        $dataProvider = new CActiveDataProvider('CvList', array(
+                'criteria' => $criteria,
+            )
+        );
 
         $this->render('index', array(
-            'model' => $model,
+            'dataProvider' => $dataProvider
         ));
     }
 

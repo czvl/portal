@@ -26,10 +26,9 @@ $this->menu = array(
 );
 ?>
 
-<?php echo TbHtml::pageHeader('Анкета "' . $model->first_name . ' ' . $model->last_name . '"', ''); ?>
+<?php echo TbHtml::pageHeader('Анкета "' . $model->firstLastName . '"', ''); ?>
 
-<p><?php echo TbHtml::submitButton('Редагувати анкету', array('submit' => array('/manage/profiles/update', 'id' => $model->id), 'color' => TbHtml::BUTTON_COLOR_PRIMARY)); ?>
-</p>
+<p><?php echo TbHtml::submitButton('Редагувати анкету', array('submit' => array('/manage/profiles/update', 'id' => $model->id), 'color' => TbHtml::BUTTON_COLOR_PRIMARY)); ?></p>
 <?php
 
 $this->widget('bootstrap.widgets.TbDetailView', array(
@@ -37,8 +36,8 @@ $this->widget('bootstrap.widgets.TbDetailView', array(
     'data' => $model,
     'attributes' => array(
         array(
-            'name' => 'category_id',
-            'value' => CHtml::link($model->category->name, array('/manage/category', 'id' => $model->category->id)),
+            'name' => 'categoryIds',
+            'value' => implode(', ', array_values(CHtml::listData($model->categories, 'id', 'name'))),
             'type' => 'html'
         ),
         'first_name',
@@ -49,12 +48,12 @@ $this->widget('bootstrap.widgets.TbDetailView', array(
         ),
         array(
             'name' => 'birth_date',
-            'value' => Yii::app()->dateFormatter->formatDateTime($model->birth_date, "long", false)
+            'value' => Yii::app()->dateFormatter->formatDateTime($model->birth_date, "long", false) . " (" . $this->getTimeDiff($model->birth_date) . ")"
         ),
         'contact_phone',
         'email:email',
         array(
-            'name' => 'residencies_ids',
+            'name' => 'residenciesIds',
             'value' => implode(', ', array_values(CHtml::listData($model->citiesResidence, 'city_index', 'city_name')))
         ),
         array(
@@ -66,15 +65,20 @@ $this->widget('bootstrap.widgets.TbDetailView', array(
         'skills:ntext',
         'summary:ntext',
         'desired_position',
+        'salary',
         array(
-            'name' => 'job_locations_ids',
+            'name' => 'jobLocationsIds',
             'value' => implode(', ', array_values(CHtml::listData($model->citiesJobLocations, 'city_index', 'city_name')))
         ),
         'documents',
+        array(
+            'name' => 'driverLicensesIds',
+            'value' => implode(', ', array_values(CHtml::listData($model->driverLicensesTypes, 'id', 'name')))
+        ),
         'applicant_type',
         'cv_file:url',
         array(
-            'label' => 'Assistance',
+            'name' => 'assistanceIds',
             'value' => $model->assistances,
             'type' => 'html'
         ),

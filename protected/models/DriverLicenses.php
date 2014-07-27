@@ -1,20 +1,16 @@
 <?php
 
 /**
- * This is the model class for table "cv_statuses".
+ * This is the model class for table "driver_licenses".
  *
- * The followings are the available columns in table 'cv_statuses':
+ * The followings are the available columns in table 'driver_licenses':
  * @property integer $id
- * @property integer $cv_id
- * @property integer $operator_id
- * @property string $message
- * @property string $added_time
+ * @property string $name
  *
  * The followings are the available model relations:
- * @property User $operator
- * @property CvList $cv
+ * @property CvToDriverLicense[] $cvToDriverLicenses
  */
-class CvStatuses extends CActiveRecord
+class DriverLicenses extends CActiveRecord
 {
 
     /**
@@ -22,7 +18,7 @@ class CvStatuses extends CActiveRecord
      */
     public function tableName()
     {
-        return 'cv_statuses';
+        return 'driver_licenses';
     }
 
     /**
@@ -33,11 +29,11 @@ class CvStatuses extends CActiveRecord
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('cv_id, message', 'required'),
-            array('cv_id, operator_id', 'numerical', 'integerOnly' => true),
+            array('name', 'required'),
+            array('name', 'length', 'max' => 3),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('id, cv_id, operator_id, message, added_time', 'safe', 'on' => 'search'),
+            array('id, name', 'safe', 'on' => 'search'),
         );
     }
 
@@ -49,8 +45,7 @@ class CvStatuses extends CActiveRecord
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'operator' => array(self::BELONGS_TO, 'User', 'operator_id'),
-            'cv' => array(self::BELONGS_TO, 'CvList', 'cv_id'),
+            'cvToDriverLicenses' => array(self::MANY_MANY, 'CvList', 'cv_to_driver_license(license_id, cv_id)'),
         );
     }
 
@@ -61,32 +56,8 @@ class CvStatuses extends CActiveRecord
     {
         return array(
             'id' => 'ID',
-            'cv_id' => 'Cv',
-            'operator_id' => 'Operator',
-            'message' => 'Message',
-            'added_time' => 'Added Time',
+            'name' => 'Name',
         );
-    }
-    
-    public function defaultScope()
-    {
-        return array(
-            'order' => 'added_time ASC',
-        );
-    }
-
-    protected function beforeSave()
-    {
-        parent::beforeSave();
-        if ($this->isNewRecord) {
-            $this->operator_id = Yii::app()->user->id;
-            $this->added_time = new CDbExpression('NOW()');
-            
-            $cv = CvList::model()->findByPk($this->cv_id);
-            $cv->last_update = new CDbExpression('NOW()');
-            $cv->save(false);
-        }
-        return true;
     }
 
     /**
@@ -108,10 +79,7 @@ class CvStatuses extends CActiveRecord
         $criteria = new CDbCriteria;
 
         $criteria->compare('id', $this->id);
-        $criteria->compare('cv_id', $this->cv_id);
-        $criteria->compare('operator_id', $this->operator_id);
-        $criteria->compare('message', $this->message, true);
-        $criteria->compare('added_time', $this->added_time, true);
+        $criteria->compare('name', $this->name, true);
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
@@ -122,7 +90,7 @@ class CvStatuses extends CActiveRecord
      * Returns the static model of the specified AR class.
      * Please note that you should have this exact method in all your CActiveRecord descendants!
      * @param string $className active record class name.
-     * @return CvStatuses the static model class
+     * @return DriverLicences the static model class
      */
     public static function model($className = __CLASS__)
     {

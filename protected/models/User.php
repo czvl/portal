@@ -166,5 +166,23 @@ class User extends CActiveRecord
             'criteria' => $criteria,
         ));
     }
+    
+    public function getFirstLastName()
+    {
+        return $this->first_name . " " . $this->last_name;
+    }
+    
+    public function getRecruiters()
+    {
+        $recruitersRoles = array(self::ROLE_VOLONT, self::ROLE_ADMIN);
+        
+        $criteria = new CDbCriteria;
+        $criteria->addInCondition('role', $recruitersRoles);
+
+        $models = User::model()->findAll($criteria);
+        $list = CHtml::listData($models, 'id', 'firstLastName');
+        
+        return $list;
+    }
 
 }
