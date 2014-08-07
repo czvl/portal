@@ -141,12 +141,12 @@ class ProfilesController extends Controller
      */
     public function actionIndex()
     {
-        $criteria = new CDbCriteria();
-        
-        if (($status = $this->getVariable('status')) !== false && !empty($status)) {
-            $criteria->condition = 'status = :status';
-            $criteria->params = array(':status' => $status);
-        }
+//        $criteria = new CDbCriteria();
+//        
+//        if (($status = $this->getVariable('status')) !== false && !empty($status)) {
+//            $criteria->condition = 'status = :status';
+//            $criteria->params = array(':status' => $status);
+//        }
 //        if (($locations = $this->getVariable('locations')) !== false && !empty($locations)) {
 //            $criteria->with = array('citiesJobLocations');
 //            $criteria->together = true;
@@ -154,7 +154,7 @@ class ProfilesController extends Controller
 //        }
         
         $dataProvider = new CActiveDataProvider('CvList', array(
-            'criteria' => $criteria,
+//            'criteria' => $criteria,
             'pagination' => array(
                 'pageSize' => 10,
                 'pageVar' => 'page',
