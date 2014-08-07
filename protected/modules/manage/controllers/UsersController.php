@@ -113,6 +113,7 @@ class UsersController extends Controller
 
         $this->render('index', array(
             'model' => $model,
+            'page_size' => 20,
         ));
     }
 
