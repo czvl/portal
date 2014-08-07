@@ -11,7 +11,7 @@ $this->menu = array(
 <form>
     <table class="search-table">
         <tr>
-            <td width="30%">
+            <td>
                 <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('status')); ?></strong><br />
                 <?php echo CHtml::dropDownList('status', $this->getVariable('status'), CvList::model()->statusTypes, array('empty' => '---')); ?>
             </td>
@@ -21,13 +21,20 @@ $this->menu = array(
                     <?php echo CHtml::checkBoxList('locations', $this->getVariable('locations'), CHtml::listData(CitiesList::model()->findAll(array('order' => 'city_name')), 'city_index', 'city_name')); ?>    
                 </div>
             </td>
-            <td width="30%">
-                3
-            </td>*/ ?>
+            */ ?>
+            <td>
+                <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('last_name')); ?></strong><br />
+                <?php echo CHtml::textField('last_name', $this->getVariable('last_name'), array('span' => 5, 'maxlength' => 255)); ?>
+            </td>
+            <td>
+                <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('first_name')); ?></strong><br />
+                <?php echo CHtml::textField('first_name', $this->getVariable('first_name'), array('span' => 5, 'maxlength' => 255)); ?>
+            </td>
         </tr>
         <tr>
             <td colspan="3">
                 <input type="submit" class="btn btn-primary btn-small" value="знайти" />
+                <input type="button" class="btn btn-primary btn-small" value="сброс" onclick="location.href='/manage/profiles'" />
             </td>
         </tr>
     </table>
