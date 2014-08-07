@@ -37,7 +37,7 @@ Yii::app()->clientScript->registerScript('search', "
 $this->widget('bootstrap.widgets.TbGridView', array(
     'dataProvider' => $model->search(),
     'filter' => $model,
-    'template' => "{items}",
+//    'template' => "{items}",
     'columns' => array(
         'username',
         'email',
