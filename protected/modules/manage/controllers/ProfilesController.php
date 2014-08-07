@@ -74,10 +74,15 @@ class ProfilesController extends Controller
         $model = new CvList;
         
         $this->performAjaxValidation($model);
-
+        
         if (isset($_POST['CvList'])) {
             $model->attributes = $_POST['CvList'];
-            if ($model->save()) {
+            $model->categories = $_POST['CvList']['categoryIds'];
+            $model->citiesResidence = $_POST['CvList']['residenciesIds'];
+            $model->driverLicensesTypes = $_POST['CvList']['driverLicensesIds'];
+            $model->citiesJobLocations = $_POST['CvList']['jobLocationsIds'];
+            $model->assistanceTypes = $_POST['CvList']['assistanceIds'];
+            if ($model->saveWithRelated(array('categories', 'citiesResidence', 'citiesJobLocations', 'driverLicensesTypes', 'assistanceTypes'))) {
                 $this->redirect(array('view', 'id' => $model->id));
             }
         }
@@ -149,8 +154,12 @@ class ProfilesController extends Controller
 //        }
         
         $dataProvider = new CActiveDataProvider('CvList', array(
-                'criteria' => $criteria,
-            )
+            'criteria' => $criteria,
+            'pagination' => array(
+                'pageSize' => 10,
+                'pageVar' => 'page',
+            ),
+                )
         );
 
         $this->render('index', array(

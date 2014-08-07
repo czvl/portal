@@ -49,6 +49,8 @@ class CvList extends CActiveRecord
     public $residenciesIds = array();
     public $jobLocationsIds = array();
     public $maritalStatuses = array();
+    
+    public $personal_data;
 
     public function __construct()
     {
@@ -75,7 +77,8 @@ class CvList extends CActiveRecord
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('first_name, last_name, gender, birth_date, contact_phone, education, eduction_info, work_experience, desired_position, documents, applicant_type, recruiter_id, added_time', 'required'),
+            array('first_name, last_name, gender, birth_date, contact_phone, education, eduction_info, residenciesIds, jobLocationsIds, work_experience, desired_position, documents, applicant_type, recruiter_id', 'required'),
+            array('personal_data', 'compare', 'compareValue' => true, 'message' => 'Вам потрібно погодитись надати свої персональні дані', 'on' => 'public'),
             array('education, recruiter_id, status', 'numerical', 'integerOnly' => true),
             array('first_name, last_name, email, desired_position, cv_file, who_filled', 'length', 'max' => 255),
             array('gender', 'length', 'max' => 1),
@@ -107,7 +110,8 @@ class CvList extends CActiveRecord
     public function behaviors()
     {
         return array('ESaveRelatedBehavior' => array(
-            'class' => 'application.components.ESaveRelatedBehavior')
+                'class' => 'application.components.ESaveRelatedBehavior'
+            )
         );
     }
 
@@ -148,6 +152,7 @@ class CvList extends CActiveRecord
             'who_filled' => 'Хто заповнив',
             'added_time' => 'Додано',
             'status' => 'Стан',
+            'personal_data' => 'Я згоден(на) з обробкою та використанням моїх персональних даних'
         );
     }
     
@@ -190,7 +195,7 @@ class CvList extends CActiveRecord
             }
         }
         if (empty($this->driverLicensesIds)) {
-            foreach ($this->driverLicensesTypes  as $d) {
+            foreach ($this->driverLicensesTypes as $d) {
                 $this->driverLicensesIds[] = $d->id;
             }
             

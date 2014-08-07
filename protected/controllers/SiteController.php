@@ -72,20 +72,69 @@ class SiteController extends Controller
 
     public function actionApplicants()
     {
-        $model = new CvList;
+        $model = new CvList();
+        $model->scenario = 'public';
         
         $this->performAjaxValidation($model);
-
+        
         if (isset($_POST['CvList'])) {
+            
             $model->attributes = $_POST['CvList'];
-            if ($model->save()) {
-                $this->redirect(array('index'));
+            $result = true;
+            $t = false;
+            
+            if (!Yii::app()->db->currentTransaction) {
+                $t = Yii::app()->db->beginTransaction();
+            }
+            
+            if (!$model->save()) {
+                $result = false;
+            }
+            $result = false;
+            echo $model->id;
+            
+            if (!empty($_POST['CvList']['residenciesIds'])) {
+                echo "<p>Residence: ";
+                foreach($_POST['CvList']['residenciesIds'] as $r) {
+                    echo $r . ",";
+                }
+                echo "</p>";
+            }
+            
+            if (!empty($_POST['CvList']['driverLicensesIds'])) {
+                echo "<p>Driver license: ";
+                foreach ($_POST['CvList']['driverLicensesIds'] as $dl) {
+                    echo $dl . ",";
+                }
+                echo "</p>";
+            }
+            if (!empty($_POST['CvList']['jobLocationsIds'])) {
+                echo "<p>Job locations: ";
+                foreach ($_POST['CvList']['jobLocationsIds'] as $jl) {
+                    echo $jl . ",";
+                }
+                echo "</p>";
+            }
+            if (!empty($_POST['CvList']['assistanceIds'])) {
+                echo "<p>Assistance: ";
+                foreach ($_POST['CvList']['assistanceIds'] as $ai) {
+                    echo $ai . ",";
+                }
+                echo "</p>";
+            }
+
+            if ($t && $result) {
+                $t->commit();
+                $this->redirect(array('applicants', array('success' => true)));
+            }
+            if ($t && !$result) {
+                $t->rollback();
             }
         }
 
         $this->render('applicants', array('model' => $model));
     }
-    
+
     protected function performAjaxValidation($model)
     {
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'cv-list-form') {
