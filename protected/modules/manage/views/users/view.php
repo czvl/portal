@@ -11,11 +11,11 @@ $this->breadcrumbs = array(
 $this->menu = array(
     array('label' => 'Управління'),
     array('label' => 'Список користувачів', 'url' => array('index')),
-//    array('label' => 'Створити нового', 'url' => array('create')),
+    array('label' => 'Створити нового', 'url' => array('create')),
     array('label' => 'Редагувати дані', 'url' => array('update', 'id' => $model->id)),
-//    TbHtml::menuDivider(),
-//    array('label' => 'Адмінистративна частина'),
-//    array('label' => 'Видалити користувача', 'url' => '#', 'linkOptions' => array('submit' => array('delete', 'id' => $model->id), 'confirm' => 'Ви впевнені?')),
+    TbHtml::menuDivider(),
+    array('label' => 'Адмінистративна частина'),
+    array('label' => 'Видалити користувача', 'url' => '#', 'linkOptions' => array('submit' => array('delete', 'id' => $model->id), 'confirm' => 'Ви впевнені?')),
 );
 ?>
 
