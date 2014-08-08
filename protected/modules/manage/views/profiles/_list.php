@@ -27,6 +27,9 @@
                 <br />
                 <strong><?php echo $data->getAttributeLabel('categoryIds'); ?>:</strong><br />
                 <?php echo implode(', ', array_values(CHtml::listData($data->categories, 'id', 'name'))); ?>
+                <br />
+                <strong><?php echo $data->getAttributeLabel('positionsIds'); ?>:</strong><br />
+                <?php echo implode(', ', array_values(CHtml::listData($data->positions, 'id', 'name'))); ?>
             </td>
             <td style="text-align: right;">
                 <?php 
