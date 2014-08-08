@@ -78,11 +78,12 @@ class ProfilesController extends Controller
         if (isset($_POST['CvList'])) {
             $model->attributes = $_POST['CvList'];
             $model->categories = $_POST['CvList']['categoryIds'];
+            $model->positions = $_POST['CvList']['positionsIds'];
             $model->citiesResidence = $_POST['CvList']['residenciesIds'];
             $model->driverLicensesTypes = $_POST['CvList']['driverLicensesIds'];
             $model->citiesJobLocations = $_POST['CvList']['jobLocationsIds'];
             $model->assistanceTypes = $_POST['CvList']['assistanceIds'];
-            if ($model->saveWithRelated(array('categories', 'citiesResidence', 'citiesJobLocations', 'driverLicensesTypes', 'assistanceTypes'))) {
+            if ($model->saveWithRelated(array('categories', 'positions', 'citiesResidence', 'citiesJobLocations', 'driverLicensesTypes', 'assistanceTypes'))) {
                 $this->redirect(array('view', 'id' => $model->id));
             }
         }
@@ -106,11 +107,12 @@ class ProfilesController extends Controller
         if (isset($_POST['CvList'])) {
             $model->attributes = $_POST['CvList'];
             $model->categories = $_POST['CvList']['categoryIds'];
+            $model->positions = $_POST['CvList']['positionsIds'];
             $model->citiesResidence = $_POST['CvList']['residenciesIds'];
             $model->driverLicensesTypes = $_POST['CvList']['driverLicensesIds'];
             $model->citiesJobLocations = $_POST['CvList']['jobLocationsIds'];
             $model->assistanceTypes = $_POST['CvList']['assistanceIds'];
-            if ($model->saveWithRelated(array('categories', 'citiesResidence', 'citiesJobLocations', 'driverLicensesTypes', 'assistanceTypes'))) {
+            if ($model->saveWithRelated(array('categories', 'positions', 'citiesResidence', 'citiesJobLocations', 'driverLicensesTypes', 'assistanceTypes'))) {
                 $this->redirect(array('view', 'id' => $model->id));
             }
         }

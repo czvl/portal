@@ -34,6 +34,8 @@
  * @property User $recruiter
  * @property CvCategories[] $categories
  * @property CvStatuses[] $cvStatuses
+ * @property CvPositions[] $positions
+ * @property DriverLicenses[] $driverLicensesTypes
  * @property AssistanceTypes[] $assistanceTypes
  * @property CitiesList[] $citiesResidence
  * @property CitiesList[] $citiesJobLocations
@@ -42,6 +44,7 @@ class CvList extends CActiveRecord
 {   
     public $genderTypes = array();
     public $categoryIds = array();
+    public $positionsIds = array();
     public $driverLicensesIds = array();
     public $educationTypes = array();
     public $statusTypes = array();
@@ -100,6 +103,7 @@ class CvList extends CActiveRecord
             'recruiter' => array(self::BELONGS_TO, 'User', 'recruiter_id'),
             'cvStatuses' => array(self::HAS_MANY, 'CvStatuses', 'cv_id'),
             'categories' => array(self::MANY_MANY, 'CvCategories', 'cv_to_category(cv_id, category_id)'),
+            'positions' => array(self::MANY_MANY, 'CvPositions', 'cv_to_position(cv_id, position_id)'),
             'driverLicensesTypes' => array(self::MANY_MANY, 'DriverLicenses', 'cv_to_driver_license(cv_id, license_id)'),
             'assistanceTypes' => array(self::MANY_MANY, 'AssistanceTypes', 'cv_to_assistance(cv_id, assistance_type_id)'),
             'citiesResidence' => array(self::MANY_MANY, 'CitiesList', 'cv_to_residence(cv_id, city_id)'),
@@ -136,8 +140,9 @@ class CvList extends CActiveRecord
             'eduction_info' => 'Про освіту',
             'work_experience' => 'Досвід роботи',
             'skills' => 'Навички',
-            'summary' => 'Резюме',
+            'summary' => 'Про себе',
             'desired_position' => 'Бажана позиція',
+            'positionsIds' => 'Можливі позиції',
             'salary' => 'Побажання по зар.платні',
             'jobLocationsIds' => 'Бажане місце роботи',
             'documents' => 'Наявні документи (паспорт, права, диплом, трудова книжка)',
@@ -198,7 +203,11 @@ class CvList extends CActiveRecord
             foreach ($this->driverLicensesTypes as $d) {
                 $this->driverLicensesIds[] = $d->id;
             }
-            
+        }
+        if (empty($this->positionsIds)) {
+            foreach ($this->positions as $p) {
+                $this->positionsIds[] = $p->id;
+            }
         }
     }
 

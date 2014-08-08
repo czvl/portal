@@ -52,6 +52,11 @@
             
             <?php echo $form->textFieldControlGroup($model, 'desired_position', array('span' => 5, 'maxlength' => 255)); ?>
             
+            <?php echo $form->labelEx($model, 'positionsIds'); ?>
+            <div class="div-overflow">
+                <?php echo $form->checkBoxList($model, 'positionsIds', CHtml::listData(CvPositions::model()->findAll(array('order' => 'name')), 'id', 'name')); ?>
+            </div>
+            
             <?php echo $form->textFieldControlGroup($model, 'salary', array('span' => 5, 'maxlength' => 255)); ?>
             
             <?php echo $form->labelEx($model, 'jobLocationsIds'); ?>

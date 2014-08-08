@@ -65,6 +65,10 @@ $this->widget('bootstrap.widgets.TbDetailView', array(
         'skills:ntext',
         'summary:ntext',
         'desired_position',
+        array(
+            'name' => 'positionsIds',
+            'value' => implode(', ', array_values(CHtml::listData($model->positions, 'id', 'name')))
+        ),
         'salary',
         array(
             'name' => 'jobLocationsIds',
