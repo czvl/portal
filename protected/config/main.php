@@ -112,7 +112,7 @@ return array(
                     'baseUrl' => '/',
                     'js' => array(
 //                        'js/bootstrap-wysiwyg.js',
-//                        'js/inside.js'
+                        'js/inside.js'
                     ),
                     'css' => array(
                         'css/inside.css'

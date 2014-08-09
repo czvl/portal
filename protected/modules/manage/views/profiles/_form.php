@@ -25,12 +25,14 @@
                 <tr>
                     <td>
                         <?php echo $form->labelEx($model, 'categoryIds'); ?>
+                        <input type="text" name="categoryFilter" class="filter" size="10" />
                         <div class="div-overflow">
                             <?php echo $form->checkBoxList($model, 'categoryIds', CHtml::listData(CvCategories::model()->findAll(array('order' => 'name')), 'id', 'name')); ?>
                         </div>
                     </td>
                     <td>
                         <?php echo $form->labelEx($model, 'positionsIds'); ?>
+                        <input type="text" name="positionsFilter" class="filter" size="10" />
                         <div class="div-overflow">
                             <?php echo $form->checkBoxList($model, 'positionsIds', CHtml::listData(CvPositions::model()->findAll(array('order' => 'name')), 'id', 'name')); ?>
                         </div>
@@ -44,12 +46,14 @@
                 <tr>
                     <td>
                         <?php echo $form->labelEx($model, 'jobLocationsIds'); ?>
+                        <input type="text" name="jobLocationsFilter" class="filter" size="10" />
                         <div class="div-overflow">
                             <?php echo $form->checkBoxList($model, 'jobLocationsIds', CHtml::listData(CitiesList::model()->findAll(array('order' => 'city_name')), 'city_index', 'city_name')); ?>
                         </div>
                     </td>
                     <td>
                         <?php echo $form->labelEx($model, 'residenciesIds'); ?>
+                        <input type="text" name="residenciesFilter" class="filter" size="10" />
                         <div class="div-overflow">
                             <?php echo $form->checkBoxList($model, 'residenciesIds', CHtml::listData(CitiesList::model()->findAll(array('order' => 'city_name')), 'city_index', 'city_name')); ?>
                         </div>
