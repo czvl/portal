@@ -42,6 +42,7 @@ class ProfilesController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->loadModel($id);
         $status = new CvStatuses();
 
         // if it is ajax validation request
@@ -59,8 +60,21 @@ class ProfilesController extends Controller
             }
         }
         
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'cvstatus-form') {
+            echo CActiveForm::validate($model);
+            Yii::app()->end();
+        }
+        
+        if (isset($_POST['CvList'])) {
+            $model->status = $_POST['CvList']['status'];
+            if ($status->save()) {
+                Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS, 'Статус анкети був доданий!');
+                $this->redirect(array('/manage/profiles/view/', 'id' => $id, '#' => 'statuses'));
+            }
+        }
+        
         $this->render('view', array(
-            'model' => $this->loadModel($id),
+            'model' => $model,
             'status' => $status
         ));
     }

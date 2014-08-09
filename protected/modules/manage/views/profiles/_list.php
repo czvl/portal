@@ -14,7 +14,7 @@
                 </span>
             </td>
             <td colspan="3">
-                <strong><?php echo $data->firstLastName; ?></strong> - 
+                <strong><?php echo CHtml::link($data->firstLastName, array("profiles/view", 'id' => $data->id)); ?></strong> - 
                 <?php echo $data->genderTypes[$data->gender]; ?>, 
                 <?php echo $age; ?>, 
                 <?php echo $data->maritalStatuses[$data->gender][$data->marital_status]; ?>, 

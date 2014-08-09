@@ -17,7 +17,7 @@ return array(
     ),
     'volunteer' => array(
         'type' => CAuthItem::TYPE_ROLE,
-        'description' => 'Волентер',
+        'description' => 'Волонтер',
         'bizRule' => null,
         'data' => null
     ),

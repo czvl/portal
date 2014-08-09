@@ -14,7 +14,7 @@ $this->breadcrumbs = array(
 
 $this->menu = array(
     array('label' => 'Список претендентів', 'url' => array('index')),
-    array('label' => 'Додати анкету', 'url' => array('create')),
+//    array('label' => 'Додати анкету', 'url' => array('create')),
 );
 ?>
 
