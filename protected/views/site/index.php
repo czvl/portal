@@ -89,9 +89,10 @@
                     </div>
                     <div class="span3">
                         <div class="align"> <i class="icon-map sev_icon"></i> </div>
-                        <h2>Інформаційний бюлетень ЦЗВЛ, червень '14:</h2>
+                        <h2>Як знайти роботу?</h2>
                         <ul>
-                            <li><a href="http://bit.ly/infoczvl062014" target="_blank">http://bit.ly/infoczvl062014</a></li>
+                            <li><a href="http://www.slideshare.net/undpukraine/undp-employm-idps-ukraine" target="_blank">Бюлетень ООН</a></li>
+                            <li><a href="/downloads/CZVL_handout_July2014.pdf" target="_blank">Інформаційний бюлетень ЦЗВЛ, липень '14</a></li>
                         </ul>
                     </div>
                     <div class="span3">
