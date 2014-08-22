@@ -51,7 +51,7 @@ Yii::app()->clientScript->registerPackage('main');
         <div class="footer-wrapper">
             <div class="container">
                 <footer>
-                    <small>&copy; <?php echo date('Y'); ?>. <?php echo Yii::t('main', 'All rights reserved.'); ?></small>
+                    <small>&copy; <?php echo date('Y'); ?>. <?php echo Yii::t('main', 'All rights reserved.'); ?> | Автор логотипу <a href="http://be.net/densednev" target="_blank">Денис Седньов</a></small>
                 </footer>
             </div>
         </div>
