@@ -92,7 +92,7 @@
                         <h2>Як знайти роботу?</h2>
                         <ul>
                             <li><a href="http://www.slideshare.net/undpukraine/undp-employm-idps-ukraine" target="_blank">Бюлетень ООН</a></li>
-                            <li><a href="/downloads/CZVL_handout_July2014.pdf" target="_blank">Інформаційний бюлетень ЦЗВЛ, липень '14</a></li>
+                            <!--<li><a href="/downloads/CZVL_handout_July2014.pdf" target="_blank">Інформаційний бюлетень ЦЗВЛ, липень '14</a></li>-->
                         </ul>
                     </div>
                     <div class="span3">
