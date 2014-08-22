@@ -113,7 +113,7 @@
                 <div class="row">
                     <div class="span12">
                         <p>Гаряча лінія для претендентів: +380 (67) 507-09-30 (<strong>Kyivstar</strong>), +380 (66) 500-35-75 (<strong>MTS</strong>), +380 (93) 167-37-81 (<strong>Life</strong>), <a href="mailto:czsl.staff@gmail.com">czsl.staff@gmail.com</a>.</p>
-                        <p>Для роботодавців: <strong>Віталій Шевченко</strong> +380 (50) 931-61-49<a href="mailto:czvl.job@gmail.com">czvl.job@gmail.com</a>.</p>
+                        <p>Для роботодавців: <strong>Віталій Шевченко</strong> +380 (50) 931-61-49 <a href="mailto:czvl.job@gmail.com">czvl.job@gmail.com</a>.</p>
                         <p>Для професійних асоціацій, громадських організацій та ініціатив: <strong>Ірина Коваль</strong>, +380 (97) 650-31-25, <a href="mailto:iryna.koval1@gmail.com">iryna.koval1@gmail.com</a>.</p>
                         <p>Загальні питання проекту, digital-частина: <strong>Наталія Швайковська</strong>, +380 (63) 241-52-13, <a href="mailto:shvaykovska@gmail.com">shvaykovska@gmail.com</a>.</p>
                         <p>Рекомендуємо підписатись на нашу сторінку в Facebook, щоб слідкувати за новинами і вакансіями: <a href="https://www.facebook.com/czvl.staff" target="_blank">https://www.facebook.com/czvl.staff</a>.</p>
