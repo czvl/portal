@@ -45,7 +45,7 @@ class CvToResidence extends CActiveRecord
         return array(
         );
     }
-
+    
     /**
      * @return array customized attribute labels (name=>label)
      */

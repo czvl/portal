@@ -33,7 +33,7 @@ Yii::app()->clientScript->registerPackage('main');
                 <div class="navbar-inner">
                     <div class="container">
                         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
-                        <h1 class="brand"><a href="#top"><?php echo Yii::t('main', Yii::app()->name); ?></a><sup>BETA</sup></h1>
+                        <h1 class="brand"><a href="/"><?php echo Yii::t('main', Yii::app()->name); ?></a><sup>BETA</sup></h1>
                         <nav class="pull-right nav-collapse collapse">
                             <ul id="menu-main" class="nav">
                                 <li><a title="services" href="#services"><?php echo Yii::t('main', 'How can you get involved?'); ?></a></li>

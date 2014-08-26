@@ -1,14 +1,7 @@
 <?php
 
 class ManageModule extends CWebModule
-{   
-//    public function init()
-//    {
-//        $this->setImport(array(
-//            'manage.models.*',
-//            'manage.components.*',
-//        ));
-//    }
+{
 
     public function beforeControllerAction($controller, $action)
     {

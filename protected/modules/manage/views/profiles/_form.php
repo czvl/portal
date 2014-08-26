@@ -17,6 +17,8 @@
 
             <?php echo $form->errorSummary($model); ?>
             
+            <?php echo $form->dropDownListControlGroup($model, 'recruiter_id', User::model()->recruiters, array('span' => 5)); ?>
+            
             <?php echo $form->dropDownListControlGroup($model, 'status', $model->statusTypes, array('span' => 5)); ?>
             
             <?php echo $form->textAreaControlGroup($model, 'recruiter_comments', array('rows' => 2, 'span' => 8)); ?>

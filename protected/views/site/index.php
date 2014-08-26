@@ -71,7 +71,7 @@
                         <div class="align"> <i class="icon-vector-pencil sev_icon"></i> </div>
                         <h2>Як кандидат:</h2>
                         <ul>
-                            <li>Надіслати резюме на адресу czsl.staff@gmail.com та заповнити анкету онлайн <a href="http://bit.ly/czslstaff" target="_blank">http://bit.ly/czslstaff</a>;</li>
+                            <li>Надіслати резюме на адресу czsl.staff@gmail.com та заповнити <a href="/applicants" target="_blank">анкету онлайн</a>;</li>
                         </ul>
                     </div>
                 </div>

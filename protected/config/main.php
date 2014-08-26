@@ -71,6 +71,7 @@ return array(
                 
                 'manage/login' => 'manage/default/login',
                 'manage/logout' => 'manage/default/logout',
+                'applicants' => 'site/applicants',
                 
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
@@ -141,11 +142,9 @@ return array(
                     'class' => 'CFileLogRoute',
                     'levels' => 'error, warning',
                 ),
-            /*
-              array(
-              'class' => 'CWebLogRoute',
-              ),
-             */
+//                array(
+//                    'class' => 'CWebLogRoute',
+//                ),
             ),
         ),
 //        'cache' => array(

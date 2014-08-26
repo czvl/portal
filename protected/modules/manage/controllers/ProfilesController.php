@@ -85,26 +85,86 @@ class ProfilesController extends Controller
      */
     public function actionCreate()
     {
-        $model = new CvList;
+        $model = new CvList();
         
         $this->performAjaxValidation($model);
         
         if (isset($_POST['CvList'])) {
+            
             $model->attributes = $_POST['CvList'];
-            $model->categories = $_POST['CvList']['categoryIds'];
-            $model->positions = $_POST['CvList']['positionsIds'];
-            $model->citiesResidence = $_POST['CvList']['residenciesIds'];
-            $model->driverLicensesTypes = $_POST['CvList']['driverLicensesIds'];
-            $model->citiesJobLocations = $_POST['CvList']['jobLocationsIds'];
-            $model->assistanceTypes = $_POST['CvList']['assistanceIds'];
-            if ($model->saveWithRelated(array('categories', 'positions', 'citiesResidence', 'citiesJobLocations', 'driverLicensesTypes', 'assistanceTypes'))) {
-                $this->redirect(array('view', 'id' => $model->id));
+            
+            $result = array();
+            $t = false;
+            
+            if (!Yii::app()->db->currentTransaction) {
+                $t = Yii::app()->db->beginTransaction();
+            }
+            
+            if ($model->save()) {
+                if (!empty($_POST['CvList']['residenciesIds'])) {
+//                    CvToResidence::model()->deleteAllByAttributes(array('cv_id' => $model->id));
+                    foreach($_POST['CvList']['residenciesIds'] as $r) {
+                        $residence = new CvToResidence();
+                        $residence->cv_id = $model->id;
+                        $residence->city_id = $r;
+                        if (!$residence->save()) {
+                            $result[] = false;
+                        }
+                    }
+                }
+
+                if (!empty($_POST['CvList']['driverLicensesIds'])) {
+//                    CvToDriverLicense::model()->deleteAllByAttributes(array('cv_id' => $model->id));
+                    foreach ($_POST['CvList']['driverLicensesIds'] as $dl) {
+                        $license = new CvToDriverLicense();
+                        $license->cv_id = $model->id;
+                        $license->license_id = $dl;
+                        if (!$license->save()) {
+                            $result[] = false;
+                        }
+                    }
+                }
+                
+                if (!empty($_POST['CvList']['jobLocationsIds'])) {
+//                    CvToJobLocation::model()->deleteAllByAttributes(array('cv_id' => $model->id));
+                    foreach ($_POST['CvList']['jobLocationsIds'] as $jl) {
+                        $jobLocation = new CvToJobLocation();
+                        $jobLocation->cv_id = $model->id;
+                        $jobLocation->city_id = $jl;
+                        if (!$jobLocation->save()) {
+                            $result[] = false;
+                        }
+                    }
+                }
+                
+                if (!empty($_POST['CvList']['assistanceIds'])) {
+//                    CvToAssistance::model()->deleteAllByAttributes(array('cv_id' => $model->id));
+                    foreach ($_POST['CvList']['assistanceIds'] as $ai) {
+                        $assistance = new CvToAssistance();
+                        $assistance->cv_id = $model->id;
+                        $assistance->assistance_type_id = $ai;
+                        if (!$assistance->save()) {
+                            $result[] = false;
+                        }
+                    }
+                }
+                
+            } else {
+                $result[] = false;
+            }
+            
+            if ($t && !in_array(false, $result)) {
+                $t->commit();
+                
+                Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS, 'Анкета була додана!');
+                
+                $this->redirect(array('index'));
+            } else {
+                $t->rollback();
             }
         }
 
-        $this->render('create', array(
-            'model' => $model,
-        ));
+        $this->render('create', array('model' => $model));
     }
 
     /**
@@ -139,18 +199,18 @@ class ProfilesController extends Controller
      * If deletion is successful, the browser will be redirected to the 'admin' page.
      * @param integer $id the ID of the model to be deleted
      */
-    public function actionDelete($id)
-    {
-        if (Yii::app()->request->isPostRequest) {
-            $this->loadModel($id)->delete();
-
-            if (!isset($_GET['ajax'])) {
-                $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
-            }
-        } else {
-            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
-        }
-    }
+//    public function actionDelete($id)
+//    {
+//        if (Yii::app()->request->isPostRequest) {
+//            $this->loadModel($id)->delete();
+//
+//            if (!isset($_GET['ajax'])) {
+//                $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
+//            }
+//        } else {
+//            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
+//        }
+//    }
 
     /**
      * Lists all models.
@@ -184,9 +244,7 @@ class ProfilesController extends Controller
                 )
         );
 
-        $this->render('index', array(
-            'dataProvider' => $dataProvider
-        ));
+        $this->render('index', array('dataProvider' => $dataProvider));
     }
 
     /**

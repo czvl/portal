@@ -45,7 +45,7 @@ class CvToJobLocation extends CActiveRecord
         return array(
         );
     }
-
+    
     /**
      * @return array customized attribute labels (name=>label)
      */

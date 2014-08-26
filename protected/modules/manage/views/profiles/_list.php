@@ -67,9 +67,11 @@
                 <?php } ?>
             </td>
             <td>
+                <?php if ($data->recruiter) { ?>
                 <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('recruiter_id')); ?>:</strong><br />
                 <?php echo CHtml::link($data->recruiter->firstLastName, array('/manage/reqruiter', 'id' => $data->recruiter->id)); ?>
                 <br /><br />
+                <?php } ?>
                 <strong><?php echo $data->getAttributeLabel('recruiter_comments'); ?>:</strong><br />
                 <?php echo $data->recruiter_comments; ?>
                 <br /><br />

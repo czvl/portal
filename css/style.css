@@ -797,7 +797,7 @@ footer p {
     font-family: 'Scada';
     color: #fff;
     width: 185px;
-    height: 20px;
+    /*height: 20px;*/
     text-shadow: none;
     font-size: 1.3125em; /* 21px */
     padding: 1em 0.5em;
@@ -1139,6 +1139,13 @@ ul#menu-main > li > a.auth-link:hover {
     height: 150px;
     width: 400px;
     display: block;
+}
+
+div.form .div-overflow span label, 
+div.form .controls span label {
+    margin: 0px;
+    font-size: 0.95em;
+    font-weight: normal;
 }
 
 ::-webkit-scrollbar {

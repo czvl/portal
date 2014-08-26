@@ -36,6 +36,7 @@
 
 div.form
 {
+    min-height: 200px;
 }
 
 div.form input,
@@ -56,8 +57,9 @@ div.form fieldset
 div.form label
 {
 	font-weight: bold;
-	font-size: 0.9em;
+	font-size: 1em;
 	display: block;
+        margin-top: 15px;
 }
 
 div.form .row

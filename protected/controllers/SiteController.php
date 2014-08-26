@@ -9,10 +9,10 @@ class SiteController extends Controller
     {
         return array(
             // captcha action renders the CAPTCHA image displayed on the contact page
-//            'captcha' => array(
-//                'class' => 'CCaptchaAction',
-//                'backColor' => 0xFFFFFF,
-//            ),
+            'captcha' => array(
+                'class' => 'CCaptchaAction',
+                'backColor' => 0xFFFFFF,
+            ),
             // page action renders "static" pages stored under 'protected/views/site/pages'
             // They can be accessed via: index.php?r=site/page&view=FileName
             'page' => array(
@@ -28,8 +28,6 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $this->layout = 'main';
-        // renders the view file 'protected/views/site/index.php'
-        // using the default layout 'protected/views/layouts/main.php'
         $this->render('index');
     }
 
@@ -80,54 +78,67 @@ class SiteController extends Controller
         if (isset($_POST['CvList'])) {
             
             $model->attributes = $_POST['CvList'];
-            $result = true;
+            
+            $result = array();
             $t = false;
             
             if (!Yii::app()->db->currentTransaction) {
                 $t = Yii::app()->db->beginTransaction();
             }
             
-            if (!$model->save()) {
-                $result = false;
-            }
-            $result = false;
-            echo $model->id;
-            
-            if (!empty($_POST['CvList']['residenciesIds'])) {
-                echo "<p>Residence: ";
-                foreach($_POST['CvList']['residenciesIds'] as $r) {
-                    echo $r . ",";
+            if ($model->save()) {
+                if (!empty($_POST['CvList']['residenciesIds'])) {
+                    foreach($_POST['CvList']['residenciesIds'] as $r) {
+                        $residence = new CvToResidence();
+                        $residence->cv_id = $model->id;
+                        $residence->city_id = $r;
+                        if (!$residence->save()) {
+                            $result[] = false;
+                        }
+                    }
                 }
-                echo "</p>";
-            }
-            
-            if (!empty($_POST['CvList']['driverLicensesIds'])) {
-                echo "<p>Driver license: ";
-                foreach ($_POST['CvList']['driverLicensesIds'] as $dl) {
-                    echo $dl . ",";
-                }
-                echo "</p>";
-            }
-            if (!empty($_POST['CvList']['jobLocationsIds'])) {
-                echo "<p>Job locations: ";
-                foreach ($_POST['CvList']['jobLocationsIds'] as $jl) {
-                    echo $jl . ",";
-                }
-                echo "</p>";
-            }
-            if (!empty($_POST['CvList']['assistanceIds'])) {
-                echo "<p>Assistance: ";
-                foreach ($_POST['CvList']['assistanceIds'] as $ai) {
-                    echo $ai . ",";
-                }
-                echo "</p>";
-            }
 
-            if ($t && $result) {
-                $t->commit();
-                $this->redirect(array('applicants', array('success' => true)));
+                if (!empty($_POST['CvList']['driverLicensesIds'])) {
+                    foreach ($_POST['CvList']['driverLicensesIds'] as $dl) {
+                        $license = new CvToDriverLicense();
+                        $license->cv_id = $model->id;
+                        $license->license_id = $dl;
+                        if (!$license->save()) {
+                            $result[] = false;
+                        }
+                    }
+                }
+                
+                if (!empty($_POST['CvList']['jobLocationsIds'])) {
+                    foreach ($_POST['CvList']['jobLocationsIds'] as $jl) {
+                        $jobLocation = new CvToJobLocation();
+                        $jobLocation->cv_id = $model->id;
+                        $jobLocation->city_id = $jl;
+                        if (!$jobLocation->save()) {
+                            $result[] = false;
+                        }
+                    }
+                }
+                
+                if (!empty($_POST['CvList']['assistanceIds'])) {
+                    foreach ($_POST['CvList']['assistanceIds'] as $ai) {
+                        $assistance = new CvToAssistance();
+                        $assistance->cv_id = $model->id;
+                        $assistance->assistance_type_id = $ai;
+                        if (!$assistance->save()) {
+                            $result[] = false;
+                        }
+                    }
+                }
+                
+            } else {
+                $result[] = false;
             }
-            if ($t && !$result) {
+            
+            if ($t && !in_array(false, $result)) {
+                $t->commit();
+                $this->redirect(array('applicants', 'success' => true));
+            } else {
                 $t->rollback();
             }
         }

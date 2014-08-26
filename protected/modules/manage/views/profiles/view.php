@@ -12,7 +12,7 @@ $this->breadcrumbs = array(
 $this->menu = array(
     array('label' => 'Меню'),
     array('label' => 'Список претендентів', 'url' => array('index')),
-//    array('label' => 'Додати анкету', 'url' => array('create')),
+    array('label' => 'Додати анкету', 'url' => array('create')),
 //    TbHtml::menuDivider(),
 //    array('label' => 'Адмінистративна частина'),
 //    array(

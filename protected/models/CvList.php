@@ -8,7 +8,7 @@
  * @property string $first_name
  * @property string $last_name
  * @property string $gender
- * @property string $marital_status
+ * @property integer $marital_status
  * @property string $birth_date
  * @property string $contact_phone
  * @property string $other_contacts
@@ -18,8 +18,8 @@
  * @property string $work_experience
  * @property string $skills
  * @property string $summary
- * @property string $desired_position
  * @property string $salary
+ * @property string $desired_position
  * @property string $documents
  * @property string $applicant_type
  * @property string $cv_file
@@ -31,17 +31,10 @@
  * @property integer $status
  *
  * The followings are the available model relations:
- * @property User $recruiter
- * @property CvCategories[] $categories
- * @property CvStatuses[] $cvStatuses
- * @property CvPositions[] $positions
- * @property DriverLicenses[] $driverLicensesTypes
- * @property AssistanceTypes[] $assistanceTypes
- * @property CitiesList[] $citiesResidence
- * @property CitiesList[] $citiesJobLocations
+ * @property Users $recruiter
  */
 class CvList extends CActiveRecord
-{   
+{
     public $genderTypes = array();
     public $categoryIds = array();
     public $positionsIds = array();
@@ -54,14 +47,15 @@ class CvList extends CActiveRecord
     public $maritalStatuses = array();
     
     public $personal_data;
-
-    public function __construct()
+    public $verifyCode;
+    
+    public function init()
     {
-        $controller = Yii::app()->getController();
-        $this->genderTypes = $controller->loadConfigFromFile('gender_types');
-        $this->educationTypes = $controller->loadConfigFromFile('education_types');
-        $this->statusTypes = $controller->loadConfigFromFile('statuses');
-        $this->maritalStatuses = $controller->loadConfigFromFile('marital_statuses');
+        parent::init();
+        $this->genderTypes = $this->loadConfigFromFile('gender_types');
+        $this->educationTypes = $this->loadConfigFromFile('education_types');
+        $this->statusTypes = $this->loadConfigFromFile('statuses');
+        $this->maritalStatuses = $this->loadConfigFromFile('marital_statuses');
     }
 
     /**
@@ -80,15 +74,28 @@ class CvList extends CActiveRecord
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('first_name, last_name, gender, birth_date, contact_phone, education, eduction_info, residenciesIds, jobLocationsIds, work_experience, desired_position, documents, applicant_type, recruiter_id', 'required'),
-            array('personal_data', 'compare', 'compareValue' => true, 'message' => 'Вам потрібно погодитись надати свої персональні дані', 'on' => 'public'),
-            array('education, recruiter_id, status', 'numerical', 'integerOnly' => true),
-            array('first_name, last_name, email, desired_position, cv_file, who_filled', 'length', 'max' => 255),
+            array('first_name, last_name, gender, residenciesIds, education, jobLocationsIds, desired_position, work_experience, skills, summary, applicant_type', 'required'),
+            array('marital_status, education, recruiter_id, status', 'numerical', 'integerOnly' => true),
+            array('first_name, last_name, email, salary, desired_position, cv_file, who_filled', 'length', 'max' => 255),
             array('gender', 'length', 'max' => 1),
-            array('email', 'email'),
+            array('contact_phone', 'match', 'pattern'=>'/^([+]?[0-9 \)\(\-]+)$/'),
             array('contact_phone', 'length', 'max' => 19),
-            array('salary', 'safe'),
-            array('id, category_id, first_name, last_name, gender, birth_date, contact_phone, email, education, eduction_info, work_experience, skills, summary, desired_position, documents, applicant_type, cv_file, recruiter_id, recruiter_comments, who_filled, added_time, status', 'safe', 'on' => 'search'),
+            array('birth_date, other_contacts, eduction_info, work_experience, skills, summary, documents, applicant_type, recruiter_comments, residenciesIds, jobLocationsIds, driverLicensesIds, assistanceIds, personal_data', 'safe'),
+            
+            array('personal_data', 'required', 'on' => 'public'),
+            array('personal_data', 'compare', 'compareValue' => true, 'message' => 'Вам потрібно погодитись надати нам Ваші персональні дані.', 'on' => 'public'),
+            array('verifyCode', 'captcha', 'on' => 'public'),
+            
+            // The following rule is used by search().
+            // @todo Please remove those attributes that should not be searched.
+            array('id, first_name, last_name, gender, marital_status, birth_date, contact_phone, other_contacts, email, education, eduction_info, work_experience, skills, summary, salary, desired_position, documents, applicant_type, cv_file, recruiter_id, recruiter_comments, who_filled, last_update, added_time, status', 'safe', 'on' => 'search'),
+        );
+    }
+    
+    public function behaviors()
+    {
+        return array('ESaveRelatedBehavior' => array(
+                'class' => 'application.components.ESaveRelatedBehavior')
         );
     }
 
@@ -111,21 +118,13 @@ class CvList extends CActiveRecord
         );
     }
 
-    public function behaviors()
-    {
-        return array('ESaveRelatedBehavior' => array(
-                'class' => 'application.components.ESaveRelatedBehavior'
-            )
-        );
-    }
-
     /**
      * @return array customized attribute labels (name=>label)
      */
     public function attributeLabels()
     {
         return array(
-            'id' => 'ID',
+             'id' => 'ID',
             'categoryIds' => 'Категорії',
             'first_name' => 'Ім’я',
             'last_name' => 'Прізвище',
@@ -157,6 +156,7 @@ class CvList extends CActiveRecord
             'who_filled' => 'Хто заповнив',
             'added_time' => 'Додано',
             'status' => 'Стан',
+            'verifyCode' => 'Введіть символи з малюнка', 
             'personal_data' => 'Я згоден(на) з обробкою та використанням моїх персональних даних'
         );
     }
@@ -164,11 +164,16 @@ class CvList extends CActiveRecord
     protected function beforeSave()
     {
         if (parent::beforeSave()) {
-            if ($this->isNewRecord && !Yii::app()->user->isGuest) {
-                $this->who_filled = Yii::app()->user->id;
+            if ($this->isNewRecord) {
+                $this->added_time = new CDbExpression('NOW()');
+                
+                if (!Yii::app()->user->isGuest) {
+                    $this->who_filled = Yii::app()->user->id;
+                }
             }
             $this->last_update = new CDbExpression('NOW()');
             $this->contact_phone = preg_replace('/[^0-9]/', '', $this->contact_phone);
+            
             return true;
         } else {
             return false;
@@ -233,14 +238,17 @@ class CvList extends CActiveRecord
         $criteria->compare('first_name', $this->first_name, true);
         $criteria->compare('last_name', $this->last_name, true);
         $criteria->compare('gender', $this->gender, true);
+        $criteria->compare('marital_status', $this->marital_status);
         $criteria->compare('birth_date', $this->birth_date, true);
         $criteria->compare('contact_phone', $this->contact_phone, true);
+        $criteria->compare('other_contacts', $this->other_contacts, true);
         $criteria->compare('email', $this->email, true);
         $criteria->compare('education', $this->education);
         $criteria->compare('eduction_info', $this->eduction_info, true);
         $criteria->compare('work_experience', $this->work_experience, true);
         $criteria->compare('skills', $this->skills, true);
         $criteria->compare('summary', $this->summary, true);
+        $criteria->compare('salary', $this->salary, true);
         $criteria->compare('desired_position', $this->desired_position, true);
         $criteria->compare('documents', $this->documents, true);
         $criteria->compare('applicant_type', $this->applicant_type, true);
@@ -248,6 +256,7 @@ class CvList extends CActiveRecord
         $criteria->compare('recruiter_id', $this->recruiter_id);
         $criteria->compare('recruiter_comments', $this->recruiter_comments, true);
         $criteria->compare('who_filled', $this->who_filled, true);
+        $criteria->compare('last_update', $this->last_update, true);
         $criteria->compare('added_time', $this->added_time, true);
         $criteria->compare('status', $this->status);
 
@@ -295,6 +304,17 @@ class CvList extends CActiveRecord
     public function getFirstLastName()
     {
         return $this->first_name . " " . $this->last_name;
+    }
+    
+    private function loadConfigFromFile($file)
+    {
+        $filePath = Yii::getPathOfAlias('application.config.' . $file).'.php';
+        
+        if (is_file($filePath)) {
+            return require($filePath);
+        } else {
+            return array();
+        }
     }
 
 }

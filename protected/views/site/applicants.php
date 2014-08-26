@@ -1,14 +1,19 @@
         <section id="services" class="single-page scrollblock">
-            <div class="container">       
+            <div class="container">
                 <h1>Додати анкету</h1>
-
                 <div class="form">
+                <?php if (filter_input(INPUT_GET, 'success')) { ?>
+                    <p>Ваші дані були збережені. Найближчим часом з Вами зв’яжуться наші представники.</p>
+                <?php } else { ?>
                     <?php
                         $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                             'id' => 'cv-list-form',
                             'enableAjaxValidation' => true,
                         ));
                     ?>
+                    <p><span class="required">*</span> - поля, обов’язкові для заповнення.</p>
+                    
+                    <?php echo $form->errorSummary($model); ?>
 
                     <?php echo $form->textFieldControlGroup($model, 'first_name', array('span' => 5, 'maxlength' => 255)); ?>
 
@@ -70,6 +75,12 @@
 
                     <?php echo $form->checkBoxListControlGroup($model, 'assistanceIds', CHtml::listData(AssistanceTypes::model()->findAll(array('order' => 'id')), 'id', 'name')); ?>
                     
+                    <div>
+                        <?php echo $form->labelEx($model, 'verifyCode'); ?>
+                        <p><?php $this->widget('CCaptcha'); ?></p>
+                        <?php echo $form->textField($model, 'verifyCode'); ?>
+                    </div>
+                    
                     <?php echo $form->checkBox($model, 'personal_data'); ?>
                     <?php echo $form->labelEx($model, 'personal_data', array('class' => 'inline')); ?>
 
@@ -83,5 +94,6 @@
 
                 <?php $this->endWidget(); ?>
                 </div>
+                <?php } ?>
             </div>
         </section>
