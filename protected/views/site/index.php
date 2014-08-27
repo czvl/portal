@@ -100,6 +100,7 @@
                         <h2>Корисна інформація для вимушених переселенців з Криму, Донбассу:</h2>
                         <ul>
                             <li><a href="http://bit.ly/czvlsosinfo" target="_blank">http://bit.ly/czvlsosinfo</a></li>
+                            <li><a href="/downloads/helpful_notes.jpg" target="_blank">Пам'ятка Волонтерської Сотні</a></li>
                         </ul>
                     </div>
                 </div>
