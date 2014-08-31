@@ -74,7 +74,7 @@ class CvList extends CActiveRecord
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('first_name, last_name, gender, residenciesIds, education, jobLocationsIds, desired_position, work_experience, skills, summary, applicant_type', 'required'),
+            array('first_name, last_name, gender, contact_phone, residenciesIds, education, jobLocationsIds, desired_position, work_experience, skills, summary, applicant_type', 'required'),
             array('marital_status, education, recruiter_id, status', 'numerical', 'integerOnly' => true),
             array('first_name, last_name, email, salary, desired_position, cv_file, who_filled', 'length', 'max' => 255),
             array('gender', 'length', 'max' => 1),
@@ -148,7 +148,7 @@ class CvList extends CActiveRecord
             'driverLicensesIds' => 'Водійські права',
             'applicant_type' => 'Інформація про претендента ЦЗВЛ',
             'assistanceIds' => 'Потрібна допомога',
-            'residenciesIds' => 'Місце проживання/проживання',
+            'residenciesIds' => 'Місце проживання, знаходження',
             'cv_file' => 'Файл резюме (посилання)',
             'recruiter_id' => 'Рекрутер',
             'recruiter_comments' => 'Коментарі рекрутера',
