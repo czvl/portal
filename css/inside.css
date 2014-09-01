@@ -61,15 +61,15 @@ tr.additional td:hover {
 span.time {
     font-size: 80%;
 }
+.search-filters {
+    overflow-x: scroll;
+}
 .search-table {
     width: 100%;
 }
 .search-table tr td {
     vertical-align: top;
     padding: 3px;
-}
-.search-table tr td label {
-    display: inline;
 }
 .div-overflow {
     overflow-y: auto;
@@ -86,4 +86,10 @@ span.time {
     border-radius: 4px;
     background-color: rgba(0, 0, 0, .5);
     -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}
+.narrow {
+    width: 200px;
+}
+.narrow span label {
+    display: block;
 }

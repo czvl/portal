@@ -276,6 +276,13 @@ class CvList extends CActiveRecord
         return parent::model($className);
     }
     
+    public function getStatusTypes()
+    {
+        $this->statusTypes = $this->loadConfigFromFile('statuses');
+        return $this->statusTypes;
+    }
+
+
     public function getAssistances()
     {
         $html = '';

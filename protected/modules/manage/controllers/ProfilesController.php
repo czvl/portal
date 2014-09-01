@@ -229,11 +229,26 @@ class ProfilesController extends Controller
         if (($firstName = $this->getVariable('first_name')) !== false && !empty($firstName)) {
             $criteria->addSearchCondition('first_name', $firstName);
         }
-//        if (($locations = $this->getVariable('locations')) !== false && !empty($locations)) {
-//            $criteria->with = array('citiesJobLocations');
-//            $criteria->together = true;
-//            $criteria->addInCondition('city_id', $locations);
-//        }
+        if (($locations = $this->getVariable('locations')) !== false && !empty($locations)) {
+            $criteria->with = array('citiesJobLocations');
+            $criteria->together = true;
+            $criteria->addInCondition('city_id', $locations);
+        }
+        if (($residencies = $this->getVariable('residencies')) !== false && !empty($residencies)) {
+            $criteria->with = array('citiesResidence');
+            $criteria->together = true;
+            $criteria->addInCondition('city_id', $residencies);
+        }
+        if (($categories = $this->getVariable('categories')) !== false && !empty($categories)) {
+            $criteria->with = array('categories');
+            $criteria->together = true;
+            $criteria->addInCondition('category_id', $categories);
+        }
+        if (($positions = $this->getVariable('positions')) !== false && !empty($positions)) {
+            $criteria->with = array('positions');
+            $criteria->together = true;
+            $criteria->addInCondition('position_id', $positions);
+        }
         
         $dataProvider = new CActiveDataProvider('CvList', array(
             'criteria' => $criteria,
