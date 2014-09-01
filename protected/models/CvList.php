@@ -47,7 +47,7 @@ class CvList extends CActiveRecord
     public $maritalStatuses = array();
     
     public $personal_data;
-    public $verifyCode;
+//    public $verifyCode;
     
     public function init()
     {
@@ -84,7 +84,7 @@ class CvList extends CActiveRecord
             
             array('personal_data', 'required', 'on' => 'public'),
             array('personal_data', 'compare', 'compareValue' => true, 'message' => 'Вам потрібно погодитись надати нам Ваші персональні дані.', 'on' => 'public'),
-            array('verifyCode', 'captcha', 'on' => 'public'),
+//            array('verifyCode', 'captcha', 'on' => 'public'),
             
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
@@ -156,7 +156,7 @@ class CvList extends CActiveRecord
             'who_filled' => 'Хто заповнив',
             'added_time' => 'Додано',
             'status' => 'Стан',
-            'verifyCode' => 'Введіть символи з малюнка', 
+//            'verifyCode' => 'Введіть символи з малюнка', 
             'personal_data' => 'Я згоден(на) з обробкою та використанням моїх персональних даних'
         );
     }

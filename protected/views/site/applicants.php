@@ -90,12 +90,13 @@
                     <?php echo $form->textArea($model, 'applicant_type', array('rows' => 6, 'span' => 8)); ?>
 
                     <?php echo $form->checkBoxListControlGroup($model, 'assistanceIds', CHtml::listData(AssistanceTypes::model()->findAll(array('order' => 'id')), 'id', 'name')); ?>
-                    
+                    <?php /*
                     <div>
                         <?php echo $form->labelEx($model, 'verifyCode'); ?>
                         <p><?php $this->widget('CCaptcha'); ?></p>
                         <?php echo $form->textField($model, 'verifyCode'); ?>
                     </div>
+                     */ ?>
                     
                     <?php echo $form->checkBox($model, 'personal_data'); ?>
                     <?php echo $form->labelEx($model, 'personal_data', array('class' => 'inline')); ?>
