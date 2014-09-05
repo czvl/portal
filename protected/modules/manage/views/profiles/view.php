@@ -145,7 +145,7 @@ $this->widget('bootstrap.widgets.TbDetailView', array(
         ),
         array(
             'name' => 'recruiter_id',
-            'value' => CHtml::link($model->recruiter->first_name. " " .$model->recruiter->last_name, array('/manage/reqruiter', 'id' => $model->recruiter->id)),
+            'value' => (isset($model->recruiter->last_name)) ? CHtml::link($model->recruiter->first_name. " " .$model->recruiter->last_name, array('/manage/reqruiter', 'id' => $model->recruiter->id)) : '',
             'type' => 'html'
         ),
         'recruiter_comments:ntext',

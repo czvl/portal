@@ -178,6 +178,7 @@ class User extends CActiveRecord
         
         $criteria = new CDbCriteria;
         $criteria->addInCondition('role', $recruitersRoles);
+        $criteria->order = 'first_name';
 
         $models = User::model()->findAll($criteria);
         $list = CHtml::listData($models, 'id', 'firstLastName');

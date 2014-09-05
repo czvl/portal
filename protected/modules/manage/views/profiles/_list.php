@@ -10,7 +10,9 @@
                 <span class="time">
                     <?php echo $inProgress; ?>
                     <br />
-                    <em>[<?php echo $lastUpdate; ?>]</em>
+                    [<?php echo Yii::app()->dateFormatter->formatDateTime($data->added_time, "short"); ?>]
+                    <br />
+                    <em>Останне оновлення - <?php echo $lastUpdate; ?> тому</em>
                 </span>
             </td>
             <td colspan="3">

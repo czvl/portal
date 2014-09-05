@@ -125,7 +125,7 @@ class CvList extends CActiveRecord
     public function attributeLabels()
     {
         return array(
-             'id' => 'ID',
+            'id' => 'ID',
             'categoryIds' => 'Категорії',
             'first_name' => 'Ім’я',
             'last_name' => 'Прізвище',
@@ -144,12 +144,12 @@ class CvList extends CActiveRecord
             'desired_position' => 'Бажана позиція',
             'positionsIds' => 'Можливі позиції',
             'salary' => 'Побажання по зар.платні',
-            'jobLocationsIds' => 'Бажане місце роботи',
+            'jobLocationsIds' => 'Бажане місто роботи',
             'documents' => 'Наявні документи (паспорт, права, диплом, трудова книжка)',
             'driverLicensesIds' => 'Водійські права',
             'applicant_type' => 'Інформація про претендента ЦЗВЛ',
             'assistanceIds' => 'Потрібна допомога',
-            'residenciesIds' => 'Місце проживання, знаходження',
+            'residenciesIds' => 'Місто проживання, знаходження',
             'cv_file' => 'Файл резюме (посилання)',
             'recruiter_id' => 'Рекрутер',
             'recruiter_comments' => 'Коментарі рекрутера',
