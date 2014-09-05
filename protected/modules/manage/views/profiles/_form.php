@@ -78,7 +78,17 @@
             
             <?php echo $form->dropDownListControlGroup($model, 'gender', $model->genderTypes, array('span' => 5, 'maxlength' => 1)); ?>
             
-            <?php echo $form->dateFieldControlGroup($model, 'birth_date', array('span' => 5)); ?>
+            <?php echo $form->labelEx($model, 'birth_date'); ?>
+            <?php
+                $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+                    'model' => $model, 
+                    'attribute' => 'birth_date',
+                    'options' => array(
+                        'showAnim' => 'fold',
+                        'dateFormat' => 'yy-mm-dd',
+                    )
+                ));
+            ?>
             
             <?php echo $form->labelEx($model, 'contact_phone'); ?>
             <?php

@@ -23,11 +23,13 @@
                     
                     <?php echo $form->labelEx($model, 'birth_date'); ?>
                     <?php
-                        $this->widget('zii.widgets.jui.CJuiDatePicker',array(
-                            'name'=>'birth_date',
-                            'htmlOptions'=>array(
-                                'style'=>'height:20px;'
-                            ),
+                        $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+                            'model' => $model, 
+                            'attribute' => 'birth_date',
+                            'options' => array(
+                                'showAnim' => 'fold',
+                                'dateFormat' => 'yy-mm-dd',
+                            )
                         ));
                     ?>
 
