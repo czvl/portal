@@ -18,20 +18,34 @@
             <td colspan="3">
                 <strong><?php echo CHtml::link($data->firstLastName, array("profiles/view", 'id' => $data->id)); ?></strong> - 
                 <?php echo $data->genderTypes[$data->gender]; ?>, 
-                <?php echo $age; ?>, 
+                <?php
+                    if (isset($data->birth_date)) {
+                        echo $age . ", ";
+                    }
+                ?>
                 <?php echo $data->maritalStatuses[$data->gender][$data->marital_status]; ?>, 
-                <?php echo implode(', ', array_values(CHtml::listData($data->citiesResidence, 'city_index', 'city_name'))); ?>, 
+                <?php
+                    if (!empty($data->citiesResidence)) {
+                        echo implode(', ', array_values(CHtml::listData($data->citiesResidence, 'city_index', 'city_name'))) . ", ";
+                    }
+                ?>
                 <?php echo $data->contact_phone; ?>, <?php echo CHtml::mailto($data->email); ?>
             </td>
             <td>
-                <?php echo $data->desired_position; ?> у м.
-                <?php echo implode(', ', array_values(CHtml::listData($data->citiesJobLocations, 'city_index', 'city_name'))); ?>
+                <?php echo $data->desired_position; ?> 
+            <?php if (!empty($data->citiesJobLocations)) { ?>
+                у м. <?php echo implode(', ', array_values(CHtml::listData($data->citiesJobLocations, 'city_index', 'city_name'))); ?>
+            <?php } ?>
                 <br />
+            <?php if (!empty($data->categories)) { ?>
                 <strong><?php echo $data->getAttributeLabel('categoryIds'); ?>:</strong><br />
                 <?php echo implode(', ', array_values(CHtml::listData($data->categories, 'id', 'name'))); ?>
                 <br />
+            <?php } ?>
+            <?php if (!empty($data->positions)) { ?>
                 <strong><?php echo $data->getAttributeLabel('positionsIds'); ?>:</strong><br />
                 <?php echo implode(', ', array_values(CHtml::listData($data->positions, 'id', 'name'))); ?>
+            <?php } ?>
             </td>
             <td style="text-align: right;">
                 <?php 
