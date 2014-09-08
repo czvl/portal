@@ -250,6 +250,11 @@ class ProfilesController extends Controller
             $criteria->addInCondition('position_id', $positions);
         }
         
+        if (empty($_GET)) {
+            $criteria->condition = 'status = :status';
+            $criteria->params = array(':status' => 0);
+        }
+        
         $dataProvider = new CActiveDataProvider('CvList', array(
             'criteria' => $criteria,
             'pagination' => array(

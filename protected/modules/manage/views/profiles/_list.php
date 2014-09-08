@@ -60,16 +60,16 @@
         <tr class="additional">
             <td colspan="2">
                 <strong><?php echo $data->getAttributeLabel('summary'); ?>:</strong><br />
-                <?php echo nl2br($data->summary); ?>
+                <?php echo nl2br(stripslashes($data->summary)); ?>
                 <br /><br />
                 <strong><?php echo $data->getAttributeLabel('education'); ?>:</strong> <?php echo $data->educationTypes[$data->education]; ?>, 
-                <?php echo $data->eduction_info; ?>
+                <?php echo stripslashes($data->eduction_info); ?>
                 <br /><br />
-                <strong><?php echo $data->getAttributeLabel('skills'); ?>:</strong> <?php echo $data->skills; ?>
+                <strong><?php echo $data->getAttributeLabel('skills'); ?>:</strong> <?php echo stripslashes($data->skills); ?>
             </td>
             <td colspan="2">
                 <strong><?php echo $data->getAttributeLabel('work_experience'); ?>:</strong><br />
-                <?php echo $data->work_experience; ?>
+                <?php echo stripslashes($data->work_experience); ?>
             </td>
             <td>
                 <strong><?php echo $data->getAttributeLabel('assistanceIds'); ?>:</strong>
