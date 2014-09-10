@@ -39,7 +39,8 @@ class Controller extends CController
     
     public function getVariable($name)
     {
-        return (isset($_GET[$name])) ? $_GET[$name] : NULL;
+        $var = filter_input(INPUT_GET, $name);
+        return (($var !== NULL && ($var !== ''))) ? $var : false;
     }
 
 }

@@ -14,7 +14,7 @@ $this->menu = array(
             <tr>
                 <td>
                     <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('status')); ?></strong><br />
-                    <?php echo CHtml::dropDownList('status', $this->getVariable('status'), CvList::model()->getStatusTypes(), array('empty' => '---', 'options' => array('0' => array('selected' => true)))); ?>
+                    <?php echo CHtml::dropDownList('status', $this->getVariable('status'), CvList::model()->getStatusTypes(), array('empty' => '---')); ?>
                     <br />
                     <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('last_name')); ?></strong><br />
                     <?php echo CHtml::textField('last_name', $this->getVariable('last_name'), array('span' => 5, 'maxlength' => 255)); ?>

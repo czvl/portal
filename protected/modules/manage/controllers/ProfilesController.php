@@ -219,32 +219,32 @@ class ProfilesController extends Controller
     {
         $criteria = new CDbCriteria();
         
-        if (($status = $this->getVariable('status')) !== false && !empty($status)) {
+        if (($status = $this->getVariable('status')) !== false) {
             $criteria->condition = 'status = :status';
             $criteria->params = array(':status' => $status);
         }
-        if (($lastName = $this->getVariable('last_name')) !== false && !empty($lastName)) {
+        if ($lastName = $this->getVariable('last_name')) {
             $criteria->addSearchCondition('last_name', $lastName);
         }
-        if (($firstName = $this->getVariable('first_name')) !== false && !empty($firstName)) {
+        if ($firstName = $this->getVariable('first_name')) {
             $criteria->addSearchCondition('first_name', $firstName);
         }
-        if (($locations = $this->getVariable('locations')) !== false && !empty($locations)) {
+        if ($locations = $this->getVariable('locations')) {
             $criteria->with = array('citiesJobLocations');
             $criteria->together = true;
             $criteria->addInCondition('city_id', $locations);
         }
-        if (($residencies = $this->getVariable('residencies')) !== false && !empty($residencies)) {
+        if ($residencies = $this->getVariable('residencies')) {
             $criteria->with = array('citiesResidence');
             $criteria->together = true;
             $criteria->addInCondition('city_id', $residencies);
         }
-        if (($categories = $this->getVariable('categories')) !== false && !empty($categories)) {
+        if ($categories = $this->getVariable('categories')) {
             $criteria->with = array('categories');
             $criteria->together = true;
             $criteria->addInCondition('category_id', $categories);
         }
-        if (($positions = $this->getVariable('positions')) !== false && !empty($positions)) {
+        if ($positions = $this->getVariable('positions')) {
             $criteria->with = array('positions');
             $criteria->together = true;
             $criteria->addInCondition('position_id', $positions);
