@@ -70,7 +70,7 @@ class ProfilesController extends Controller
             if ($model->save()) {
                 
                 $log = new Log();
-                $log->action = 'change_status_to_user_' . $id;
+                $log->action = 'change_status_to_user_' . $id . "_to_" . $_POST['CvList']['status'];
                 $log->save();
                 
                 Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS, 'Статус анкети був оновлений!');
