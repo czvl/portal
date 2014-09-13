@@ -28,6 +28,8 @@ $this->menu = array(
 
 <?php echo TbHtml::pageHeader('Анкета "' . $model->firstLastName . '"', ''); ?>
 
+<?php $this->widget('bootstrap.widgets.TbAlert'); ?>
+
 <?php
     $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         'id' => 'cvstatus-form',
@@ -56,7 +58,6 @@ foreach ($model->cvStatuses as $s) {
 }
 ?>
 <hr />
-<?php $this->widget('bootstrap.widgets.TbAlert'); ?>
 <?php echo TbHtml::lead('Оновити статус:'); ?>
 <a name="statuses"></a>
 <?php

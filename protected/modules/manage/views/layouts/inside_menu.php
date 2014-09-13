@@ -13,19 +13,18 @@
                                             array('label' => 'Анкети претендентів', 'url' => array('/manage/profiles'), 'visible' => !Yii::app()->user->isGuest),
                                             array('label' => 'Адміністративна частина', 'items' => array(
                                                 array('label' => 'Користувачі', 'url' => array('/manage/users')),
-                                                //array('label' => 'Another action', 'url' => '#'),
-                                                //array('label' => 'Something else here', 'url' => '#'),
                                                 TbHtml::menuDivider(),
                                                 array('label' => 'Довідник категорій', 'url' => '#'),
-                                            ), 
-                                            'visible' => Yii::app()->user->checkAccess(User::ROLE_ADMIN))
+                                            ), 'visible' => Yii::app()->user->checkAccess(User::ROLE_ADMIN))
                                         ),
                                     ),
                                     array(
                                         'class' => 'bootstrap.widgets.TbNav',
                                         'htmlOptions' => array('class' => 'pull-right'),
                                         'items' => array(
-                                            array('label' => Yii::t('main', 'Hello') . ", " . Yii::app()->session['first_name'] . " " . Yii::app()->session['last_name'] . "!", 'visible' => !Yii::app()->user->isGuest),
+                                            array('label' => Yii::t('main', 'Hello') . ", " . Yii::app()->session['first_name'] . " " . Yii::app()->session['last_name'] . "!", 'items' => array(
+                                               array('label' => 'Мій профайл', 'url' => array('/manage/profile/')) 
+                                            ), 'visible' => !Yii::app()->user->isGuest),
                                             array('label' => Yii::t('main', 'Logout'), 'url' => array('/manage/logout'), 'visible' => !Yii::app()->user->isGuest),
                                             array('label' => Yii::t('main', 'Login'), 'url' => array('/manage/login'), 'visible' => Yii::app()->user->isGuest),
                                         ),

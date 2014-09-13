@@ -8,7 +8,7 @@ return array(
     'Contacts' => 'Контакти',
     'Sign in' => 'Авторизація',
     'Logout' => 'Вийти',
-    'Hello' => 'Привіт',
+    'Hello' => 'Вітаю',
     'Username' => 'Ім’я користувача',
     'Password' => 'Пароль',
     'Password repeat' => 'Повторити пароль',

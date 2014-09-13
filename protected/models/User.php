@@ -85,8 +85,11 @@ class User extends CActiveRecord
             array('password, password_repeat', 'length', 'max' => 32),
             array('password, password_repeat', 'required', 'on' => 'create'),
             array('password_repeat', 'compare', 'compareAttribute' => 'password', 'on' => 'create'),
+            
+            array('password_new, password_repeat', 'required', 'on' => 'update'),
             array('password_repeat', 'compare', 'compareAttribute' => 'password_new', 'on' => 'update'),
-            array('password_new', 'safe', 'on' => 'update'),
+            array('password_new, password_repeat', 'safe', 'on' => 'update'),
+            
             array('status', 'numerical', 'integerOnly' => true),
             array('username, email, role, first_name, last_name', 'length', 'max' => 255),
             array('signin_time, last_login', 'safe'),

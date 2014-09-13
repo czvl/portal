@@ -55,21 +55,26 @@ class ProfilesController extends Controller
         if (isset($_POST['CvStatuses'])) {
             $status->attributes = $_POST['CvStatuses'];
             if ($status->validate() && $status->save()) {
+                
+                $log = new Log();
+                $log->action = 'add_status_to_user_' . $id;
+                $log->save();
+                
                 Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS, 'Ваш статус був доданий!');
                 $this->redirect(array('/manage/profiles/view/', 'id' => $id, '#' => 'statuses'));
             }
         }
         
-        if (isset($_POST['ajax']) && $_POST['ajax'] === 'cvstatus-form') {
-            echo CActiveForm::validate($model);
-            Yii::app()->end();
-        }
-        
         if (isset($_POST['CvList'])) {
             $model->status = $_POST['CvList']['status'];
-            if ($status->save()) {
-                Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS, 'Статус анкети був доданий!');
-                $this->redirect(array('/manage/profiles/view/', 'id' => $id, '#' => 'statuses'));
+            if ($model->save()) {
+                
+                $log = new Log();
+                $log->action = 'change_status_to_user_' . $id;
+                $log->save();
+                
+                Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS, 'Статус анкети був оновлений!');
+                $this->redirect(array('/manage/profiles/view/', 'id' => $id));
             }
         }
         
@@ -156,6 +161,10 @@ class ProfilesController extends Controller
             if ($t && !in_array(false, $result)) {
                 $t->commit();
                 
+                $log = new Log();
+                $log->action = 'add_user_' . $model->id;
+                $log->save();
+                
                 Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS, 'Анкета була додана!');
                 
                 $this->redirect(array('index'));
@@ -187,6 +196,11 @@ class ProfilesController extends Controller
             $model->citiesJobLocations = $_POST['CvList']['jobLocationsIds'];
             $model->assistanceTypes = $_POST['CvList']['assistanceIds'];
             if ($model->saveWithRelated(array('categories', 'positions', 'citiesResidence', 'citiesJobLocations', 'driverLicensesTypes', 'assistanceTypes'))) {
+                
+                $log = new Log();
+                $log->action = 'update_user_info_' . $id;
+                $log->save();
+                
                 $this->redirect(array('view', 'id' => $model->id));
             }
         }
