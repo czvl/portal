@@ -13,16 +13,17 @@ $this->menu = array(
     array('label' => 'Меню'),
     array('label' => 'Список претендентів', 'url' => array('index')),
     array('label' => 'Додати анкету', 'url' => array('create')),
-//    TbHtml::menuDivider(),
-//    array('label' => 'Адмінистративна частина'),
-//    array(
-//        'label' => 'Видалити анкету', 
-//        'url' => '#', 
-//        'linkOptions' => array(
-//            'submit' => array('delete', 'id' => $model->id), 
-//            'confirm' => 'Ви впевнені, що бажаєте видатили цю анкету?'
-//        )
-//    ),
+    TbHtml::menuDivider(),
+    array('label' => 'Адмінистративна частина'),
+    array(
+        'label' => 'Видалити анкету', 
+        'url' => '#', 
+        'linkOptions' => array(
+            'submit' => array('delete', 'id' => $model->id), 
+            'confirm' => 'Ви впевнені, що бажаєте видатили цю анкету?'
+        ),
+        'visible' => Yii::app()->user->checkAccess(User::ROLE_ADMIN)
+    ),
 );
 ?>
 

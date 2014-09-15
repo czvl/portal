@@ -213,18 +213,29 @@ class ProfilesController extends Controller
      * If deletion is successful, the browser will be redirected to the 'admin' page.
      * @param integer $id the ID of the model to be deleted
      */
-//    public function actionDelete($id)
-//    {
-//        if (Yii::app()->request->isPostRequest) {
-//            $this->loadModel($id)->delete();
-//
-//            if (!isset($_GET['ajax'])) {
-//                $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('index'));
-//            }
-//        } else {
-//            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
-//        }
-//    }
+    public function actionDelete($id)
+    {
+        if (Yii::app()->request->isPostRequest) {
+            
+            CvStatuses::model()->deleteAllByAttributes(array('cv_id' => $id));
+            CvToAssistance::model()->deleteAllByAttributes(array('cv_id' => $id));
+            CvToCategory::model()->deleteAllByAttributes(array('cv_id' => $id));
+            CvToDriverLicense::model()->deleteAllByAttributes(array('cv_id' => $id));
+            CvToJobLocation::model()->deleteAllByAttributes(array('cv_id' => $id));
+            CvToPosition::model()->deleteAllByAttributes(array('cv_id' => $id));
+            CvToResidence::model()->deleteAllByAttributes(array('cv_id' => $id));
+            
+            $log = new Log();
+            $log->action = "delete_user_" . $id;
+            $res = $log->save();
+            
+            $this->loadModel($id)->delete();
+            
+            $this->redirect(array('index'));
+        } else {
+            throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
+        }
+    }
 
     /**
      * Lists all models.
