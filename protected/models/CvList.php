@@ -5,6 +5,7 @@
  *
  * The followings are the available columns in table 'cv_list':
  * @property integer $id
+ * @property integer $internal_num
  * @property string $first_name
  * @property string $last_name
  * @property string $gender
@@ -126,6 +127,7 @@ class CvList extends CActiveRecord
     {
         return array(
             'id' => 'ID',
+            'internal_num' => 'Внутрішній номер',
             'categoryIds' => 'Категорії',
             'first_name' => 'Ім’я',
             'last_name' => 'Прізвище',
@@ -236,6 +238,7 @@ class CvList extends CActiveRecord
         $criteria = new CDbCriteria;
 
         $criteria->compare('id', $this->id);
+        $criteria->compare('internal_num', $this->internal_num);
         $criteria->compare('first_name', $this->first_name, true);
         $criteria->compare('last_name', $this->last_name, true);
         $criteria->compare('gender', $this->gender, true);

@@ -23,7 +23,9 @@
                         echo $age . ", ";
                     }
                 ?>
+                <?php if ($data->marital_status) { ?>
                 <?php echo $data->maritalStatuses[$data->gender][$data->marital_status]; ?>, 
+                <?php } ?>
                 <?php
                     if (!empty($data->citiesResidence)) {
                         echo implode(', ', array_values(CHtml::listData($data->citiesResidence, 'city_index', 'city_name'))) . ", ";
