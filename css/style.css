@@ -1160,3 +1160,13 @@ div.form .controls span label {
 .inline {
     display: inline;
 }
+.notice {
+    font-size: 90%;
+    font-style: italic;
+    padding: 10px;
+}
+section#services .notice p {
+    margin: 0px 0px 2px 0px;
+    padding: 0px;
+    line-height: 1;
+}
