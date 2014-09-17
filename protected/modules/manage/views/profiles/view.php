@@ -48,7 +48,7 @@ $this->menu = array(
 echo TbHtml::lead('Статуси про претендента &laquo;' . $model->first_name . ' ' . $model->last_name . '&raquo;');
 
 $statusList = array();
-foreach ($model->cvStatuses as $s) {
+foreach ($statuses as $s) {
     $date = Yii::app()->dateFormatter->formatDateTime($s->added_time, "long");
     $from = $s->operator->first_name . ' ' . $s->operator->last_name;
     

@@ -78,7 +78,7 @@
             
             <?php echo $form->dropDownListControlGroup($model, 'gender', $model->genderTypes, array('span' => 5, 'maxlength' => 1)); ?>
             
-            <?php echo $form->dropDownListControlGroup($model, 'marital_status', $model->maritalStatuses['m'], array('span' => 5, 'maxlength' => 1)); ?>
+            <?php echo $form->dropDownListControlGroup($model, 'marital_status', $model->maritalStatuses['m'], array('prompt' => '-- оберіть --', 'span' => 5, 'maxlength' => 1)); ?>
             
             <?php echo $form->labelEx($model, 'birth_date'); ?>
             <?php

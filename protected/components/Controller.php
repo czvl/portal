@@ -39,7 +39,7 @@ class Controller extends CController
     
     public function getVariable($name)
     {
-        return ((isset($_GET[$name]) && ($_GET[$name] !== ''))) ? $_GET[$name] : false;
+        return ((isset($_GET[$name]) && ($_GET[$name] !== ''))) ? trim($_GET[$name]) : false;
     }
 
 }

@@ -21,6 +21,9 @@ $this->menu = array(
                     <br />
                     <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('first_name')); ?></strong><br />
                     <?php echo CHtml::textField('first_name', $this->getVariable('first_name'), array('span' => 5, 'maxlength' => 255)); ?>
+                    <br />
+                    <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('recruiter_id')); ?></strong><br />
+                    <?php echo CHtml::dropDownList('recruiter_id', $this->getVariable('recruiter_id'), User::model()->recruiters, array('empty' => '---')); ?>
                 </td>
                 <td>
                     <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('jobLocationsIds')); ?></strong><br />

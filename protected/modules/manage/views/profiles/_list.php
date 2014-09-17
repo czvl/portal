@@ -77,12 +77,17 @@
                 <strong><?php echo $data->getAttributeLabel('assistanceIds'); ?>:</strong>
                 <?php echo $data->assistances; ?>
                 
-                <?php if (!empty($data->latestStatus)) { ?>
+            <?php if (!empty($data->latestStatuses)) { ?>
                 <strong><?php echo $data->getAttributeLabel('statuses'); ?>:</strong><br />
-                <?php echo $data->latestStatus->message; ?><br />
-                <em>[<?php echo Yii::app()->dateFormatter->formatDateTime($data->latestStatus->added_time, "short"); ?> 
-                    - <?php echo CHtml::link($data->latestStatus->operator->first_name . ' ' . $data->latestStatus->operator->last_name, array('/manage/reqruiter', 'id' => $data->latestStatus->operator->id)); ?>]</em>
+                <?php foreach($data->latestStatuses as $status) { ?>
+                <div class="list-statuses">
+                    <?php echo $status->message; ?><br />
+                    <em>[<?php echo Yii::app()->dateFormatter->formatDateTime($status->added_time, "short"); ?> 
+                    - <?php echo CHtml::link($status->operator->first_name . ' ' . $status->operator->last_name, array('/manage/reqruiter', 'id' => $status->operator->id)); ?>]</em>
+                </div>
                 <?php } ?>
+            <?php } ?>
+                 
             </td>
             <td>
                 <?php if ($data->recruiter) { ?>

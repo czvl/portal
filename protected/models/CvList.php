@@ -84,6 +84,7 @@ class CvList extends CActiveRecord
             array('birth_date', 'type', 'type' => 'date', 'message' => 'Поле "Дата нарождення" має бути датою.',  'dateFormat' => 'yyyy-MM-dd'),
             array('birth_date, other_contacts, eduction_info, work_experience, skills, summary, documents, applicant_type, recruiter_comments, residenciesIds, jobLocationsIds, driverLicensesIds, assistanceIds, personal_data', 'safe'),
             
+            array('contact_phone', 'existentUser', 'on' => 'public'),
             array('personal_data', 'required', 'on' => 'public'),
             array('personal_data', 'compare', 'compareValue' => true, 'message' => 'Вам потрібно погодитись надати нам Ваші персональні дані.', 'on' => 'public'),
 //            array('verifyCode', 'captcha', 'on' => 'public'),
@@ -92,6 +93,17 @@ class CvList extends CActiveRecord
             // @todo Please remove those attributes that should not be searched.
             array('id, first_name, last_name, gender, marital_status, birth_date, contact_phone, other_contacts, email, education, eduction_info, work_experience, skills, summary, salary, desired_position, documents, applicant_type, cv_file, recruiter_id, recruiter_comments, who_filled, last_update, added_time, status', 'safe', 'on' => 'search'),
         );
+    }
+    
+    public function existentUser($attribute, $params)
+    {
+        if (!empty($this->first_name) && !empty($this->last_name) && !empty($this->contact_phone)) {
+            $this->contact_phone = preg_replace('/[^0-9]/', '', $this->contact_phone);
+            $user = CvList::model()->findByAttributes(array('first_name' => $this->first_name, 'last_name' => $this->last_name, 'contact_phone' => $this->contact_phone));
+            if (!empty($user)) {
+                $this->addError($attribute, 'Запис з такими данними вже є в базі. Будь ласка не заповнюйте анкету вдруге!');
+            }
+        }
     }
     
     public function behaviors()
@@ -301,15 +313,15 @@ class CvList extends CActiveRecord
         
     }
     
-    public function getLatestStatus()
+    public function getLatestStatuses()
     {
         $criteria = new CDbCriteria;
         $criteria->condition = 'cv_id = :cv_id';
         $criteria->params = array(':cv_id' => $this->id);
-        $criteria->order = "id DESC";
-        $criteria->limit = 1;
+        $criteria->order = "added_time DESC";
+        $criteria->limit = 3;
         
-        return CvStatuses::model()->find($criteria);
+        return CvStatuses::model()->findAll($criteria);
     }
     
     public function getFirstLastName()

@@ -78,9 +78,12 @@ class ProfilesController extends Controller
             }
         }
         
+        $statuses = CvStatuses::model()->findAll(array('condition' => 'cv_id=:cv_id', 'params' => array(':cv_id' => $id), 'order' => 'added_time DESC'));
+        
         $this->render('view', array(
             'model' => $model,
-            'status' => $status
+            'status' => $status,
+            'statuses' => $statuses
         ));
     }
 
@@ -273,6 +276,9 @@ class ProfilesController extends Controller
             $criteria->with = array('positions');
             $criteria->together = true;
             $criteria->addInCondition('position_id', $positions);
+        }
+        if ($recruiterId = $this->getVariable('recruiter_id')) {
+            $criteria->addSearchCondition('recruiter_id', $recruiterId, false, false, '=');
         }
         
         if (empty($_GET)) {

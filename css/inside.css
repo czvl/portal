@@ -93,3 +93,10 @@ span.time {
 .narrow span label {
     display: block;
 }
+.list-statuses {
+    margin-bottom: 5px;
+}
+label.inline {
+    margin-left: 5px;
+    display: inline;
+}
