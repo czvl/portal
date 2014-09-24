@@ -283,7 +283,6 @@ class ProfilesController extends Controller
             $criteria->addInCondition('assistance_type_id', $assistanceIds);
         }
         if ($licensesIds = $this->getVariable('licensesIds')) {
-            print_r($licensesIds);
             $criteria->with = array('driverLicensesTypes');
             $criteria->together = true;
             $criteria->addInCondition('license_id', $licensesIds);
