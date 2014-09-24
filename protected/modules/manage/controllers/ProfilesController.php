@@ -277,8 +277,22 @@ class ProfilesController extends Controller
             $criteria->together = true;
             $criteria->addInCondition('position_id', $positions);
         }
+        if ($assistanceIds = $this->getVariable('assistanceIds')) {
+            $criteria->with = array('assistanceTypes');
+            $criteria->together = true;
+            $criteria->addInCondition('assistance_type_id', $assistanceIds);
+        }
+        if ($licensesIds = $this->getVariable('licensesIds')) {
+            print_r($licensesIds);
+            $criteria->with = array('driverLicensesTypes');
+            $criteria->together = true;
+            $criteria->addInCondition('license_id', $licensesIds);
+        }
         if ($recruiterId = $this->getVariable('recruiter_id')) {
             $criteria->addSearchCondition('recruiter_id', $recruiterId, false, false, '=');
+        }
+        if ($internalNum = $this->getVariable('internal_num')) {
+            $criteria->addSearchCondition('internal_num', $internalNum, false, false, '=');
         }
         
         if (empty($_GET)) {

@@ -32,6 +32,9 @@
                     }
                 ?>
                 <?php echo $data->contact_phone; ?>, <?php echo CHtml::mailto($data->email); ?>
+                <?php if (!empty($data->internal_num)) { ?>
+                    , внутрішній номер <?php echo $data->internal_num; ?>
+                <?php } ?>
             </td>
             <td>
                 <?php echo $data->desired_position; ?> 

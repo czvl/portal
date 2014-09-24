@@ -77,6 +77,10 @@ span.time {
     width: 400px;
     display: block;
 }
+.scrollY {
+    height: 200px;
+    overflow-y: scroll;
+}
 
 ::-webkit-scrollbar {
     -webkit-appearance: none;
