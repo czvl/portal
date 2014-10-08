@@ -298,6 +298,8 @@ class ProfilesController extends Controller
             $criteria->condition = 'status = :status';
             $criteria->params = array(':status' => 0);
         }
+
+        $criteria->order = 'added_time DESC';
         
         $dataProvider = new CActiveDataProvider('CvList', array(
             'criteria' => $criteria,
