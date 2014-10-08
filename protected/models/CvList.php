@@ -155,7 +155,7 @@ class CvList extends CActiveRecord
             'work_experience' => 'Досвід роботи',
             'skills' => 'Навички',
             'summary' => 'Про себе',
-            'desired_position' => 'Бажана позиція',
+            'desired_position' => 'Бажана посада',
             'positionsIds' => 'Можливі посади',
             'salary' => 'Побажання по зар.платні',
             'jobLocationsIds' => 'Бажане місто роботи',

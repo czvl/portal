@@ -104,3 +104,6 @@ label.inline {
     margin-left: 5px;
     display: inline;
 }
+.even {
+    background-color: #f5f5f5;
+}

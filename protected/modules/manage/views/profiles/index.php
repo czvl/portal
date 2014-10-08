@@ -93,13 +93,14 @@ $this->menu = array(
             <th style="width: 180px;"></th>
         </tr>
     </thead>
+    <tbody>
 <?php
 
-$this->widget('bootstrap.widgets.TbListView', array(
+$listView = $this->widget('bootstrap.widgets.TbListView', array(
     'dataProvider' => $dataProvider,
     'itemView' => '_list'
 ));
 ?>
-        <tbody>
     </tbody>
 </table>
+<?php $listView->renderPager(); ?>

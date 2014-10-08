@@ -3,7 +3,7 @@
     $inProgress = $this->getTimeDiff($data->added_time);
     $lastUpdate = $this->getTimeDiff($data->last_update);
 ?>
-        <tr class="leadtr">
+        <tr class="leadtr <?php echo ($index % 2) ? 'odd' : 'even' ?>">
             <td>
                 <?php echo $data->statusTypes[$data->status]; ?>
                 <br />
@@ -62,7 +62,7 @@
                 ?>
             </td>
         </tr>
-        <tr class="additional">
+        <tr class="additional <?php echo ($index % 2) ? 'odd' : 'even' ?>">
             <td colspan="2">
                 <strong><?php echo $data->getAttributeLabel('summary'); ?>:</strong><br />
                 <?php echo nl2br(stripslashes($data->summary)); ?>
