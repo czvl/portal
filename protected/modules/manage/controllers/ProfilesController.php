@@ -28,7 +28,7 @@ class ProfilesController extends Controller
             ),
             array('allow',
                 'actions' => array('delete'),
-                'roles' => array('administrator'),
+                'roles' => array('administrator', 'manager'),
             ),
             array('deny',
                 'users' => array('*'),
@@ -219,20 +219,24 @@ class ProfilesController extends Controller
     public function actionDelete($id)
     {
         if (Yii::app()->request->isPostRequest) {
+
+            $model = $this->loadModel($id);
+            $model->is_active = 'no';
+            $model->save(false);
             
-            CvStatuses::model()->deleteAllByAttributes(array('cv_id' => $id));
-            CvToAssistance::model()->deleteAllByAttributes(array('cv_id' => $id));
-            CvToCategory::model()->deleteAllByAttributes(array('cv_id' => $id));
-            CvToDriverLicense::model()->deleteAllByAttributes(array('cv_id' => $id));
-            CvToJobLocation::model()->deleteAllByAttributes(array('cv_id' => $id));
-            CvToPosition::model()->deleteAllByAttributes(array('cv_id' => $id));
-            CvToResidence::model()->deleteAllByAttributes(array('cv_id' => $id));
+//            CvStatuses::model()->deleteAllByAttributes(array('cv_id' => $id));
+//            CvToAssistance::model()->deleteAllByAttributes(array('cv_id' => $id));
+//            CvToCategory::model()->deleteAllByAttributes(array('cv_id' => $id));
+//            CvToDriverLicense::model()->deleteAllByAttributes(array('cv_id' => $id));
+//            CvToJobLocation::model()->deleteAllByAttributes(array('cv_id' => $id));
+//            CvToPosition::model()->deleteAllByAttributes(array('cv_id' => $id));
+//            CvToResidence::model()->deleteAllByAttributes(array('cv_id' => $id));
             
             $log = new Log();
             $log->action = "delete_user_" . $id;
-            $res = $log->save();
+            $log->save();
             
-            $this->loadModel($id)->delete();
+//            $this->loadModel($id)->delete();
             
             $this->redirect(array('index'));
         } else {

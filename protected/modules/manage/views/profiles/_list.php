@@ -56,8 +56,8 @@
                 <?php 
                     echo CHtml::link(TbHtml::icon(TbHtml::ICON_EYE_OPEN), array("profiles/view", 'id' => $data->id));
                     echo " | " . CHtml::link(TbHtml::icon(TbHtml::ICON_EDIT), array("profiles/update", 'id' => $data->id));
-                    if (Yii::app()->user->checkAccess(User::ROLE_ADMIN)) {
-                        echo " | " . CHtml::link(TbHtml::icon(TbHtml::ICON_REMOVE), array("profiles/delete", 'id' => $data->id), array('confirm' => 'Ви впевнені, що хочете видалити цей запис?'));
+                    if (Yii::app()->user->checkAccess(User::ROLE_MANAGER)) {
+                        echo " | " . CHtml::link(TbHtml::icon(TbHtml::ICON_REMOVE), "#", array('submit' => array('profiles/delete', 'id' => $data->id), 'confirm' => 'Ви впевнені, що хочете видалити цей запис?'));
                     }
                 ?>
             </td>

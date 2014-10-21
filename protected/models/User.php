@@ -23,6 +23,7 @@ class User extends CActiveRecord
 {
 
     const ROLE_ADMIN = 'administrator';
+    const ROLE_MANAGER = 'manager';
     const ROLE_EMPL = 'employer';
     const ROLE_VOLONT = 'volunteer';
     const ROLE_APPLIC = 'applicant';

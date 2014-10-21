@@ -27,10 +27,20 @@ return array(
         'bizRule' => null,
         'data' => null
     ),
+    'manager' => array(
+        'type' => CAuthItem::TYPE_ROLE,
+        'description' => 'Менеджер',
+        'children' => array(
+            'volunteer'
+        ),
+        'bizRule' => null,
+        'data' => null
+    ),
     'administrator' => array(
         'type' => CAuthItem::TYPE_ROLE,
         'description' => 'Адміністратор',
         'children' => array(
+            'manager',
             'volunteer',
             'employer'
         ),

@@ -30,6 +30,7 @@
  * @property string $last_update
  * @property string $added_time
  * @property integer $status
+ * @property integer $is_active
  *
  * The followings are the available model relations:
  * @property Users $recruiter
@@ -113,6 +114,14 @@ class CvList extends CActiveRecord
         );
     }
 
+    public function defaultScope()
+    {
+        return array(
+            'condition' => "is_active = 'yes'"
+        );
+
+    }
+
     /**
      * @return array relational rules.
      */
@@ -171,6 +180,7 @@ class CvList extends CActiveRecord
             'who_filled' => 'Хто заповнив',
             'added_time' => 'Додано',
             'status' => 'Стан',
+            'is_active' => 'Включений/Вимкнений',
 //            'verifyCode' => 'Введіть символи з малюнка', 
             'personal_data' => 'Я згоден(на) з обробкою та використанням моїх персональних даних'
         );
