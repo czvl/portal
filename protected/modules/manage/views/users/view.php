@@ -12,11 +12,22 @@ $this->menu = array(
     array('label' => 'Управління'),
     array('label' => 'Список користувачів', 'url' => array('index')),
     array('label' => 'Створити нового', 'url' => array('create')),
-    array('label' => 'Редагувати дані', 'url' => array('update', 'id' => $model->id)),
-    TbHtml::menuDivider(),
-    array('label' => 'Адмінистративна частина'),
-    array('label' => 'Видалити користувача', 'url' => '#', 'linkOptions' => array('submit' => array('delete', 'id' => $model->id), 'confirm' => 'Ви впевнені?')),
+    array('label' => 'Редагувати дані', 'url' => array('update', 'id' => $model->id))
 );
+
+if (Yii::app()->user->checkAccess(User::ROLE_ADMIN)) {
+    $adminMenu = array(
+        TbHtml::menuDivider(),
+        array('label' => 'Адмінистративна частина'),
+        array(
+            'label' => 'Видалити користувача',
+            'url' => '#',
+            'linkOptions' => array('submit' => array('delete', 'id' => $model->id), 'confirm' => 'Ви впевнені?'),
+        ),
+    );
+    $this->menu = array_merge($this->menu, $adminMenu);
+}
+
 ?>
 
 <?php echo TbHtml::pageHeader('Користувач "' . $model->first_name . ' ' . $model->last_name . '"', ''); ?>

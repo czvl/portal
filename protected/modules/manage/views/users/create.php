@@ -2,17 +2,17 @@
 /* @var $this UsersController */
 /* @var $model User */
 
-$this->breadcrumbs=array(
-	'Users'=>array('index'),
-	'Create',
+$this->breadcrumbs = array(
+    'Users' => array('index'),
+    'Create',
 );
 
-$this->menu=array(
-	array('label'=>'List User', 'url'=>array('index')),
-	array('label'=>'Manage User', 'url'=>array('admin')),
+$this->menu = array(
+    array('label' => 'Управління'),
+    array('label' => 'Список користувачів', 'url' => array('index')),
 );
 ?>
 
-<h1>Create User</h1>
+<?php echo TbHtml::pageHeader('Створити користувача', ''); ?>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php $this->renderPartial('_form', array('model' => $model)); ?>

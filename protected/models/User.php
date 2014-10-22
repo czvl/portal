@@ -30,9 +30,9 @@ class User extends CActiveRecord
 
     public $password_repeat = '';
     public $password_new = '';
-    public $roles = array();
-    
     public $statusTypes;
+
+    private  $_roles = array();
 
     /**
      * Returns the static model of the specified AR class.
@@ -46,16 +46,7 @@ class User extends CActiveRecord
     public function init()
     {
         parent::init();
-        
-        $controller = Yii::app()->getController();
-        $authRoles = $controller->loadConfigFromFile('auth');
-        foreach ($authRoles as $key => $item) {
-            if ($key != 'guest') {
-                $this->roles[$key] = $item['description'];
-            }
-        }
-        
-        $this->statusTypes = $controller->loadConfigFromFile('user_statuses');
+        $this->statusTypes = Yii::app()->getController()->loadConfigFromFile('user_statuses');
     }
 
     public function defaultScope()
@@ -154,6 +145,10 @@ class User extends CActiveRecord
     {
         $criteria = new CDbCriteria;
 
+        if (Yii::app()->user->role == User::ROLE_MANAGER) {
+            $criteria->addNotInCondition("role", array(User::ROLE_MANAGER, User::ROLE_ADMIN));
+        }
+
         $criteria->compare('id', $this->id);
         $criteria->compare('username', $this->username, true);
         $criteria->compare('password', $this->password, true);
@@ -168,6 +163,21 @@ class User extends CActiveRecord
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
         ));
+    }
+
+    public function getRoles()
+    {
+        if (empty($this->_roles)) {
+            $authRoles = Yii::app()->getController()->loadConfigFromFile('auth');
+
+            foreach ($authRoles as $key => $item) {
+                if (Yii::app()->user->role == "administrator" || !in_array($key, array('guest', 'manager', 'administrator'))) {
+                    $this->_roles[$key] = $item['description'];
+                }
+            }
+        }
+
+        return $this->_roles;
     }
     
     public function getFirstLastName()

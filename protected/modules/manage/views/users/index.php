@@ -37,6 +37,7 @@ Yii::app()->clientScript->registerScript('search', "
 $this->widget('bootstrap.widgets.TbGridView', array(
     'dataProvider' => $model->search(),
     'filter' => $model,
+    'ajaxUpdate' => false,
 //    'template' => "{items}",
     'columns' => array(
         'username',
@@ -56,6 +57,14 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         ),
         array(
             'class'=>'bootstrap.widgets.TbButtonColumn',
+            'template' => '{view} {update} {delete}',
+            'buttons' => array(
+                'view',
+                'update',
+                'delete' => array(
+                    'visible'=> 'Yii::app()->user->checkAccess(User::ROLE_ADMIN)'
+                )
+            )
         ),
     ),
 ));

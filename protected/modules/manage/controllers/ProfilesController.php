@@ -306,12 +306,12 @@ class ProfilesController extends Controller
         $criteria->order = 'added_time DESC';
         
         $dataProvider = new CActiveDataProvider('CvList', array(
-            'criteria' => $criteria,
-            'pagination' => array(
-                'pageSize' => 20,
-                'pageVar' => 'page',
-            ),
-                )
+                'criteria' => $criteria,
+                'pagination' => array(
+                    'pageSize' => 20,
+                    'pageVar' => 'page',
+                ),
+            )
         );
 
         $this->render('index', array('dataProvider' => $dataProvider));

@@ -20,7 +20,11 @@ class UsersController extends Controller
     {
         return array(
             array('allow',
-                'actions' => array('index', 'view', 'create', 'update', 'delete'),
+                'actions' => array('index', 'view', 'create', 'update'),
+                'roles' => array(User::ROLE_MANAGER),
+            ),
+            array('allow',
+                'actions' => array('delete'),
                 'roles' => array(User::ROLE_ADMIN),
             ),
             array('deny', // deny all users
@@ -35,9 +39,7 @@ class UsersController extends Controller
      */
     public function actionView($id)
     {
-        $this->render('view', array(
-            'model' => $this->loadModel($id),
-        ));
+        $this->render('view', array('model' => $this->loadModel($id)));
     }
 
     /**
@@ -52,13 +54,12 @@ class UsersController extends Controller
 
         if (isset($_POST['User'])) {
             $model->attributes = $_POST['User'];
-            if ($model->save())
+            if ($model->save()) {
                 $this->redirect(array('view', 'id' => $model->id));
+            }
         }
 
-        $this->render('create', array(
-            'model' => $model,
-        ));
+        $this->render('create', array('model' => $model));
     }
 
     /**
@@ -69,7 +70,6 @@ class UsersController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->loadModel($id);
-        
         $this->performAjaxValidation($model);
         
         if (isset($_POST['User'])) {
@@ -79,9 +79,7 @@ class UsersController extends Controller
             }
         }
 
-        $this->render('update', array(
-            'model' => $model,
-        ));
+        $this->render('update', array('model' => $model));
     }
 
     /**
@@ -109,13 +107,11 @@ class UsersController extends Controller
     {
         $model = new User('search');
         $model->unsetAttributes();  // clear any default values
-        if (isset($_GET['User']))
+        if (isset($_GET['User'])) {
             $model->attributes = $_GET['User'];
+        }
 
-        $this->render('index', array(
-            'model' => $model,
-            'page_size' => 20,
-        ));
+        $this->render('index', array('model' => $model));
     }
 
     /**

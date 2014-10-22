@@ -12,10 +12,11 @@
                                         'items' => array(
                                             array('label' => 'Анкети претендентів', 'url' => array('/manage/profiles'), 'visible' => !Yii::app()->user->isGuest),
                                             array('label' => 'Адміністративна частина', 'items' => array(
-                                                array('label' => 'Користувачі', 'url' => array('/manage/users')),
-                                                TbHtml::menuDivider(),
-                                                array('label' => 'Довідник категорій', 'url' => '#'),
-                                            ), 'visible' => Yii::app()->user->checkAccess(User::ROLE_ADMIN))
+                                                    array('label' => 'Користувачі', 'url' => array('/manage/users')),
+                                                    TbHtml::menuDivider(),
+                                                    array('label' => 'Довідник категорій', 'url' => '#'),
+                                                ), 'visible' => Yii::app()->user->checkAccess(User::ROLE_ADMIN) || Yii::app()->user->checkAccess(User::ROLE_MANAGER)
+                                            )
                                         ),
                                     ),
                                     array(
