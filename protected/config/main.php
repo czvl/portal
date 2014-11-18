@@ -78,13 +78,7 @@ return array(
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
             ),
         ),
-        'db' => array(
-            'connectionString' => 'mysql:host=localhost;dbname=czvl',
-            'emulatePrepare' => true,
-            'username' => 'czvl',
-            'password' => 'ACu8wnmujybQC7em',
-            'charset' => 'utf8',
-        ),
+        'db' => require(dirname(__FILE__) . '/db.php'),
         'mail' => array(
             'class' => 'application.extensions.yii-mail.YiiMail',
             'transportType' => 'php',
