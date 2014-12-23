@@ -6,6 +6,7 @@ return array(
     'How can you get involved?' => 'Як ви можете долучитися?',
     'Useful information' => 'Корисна інформація',
     'Contacts' => 'Контакти',
+    'Blog' => 'Блог',
     'Sign in' => 'Авторизація',
     'Logout' => 'Вийти',
     'Hello' => 'Вітаю',

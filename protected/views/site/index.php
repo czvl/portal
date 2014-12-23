@@ -106,6 +106,30 @@
                 </div>
             </div>
         </section>
+        <hr />
+        <?php if (!empty($blog_articles)) { ?>
+        <a name="blog"></a>
+        <!--******************** News Section ********************-->
+        <section id="news" class="single-page scrollblock">
+            <div class="container">
+                <div class="align"><i class="icon-pencil-circled"></i></div>
+                <h1>Наш блог</h1>
+                <div class="row">
+                <?php foreach ($blog_articles as $article) { ?>
+                    <article class="span4 post"> <img class="img-news" src="<?php echo $this->getThumb($article['ID']); ?>" width="370" alt="">
+                        <div class="inside">
+                            <p class="post-date"><i class="icon-calendar"></i> <?php echo $article['p_date']; ?></p>
+                            <h2><?php echo $article['post_title']; ?></h2>
+                            <div class="entry-content">
+                                <p><?php echo mb_substr(strip_tags($article['post_content']), 0, 320); ?> &hellip;</p>
+                                <a href="<?php echo $article['guid']; ?>" target="_blank" class="more-link">читати далі</a> </div>
+                        </div>
+                    </article>
+                <?php } ?>
+                </div>
+                <a href="/blog/" target="_blank" class="btn btn-large">Перейти до блогу</a> </div>
+        </section>
+        <?php } ?>
         <!--******************** Contact Section ********************-->
         <a name="contact"></a>
         <section id="contact" class="single-page scrollblock">

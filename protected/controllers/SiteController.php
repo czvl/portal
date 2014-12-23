@@ -28,7 +28,23 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $this->layout = 'main';
-        $this->render('index');
+
+        $sql = "SELECT
+                    ID,
+                    DATE_FORMAT(post_date, '%d/%m/%Y') AS p_date,
+                    post_title,
+                    post_content,
+                    guid
+                FROM wp_posts
+                WHERE post_status = 'publish'
+                ORDER BY post_date DESC
+                LIMIT 3";
+
+        $blogArticles = Yii::app()->db->createCommand($sql)->queryAll();
+
+        $this->render('index', array(
+            'blog_articles' => $blogArticles
+        ));
     }
 
     /**
@@ -151,6 +167,39 @@ class SiteController extends Controller
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'cv-list-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
+        }
+    }
+    protected function getThumb($postId)
+    {
+        $sql = "SELECT
+                    post_parent,
+                    post_title,
+                    post_mime_type,
+                    DATE_FORMAT(post_date, '%Y') AS p_year,
+                    DATE_FORMAT(post_date, '%m') AS p_month
+                FROM wp_posts
+                WHERE ID = (
+                      SELECT meta_value
+                      FROM wp_postmeta
+                      WHERE post_id = " . $postId . "
+                        AND meta_key = '_thumbnail_id'
+                )";
+
+        $imagePath = Yii::app()->db->createCommand($sql)->queryRow();
+        $ext = '.jpg';
+        switch ($imagePath['post_mime_type']) {
+            case 'image/gif':
+                $ext = '.gif';
+                break;
+            case 'image/png':
+                $ext = '.png';
+                break;
+        }
+
+        if ($imagePath) {
+            return "/blog/wp-content/uploads/" . $imagePath['p_year'] . "/" . $imagePath['p_month'] . "/" . $imagePath['post_title'] . "-300x200" . $ext;
+        } else {
+            return "/blog/wp-content/themes/point/images/mediumthumb.png";
         }
     }
 }
