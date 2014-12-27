@@ -287,10 +287,12 @@ class ProfilesController extends Controller
             $criteria->addInCondition('license_id', $licensesIds);
         }
         if ($recruiterId = $this->getVariable('recruiter_id')) {
-            $criteria->addSearchCondition('recruiter_id', $recruiterId, false, false, '=');
+            $criteria->condition = 'recruiter_id = :recruiter_id';
+            $criteria->params = array(':recruiter_id' => $recruiterId);
         }
         if ($internalNum = $this->getVariable('internal_num')) {
-            $criteria->addSearchCondition('internal_num', $internalNum, false, false, '=');
+            $criteria->condition = 'internal_num = :internal_num';
+            $criteria->params = array(':internal_num' => $internalNum);
         }
 
         if(!empty($with)) {
