@@ -111,7 +111,7 @@ return array(
                         'js/inside.js'
                     ),
                     'css' => array(
-                        'css/inside.css'
+                        'css/inside.css?v=1'
                     ),
 //                    'depends'=>array('jquery'),
                 ),
