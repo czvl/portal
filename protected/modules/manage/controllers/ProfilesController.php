@@ -250,6 +250,7 @@ class ProfilesController extends Controller
     public function actionIndex()
     {
         $criteria = new CDbCriteria();
+        $with = array();
         
         if (($status = $this->getVariable('status')) !== false) {
             $criteria->condition = 'status = :status';
@@ -262,33 +263,27 @@ class ProfilesController extends Controller
             $criteria->addSearchCondition('first_name', $firstName);
         }
         if ($locations = $this->getVariable('locations')) {
-            $criteria->with = array('citiesJobLocations');
-            $criteria->together = true;
-            $criteria->addInCondition('city_id', $locations);
+            $with[] ='citiesJobLocations';
+            $criteria->addInCondition('citiesJobLocations_citiesJobLocations.city_id', $locations);
         }
         if ($residencies = $this->getVariable('residencies')) {
-            $criteria->with = array('citiesResidence');
-            $criteria->together = true;
-            $criteria->addInCondition('city_id', $residencies);
+            $with[] = 'citiesResidence';
+            $criteria->addInCondition('citiesResidence_citiesResidence.city_id', $residencies);
         }
         if ($categories = $this->getVariable('categories')) {
-            $criteria->with = array('categories');
-            $criteria->together = true;
+            $with[] = 'categories';
             $criteria->addInCondition('category_id', $categories);
         }
         if ($positions = $this->getVariable('positions')) {
-            $criteria->with = array('positions');
-            $criteria->together = true;
+            $with[] = 'positions';
             $criteria->addInCondition('position_id', $positions);
         }
         if ($assistanceIds = $this->getVariable('assistanceIds')) {
-            $criteria->with = array('assistanceTypes');
-            $criteria->together = true;
+            $with[] = 'assistanceTypes';
             $criteria->addInCondition('assistance_type_id', $assistanceIds);
         }
         if ($licensesIds = $this->getVariable('licensesIds')) {
-            $criteria->with = array('driverLicensesTypes');
-            $criteria->together = true;
+            $with[] = 'driverLicensesTypes';
             $criteria->addInCondition('license_id', $licensesIds);
         }
         if ($recruiterId = $this->getVariable('recruiter_id')) {
@@ -296,6 +291,11 @@ class ProfilesController extends Controller
         }
         if ($internalNum = $this->getVariable('internal_num')) {
             $criteria->addSearchCondition('internal_num', $internalNum, false, false, '=');
+        }
+
+        if(!empty($with)) {
+            $criteria->with = $with;
+            $criteria->together = true;
         }
         
         if (empty($_GET)) {
