@@ -173,10 +173,7 @@ class SiteController extends Controller
     {
         $sql = "SELECT
                     post_parent,
-                    post_title,
-                    post_mime_type,
-                    DATE_FORMAT(post_date, '%Y') AS p_year,
-                    DATE_FORMAT(post_date, '%m') AS p_month
+                    guid
                 FROM wp_posts
                 WHERE ID = (
                       SELECT meta_value
@@ -186,18 +183,12 @@ class SiteController extends Controller
                 )";
 
         $imagePath = Yii::app()->db->createCommand($sql)->queryRow();
-        $ext = '.jpg';
-        switch ($imagePath['post_mime_type']) {
-            case 'image/gif':
-                $ext = '.gif';
-                break;
-            case 'image/png':
-                $ext = '.png';
-                break;
-        }
 
         if ($imagePath) {
-            return "/blog/wp-content/uploads/" . $imagePath['p_year'] . "/" . $imagePath['p_month'] . "/" . $imagePath['post_title'] . "-300x200" . $ext;
+            $path = substr($imagePath['guid'], 0, -4);
+            $ext = substr($imagePath['guid'], -4);
+            $imagePath = $path .  "-300x200" . $ext;
+            return $imagePath;
         } else {
             return "/blog/wp-content/themes/point/images/mediumthumb.png";
         }
