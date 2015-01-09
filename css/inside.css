@@ -111,3 +111,10 @@ label.inline {
     background-color: #ededed !important;
     color: #333333 !important;;
 }
+.to_export label {
+    display: inline;
+    margin-right: 5px;
+}
+.to_export input[type="checkbox"] {
+    margin-top: -1px;
+}

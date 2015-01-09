@@ -373,7 +373,7 @@ class ProfilesController extends Controller
 
 
     public function actionExport() {
-        if( sizeof($this->toExport) ) {
+        if (sizeof($this->toExport)) {
             $rows = array();
             $items = CvList::model()->getItemsByList($this->toExport);
             foreach($items as $item) {
@@ -401,37 +401,34 @@ class ProfilesController extends Controller
                 $rows[] = $export_item;
             }
 
-            $this->toExcel($rows,
-                array(
-                    'id',
-                    'first_name',
-                    'last_name',
-                    'contact_phone',
-                    'email',
-                    'other_contacts',
-                    'desired_position',
-                    'desired_place',
-                    'residencies',
-                    'education',
-                    'eduction_info',
-                    'work_experience',
-                    'skills',
-                    'driver_licenses',
-                    'summary',
-                    'gender',
-                    'marital_status',
-                    'birth_date',
-                    'documents',
-                    'assistance'
-                ),
-                'Profiles',
-                array(
-                    'creator' => 'PHP',
-                ),
-                'Excel2007' // This is the default value, so you can omit it. You can export to CSV, PDF or HTML too
-            );
+            $this->toExcel($rows, array(
+                                    'id',
+                                    'first_name',
+                                    'last_name',
+                                    'contact_phone',
+                                    'email',
+                                    'other_contacts',
+                                    'desired_position',
+                                    'desired_place',
+                                    'residencies',
+                                    'education',
+                                    'eduction_info',
+                                    'work_experience',
+                                    'skills',
+                                    'driver_licenses',
+                                    'summary',
+                                    'gender',
+                                    'marital_status',
+                                    'birth_date',
+                                    'documents',
+                                    'assistance'
+                                ),
+                                'CZVL-profiles-export-' . date('Ymd-His'),
+                                array('creator' => 'PHP'),
+                                'Excel2007' // This is the default value, so you can omit it. You can export to CSV, PDF or HTML too
+                            );
         }
-        throw new CHttpException(404, Yii::t('profile', 'Нечего экспортировать'));
+        throw new CHttpException(404, Yii::t('profile', 'Нічого експортувати'));
     }
 
 }

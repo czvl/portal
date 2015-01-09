@@ -99,22 +99,22 @@ function getOrder($fieldValue, $orderField = 'id')
         </table>
     </div>
     <br />
-    <input type="submit" class="btn btn-primary btn-small" value="знайти" />
-    <input type="button" class="btn btn-primary btn-small" value="сброс" onclick="location.href='/manage/profiles'" />
+    <input type="submit" class="btn btn-primary btn-small" value="Знайти" />
+    <input type="button" class="btn btn-primary btn-small" value="Скинути" onclick="location.href='/manage/profiles'" />
 </form>
 
 <?php
 $params = array('class' => 'btn btn-success btn-small', 'id' => 'export-button');
-if( !sizeof($this->toExport) ) {
+if(!sizeof($this->toExport)) {
     $params['style'] = 'display:none';
 }
-echo CHtml::link('Экспорт', array('profiles/export'), $params);
+echo CHtml::link('Експорт', array('profiles/export'), $params);
 
 $params = array('class' => 'btn btn-default btn-small', 'id' => 'reset-button');
-if( !sizeof($this->toExport) ) {
+if(!sizeof($this->toExport)) {
     $params['style'] = 'display:none';
 }
-echo ' ', CHtml::link('Сброс', '#reset', $params);
+echo ' ', CHtml::link('Скинути', '#reset', $params);
 ?>
 
 <p><?php $this->widget('bootstrap.widgets.TbAlert'); ?></p>

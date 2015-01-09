@@ -34,7 +34,7 @@ $(function(){
     $('#reset-button').click(function(e){
         e.preventDefault();
 
-        if( !confirm('Вы уверены?') ) return;
+        if( !confirm('Ви впевнені?') ) return;
 
         $.cookie('toExport', '', {expires: 365, path: '/'});
         $('#export-button').hide();

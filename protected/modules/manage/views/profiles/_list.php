@@ -59,17 +59,13 @@
                     if (Yii::app()->user->checkAccess(User::ROLE_MANAGER)) {
                         echo " | " . CHtml::link(TbHtml::icon(TbHtml::ICON_REMOVE), "#", array('submit' => array('profiles/delete', 'id' => $data->id), 'confirm' => 'Ви впевнені, що хочете видалити цей запис?'));
                     }
-                    echo CHtml::tag(
-                        'div',
-                        [],
-                        CHtml::label('Export', 'export_'.$data->id) .
-                            CHtml::checkBox(
-                                'toExport[]',
-                                in_array($data->id, $this->toExport),
-                                array('value' => $data->id, 'class' => 'toExport', 'id' => 'export_'.$data->id)
-                            )
-                        );
                 ?>
+                <div class="to_export">
+                <?php
+                    echo CHtml::label('Експорт анкети', 'export_'.$data->id);
+                    echo CHtml::checkBox('toExport[]', in_array($data->id, $this->toExport), array('value' => $data->id, 'class' => 'toExport', 'id' => 'export_'.$data->id))
+                ?>
+                </div>
             </td>
         </tr>
         <tr class="additional <?php echo ($index % 2) ? 'odd' : 'even' ?>">
