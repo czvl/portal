@@ -53,12 +53,22 @@
             <?php } ?>
             </td>
             <td style="text-align: right;">
-                <?php 
+                <?php
                     echo CHtml::link(TbHtml::icon(TbHtml::ICON_EYE_OPEN), array("profiles/view", 'id' => $data->id));
                     echo " | " . CHtml::link(TbHtml::icon(TbHtml::ICON_EDIT), array("profiles/update", 'id' => $data->id));
                     if (Yii::app()->user->checkAccess(User::ROLE_MANAGER)) {
                         echo " | " . CHtml::link(TbHtml::icon(TbHtml::ICON_REMOVE), "#", array('submit' => array('profiles/delete', 'id' => $data->id), 'confirm' => 'Ви впевнені, що хочете видалити цей запис?'));
                     }
+                    echo CHtml::tag(
+                        'div',
+                        [],
+                        CHtml::label('Export', 'export_'.$data->id) .
+                            CHtml::checkBox(
+                                'toExport[]',
+                                in_array($data->id, $this->toExport),
+                                array('value' => $data->id, 'class' => 'toExport', 'id' => 'export_'.$data->id)
+                            )
+                        );
                 ?>
             </td>
         </tr>

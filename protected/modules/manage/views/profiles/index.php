@@ -103,6 +103,20 @@ function getOrder($fieldValue, $orderField = 'id')
     <input type="button" class="btn btn-primary btn-small" value="сброс" onclick="location.href='/manage/profiles'" />
 </form>
 
+<?php
+$params = array('class' => 'btn btn-success btn-small', 'id' => 'export-button');
+if( !sizeof($this->toExport) ) {
+    $params['style'] = 'display:none';
+}
+echo CHtml::link('Экспорт', array('profiles/export'), $params);
+
+$params = array('class' => 'btn btn-default btn-small', 'id' => 'reset-button');
+if( !sizeof($this->toExport) ) {
+    $params['style'] = 'display:none';
+}
+echo ' ', CHtml::link('Сброс', '#reset', $params);
+?>
+
 <p><?php $this->widget('bootstrap.widgets.TbAlert'); ?></p>
 
 <table class="items table">
@@ -127,3 +141,13 @@ $listView = $this->widget('bootstrap.widgets.TbListView', array(
     </tbody>
 </table>
 <?php $listView->renderPager(); ?>
+
+<?php
+Yii::app()->clientScript->registerCoreScript('cookie');;
+Yii::app()->clientScript->registerScriptFile(
+    Yii::app()->assetManager->publish(
+        Yii::getPathOfAlias('ext.profiles-export.js').'/export.js'
+    ),
+    CClientScript::POS_END
+);
+?>

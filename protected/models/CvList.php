@@ -322,7 +322,19 @@ class CvList extends CActiveRecord
         return $html;
         
     }
-    
+
+    public function getFlat_Assistances()
+    {
+        $rows = array();
+        if (is_array($this->assistanceTypes)) {
+            foreach ($this->assistanceTypes as $a) {
+                $rows[] = $a->name;
+            }
+        }
+        return implode("\n", $rows);
+
+    }
+
     public function getLatestStatuses()
     {
         $criteria = new CDbCriteria;
@@ -348,6 +360,15 @@ class CvList extends CActiveRecord
         } else {
             return array();
         }
+    }
+
+    public function getItemsByList(array $list)
+    {
+        if( !sizeof($list) ) return array();
+
+        $criteria = new CDbCriteria();
+        $criteria->addInCondition('id', $list);
+        return self::model()->findAll($criteria);
     }
 
 }

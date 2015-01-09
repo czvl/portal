@@ -3,6 +3,8 @@
 class ProfilesController extends Controller
 {
 
+    public $toExport = [];
+
     /**
      * @return array action filters
      */
@@ -23,7 +25,7 @@ class ProfilesController extends Controller
     {
         return array(
             array('allow',
-                'actions' => array('index', 'view', 'create', 'update'),
+                'actions' => array('index', 'view', 'create', 'update', 'export'),
                 'users' => array('@'),
             ),
             array('allow',
@@ -35,6 +37,26 @@ class ProfilesController extends Controller
             ),
         );
     }
+
+
+    public function behaviors()
+    {
+        return array(
+            'eexcelview'=>array(
+                'class'=>'ext.eexcelview.EExcelBehavior',
+            ),
+        );
+    }
+
+
+    public function init()
+    {
+        $cookies = Yii::app()->request->getCookies();
+        if (!is_null($cookies['toExport']) && !empty($cookies['toExport']->value)) {
+            $this->toExport = explode(',', $cookies['toExport']->value);
+        }
+    }
+
 
     /**
      * Displays a particular model.
@@ -249,6 +271,8 @@ class ProfilesController extends Controller
      */
     public function actionIndex()
     {
+
+
         $criteria = new CDbCriteria();
         $with = array();
         
@@ -345,6 +369,69 @@ class ProfilesController extends Controller
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
+    }
+
+
+    public function actionExport() {
+        if( sizeof($this->toExport) ) {
+            $rows = array();
+            $items = CvList::model()->getItemsByList($this->toExport);
+            foreach($items as $item) {
+                $export_item = new ExportItem();
+                $export_item->id = $item->id;
+                $export_item->first_name = $item->first_name;
+                $export_item->last_name = $item->last_name;
+                $export_item->contact_phone = $item->contact_phone;
+                $export_item->email = $item->email;
+                $export_item->other_contacts = $item->other_contacts;
+                $export_item->desired_position = $item->desired_position;
+                $export_item->desired_place = implode(', ', array_values(CHtml::listData($item->citiesJobLocations, 'city_index', 'city_name')));
+                $export_item->residencies = implode(', ', array_values(CHtml::listData($item->citiesResidence, 'city_index', 'city_name')));
+                $export_item->education = $item->educationTypes[$item->education];
+                $export_item->eduction_info = $item->eduction_info;
+                $export_item->work_experience = $item->work_experience;
+                $export_item->skills = $item->skills;
+                $export_item->driver_licenses = implode(', ', array_values(CHtml::listData($item->driverLicensesTypes, 'id', 'name')));
+                $export_item->summary = $item->summary;
+                $export_item->gender = $item->genderTypes[$item->gender];
+                $export_item->marital_status = $item->maritalStatuses[$item->gender][(int)$item->marital_status];
+                $export_item->birth_date = $item->birth_date;
+                $export_item->documents = $item->documents;
+                $export_item->assistance = $item->flat_assistances;
+                $rows[] = $export_item;
+            }
+
+            $this->toExcel($rows,
+                array(
+                    'id',
+                    'first_name',
+                    'last_name',
+                    'contact_phone',
+                    'email',
+                    'other_contacts',
+                    'desired_position',
+                    'desired_place',
+                    'residencies',
+                    'education',
+                    'eduction_info',
+                    'work_experience',
+                    'skills',
+                    'driver_licenses',
+                    'summary',
+                    'gender',
+                    'marital_status',
+                    'birth_date',
+                    'documents',
+                    'assistance'
+                ),
+                'Profiles',
+                array(
+                    'creator' => 'PHP',
+                ),
+                'Excel2007' // This is the default value, so you can omit it. You can export to CSV, PDF or HTML too
+            );
+        }
+        throw new CHttpException(404, Yii::t('profile', 'Нечего экспортировать'));
     }
 
 }
