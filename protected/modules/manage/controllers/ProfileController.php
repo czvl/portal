@@ -52,7 +52,7 @@ class ProfileController extends Controller
                 $log->action = 'change_pass';
                 $log->save();
                 
-                Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS, 'Ваш пароль буд збережений!');
+                Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS, 'Ваш пароль був збережений!');
                 
                 $this->redirect(array('index'));
             }
