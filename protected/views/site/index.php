@@ -11,7 +11,7 @@
                         <div class="fb-like" data-href="http://czvl.ua-selector.in/" data-layout="standard" data-action="recommend" data-show-faces="true" data-share="true"></div>
                         <?php } ?>
                         <?php
-			/*<div class="span12">
+                        /*<div class="span12">
                             <ul class="icon">
                                 <!--li><a href="#" target="_blank"><i class="icon-pinterest-circled"></i></a></li-->
                                 <!--li><a href="https://www.facebook.com/groups/MaydanPulse/" target="_blank"><i class="icon-facebook-circled"></i></a></li-->
@@ -20,7 +20,12 @@
                                 <!--li><a href="#" target="_blank"><i class="icon-skype-circled"></i></a></li-->
                             </ul>
                         </div>*/
-			?>
+                        ?>
+                        <div class="dblock">
+                            <h3>Допомогти проекту</h3>
+                            <button type="button" class="funding-button" onclick="window.location.href='https://biggggidea.com/project/824/'"><div class="button-cube"><span class="text gradient-red">спільнокошт</span></div></button>
+                            <a href="http://ukrbuy.com/ukrainian/payment/directlist/direct?id=6069147" target="_blank"><img src="/images/webmoney-button.jpg" width="149" height="45" alt="WebMoney" /></a>
+                        </div>
                     </div>
                 </div>
             </header>
@@ -139,7 +144,7 @@
                 <div class="row">
                     <div class="span12">
                         <p>Гаряча лінія для претендентів: +380 (67) 507-09-30 (<strong>Kyivstar</strong>), +380 (66) 500-35-75 (<strong>MTS</strong>), +380 (93) 167-37-81 (<strong>Life</strong>), <a href="mailto:czsl.staff@gmail.com">czsl.staff@gmail.com</a>.</p>
-                        <p>Для роботодавців: <strong>Віталій Шевченко</strong> +380 (50) 931-61-49, <a href="mailto:czvl.job@gmail.com">czvl.job@gmail.com</a>.</p>
+                        <p>Для роботодавців: <strong>Євгенія Конончук</strong> +380 (95) 441-06-70, <a href="mailto:czvl.job@gmail.com">czvl.job@gmail.com</a>.</p>
                         <p>Для професійних асоціацій, громадських організацій та ініціатив: <strong>Ірина Коваль</strong>, +380 (97) 650-31-25, <a href="mailto:iryna.koval1@gmail.com">iryna.koval1@gmail.com</a>.</p>
                         <p>Загальні питання проекту, digital-частина: <strong>Наталія Швайковська</strong>, +380 (63) 241-52-13, <a href="mailto:shvaykovska@gmail.com">shvaykovska@gmail.com</a>.</p>
                         <p>Рекомендуємо підписатись на нашу сторінку в Facebook, щоб слідкувати за новинами і вакансіями: <a href="https://www.facebook.com/czvl.staff" target="_blank">https://www.facebook.com/czvl.staff</a>.</p>

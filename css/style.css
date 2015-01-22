@@ -356,7 +356,7 @@ section.single-page h1 {
 }
 #feature {
     background: #fdc300 url("../images/yellow.png") repeat-x 0 0;
-    //height: 350px;
+    /*height: 350px;*/
     z-index: 500;
     box-shadow: 0 5px 16px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 0 5px 16px rgba(0, 0, 0, 0.3);
@@ -436,7 +436,7 @@ section#portfolio .align {
 /* Services */
 
 section#services {
-    //padding-bottom: 9.5em;
+    /*padding-bottom: 9.5em;*/
 }
 #services h1 {
     font-size: 3em;
@@ -1170,3 +1170,40 @@ section#services .notice p {
     padding: 0px;
     line-height: 1;
 }
+.dblock {
+    width: 500px;
+    margin: 5px auto;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.4);
+}
+.dblock h3 {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 1.3em;
+}
+
+.funding-button {
+    font: 21px/25px Arial, sans-serif bold;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer; }
+.funding-button.hidden {
+    display: none; }
+.funding-button::-moz-focus-inner {
+    border: 0; }
+.funding-button:hover > .button-cube {
+    background-position: 0 -45px; }
+.funding-button:active > .button-cube {
+    background-position: 0 -90px; }
+.funding-button > .button-cube {
+    background: url('https://biggggidea.com/static/projects/pages/project_list/blocks/header/button-cube.png?179a2e11056e&179a2e11056e') no-repeat 0 0;
+    width: 170px;
+    height: 45px; }
+.funding-button > .button-cube > .text {
+    font: bold 16px/45px Arial; }
