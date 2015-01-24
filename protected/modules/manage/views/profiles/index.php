@@ -4,17 +4,17 @@ $this->menu = array(
     array('label' => 'Додати анкету', 'url' => array('create')),
 );
 
-$statusFilter           = $this->getVariable('status');
-$lastNameFilter         = $this->getVariable('last_name');
-$firstNameFilter        = $this->getVariable('first_name');
-$internalNumFilter      = $this->getVariable('internal_num');
-$recruiterIdFilter      = $this->getVariable('recruiter_id');
-$locationsFilter        = $this->getVariable('locations');
-$residenciesFilter      = $this->getVariable('residencies');
-$categoriesFilter       = $this->getVariable('categories');
-$positionsFilter        = $this->getVariable('positions');
-$assistanceIdsFilter    = $this->getVariable('assistanceIds');
-$licensesIdsFilter      = $this->getVariable('licensesIds');
+$statusFilter           = $this->fetchVariable('status');
+$lastNameFilter         = $this->fetchVariable('last_name');
+$firstNameFilter        = $this->fetchVariable('first_name');
+$internalNumFilter      = $this->fetchVariable('internal_num');
+$recruiterIdFilter      = $this->fetchVariable('recruiter_id');
+$locationsFilter        = $this->fetchVariable('locations');
+$residenciesFilter      = $this->fetchVariable('residencies');
+$categoriesFilter       = $this->fetchVariable('categories');
+$positionsFilter        = $this->fetchVariable('positions');
+$assistanceIdsFilter    = $this->fetchVariable('assistanceIds');
+$licensesIdsFilter      = $this->fetchVariable('licensesIds');
 
 function getClassName($fieldValue = NULL)
 {
@@ -31,7 +31,8 @@ function getOrder($fieldValue, $orderField = 'id')
 <h1>Анкети претендентів</h1>
 
 <h4>Пошук</h4>
-<form>
+<form method="post" id="filter">
+    <?php echo CHtml::hiddenField('post', 1); ?>
     <div class="search-filters">
         <table class="search-table">
             <tr>
@@ -100,7 +101,7 @@ function getOrder($fieldValue, $orderField = 'id')
     </div>
     <br />
     <input type="submit" class="btn btn-primary btn-small" value="Знайти" />
-    <input type="button" class="btn btn-primary btn-small" value="Скинути" onclick="location.href='/manage/profiles'" />
+    <input type="button" class="btn btn-primary btn-small reset" value="Скинути" onclick="$(':input','#filter').not(':button, :submit, :reset, :hidden').val('').removeAttr('checked').removeAttr('selected'); $('#filter').submit();" />
 </form>
 
 <?php

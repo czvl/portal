@@ -4,6 +4,7 @@ class ProfilesController extends Controller
 {
 
     public $toExport = [];
+    protected $filters = [];
 
     /**
      * @return array action filters
@@ -266,55 +267,77 @@ class ProfilesController extends Controller
         }
     }
 
+    protected function prepareFilter() {
+        if( isset($_POST['post']) ) {
+            $this->filters = UsersFilter::model()->setFilter( Yii::app()->user->id, $_POST );
+        } else {
+            $this->filters = UsersFilter::model()->getFilter( Yii::app()->user->id );
+        }
+    }
+
+
+    public function fetchVariable($name)
+    {
+        if ((isset($this->filters[$name]) && ($this->filters[$name] !== ''))) {
+            $return = (!is_array($this->filters[$name])) ? trim($this->filters[$name]) : $this->filters[$name];
+        } else {
+            $return = false;
+        }
+        return $return;
+    }
+
+
+
     /**
      * Lists all models.
      */
     public function actionIndex()
     {
 
+        $this->prepareFilter();
 
         $criteria = new CDbCriteria();
         $with = array();
         
-        if (($status = $this->getVariable('status')) !== false) {
+        if (($status = $this->fetchVariable('status')) !== false) {
             $criteria->condition = 'status = :status';
             $criteria->params = array(':status' => $status);
         }
-        if ($lastName = $this->getVariable('last_name')) {
+        if ($lastName = $this->fetchVariable('last_name')) {
             $criteria->addSearchCondition('last_name', $lastName);
         }
-        if ($firstName = $this->getVariable('first_name')) {
+        if ($firstName = $this->fetchVariable('first_name')) {
             $criteria->addSearchCondition('first_name', $firstName);
         }
-        if ($locations = $this->getVariable('locations')) {
+        if ($locations = $this->fetchVariable('locations')) {
             $with[] ='citiesJobLocations';
             $criteria->addInCondition('citiesJobLocations_citiesJobLocations.city_id', $locations);
         }
-        if ($residencies = $this->getVariable('residencies')) {
+        if ($residencies = $this->fetchVariable('residencies')) {
             $with[] = 'citiesResidence';
             $criteria->addInCondition('citiesResidence_citiesResidence.city_id', $residencies);
         }
-        if ($categories = $this->getVariable('categories')) {
+        if ($categories = $this->fetchVariable('categories')) {
             $with[] = 'categories';
             $criteria->addInCondition('category_id', $categories);
         }
-        if ($positions = $this->getVariable('positions')) {
+        if ($positions = $this->fetchVariable('positions')) {
             $with[] = 'positions';
             $criteria->addInCondition('position_id', $positions);
         }
-        if ($assistanceIds = $this->getVariable('assistanceIds')) {
+        if ($assistanceIds = $this->fetchVariable('assistanceIds')) {
             $with[] = 'assistanceTypes';
             $criteria->addInCondition('assistance_type_id', $assistanceIds);
         }
-        if ($licensesIds = $this->getVariable('licensesIds')) {
+        if ($licensesIds = $this->fetchVariable('licensesIds')) {
             $with[] = 'driverLicensesTypes';
             $criteria->addInCondition('license_id', $licensesIds);
         }
-        if ($recruiterId = $this->getVariable('recruiter_id')) {
+        if ($recruiterId = $this->fetchVariable('recruiter_id')) {
             $criteria->condition = 'recruiter_id = :recruiter_id';
             $criteria->params = array(':recruiter_id' => $recruiterId);
         }
-        if ($internalNum = $this->getVariable('internal_num')) {
+        if ($internalNum = $this->fetchVariable('internal_num')) {
             $criteria->condition = 'internal_num = :internal_num';
             $criteria->params = array(':internal_num' => $internalNum);
         }
@@ -324,7 +347,7 @@ class ProfilesController extends Controller
             $criteria->together = true;
         }
         
-        if (empty($_GET)) {
+        if (!sizeof($this->filters)) {
             $criteria->condition = 'status = :status';
             $criteria->params = array(':status' => 0);
         }
