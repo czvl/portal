@@ -270,8 +270,15 @@ class ProfilesController extends Controller
     protected function prepareFilter() {
         if( isset($_POST['post']) ) {
             $this->filters = UsersFilter::model()->setFilter( Yii::app()->user->id, $_POST );
+            Yii::app()->cache->set('filter_'.Yii::app()->user->id, $this->filters);
         } else {
-            $this->filters = UsersFilter::model()->getFilter( Yii::app()->user->id );
+            $content = Yii::app()->cache->get('filter_'.Yii::app()->user->id);
+            if($content === false) {
+                $content = UsersFilter::model()->getFilter( Yii::app()->user->id );
+                Yii::app()->cache->set('filter_'.Yii::app()->user->id, $content);
+            }
+
+            $this->filters = $content;
         }
     }
 
