@@ -267,15 +267,28 @@ class ProfilesController extends Controller
         }
     }
 
+
+    protected function removeMark() {
+        unset($_GET['post']);
+        return $_GET;
+    }
+
+
     protected function prepareFilter() {
-        if( isset($_POST['post']) ) {
-            $this->filters = UsersFilter::model()->setFilter( Yii::app()->user->id, $_POST );
+        if( isset($_GET['post']) ) {
+            $get = $this->removeMark();
+            $this->filters = UsersFilter::model()->setFilter( Yii::app()->user->id, $get );
             Yii::app()->cache->set('filter_'.Yii::app()->user->id, $this->filters);
+            $this->redirect( Yii::app()->createUrl('manage/profiles/index') . '?' . http_build_query($get) );
         } else {
             $content = Yii::app()->cache->get('filter_'.Yii::app()->user->id);
             if($content === false) {
                 $content = UsersFilter::model()->getFilter( Yii::app()->user->id );
                 Yii::app()->cache->set('filter_'.Yii::app()->user->id, $content);
+            }
+
+            if( !sizeof($_GET) && sizeof( $content ) ) {
+                $this->redirect( Yii::app()->createUrl('manage/profiles/index') . '?' . http_build_query( $content ) );
             }
 
             $this->filters = $content;

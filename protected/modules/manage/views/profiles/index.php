@@ -31,7 +31,7 @@ function getOrder($fieldValue, $orderField = 'id')
 <h1>Анкети претендентів</h1>
 
 <h4>Пошук</h4>
-<form method="post" id="filter">
+<form method="get" id="filter">
     <?php echo CHtml::hiddenField('post', 1); ?>
     <div class="search-filters">
         <table class="search-table">

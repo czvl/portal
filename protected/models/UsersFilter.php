@@ -121,7 +121,7 @@ class UsersFilter extends CActiveRecord
 		if( !is_array($filter) ) return [];
 
 		foreach( $filter as $key => $value ) {
-			if( !in_array($key, $this->getAllowed()) || empty($value) ) {
+			if( !in_array($key, $this->getAllowed()) || $value == '' ) {
 				unset( $filter[$key] );
 			}
 		}
