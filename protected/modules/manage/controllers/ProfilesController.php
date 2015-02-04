@@ -366,11 +366,13 @@ class ProfilesController extends Controller
             $criteria->with = $with;
             $criteria->together = true;
         }
-        
+
+        /*
         if (!sizeof($this->filters)) {
             $criteria->condition = 'status = :status';
             $criteria->params = array(':status' => 0);
         }
+        */
 
         $criteria->order = 'added_time DESC';
         
