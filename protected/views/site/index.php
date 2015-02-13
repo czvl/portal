@@ -24,7 +24,16 @@
                         <div class="dblock">
                             <h3>Допомогти проекту</h3>
                             <button type="button" class="funding-button" onclick="window.location.href='https://biggggidea.com/project/824/'"><div class="button-cube"><span class="text gradient-red">спільнокошт</span></div></button>
-                            <a href="http://ukrbuy.com/ukrainian/payment/directlist/direct?id=6069147" target="_blank"><img src="/images/webmoney-button.jpg" width="149" height="45" alt="WebMoney" /></a>
+                            <form method="post" action="https://www.liqpay.com/api/pay" accept-charset="utf-8" style="display: inline;">
+                                <input type="hidden" name="amount" value="<?php echo $liqpay['amount']; ?>" />
+                                <input type="hidden" name="currency" value="<?php echo $liqpay['currency']; ?>" />
+                                <input type="hidden" name="description" value="<?php echo $liqpay['description']; ?>" />
+                                <input type="hidden" name="order_id" value="<?php echo $liqpay['order_id']; ?>" />
+                                <input type="hidden" name="type" value="<?php echo $liqpay['type']; ?>" />
+                                <input type="hidden" name="public_key" value="<?php echo $liqpay['public_key']; ?>" />
+                                <input type="hidden" name="signature" value="<?php echo $liqpay['signature']; ?>" />
+                                <input type="image" src="/images/liqpay-button.jpg" name="btn_text" />
+                            </form>
                         </div>
                     </div>
                 </div>

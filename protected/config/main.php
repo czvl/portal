@@ -17,14 +17,7 @@ return array(
         'application.models.*',
         'application.components.*',
         'application.helpers.*',
-        
-//        'ext.eoauth.*',
-//        'ext.eoauth.lib.*',
-//        'ext.lightopenid.*',
-//        'ext.eauth.services.*',
-        
         'application.extensions.yii-mail.YiiMailMessage',
-        
         'bootstrap.helpers.TbHtml',
         'bootstrap.helpers.TbArray',
         'bootstrap.behaviors.TbWidget',
