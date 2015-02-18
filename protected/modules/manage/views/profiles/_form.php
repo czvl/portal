@@ -15,6 +15,16 @@
                 ?>
             </div>
 
+	        <?php
+		        if (!$model->isNewRecord && !$model->recruiter_id) {
+			        Yii::app()->user->setFlash(
+				        TbHtml::ALERT_COLOR_WARNING,
+				        '<h4>Увага</h4> Для продовження роботи з кандидатом, вкажіть себе в полі &laquo;Рекрутер&raquo;'
+			        );
+			        $this->widget('bootstrap.widgets.TbAlert', array('block' => true));
+		        }
+	        ?>
+
             <?php echo $form->errorSummary($model); ?>
             
             <?php echo $form->dropDownListControlGroup($model, 'recruiter_id', User::model()->recruiters, array('empty' => 'оберіть', 'span' => 5)); ?>

@@ -28,8 +28,16 @@ $this->menu = array(
 ?>
 
 <?php echo TbHtml::pageHeader('Анкета "' . $model->firstLastName . '"', ''); ?>
+<?php
+	if (!$model->recruiter_id) {
+		Yii::app()->user->setFlash(
+			TbHtml::ALERT_COLOR_WARNING,
+			'<h4>Увага</h4> Для продовження роботи з кандидатом, вкажіть себе в полі &laquo;Рекрутер&raquo;'
+		);
+	}
 
-<?php $this->widget('bootstrap.widgets.TbAlert'); ?>
+	$this->widget('bootstrap.widgets.TbAlert', array('block' => true));
+?>
 
 <?php
     $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
