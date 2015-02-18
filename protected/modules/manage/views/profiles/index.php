@@ -9,6 +9,8 @@ $lastNameFilter         = $this->fetchVariable('last_name');
 $firstNameFilter        = $this->fetchVariable('first_name');
 $internalNumFilter      = $this->fetchVariable('internal_num');
 $recruiterIdFilter      = $this->fetchVariable('recruiter_id');
+$contactPhoneFilter     = $this->fetchVariable('contact_phone');
+$emailFilter            = $this->fetchVariable('email');
 $locationsFilter        = $this->fetchVariable('locations');
 $residenciesFilter      = $this->fetchVariable('residencies');
 $categoriesFilter       = $this->fetchVariable('categories');
@@ -40,20 +42,29 @@ function getOrder($fieldValue, $orderField = 'id')
                     <div class="scrollY">
                         <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('status')); ?></strong><br />
                         <?php echo CHtml::dropDownList('status', $statusFilter, CvList::model()->getStatusTypes(), array('empty' => '---', 'class' => getClassName($statusFilter))); ?>
-                        <br />
-                        <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('last_name')); ?></strong><br />
-                        <?php echo CHtml::textField('last_name', $lastNameFilter, array('span' => 5, 'maxlength' => 255, 'class' => getClassName($lastNameFilter))); ?>
-                        <br />
-                        <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('first_name')); ?></strong><br />
-                        <?php echo CHtml::textField('first_name', $firstNameFilter, array('span' => 5, 'maxlength' => 255, 'class' => getClassName($firstNameFilter))); ?>
-                        <br />
-                        <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('internal_num')); ?></strong><br />
-                        <?php echo CHtml::textField('internal_num', $internalNumFilter, array('span' => 5, 'maxlength' => 255, 'class' => getClassName($internalNumFilter))); ?>
-                        <br />
-                        <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('recruiter_id')); ?></strong><br />
-                        <?php echo CHtml::dropDownList('recruiter_id', $recruiterIdFilter, User::model()->recruiters, array('empty' => '---', 'class' => getClassName($recruiterIdFilter))); ?>
+	                    <br />
+	                    <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('recruiter_id')); ?></strong><br />
+	                    <?php echo CHtml::dropDownList('recruiter_id', $recruiterIdFilter, User::model()->recruiters, array('empty' => '---', 'class' => getClassName($recruiterIdFilter))); ?>
+	                    <br />
+	                    <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('internal_num')); ?></strong><br />
+	                    <?php echo CHtml::textField('internal_num', $internalNumFilter, array('span' => 5, 'maxlength' => 255, 'class' => getClassName($internalNumFilter))); ?>
                     </div>
                 </td>
+	            <td>
+		            <div class="scrollY">
+			            <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('last_name')); ?></strong><br />
+			            <?php echo CHtml::textField('last_name', $lastNameFilter, array('span' => 5, 'maxlength' => 255, 'class' => getClassName($lastNameFilter))); ?>
+			            <br />
+			            <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('first_name')); ?></strong><br />
+			            <?php echo CHtml::textField('first_name', $firstNameFilter, array('span' => 5, 'maxlength' => 255, 'class' => getClassName($firstNameFilter))); ?>
+			            <br />
+			            <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('email')); ?></strong><br />
+			            <?php echo CHtml::textField('email', $emailFilter, array('span' => 5, 'maxlength' => 255, 'class' => getClassName($emailFilter))); ?>
+			            <br />
+			            <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('contact_phone')); ?></strong><br />
+			            <?php echo CHtml::textField('contact_phone', $contactPhoneFilter, array('span' => 5, 'maxlength' => 255, 'class' => getClassName($contactPhoneFilter))); ?>
+		            </div>
+	            </td>
                 <td class="<?php echo getClassName($locationsFilter); ?>">
                     <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('jobLocationsIds')); ?></strong><br />
                     <input type="text" name="locationsFilter" class="filter" size="10" />

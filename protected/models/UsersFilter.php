@@ -107,6 +107,8 @@ class UsersFilter extends CActiveRecord
 			'first_name',
 			'internal_num',
 			'recruiter_id',
+			'contact_phone',
+			'email',
 			'locations',
 			'residencies',
 			'categories',
