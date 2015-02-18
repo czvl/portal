@@ -337,6 +337,10 @@ class ProfilesController extends Controller {
 		if ($firstName = $this->fetchVariable('first_name')) {
 			$criteria->addSearchCondition('first_name', $firstName);
 		}
+		if (($gender = $this->fetchVariable('gender')) !== false) {
+			$criteria->condition = 'gender = :gender';
+			$criteria->params    = array(':gender' => $gender);
+		}
 		if ($locations = $this->fetchVariable('locations')) {
 			$with[] = 'citiesJobLocations';
 			$criteria->addInCondition('citiesJobLocations_citiesJobLocations.city_id', $locations);
@@ -365,10 +369,10 @@ class ProfilesController extends Controller {
 			$criteria->condition = 'recruiter_id = :recruiter_id';
 			$criteria->params    = array(':recruiter_id' => $recruiterId);
 		}
-		if ($internalNum = $this->fetchVariable('internal_num')) {
-			$criteria->condition = 'internal_num = :internal_num';
-			$criteria->params    = array(':internal_num' => $internalNum);
-		}
+//		if ($internalNum = $this->fetchVariable('internal_num')) {
+//			$criteria->condition = 'internal_num = :internal_num';
+//			$criteria->params    = array(':internal_num' => $internalNum);
+//		}
 		if ($contactPhone = $this->fetchVariable('contact_phone')) {
 			$criteria->addSearchCondition('contact_phone', $contactPhone);
 		}

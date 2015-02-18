@@ -308,6 +308,12 @@ class CvList extends CActiveRecord
         return $this->statusTypes;
     }
 
+	public function getGenderTypes()
+	{
+		$this->genderTypes = $this->loadConfigFromFile('gender_types');
+		return $this->genderTypes;
+	}
+
 
     public function getAssistances()
     {

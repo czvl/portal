@@ -7,7 +7,8 @@ $this->menu = array(
 $statusFilter           = $this->fetchVariable('status');
 $lastNameFilter         = $this->fetchVariable('last_name');
 $firstNameFilter        = $this->fetchVariable('first_name');
-$internalNumFilter      = $this->fetchVariable('internal_num');
+$genderFilter           = $this->fetchVariable('gender');
+//$internalNumFilter      = $this->fetchVariable('internal_num');
 $recruiterIdFilter      = $this->fetchVariable('recruiter_id');
 $contactPhoneFilter     = $this->fetchVariable('contact_phone');
 $emailFilter            = $this->fetchVariable('email');
@@ -45,9 +46,14 @@ function getOrder($fieldValue, $orderField = 'id')
 	                    <br />
 	                    <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('recruiter_id')); ?></strong><br />
 	                    <?php echo CHtml::dropDownList('recruiter_id', $recruiterIdFilter, User::model()->recruiters, array('empty' => '---', 'class' => getClassName($recruiterIdFilter))); ?>
-	                    <br />
+	                    <?php /*
+                        <br />
 	                    <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('internal_num')); ?></strong><br />
 	                    <?php echo CHtml::textField('internal_num', $internalNumFilter, array('span' => 5, 'maxlength' => 255, 'class' => getClassName($internalNumFilter))); ?>
+                        */?>
+	                    <br />
+	                    <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('gender')); ?></strong><br />
+	                    <?php echo CHtml::dropDownList('gender', $genderFilter, CvList::model()->getGenderTypes(), array('empty' => '---', 'class' => getClassName($genderFilter))); ?>
                     </div>
                 </td>
 	            <td>
