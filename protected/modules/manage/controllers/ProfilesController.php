@@ -389,7 +389,7 @@ class ProfilesController extends Controller {
 		}
 		*/
 
-		$criteria->order = 'added_time DESC';
+		$criteria->order = 'last_update DESC';
 
 		$dataProvider = new CActiveDataProvider('CvList', array(
 				'criteria'   => $criteria,
