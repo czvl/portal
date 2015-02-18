@@ -53,8 +53,7 @@ class ProfileController extends Controller
                 $log->save();
                 
                 Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS, 'Ваш пароль був збережений!');
-                
-                $this->redirect(array('index'));
+                $this->refresh();
             }
         }
         
