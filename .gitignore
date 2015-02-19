@@ -1,9 +1,0 @@
-/assets/*
-!assets/.gitignore
-/protected/runtime/*
-!protected/runtime/.gitignore
-/themes/classic/views/
-/index.php
-/protected/config/main.php
-/nbproject/
-.idea
