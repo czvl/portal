@@ -90,6 +90,9 @@
                      */ ?>
                     <?php echo $form->checkBox($model, 'personal_data'); ?>
                     <?php echo $form->labelEx($model, 'personal_data', array('class' => 'inline')); ?>
+
+	                <p><strong>Якщо бажаєте приєднатися до команди волонтерів, <a href="http://bit.ly/czslvlntr" target="_blank">заповніть форму</a>.</strong></p>
+
                     <div class="form-actions">
                         <?php
                             echo TbHtml::submitButton($model->isNewRecord ? 'Додати' : 'Зберегти', array(
