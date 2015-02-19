@@ -4,7 +4,7 @@ $this->menu = array(
     array('label' => 'Додати анкету', 'url' => array('create')),
 );
 
-$ageMinDefault = 18;
+$ageMinDefault = 16;
 $ageMaxDefault = 99;
 
 $statusFilter           = $this->fetchVariable('status');
