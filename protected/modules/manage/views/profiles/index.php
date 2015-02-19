@@ -74,8 +74,8 @@ function getOrder($fieldValue, $orderField = 'id')
 	                    <?php echo CHtml::dropDownList('gender', $genderFilter, CvList::model()->getGenderTypes(), array('empty' => '---', 'class' => getClassName($genderFilter))); ?>
 	                    <br />
 	                    <strong>Вік</strong><br />
-	                    <input type="hidden" name="age_min" />
-	                    <input type="hidden" name="age_max" />
+	                    <input type="hidden" name="age_min" value="<?php echo $ageMinFilter; ?>" />
+	                    <input type="hidden" name="age_max" value="<?php echo $ageMaxFilter; ?>" />
 	                    <?php
 		                    $this->widget('zii.widgets.jui.CJuiSlider', array(
 			                    'options' => array(
