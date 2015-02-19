@@ -4,10 +4,15 @@ $this->menu = array(
     array('label' => 'Додати анкету', 'url' => array('create')),
 );
 
+$ageMinDefault = 18;
+$ageMaxDefault = 99;
+
 $statusFilter           = $this->fetchVariable('status');
 $lastNameFilter         = $this->fetchVariable('last_name');
 $firstNameFilter        = $this->fetchVariable('first_name');
 $genderFilter           = $this->fetchVariable('gender');
+$ageMinFilter           = $this->fetchVariable('age_min');
+$ageMaxFilter           = $this->fetchVariable('age_max');
 //$internalNumFilter      = $this->fetchVariable('internal_num');
 $recruiterIdFilter      = $this->fetchVariable('recruiter_id');
 $contactPhoneFilter     = $this->fetchVariable('contact_phone');
@@ -18,6 +23,9 @@ $categoriesFilter       = $this->fetchVariable('categories');
 $positionsFilter        = $this->fetchVariable('positions');
 $assistanceIdsFilter    = $this->fetchVariable('assistanceIds');
 $licensesIdsFilter      = $this->fetchVariable('licensesIds');
+
+if (!$ageMinFilter) $ageMinFilter = $ageMinDefault;
+if (!$ageMaxFilter) $ageMaxFilter = $ageMaxDefault;
 
 function getClassName($fieldValue = NULL)
 {
@@ -54,6 +62,28 @@ function getOrder($fieldValue, $orderField = 'id')
 	                    <br />
 	                    <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('gender')); ?></strong><br />
 	                    <?php echo CHtml::dropDownList('gender', $genderFilter, CvList::model()->getGenderTypes(), array('empty' => '---', 'class' => getClassName($genderFilter))); ?>
+	                    <br />
+	                    <strong>Вік</strong><br />
+	                    <input type="hidden" name="age_min" />
+	                    <input type="hidden" name="age_max" />
+	                    <?php
+		                    $this->widget('zii.widgets.jui.CJuiSlider', array(
+			                    'options' => array(
+				                    'min'    => $ageMinDefault,
+				                    'max'    => $ageMaxDefault,
+				                    'range'  => true,
+				                    'values' => array($ageMinFilter, $ageMaxFilter),
+				                    'slide' => 'js:function(event, ui) {selectAge(ui);}',
+			                    ),
+			                    'htmlOptions'=>array(
+				                    'style'=>'width: 200px;',
+			                    ),
+		                    ));
+	                    ?>
+	                    <div class="range_slider" id="age">
+		                    <div class="min"><?php echo $ageMinFilter; ?></div>
+		                    <div class="max"><?php echo $ageMaxFilter; ?></div>
+	                    </div>
                     </div>
                 </td>
 	            <td>

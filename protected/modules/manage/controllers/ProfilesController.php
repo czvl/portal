@@ -338,8 +338,13 @@ class ProfilesController extends Controller {
 			$criteria->addSearchCondition('first_name', $firstName);
 		}
 		if (($gender = $this->fetchVariable('gender')) !== false) {
-			$criteria->condition = 'gender = :gender';
-			$criteria->params    = array(':gender' => $gender);
+			$criteria->addCondition('gender = "' . $gender . '"');
+		}
+		if (($ageMin = $this->fetchVariable('age_min')) !== false) {
+			$criteria->addCondition("(birth_date IS NOT NULL) AND (DATE_FORMAT(FROM_DAYS(DATEDIFF(NOW(), birth_date)), '%Y')+0) >= " . $ageMin);
+		}
+		if (($ageMax = $this->fetchVariable('age_max')) !== false) {
+			$criteria->addCondition("(birth_date IS NOT NULL) AND (DATE_FORMAT(FROM_DAYS(DATEDIFF(NOW(), birth_date)), '%Y')+0) <= " . $ageMax);
 		}
 		if ($locations = $this->fetchVariable('locations')) {
 			$with[] = 'citiesJobLocations';
@@ -366,8 +371,7 @@ class ProfilesController extends Controller {
 			$criteria->addInCondition('license_id', $licensesIds);
 		}
 		if ($recruiterId = $this->fetchVariable('recruiter_id')) {
-			$criteria->condition = 'recruiter_id = :recruiter_id';
-			$criteria->params    = array(':recruiter_id' => $recruiterId);
+			$criteria->addCondition('recruiter_id = ' . $recruiterId);
 		}
 //		if ($internalNum = $this->fetchVariable('internal_num')) {
 //			$criteria->condition = 'internal_num = :internal_num';

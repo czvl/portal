@@ -107,6 +107,8 @@ class UsersFilter extends CActiveRecord
 			'first_name',
 			//'internal_num',
 			'gender',
+			'age_min',
+			'age_max',
 			'recruiter_id',
 			'contact_phone',
 			'email',

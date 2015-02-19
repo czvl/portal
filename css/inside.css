@@ -118,3 +118,13 @@ label.inline {
 .to_export input[type="checkbox"] {
     margin-top: -1px;
 }
+.range_slider div {
+    display: inline-block;
+    width: 30px;
+}
+.range_slider .min {
+    float: left;
+}
+.range_slider .max {
+    float: right;
+}

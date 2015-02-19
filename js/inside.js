@@ -27,3 +27,12 @@ jQuery.fn.filterByText = function() {
 $(function() {
     $('.filter').filterByText();
 });
+
+function selectAge(ui) {
+    var min = ui.values[0];
+    var max = ui.values[1];
+    $('input[name=age_min]').val(min);
+    $('input[name=age_max]').val(max);
+    $("#age > .min").html(min);
+    $("#age > .max").html(max);
+}
