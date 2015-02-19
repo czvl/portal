@@ -328,8 +328,7 @@ class ProfilesController extends Controller {
 		$with     = array();
 
 		if (($status = $this->fetchVariable('status')) !== false) {
-			$criteria->condition = 'status = :status';
-			$criteria->params    = array(':status' => $status);
+			$criteria->addInCondition('status', $status);
 		}
 		if ($lastName = $this->fetchVariable('last_name')) {
 			$criteria->addSearchCondition('last_name', $lastName);
