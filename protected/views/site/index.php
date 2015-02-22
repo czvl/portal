@@ -98,7 +98,7 @@
                         <div class="align"> <i class="icon-chat sev_icon"></i> </div>
                         <h2>Як потрапити на зустріч з рекрутерами-волонтерами ЦЗВЛ?</h2>
                         <ul>
-                            <li><a href="http://bit.ly/czvladvice" target="_blank">http://bit.ly/czvladvice</a></li>
+                            <li><a href="http://www.czvl.org.ua/blog/counseling/" target="_blank">Кар’єрне консультування</a></li>
                         </ul>
                     </div>
                     <div class="span3">
