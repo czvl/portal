@@ -94,13 +94,12 @@
             <?php
 	            $this->widget('zii.widgets.jui.CJuiDatePicker', array(
 		            'model'       => $model,
-		            'name'        => 'birth_date',
+		            'attribute'   => 'birth_date',
 		            'flat'        => false,
 		            'language'    => 'uk',
 		            'options'     => array(
 			            'dateFormat'  => 'yy-mm-dd',
 			            'showAnim'    => 'slide',
-			            //'slide','fold','slideDown','fadeIn','blind','bounce','clip','drop'
 			            'changeMonth' => true,
 			            'changeYear'  => true,
 			            'yearRange'   => '1920:2000',

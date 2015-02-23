@@ -37,7 +37,6 @@
 		                    'options'     => array(
 			                    'dateFormat'  => 'yy-mm-dd',
 			                    'showAnim'    => 'slide',
-			                    //'slide','fold','slideDown','fadeIn','blind','bounce','clip','drop'
 			                    'changeMonth' => true,
 			                    'changeYear'  => true,
 			                    'yearRange'   => '1920:2000',
