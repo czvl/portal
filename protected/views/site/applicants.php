@@ -29,14 +29,22 @@
                     <?php echo $form->dropDownListControlGroup($model, 'marital_status', $model->maritalStatuses['m'], array('span' => 5, 'maxlength' => 1)); ?>
                     <?php echo $form->labelEx($model, 'birth_date'); ?>
                     <?php
-                        $this->widget('zii.widgets.jui.CJuiDatePicker', array(
-                            'model' => $model, 
-                            'attribute' => 'birth_date',
-                            'options' => array(
-                                'showAnim' => 'fold',
-                                'dateFormat' => 'yy-mm-dd',
-                            )
-                        ));
+	                    $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+		                    'model'       => $model,
+		                    'name'        => 'birth_date',
+		                    'flat'        => false,
+		                    'language'    => 'uk',
+		                    'options'     => array(
+			                    'dateFormat'  => 'yy-mm-dd',
+			                    'showAnim'    => 'slide',
+			                    //'slide','fold','slideDown','fadeIn','blind','bounce','clip','drop'
+			                    'changeMonth' => true,
+			                    'changeYear'  => true,
+			                    'yearRange'   => '1920:2000',
+			                    'minDate'     => '1920-01-01',
+			                    'maxDate'     => '2000-12-31',
+		                    )
+	                    ));
                     ?>
                     <?php echo $form->labelEx($model, 'contact_phone'); ?>
                     <?php
