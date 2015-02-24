@@ -23,7 +23,6 @@
                         ?>
                         <div class="dblock">
                             <h3>Допомогти проекту</h3>
-                            <button type="button" class="funding-button" onclick="window.location.href='https://biggggidea.com/project/824/'"><div class="button-cube"><span class="text gradient-red">спільнокошт</span></div></button>
                             <form method="post" action="https://www.liqpay.com/api/pay" accept-charset="utf-8" style="display: inline;">
                                 <input type="hidden" name="amount" value="<?php echo $liqpay['amount']; ?>" />
                                 <input type="hidden" name="currency" value="<?php echo $liqpay['currency']; ?>" />
