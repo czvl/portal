@@ -55,7 +55,11 @@
             <td style="text-align: right;">
                 <?php
                     echo CHtml::link(TbHtml::icon(TbHtml::ICON_EYE_OPEN), array("profiles/view", 'id' => $data->id));
-                    echo " | " . CHtml::link(TbHtml::icon(TbHtml::ICON_EDIT), array("profiles/update", 'id' => $data->id));
+
+                    if (Yii::app()->user->checkAccess(User::ROLE_MANAGER) || (Yii::app()->user->checkAccess(User::ROLE_VOLONT) && $data->recruiter_id == Yii::app()->user->id) ) {
+                        echo " | " . CHtml::link(TbHtml::icon(TbHtml::ICON_EDIT), array("profiles/update", 'id' => $data->id));
+                    }
+
                     if (Yii::app()->user->checkAccess(User::ROLE_MANAGER)) {
                         echo " | " . CHtml::link(TbHtml::icon(TbHtml::ICON_REMOVE), "#", array('submit' => array('profiles/delete', 'id' => $data->id), 'confirm' => 'Ви впевнені, що хочете видалити цей запис?'));
                     }
