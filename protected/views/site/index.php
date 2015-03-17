@@ -31,7 +31,7 @@
                                 <input type="hidden" name="type" value="<?php echo $liqpay['type']; ?>" />
                                 <input type="hidden" name="public_key" value="<?php echo $liqpay['public_key']; ?>" />
                                 <input type="hidden" name="signature" value="<?php echo $liqpay['signature']; ?>" />
-                                <input type="image" src="/images/liqpay-button.jpg" name="btn_text" />
+                                <input type="image" src="http://static.liqpay.com/buttons/d1en.radius.png" name="btn_text" />
                             </form>
                         </div>
                     </div>
