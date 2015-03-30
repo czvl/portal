@@ -155,6 +155,7 @@
                 <div class="row">
                     <div class="span12">
                         <p>Гаряча лінія для претендентів: +380 (67) 507-09-30 (<strong>Kyivstar</strong>), +380 (66) 500-35-75 (<strong>MTS</strong>), +380 (93) 167-37-81 (<strong>Life</strong>), <a href="mailto:czsl.staff@gmail.com">czsl.staff@gmail.com</a>.</p>
+	                    <p>Для роботодавців: <strong>Євгенія Конончук</strong> +380 (95) 441-06-70, <a href="mailto:czvl.job@gmail.com">czvl.job@gmail.com</a></p>
                         <p>Рекомендуємо підписатись на нашу сторінку в Facebook, щоб слідкувати за новинами і вакансіями: <a href="https://www.facebook.com/czvl.staff" target="_blank">https://www.facebook.com/czvl.staff</a>, або читайте наш <a href="/blog/">блог</a>.</p>
                     </div>
                 </div>
