@@ -8,13 +8,9 @@ defined('IS_LOCALHOST') or define('IS_LOCALHOST', $isLocalhost);
 defined('YII_DEBUG') or define('YII_DEBUG', true);
 defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL', 3);
 
-$protected  = __DIR__ . '/../protected/yiic.php';
+$protected  = __DIR__ . '/../protected/';
 $config     = $protected . '/config/main.php';
 $yii        = $protected . '/vendor/yii/framework/yii.php';
-
-if (file_exists($protected . '/local.php')) {
-	require_once $protected . '/local.php';
-}
 
 require_once $yii;
 Yii::createWebApplication($config)->run();

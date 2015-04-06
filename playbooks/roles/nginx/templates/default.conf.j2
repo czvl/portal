@@ -1,0 +1,17 @@
+server {
+
+    listen      80;
+    server_name {{ nginx_server_name }};
+    root        {{ nginx_document_root }};
+    index       {{ nginx_index_file}};
+
+    location / {
+        try_files $uri $uri/ /{{ nginx_index_file }}$is_args$args;
+    }
+
+    location ~ \.php$ {
+        fastcgi_pass   {{ nginx_fastcgi }};
+        fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include        fastcgi_params;
+    }
+}

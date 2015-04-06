@@ -1,6 +1,7 @@
 <?php
 
 // Yii::setPathOfAlias('local','path/to/local-folder');
+$dbFileName = file_exists(dirname(__FILE__) . '/db_local.php') ? dirname(__FILE__) . '/db_local.php' : dirname(__FILE__) . '/db.php';
 
 return array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
@@ -71,7 +72,7 @@ return array(
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
             ),
         ),
-        'db' => require(dirname(__FILE__) . '/db.php'),
+        'db' => require($dbFileName),
         'mail' => array(
             'class' => 'application.extensions.yii-mail.YiiMail',
             'transportType' => 'php',

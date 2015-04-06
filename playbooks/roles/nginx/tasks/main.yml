@@ -1,0 +1,10 @@
+---
+- name: install nginx packages
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - nginx
+
+- name: edit config file
+  template: src=default.conf.j2 dest=/etc/nginx/sites-available/default
+
+  notify: reload nginx

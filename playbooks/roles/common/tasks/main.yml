@@ -1,0 +1,10 @@
+---
+- name: Update system packages headers
+  apt: update_cache=yes cache_valid_time=3600
+
+- name: Install additional packages
+  apt: pkg={{ item }} state=latest force=yes update_cache=yes
+  with_items:
+    - curl
+    - git
+    - python-software-properties

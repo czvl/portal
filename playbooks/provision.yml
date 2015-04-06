@@ -1,0 +1,17 @@
+---
+- name: Sitemap generator deploy playbook
+  hosts: default
+  sudo: yes
+
+  vars_files:
+    - vars/local.yml
+
+  roles:
+    - common
+    - php
+    - nginx
+    - mysql
+    - memcached
+    - init
+
+

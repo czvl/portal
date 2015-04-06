@@ -1,0 +1,3 @@
+---
+nginx_port: 80
+nginx_fastcgi: unix:/var/run/php5-fpm.sock

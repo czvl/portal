@@ -1,0 +1,9 @@
+---
+- name: Install mysql
+  apt: pkg={{ item }} state=latest force=yes update_cache=yes
+  with_items:
+    - mysql-server
+    - php5-mysql
+
+- name: Create mysql database
+  shell: mysql -u {{ mysql_db_user }} -e "create database if not exists {{ mysql_db_name }}";

@@ -1,0 +1,14 @@
+---
+  - name: Memcached | Install packages
+    action: apt pkg={{ item }} state=installed
+    with_items:
+      - memcached
+
+  - name: Memcached | Config file
+    action: template src=etc-memcached-conf.j2 dest=/etc/memcached.conf
+    tags: memcached
+
+  - name: Memcached | Config file for the PHP memcache extension
+    action: template src=etc-php5-conf-d-memcache-ini.j2 dest=/etc/php5/mods-available/memcache.ini
+    tags: memcached
+    notify: reload nginx

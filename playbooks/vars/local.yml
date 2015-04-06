@@ -1,0 +1,11 @@
+---
+project_root: /vagrant
+nginx_document_root: /vagrant/app/web
+runtime_dir: /vagrant/app/protected/runtime
+assets_dir: /vagrant/app/web/assets
+nginx_server_name: localhost
+nginx_index_file: index.php
+mysql_db_name: test
+mysql_db_user: root
+mysql_init_dump_file: /vagrant/app/protected/data/init.mysql.sql
+

@@ -1,0 +1,9 @@
+---
+- name: Init runtime directory
+  shell: mkdir -p {{ runtime_dir }};
+
+- name: Init assets directory
+  shell: mkdir -p {{ assets_dir }};
+
+- name: Init test db schema
+  shell: mysql -h localhost -u {{ mysql_db_user }} {{ mysql_db_name }} < {{ mysql_init_dump_file }};
