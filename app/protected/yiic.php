@@ -1,7 +1,8 @@
 <?php
 
-// change the following paths if necessary
-$yiic=dirname(__FILE__).'/../../../../Development/yii-1.1.14/framework/yiic.php';
-$config=dirname(__FILE__).'/config/console.php';
+require(__DIR__ . '/../vendor/autoload.php');
 
-require_once($yiic);
+$app = Yii::createConsoleApplication(__DIR__ .'/config/console.php');
+$app->commandRunner->addCommands(YII_PATH.'/cli/commands');
+
+$app->run();
