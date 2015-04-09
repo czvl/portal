@@ -12,6 +12,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "www-data",
         :mount_options =>  ['dmode=775', 'fmode=755']
 
+  config.ssh.username = "vagrant"
+  config.ssh.password = "vagrant"
+
   config.vm.provider "virtualbox" do |v|
        v.name = "czvl-ua"
        v.memory = 2048
