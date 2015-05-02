@@ -69,23 +69,47 @@ class UsersController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->loadModel($id);
-        $this->performAjaxValidation($model);
+        $user = $this->loadModel($id);
+        $this->performAjaxValidation($user);
         
         if (isset($_POST['User'])) {
-            $model->attributes = $_POST['User'];
-            if ($model->save()) {
-                $this->redirect(array('view', 'id' => $model->id));
+            $user->attributes = $_POST['User'];
+            if ($user->save()) {
+                if(isset($_POST['categories']) && is_array($_POST['categories'])) {
+                    UserToCvCategories::model()->deleteAll('user_id=:user_id', [
+                        ':user_id' => $user->id,
+                    ]);
+                    foreach($_POST['categories'] as $categoryId) {
+                        $userToCvCategory = new UserToCvCategories();
+                        $userToCvCategory->user_id = $user->id;
+                        $userToCvCategory->cv_category_id = $categoryId;
+                        $userToCvCategory->save();
+                    }
+                }
+                if(isset($_POST['cities']) && is_array($_POST['cities'])) {
+                    UserToCities::model()->deleteAll('user_id=:user_id', [
+                        ':user_id' => $user->id,
+                    ]);
+                    foreach($_POST['cities'] as $cityIndex) {
+                        $userToCity = new UserToCities();
+                        $userToCity->user_id = $user->id;
+                        $userToCity->city_index = $cityIndex;
+                        $userToCity->save();
+                    }
+                }
+                Yii::app()->user->setFlash('success', Yii::t('main', 'Successfully changed!'));
             }
         }
 
-        $this->render('update', array('model' => $model));
+        $this->render('update', array('model' => $user));
     }
 
     /**
      * Deletes a particular model.
      * If deletion is successful, the browser will be redirected to the 'admin' page.
      * @param integer $id the ID of the model to be deleted
+     * @throws CDbException
+     * @throws CHttpException
      */
     public function actionDelete($id)
     {

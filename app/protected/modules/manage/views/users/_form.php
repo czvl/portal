@@ -1,7 +1,7 @@
 <?php
 /* @var $this UsersController */
 /* @var $model User */
-/* @var $form CActiveForm */
+/* @var $form TbActiveForm */
 ?>
 
         <div class="form">
@@ -25,11 +25,37 @@
                 <?php echo $form->textFieldControlGroup($model, 'first_name', array('span' => 5, 'maxlength' => 255)); ?>
                 <?php echo $form->textFieldControlGroup($model, 'last_name', array('span' => 5, 'maxlength' => 255)); ?>
                 <?php echo $form->dropDownListControlGroup($model, 'role', $model->roles, array('empty' => '', 'options' => array('volunteer' => array('selected' => 'selected')))); ?>
-                <?php echo $form->dropDownListControlGroup($model, 'status', $model->statusTypes); ?>            
+                <?php echo $form->dropDownListControlGroup($model, 'status', $model->statusTypes); ?>
+
+                <?php if (!$model->isNewRecord) { ?>
+                    <h4><?= Yii::t('main', 'user.profile.responsibility.title')?></h4>
+                    <div class="search-filters">
+                        <table class="search-table">
+                            <tr>
+                                <td>
+                                    <strong><?= Yii::t('main', 'user.profile.responsibility.cities')?></strong><br />
+                                    <input type="text" name="locationsFilter" class="filter" size="10" />
+                                    <div class="div-overflow narrow">
+                                        <?= UserCitiesHelper::checkBoxList($model)?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <strong><?= Yii::t('main', 'user.profile.responsibility.categories')?></strong><br />
+                                    <input type="text" name="categoryFilter" class="filter" size="10" />
+                                    <div class="div-overflow narrow">
+                                        <?= UserCvCategoriesHelper::checkBoxList($model) ?>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                <?php } ?>
+
+
             </fieldset>
             <hr />
             <fieldset>
-                <?php 
+                <?php
                 if (!$model->isNewRecord) {
                     echo $form->passwordFieldControlGroup($model, 'password_new', array('span' => 5, 'maxlength' => 20));
                 } else {
@@ -46,7 +72,7 @@
                     ));
                 ?>
             </div>
-            
+
 
         <?php $this->endWidget(); ?>
 

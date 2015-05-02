@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var string $content
+ */
+?>
 <?php $this->beginContent('application.modules.manage.views.layouts.inside'); ?>
             <div class="masthead">
                     <?php
@@ -42,6 +47,16 @@
                     <?php echo TbHtml::navList($this->menu); ?>
                 </div>
             <?php } ?>
+                <?php if(Yii::app()->user->hasFlash('error')):?>
+                        <div class="alert alert-danger">
+                            <?=Yii::app()->user->getFlash('error')?>
+                        </div>
+                 <?php endif;?>
+                <?php if(Yii::app()->user->hasFlash('success')):?>
+                    <div class="alert alert-success">
+                        <?=Yii::app()->user->getFlash('success')?>
+                    </div>
+                <?php endif;?>
                 <?php echo $content; ?>
             </div>
 <?php $this->endContent(); ?>

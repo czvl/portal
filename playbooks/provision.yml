@@ -1,5 +1,5 @@
 ---
-- name: Sitemap generator deploy playbook
+- name: CZVL deploy playbook
   hosts: default
   sudo: yes
 

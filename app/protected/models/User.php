@@ -18,6 +18,8 @@
  * The followings are the available model relations:
  * @property CvList[] $cvLists
  * @property CvStatuses[] $cvStatuses
+ * @property CvCategories[] $cvCategories
+ * @property CitiesList[] $citiesList
  */
 class User extends CActiveRecord
 {
@@ -96,6 +98,10 @@ class User extends CActiveRecord
         return array(
             'cvLists' => array(self::HAS_MANY, 'CvList', 'recruiter_id'),
             'cvStatuses' => array(self::HAS_MANY, 'CvStatuses', 'operator_id'),
+            'cvCategories'=>array(self::MANY_MANY, 'CvCategories',
+                'user_to_cv_categories(user_id, cv_category_id)'),
+            'citiesList'=>array(self::MANY_MANY, 'CitiesList',
+                'user_to_cities(user_id, city_index)'),
         );
     }
 

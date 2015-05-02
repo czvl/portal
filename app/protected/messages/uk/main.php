@@ -23,5 +23,9 @@ return array(
     'Registration time' => 'Дата реєстрації',
     'Last login at' => 'Час останнього входу',
     'Status' => 'Статус',
-    'Error' => 'Помилка'
+    'Error' => 'Помилка',
+    'Successfully changed!' => 'Зміни успішно записані!',
+    'user.profile.responsibility.title' => 'Зона відповідальності',
+    'user.profile.responsibility.cities' => 'Міста',
+    'user.profile.responsibility.categories' => 'Категоріі',
 );
