@@ -75,10 +75,15 @@ class UsersController extends Controller
         if (isset($_POST['User'])) {
             $user->attributes = $_POST['User'];
             if ($user->save()) {
+
+                UserToCities::model()->deleteAll('user_id=:user_id', [
+                    ':user_id' => $user->id,
+                ]);
+                UserToCvCategories::model()->deleteAll('user_id=:user_id', [
+                    ':user_id' => $user->id,
+                ]);
+
                 if(isset($_POST['categories']) && is_array($_POST['categories'])) {
-                    UserToCvCategories::model()->deleteAll('user_id=:user_id', [
-                        ':user_id' => $user->id,
-                    ]);
                     foreach($_POST['categories'] as $categoryId) {
                         $userToCvCategory = new UserToCvCategories();
                         $userToCvCategory->user_id = $user->id;
@@ -87,9 +92,6 @@ class UsersController extends Controller
                     }
                 }
                 if(isset($_POST['cities']) && is_array($_POST['cities'])) {
-                    UserToCities::model()->deleteAll('user_id=:user_id', [
-                        ':user_id' => $user->id,
-                    ]);
                     foreach($_POST['cities'] as $cityIndex) {
                         $userToCity = new UserToCities();
                         $userToCity->user_id = $user->id;
