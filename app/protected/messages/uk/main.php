@@ -28,4 +28,5 @@ return array(
     'user.profile.responsibility.title' => 'Зона відповідальності',
     'user.profile.responsibility.cities' => 'Міста',
     'user.profile.responsibility.categories' => 'Категоріі',
+    'applicant.error.tooYoung' => 'Вік претендента не може бути меншим ніж {years} років.',
 );

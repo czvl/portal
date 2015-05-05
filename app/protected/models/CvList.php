@@ -83,17 +83,25 @@ class CvList extends CActiveRecord
             array('contact_phone', 'match', 'pattern'=>'/^([+]?[0-9 \)\(\-]+)$/'),
             array('contact_phone', 'length', 'max' => 19),
             array('birth_date', 'type', 'type' => 'date', 'message' => 'Поле "Дата нарождення" має бути датою.',  'dateFormat' => 'yyyy-MM-dd'),
+            array('birth_date', 'birthDateValidator'),
             array('birth_date, other_contacts, eduction_info, work_experience, skills, summary, documents, applicant_type, recruiter_comments, residenciesIds, jobLocationsIds, driverLicensesIds, assistanceIds, personal_data', 'safe'),
             
             array('contact_phone', 'existentUser', 'on' => 'public'),
             array('personal_data', 'required', 'on' => 'public'),
             array('personal_data', 'compare', 'compareValue' => true, 'message' => 'Вам потрібно погодитись надати нам Ваші персональні дані.', 'on' => 'public'),
-//            array('verifyCode', 'captcha', 'on' => 'public'),
-            
+
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('id, first_name, last_name, gender, marital_status, birth_date, contact_phone, other_contacts, email, education, eduction_info, work_experience, skills, summary, salary, desired_position, documents, applicant_type, cv_file, recruiter_id, recruiter_comments, who_filled, last_update, added_time, status', 'safe', 'on' => 'search'),
         );
+    }
+
+    public function birthDateValidator()
+    {
+        $years = 16;
+        if(strtotime('-'.$years.'year') < strtotime($this->birth_date)) {
+            $this->addError('birth_date', Yii::t('main', 'applicant.error.tooYoung', ['{years}' => $years]));
+        }
     }
     
     public function existentUser($attribute, $params)
