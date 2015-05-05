@@ -105,7 +105,6 @@ class UsersFilter extends CActiveRecord
 			'status',
 			'last_name',
 			'first_name',
-			//'internal_num',
 			'gender',
 			'age_min',
 			'age_max',
@@ -117,7 +116,9 @@ class UsersFilter extends CActiveRecord
 			'categories',
 			'positions',
 			'assistanceIds',
-			'licensesIds'
+			'licensesIds',
+            'added_time_from',
+            'added_time_to',
 		];
 	}
 

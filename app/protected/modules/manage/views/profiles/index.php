@@ -1,4 +1,7 @@
 <?php
+/**
+ * @var ProfilesController $this
+ */
 
 $this->menu = array(
     array('label' => 'Додати анкету', 'url' => array('create')),
@@ -13,7 +16,6 @@ $firstNameFilter        = $this->fetchVariable('first_name');
 $genderFilter           = $this->fetchVariable('gender');
 $ageMinFilter           = $this->fetchVariable('age_min');
 $ageMaxFilter           = $this->fetchVariable('age_max');
-//$internalNumFilter      = $this->fetchVariable('internal_num');
 $recruiterIdFilter      = $this->fetchVariable('recruiter_id');
 $contactPhoneFilter     = $this->fetchVariable('contact_phone');
 $emailFilter            = $this->fetchVariable('email');
@@ -23,6 +25,8 @@ $categoriesFilter       = $this->fetchVariable('categories');
 $positionsFilter        = $this->fetchVariable('positions');
 $assistanceIdsFilter    = $this->fetchVariable('assistanceIds');
 $licensesIdsFilter      = $this->fetchVariable('licensesIds');
+$addedTimeFrom          = $this->fetchVariable('added_time_from');
+$addedTimeTo            = $this->fetchVariable('added_time_to');
 
 if (!$ageMinFilter) $ageMinFilter = $ageMinDefault;
 if (!$ageMaxFilter) $ageMaxFilter = $ageMaxDefault;
@@ -63,12 +67,6 @@ function getOrder($fieldValue, $orderField = 'id')
 	                    <br />
 	                    <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('first_name')); ?></strong><br />
 	                    <?php echo CHtml::textField('first_name', $firstNameFilter, array('span' => 5, 'maxlength' => 255, 'class' => getClassName($firstNameFilter))); ?>
-                        <?php //echo CHtml::dropDownList('status', $statusFilter, CvList::model()->getStatusTypes(), array('empty' => '---', 'class' => getClassName($statusFilter))); ?>
-	                    <?php /*
-                        <br />
-	                    <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('internal_num')); ?></strong><br />
-	                    <?php echo CHtml::textField('internal_num', $internalNumFilter, array('span' => 5, 'maxlength' => 255, 'class' => getClassName($internalNumFilter))); ?>
-                        */?>
 	                    <br />
 	                    <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('gender')); ?></strong><br />
 	                    <?php echo CHtml::dropDownList('gender', $genderFilter, CvList::model()->getGenderTypes(), array('empty' => '---', 'class' => getClassName($genderFilter))); ?>
@@ -146,6 +144,33 @@ function getOrder($fieldValue, $orderField = 'id')
                     <div class="div-overflow narrow">
                         <?php echo CHtml::checkBoxList('licensesIds', $licensesIdsFilter, CHtml::listData(DriverLicenses::model()->findAll(array('order' => getOrder($licensesIdsFilter) . 'name ASC')), 'id', 'name'), array('template' => '{beginLabel}{input} {labelTitle}{endLabel}', 'separator' => '')); ?>
                     </div>
+                </td>
+                <td>
+                    <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('added_time')); ?></strong><br />
+                    <?php
+                    $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+                        'name' => 'added_time_from',
+                        'value' => $addedTimeFrom,
+                        'options' => array(
+                            'showAnim' => 'fold',
+                            'changeYear' => true,
+                            'dateFormat' => 'yy-mm-dd',
+                            'id' => 'atf',
+                        )
+                    ));
+                    ?>
+                    <?php
+                    $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+                        'name' => 'added_time_to',
+                        'value' => $addedTimeTo,
+                        'options' => array(
+                            'showAnim' => 'fold',
+                            'changeYear' => true,
+                            'dateFormat' => 'yy-mm-dd',
+                            'id' => 'att',
+                        )
+                    ));
+                    ?>
                 </td>
             </tr>
         </table>

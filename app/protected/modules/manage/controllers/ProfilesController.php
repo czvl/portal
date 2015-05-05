@@ -256,14 +256,6 @@ class ProfilesController extends Controller {
 			$model->is_active = 'no';
 			$model->save(false);
 
-//            CvStatuses::model()->deleteAllByAttributes(array('cv_id' => $id));
-//            CvToAssistance::model()->deleteAllByAttributes(array('cv_id' => $id));
-//            CvToCategory::model()->deleteAllByAttributes(array('cv_id' => $id));
-//            CvToDriverLicense::model()->deleteAllByAttributes(array('cv_id' => $id));
-//            CvToJobLocation::model()->deleteAllByAttributes(array('cv_id' => $id));
-//            CvToPosition::model()->deleteAllByAttributes(array('cv_id' => $id));
-//            CvToResidence::model()->deleteAllByAttributes(array('cv_id' => $id));
-
 			$log         = new Log();
 			$log->action = "delete_user_" . $id;
 			$log->save();
@@ -372,10 +364,12 @@ class ProfilesController extends Controller {
 		if ($recruiterId = $this->fetchVariable('recruiter_id')) {
 			$criteria->addCondition('recruiter_id = ' . $recruiterId);
 		}
-//		if ($internalNum = $this->fetchVariable('internal_num')) {
-//			$criteria->condition = 'internal_num = :internal_num';
-//			$criteria->params    = array(':internal_num' => $internalNum);
-//		}
+        if($addedTimeFrom = $this->fetchVariable('added_time_from')) {
+            $criteria->addCondition('added_time >= "'. date('Y-m-d 00:00:00', strtotime($addedTimeFrom)) . '"');
+        }
+        if($addedTimeTo = $this->fetchVariable('added_time_to')) {
+            $criteria->addCondition('added_time <= "'. date('Y-m-d 23:59:59', strtotime($addedTimeTo)) . '"');
+        }
 		if ($contactPhone = $this->fetchVariable('contact_phone')) {
 			$criteria->addSearchCondition('contact_phone', $contactPhone);
 		}
@@ -383,18 +377,10 @@ class ProfilesController extends Controller {
 			$criteria->addSearchCondition('email', $email);
 		}
 
-
 		if (!empty($with)) {
 			$criteria->with     = $with;
 			$criteria->together = true;
 		}
-
-		/*
-		if (!sizeof($this->filters)) {
-			$criteria->condition = 'status = :status';
-			$criteria->params = array(':status' => 0);
-		}
-		*/
 
 		$criteria->order = 'last_update DESC';
 
