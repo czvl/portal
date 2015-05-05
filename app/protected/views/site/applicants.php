@@ -51,7 +51,6 @@
                     <?php echo $form->textFieldControlGroup($model, 'email', array('span' => 5, 'maxlength' => 255)); ?>
                     <?php echo $form->textAreaControlGroup($model, 'other_contacts', array('rows' => 6, 'span' => 8)); ?>
                     <?php echo $form->labelEx($model, 'residenciesIds'); ?>
-                    <input type="text" name="residenciesFilter" class="filter" size="10" />
                     <div class="div-overflow">
                         <?php echo $form->checkBoxList($model, 'residenciesIds', CHtml::listData(CitiesList::model()->findAll(array('order' => 'city_name')), 'city_index', 'city_name')); ?>
                     </div>
@@ -68,13 +67,11 @@
                     <?php echo $form->textFieldControlGroup($model, 'desired_position', array('span' => 5, 'maxlength' => 255)); ?>
                     <?php echo $form->textFieldControlGroup($model, 'salary', array('span' => 5, 'maxlength' => 255)); ?>
                     <?php echo $form->labelEx($model, 'jobLocationsIds'); ?>
-                    <input type="text" name="jobLocationsFilter" class="filter" size="10" />
                     <div class="div-overflow">
                         <?php echo $form->checkBoxList($model, 'jobLocationsIds', CHtml::listData(CitiesList::model()->findAll(array('order' => 'city_name')), 'city_index', 'city_name')); ?>
                     </div>
                     <?php echo $form->textAreaControlGroup($model, 'documents', array('rows' => 2, 'span' => 8)); ?>
                     <?php echo $form->labelEx($model, 'driverLicensesIds'); ?>
-                    <input type="text" name="licensesFilter" class="filter" size="10" />
                     <div class="div-overflow">
                         <?php echo $form->checkBoxList($model, 'driverLicensesIds', CHtml::listData(DriverLicenses::model()->findAll(array('order' => 'id')), 'id', 'name')); ?>
                     </div>
@@ -82,13 +79,6 @@
                     <p><small>Учасник протестів на Майдані / Внутрішньо Переміщена Особа (з Криму, зі Сходу України).</small></p>
                     <?php echo $form->textArea($model, 'applicant_type', array('rows' => 6, 'span' => 8)); ?>
                     <?php echo $form->checkBoxListControlGroup($model, 'assistanceIds', CHtml::listData(AssistanceTypes::model()->findAll(array('order' => 'id')), 'id', 'name')); ?>
-                    <?php /*
-                    <div>
-                        <?php echo $form->labelEx($model, 'verifyCode'); ?>
-                        <p><?php $this->widget('CCaptcha'); ?></p>
-                        <?php echo $form->textField($model, 'verifyCode'); ?>
-                    </div>
-                     */ ?>
                     <?php echo $form->checkBox($model, 'personal_data'); ?>
                     <?php echo $form->labelEx($model, 'personal_data', array('class' => 'inline')); ?>
 
