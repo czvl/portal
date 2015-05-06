@@ -101,7 +101,31 @@ function getOrder($fieldValue, $orderField = 'id')
 			            <br />
 			            <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('contact_phone')); ?></strong><br />
 			            <?php echo CHtml::textField('contact_phone', $contactPhoneFilter, array('span' => 5, 'maxlength' => 255, 'class' => getClassName($contactPhoneFilter))); ?>
-		            </div>
+
+                    <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('added_time')); ?></strong><br />
+                    <?php
+                        $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+                            'name' => 'added_time_from',
+                            'value' => $addedTimeFrom,
+                            'options' => array(
+                                'showAnim' => 'fold',
+                                'changeYear' => true,
+                                'dateFormat' => 'yy-mm-dd',
+                            )
+                        ));
+                        ?>
+                        <?php
+                        $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+                            'name' => 'added_time_to',
+                            'value' => $addedTimeTo,
+                            'options' => array(
+                                'showAnim' => 'fold',
+                                'changeYear' => true,
+                                'dateFormat' => 'yy-mm-dd',
+                            )
+                        ));
+                        ?>
+                    </div>
 	            </td>
                 <td class="<?php echo getClassName($locationsFilter); ?>">
                     <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('jobLocationsIds')); ?></strong><br />
@@ -144,33 +168,6 @@ function getOrder($fieldValue, $orderField = 'id')
                     <div class="div-overflow narrow">
                         <?php echo CHtml::checkBoxList('licensesIds', $licensesIdsFilter, CHtml::listData(DriverLicenses::model()->findAll(array('order' => getOrder($licensesIdsFilter) . 'name ASC')), 'id', 'name'), array('template' => '{beginLabel}{input} {labelTitle}{endLabel}', 'separator' => '')); ?>
                     </div>
-                </td>
-                <td>
-                    <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('added_time')); ?></strong><br />
-                    <?php
-                    $this->widget('zii.widgets.jui.CJuiDatePicker', array(
-                        'name' => 'added_time_from',
-                        'value' => $addedTimeFrom,
-                        'options' => array(
-                            'showAnim' => 'fold',
-                            'changeYear' => true,
-                            'dateFormat' => 'yy-mm-dd',
-                            'id' => 'atf',
-                        )
-                    ));
-                    ?>
-                    <?php
-                    $this->widget('zii.widgets.jui.CJuiDatePicker', array(
-                        'name' => 'added_time_to',
-                        'value' => $addedTimeTo,
-                        'options' => array(
-                            'showAnim' => 'fold',
-                            'changeYear' => true,
-                            'dateFormat' => 'yy-mm-dd',
-                            'id' => 'att',
-                        )
-                    ));
-                    ?>
                 </td>
             </tr>
         </table>
