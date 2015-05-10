@@ -49,8 +49,7 @@ class CvList extends CActiveRecord
     public $maritalStatuses = array();
     
     public $personal_data;
-//    public $verifyCode;
-    
+
     public function init()
     {
         parent::init();
@@ -73,8 +72,6 @@ class CvList extends CActiveRecord
      */
     public function rules()
     {
-        // NOTE: you should only define rules for those attributes that
-        // will receive user inputs.
         return array(
             array('first_name, last_name, gender, contact_phone, birth_date, residenciesIds, education, jobLocationsIds, desired_position, work_experience, skills, summary, applicant_type', 'required'),
             array('marital_status, education, recruiter_id, status', 'numerical', 'integerOnly' => true),
@@ -90,8 +87,6 @@ class CvList extends CActiveRecord
             array('personal_data', 'required', 'on' => 'public'),
             array('personal_data', 'compare', 'compareValue' => true, 'message' => 'Вам потрібно погодитись надати нам Ваші персональні дані.', 'on' => 'public'),
 
-            // The following rule is used by search().
-            // @todo Please remove those attributes that should not be searched.
             array('id, first_name, last_name, gender, marital_status, birth_date, contact_phone, other_contacts, email, education, eduction_info, work_experience, skills, summary, salary, desired_position, documents, applicant_type, cv_file, recruiter_id, recruiter_comments, who_filled, last_update, added_time, status', 'safe', 'on' => 'search'),
         );
     }
@@ -189,7 +184,6 @@ class CvList extends CActiveRecord
             'added_time' => 'Додано',
             'status' => 'Стан',
             'is_active' => 'Включений/Вимкнений',
-//            'verifyCode' => 'Введіть символи з малюнка', 
             'personal_data' => 'Я згоден(на) з обробкою та використанням моїх персональних даних'
         );
     }
@@ -334,7 +328,7 @@ class CvList extends CActiveRecord
             $html .= '</ul>';
         }
         return $html;
-        
+
     }
 
     public function getFlat_Assistances()
@@ -359,12 +353,12 @@ class CvList extends CActiveRecord
         
         return CvStatuses::model()->findAll($criteria);
     }
-    
+
     public function getFirstLastName()
     {
         return $this->first_name . " " . $this->last_name;
     }
-    
+
     private function loadConfigFromFile($file)
     {
         $filePath = Yii::getPathOfAlias('application.config.' . $file).'.php';

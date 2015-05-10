@@ -177,6 +177,11 @@ function getOrder($fieldValue, $orderField = 'id')
     <input type="button" class="btn btn-primary btn-small reset" value="Скинути" onclick="$(':input','#filter').not(':button, :submit, :reset, :hidden').val('').removeAttr('checked').removeAttr('selected'); $('#filter').submit();" />
 </form>
 
+<?= CHtml::tag('h4',[], Yii::t('main', 'profiles.status.statistic'))?>
+<?php foreach (CvListHelper::statusStatistic($addedTimeFrom, $addedTimeTo) as $status): ?>
+    <?= $status['name']?>: <?= $status['count']?>,
+<?php endforeach; ?>
+
 <?php
 $params = array('class' => 'btn btn-success btn-small', 'id' => 'export-button');
 if(!sizeof($this->toExport)) {
