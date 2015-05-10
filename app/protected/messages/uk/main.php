@@ -30,4 +30,5 @@ return array(
     'user.profile.responsibility.categories' => 'Категоріі',
     'applicant.error.tooYoung' => 'Вік претендента не може бути меншим ніж {years} років.',
     'profiles.status.statistic' => 'Статистика анкет',
+    'profiles.status.statistic.period' => 'за вибраний період',
 );
