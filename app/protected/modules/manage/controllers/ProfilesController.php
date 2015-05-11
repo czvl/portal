@@ -332,10 +332,10 @@ class ProfilesController extends Controller {
 			$criteria->addCondition('gender = "' . $gender . '"');
 		}
 		if (($ageMin = $this->fetchVariable('age_min')) !== false) {
-			$criteria->addCondition("(birth_date IS NOT NULL) AND (DATE_FORMAT(FROM_DAYS(DATEDIFF(NOW(), birth_date)), '%Y')+0) >= " . $ageMin);
+			$criteria->addCondition("birth_date IS NULL OR ((birth_date IS NOT NULL) AND (DATE_FORMAT(FROM_DAYS(DATEDIFF(NOW(), birth_date)), '%Y')+0) >= " . $ageMin . ")");
 		}
 		if (($ageMax = $this->fetchVariable('age_max')) !== false) {
-			$criteria->addCondition("(birth_date IS NOT NULL) AND (DATE_FORMAT(FROM_DAYS(DATEDIFF(NOW(), birth_date)), '%Y')+0) <= " . $ageMax);
+			$criteria->addCondition("birth_date IS NULL OR ((birth_date IS NOT NULL) AND (DATE_FORMAT(FROM_DAYS(DATEDIFF(NOW(), birth_date)), '%Y')+0) <= " . $ageMax . ")");
 		}
 		if ($locations = $this->fetchVariable('locations')) {
 			$with[] = 'citiesJobLocations';
