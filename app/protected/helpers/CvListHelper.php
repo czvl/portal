@@ -25,6 +25,7 @@ class CvListHelper
         if ($addedTimeTo) {
             $command->andWhere('added_time <= "' . date('Y-m-d 23:59:59', strtotime($addedTimeTo)) . '"');
         }
+        $command->andWhere('is_active = "' . CvList::IS_ACTIVE_PRESENT . '"');
 
         $rows = $command->queryAll();
 

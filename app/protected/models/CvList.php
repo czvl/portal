@@ -33,10 +33,13 @@
  * @property integer $is_active
  *
  * The followings are the available model relations:
- * @property Users $recruiter
+ * @property User $recruiter
  */
 class CvList extends CActiveRecord
 {
+    const IS_ACTIVE_PRESENT = 'yes';
+    const IS_ACTIVE_DELETED = 'no';
+
     public $genderTypes = array();
     public $categoryIds = array();
     public $positionsIds = array();
@@ -120,7 +123,7 @@ class CvList extends CActiveRecord
     public function defaultScope()
     {
         return array(
-            'condition' => "is_active = 'yes'"
+            'condition' => "is_active = '" . self::IS_ACTIVE_PRESENT . "'"
         );
 
     }

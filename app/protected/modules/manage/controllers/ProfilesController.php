@@ -253,14 +253,12 @@ class ProfilesController extends Controller {
 		if (Yii::app()->request->isPostRequest) {
 
 			$model            = $this->loadModel($id);
-			$model->is_active = 'no';
+			$model->is_active = CvList::IS_ACTIVE_DELETED;
 			$model->save(false);
 
 			$log         = new Log();
 			$log->action = "delete_user_" . $id;
 			$log->save();
-
-//            $this->loadModel($id)->delete();
 
 			$this->redirect(array('index'));
 		} else {
