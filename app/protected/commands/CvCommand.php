@@ -13,7 +13,7 @@ class CvCommand extends CConsoleCommand
         $app = Yii::app();
 
         /* @var $app CConsoleApplication */
-
-        return $app->db->createCommand($sql)->execute();
+        echo $app->db->createCommand($sql)->execute();
+        echo PHP_EOL;
     }
 }
