@@ -9,7 +9,7 @@ class CvCommand extends CConsoleCommand
 {
     public function actionFixBirthDate()
     {
-        $sql = "UPDATE cv_list SET birth_date = NULL WHERE (DATE_FORMAT(FROM_DAYS(DATEDIFF(NOW(), birth_date)), '%Y')+0) < 10";
+        $sql = "UPDATE cv_list SET birth_date = NULL WHERE (DATE_FORMAT(FROM_DAYS(DATEDIFF(NOW(), birth_date)), '%Y')+0) < 16";
         $app = Yii::app();
 
         /* @var $app CConsoleApplication */
