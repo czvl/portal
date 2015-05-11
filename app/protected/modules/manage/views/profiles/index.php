@@ -183,9 +183,7 @@ function getOrder($fieldValue, $orderField = 'id')
         <?php endif; ?>
     </h4>
     <p>
-        <?php foreach (CvListHelper::statusStatistic($addedTimeFrom, $addedTimeTo) as $status): ?>
-            <?= $status['name'] ?>: <?= $status['count'] ?>,
-        <?php endforeach; ?>
+        <?= implode(", ", CvListHelper::statusStatistic($addedTimeFrom, $addedTimeTo))?>
     </p>
 <?php
 $params = array('class' => 'btn btn-success btn-small', 'id' => 'export-button');

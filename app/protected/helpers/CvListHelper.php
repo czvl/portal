@@ -30,10 +30,7 @@ class CvListHelper
 
         if (is_array($rows)) {
             foreach ($rows as $row) {
-                $result[] = [
-                    'name' => $types[$row['status']],
-                    'count' => $row['cnt'],
-                ];
+                $result[] = $types[$row['status']] .": ". $row['cnt'];
             }
         }
 
