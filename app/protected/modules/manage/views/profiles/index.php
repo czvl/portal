@@ -38,7 +38,11 @@ function getClassName($fieldValue = NULL)
 
 function getOrder($fieldValue, $orderField = 'id')
 {
-    return ($fieldValue) ? $orderField . " IN (" . implode(",", $fieldValue) . ") DESC," : "";
+    $resValue = array_filter((array)$fieldValue, function($e){
+        return !empty($e);
+    });
+
+    return ($resValue) ? $orderField . " IN (" . implode(",", $resValue) . ") DESC," : "";
 }
 
 ?>
