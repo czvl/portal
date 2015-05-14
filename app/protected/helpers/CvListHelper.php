@@ -17,6 +17,7 @@ class CvListHelper
             ->createCommand()
             ->select('status, count(id) cnt')
             ->from(CvList::model()->tableName())
+            ->order("FIELD(status, " . implode(',', array_keys($types)) . ")")
             ->group('status');
 
         if ($addedTimeFrom) {
