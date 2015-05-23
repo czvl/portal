@@ -24,7 +24,7 @@ class ProfilesController extends Controller {
 		return array(
 			array(
 				'allow',
-				'actions' => array('index', 'view', 'create', 'update', 'export'),
+				'actions' => array('index', 'view', 'create', 'update', 'export', 'invalid'),
 				'users'   => array('@'),
 			),
 			array(
@@ -134,7 +134,6 @@ class ProfilesController extends Controller {
 
 			if ($model->save()) {
 				if (!empty($_POST['CvList']['residenciesIds'])) {
-//                    CvToResidence::model()->deleteAllByAttributes(array('cv_id' => $model->id));
 					foreach ($_POST['CvList']['residenciesIds'] as $r) {
 						$residence          = new CvToResidence();
 						$residence->cv_id   = $model->id;
@@ -146,7 +145,6 @@ class ProfilesController extends Controller {
 				}
 
 				if (!empty($_POST['CvList']['driverLicensesIds'])) {
-//                    CvToDriverLicense::model()->deleteAllByAttributes(array('cv_id' => $model->id));
 					foreach ($_POST['CvList']['driverLicensesIds'] as $dl) {
 						$license             = new CvToDriverLicense();
 						$license->cv_id      = $model->id;
@@ -158,7 +156,6 @@ class ProfilesController extends Controller {
 				}
 
 				if (!empty($_POST['CvList']['jobLocationsIds'])) {
-//                    CvToJobLocation::model()->deleteAllByAttributes(array('cv_id' => $model->id));
 					foreach ($_POST['CvList']['jobLocationsIds'] as $jl) {
 						$jobLocation          = new CvToJobLocation();
 						$jobLocation->cv_id   = $model->id;
@@ -170,7 +167,6 @@ class ProfilesController extends Controller {
 				}
 
 				if (!empty($_POST['CvList']['assistanceIds'])) {
-//                    CvToAssistance::model()->deleteAllByAttributes(array('cv_id' => $model->id));
 					foreach ($_POST['CvList']['assistanceIds'] as $ai) {
 						$assistance                     = new CvToAssistance();
 						$assistance->cv_id              = $model->id;
@@ -202,6 +198,36 @@ class ProfilesController extends Controller {
 
 		$this->render('create', array('model' => $model));
 	}
+
+    /**
+     * Profiles with incorrect date
+     */
+    public function actionInvalid()
+    {
+        $criteria = new CDbCriteria();
+
+        $criteria->addCondition([
+            'category_id IS NULL OR
+                citiesJobLocations_citiesJobLocations.city_id IS NULL OR
+                citiesResidence_citiesResidence.city_id IS NULL OR
+                position_id IS NULL',
+        ]);
+        $criteria->addCondition('is_active="yes"');
+        $criteria->with = [
+            'categories',
+            'citiesJobLocations',
+            'citiesResidence',
+            'positions',
+        ];
+        $criteria->together = true;
+
+        $dataProvider = new CActiveDataProvider('CvList', array(
+                'criteria' => $criteria,
+            )
+        );
+
+        $this->render('invalid', array('dataProvider' => $dataProvider));
+    }
 
 	/**
 	 * Updates a particular model.
@@ -243,12 +269,13 @@ class ProfilesController extends Controller {
 		$this->render('update', array('model' => $model));
 	}
 
-	/**
-	 * Deletes a particular model.
-	 * If deletion is successful, the browser will be redirected to the 'admin' page.
-	 *
-	 * @param integer $id the ID of the model to be deleted
-	 */
+    /**
+     * Deletes a particular model.
+     * If deletion is successful, the browser will be redirected to the 'admin' page.
+     *
+     * @param integer $id the ID of the model to be deleted
+     * @throws CHttpException
+     */
 	public function actionDelete($id) {
 		if (Yii::app()->request->isPostRequest) {
 

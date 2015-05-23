@@ -21,7 +21,8 @@
                                                     TbHtml::menuDivider(),
                                                     array('label' => 'Довідник категорій', 'url' => '#'),
                                                 ), 'visible' => Yii::app()->user->checkAccess(User::ROLE_ADMIN) || Yii::app()->user->checkAccess(User::ROLE_MANAGER)
-                                            )
+                                            ),
+                                            array('label' => 'Анкети без категорій','url' => '/manage/profiles/invalid'),
                                         ),
                                     ),
                                     array(
