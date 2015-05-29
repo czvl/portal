@@ -154,9 +154,14 @@
                 <h1>Наші контакти:</h1>
                 <div class="row">
                     <div class="span12">
-                        <p>Гаряча лінія для претендентів: +380 (67) 507-09-30 (<strong>Kyivstar</strong>), +380 (66) 500-35-75 (<strong>MTS</strong>), +380 (93) 167-37-81 (<strong>Life</strong>), <a href="mailto:czsl.staff@gmail.com">czsl.staff@gmail.com</a>.</p>
-	                    <p>Для роботодавців: <strong>Євгенія Конончук</strong> +380 (95) 441-06-70, <a href="mailto:czvl.job@gmail.com">czvl.job@gmail.com</a></p>
-                        <p>Рекомендуємо підписатись на нашу сторінку в Facebook, щоб слідкувати за новинами і вакансіями: <a href="https://www.facebook.com/czvl.staff" target="_blank">https://www.facebook.com/czvl.staff</a>, або читайте наш <a href="/blog/">блог</a>.</p>
+                        <p>Для претендентів Гаряча лінія: +380 (67) 507-09-30 (<strong>Kyivstar</strong>), +380 (66) 500-35-75 (<strong>MTS</strong>), +380 (93) 167-37-81 (<strong>Life</strong>), <a href="mailto:czsl.staff@gmail.com">czsl.staff@gmail.com</a></p>
+                        <p>Адреси і телефони офісів та консультаційних центрів ЦЗВЛ та партнерів Центру у <strong>Києві</strong> та регіонах знаходьте на сторінці <a href="/blog/counseling/">Кар’єрне консультування</a>.</p>
+                        <p>Для роботодавців: координатор Євгенія Конончук +380 (95) 441-06-70, <a href="mailto:czvl.job@gmail.com">czvl.job@gmail.com</a></p>
+                        <p>Проект “<a href="http://www.czvl.org.ua/blog/work4warrior/%20" target="_blank" rel="nofollow">Воїну-гідна праця</a>”: координатор Оксана Воропай +380 (63) 802-61-51, сторінка проекту в <a href="https://www.facebook.com/jobsoldiers" target="_blank" rel="nofollow">Facebook</a>.</p>
+                        <p>Координаторка зв’язків з громадськістю Марія Маруженко +380 (99) 644-74-87, <a href="mailto:maria.maruzhenko@gmail.com">maria.maruzhenko@gmail.com</a></p>
+                        <p>Наша електропошта: <a href="mailto:czsl.staff@gmail.com">czsl.staff@gmail.com</a></p>
+                        <p>Наша сторінка в <a href="https://facebook.com/czvl.staff" target="_blank" rel="nofollow">Facebook</a>.</p>
+                        <p>Наш <a href="/blog/">Блог</a>.</p>
                     </div>
                 </div>
             </div>
