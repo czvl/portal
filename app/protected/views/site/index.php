@@ -8,7 +8,7 @@
                 <div class="container">
                     <div class="row">
                         <?php if (!IS_LOCALHOST) { ?>
-                        <div class="fb-like" data-href="http://czvl.ua-selector.in/" data-layout="standard" data-action="recommend" data-show-faces="true" data-share="true"></div>
+                        <div class="fb-like" data-href="http://czvl.ua-selector.in/" data-layout="standard" data-action="recommend" data-show-faces="false" data-share="true"></div>
                         <?php } ?>
                         <?php
                         /*<div class="span12">
