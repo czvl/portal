@@ -52,7 +52,7 @@ Yii::app()->clientScript->registerPackage('main');
         <div class="footer-wrapper">
             <div class="container">
                 <footer>
-                    <small>&copy; <?php echo date('Y'); ?>. <?php echo Yii::t('main', 'All rights reserved.'); ?> | Автор логотипу <a href="http://be.net/densednev" target="_blank">Денис Седньов</a></small>
+                    <small>&copy; 2014 - <?php echo date('Y'); ?>. <?php echo Yii::t('main', 'All rights reserved.'); ?> | Автор логотипу <a href="http://be.net/densednev" target="_blank">Денис Седньов</a></small>
                 </footer>
             </div>
         </div>
