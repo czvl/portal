@@ -223,6 +223,9 @@ class ProfilesController extends Controller {
 
         $dataProvider = new CActiveDataProvider('CvList', array(
                 'criteria' => $criteria,
+                'pagination' => array(
+                    'pageSize' => 20,
+                ),
             )
         );
 
