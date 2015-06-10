@@ -21,7 +21,7 @@
                                                     TbHtml::menuDivider(),
                                                     array('label' => 'Довідник категорій', 'url' => '#'),
                                                 ), 'visible' => Yii::app()->user->checkAccess(User::ROLE_ADMIN) || Yii::app()->user->checkAccess(User::ROLE_MANAGER)
-                                            )
+                                            ),
                                         ),
                                     ),
                                     array(
