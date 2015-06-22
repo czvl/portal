@@ -66,6 +66,34 @@ class SiteController extends Controller
     }
 
     /**
+     * Registers new user and company
+     * @return mixed|string
+     */
+    public function actionRegisterCompany()
+    {
+
+        $model = new RegisterCompanyForm();
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'company-form') {
+            echo CActiveForm::validate($model);
+            Yii::app()->end();
+        }
+
+        if (isset($_POST['RegisterCompanyForm'])) {
+            $model->attributes = $_POST['RegisterCompanyForm'];
+            if($model->register())
+            {
+                Yii::app()->user->setFlash('success', 'Successfully registered. Please, check you email');
+                $this->redirect('/manage/login');
+            }
+
+            Yii::app()->user->setFlash('error', 'Unexpected error during registration');
+
+        }
+
+        return $this->render('company/register', ['model' => $model]);
+    }
+
+    /**
      * This is the action to handle external exceptions.
      */
     public function actionError()

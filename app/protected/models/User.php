@@ -20,6 +20,7 @@
  * @property CvStatuses[] $cvStatuses
  * @property CvCategories[] $cvCategories
  * @property CitiesList[] $citiesList
+ * @property Company|null[] $company
  */
 class User extends CActiveRecord
 {
@@ -102,6 +103,8 @@ class User extends CActiveRecord
                 'user_to_cv_categories(user_id, cv_category_id)'),
             'citiesList'=>array(self::MANY_MANY, 'CitiesList',
                 'user_to_cities(user_id, city_index)'),
+            'companiesList' => [self::MANY_MANY, 'Company',
+                'user_to_company(user_id, company_id)']
         );
     }
 
