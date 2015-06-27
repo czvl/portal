@@ -16,6 +16,7 @@ class RegisterCompanyForm extends CFormModel
     public $first_name;
     public $last_name;
     public $username;
+    public $position;
     public $email;
     public $phone;
     public $password;
@@ -26,7 +27,7 @@ class RegisterCompanyForm extends CFormModel
         return array(
             ['username, email, name, phone, password, first_name, last_name, repeat_password, address', 'required'],
             ['password, repeat_password', 'length', 'min' => 6, 'max' => 25],
-            ['name', 'length', 'min' => 5, 'max' => 255],
+            ['name, position', 'length', 'min' => 5, 'max' => 255],
             ['password', 'compare', 'compareAttribute' => 'repeat_password'],
             ['username', 'usernameUniqueValidator'],
             ['username', 'length', 'min' => 3, 'max' => 25],
@@ -57,6 +58,7 @@ class RegisterCompanyForm extends CFormModel
         $user->first_name = $this->first_name;
         $user->last_name = $this->last_name;
         $user->email = $this->email;
+        $user->position = $this->position;
         $user->phone = $this->phone;
         $user->password = $this->password;
         $user->username = $this->username;
@@ -89,6 +91,26 @@ class RegisterCompanyForm extends CFormModel
         }
 
         return true;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return array(
+            'id' => 'ID',
+            'username' => Yii::t('main', 'Username'),
+            'phone' => Yii::t('main', 'phone'),
+            'name' => Yii::t('main', 'company.name'),
+            'address' => Yii::t('main', 'company.address'),
+            'position' => Yii::t('main', 'user.position'),
+            'password' => Yii::t('main', 'Password'),
+            'repeat_password' => Yii::t('main', 'Password repeat'),
+            'email' => Yii::t('main', 'Email'),
+            'first_name' => Yii::t('main', 'First name'),
+            'last_name' => Yii::t('main', 'Last name'),
+        );
     }
 
 }

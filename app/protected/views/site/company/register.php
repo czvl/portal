@@ -57,6 +57,10 @@
         <?= $form->textField($model, 'last_name') ?>
         <?= $form->error($model, 'last_name'); ?>
 
+        <?= $form->label($model, 'position'); ?>
+        <?= $form->textField($model, 'position') ?>
+        <?= $form->error($model, 'position'); ?>
+
         <?= $form->label($model, 'email'); ?>
         <?= $form->textField($model, 'email') ?>
         <?= $form->error($model, 'email'); ?>
