@@ -24,6 +24,8 @@ return array(
     'Last login at' => 'Час останнього входу',
     'Status' => 'Статус',
     'Error' => 'Помилка',
+    'phone' => 'Контакний телефон',
+    'position' => 'Посада у компаніі',
     'Successfully changed!' => 'Зміни успішно записані!',
     'user.profile.responsibility.title' => 'Зона відповідальності',
     'user.profile.responsibility.cities' => 'Міста',
@@ -31,4 +33,7 @@ return array(
     'applicant.error.tooYoung' => 'Вік претендента не може бути меншим ніж {years} років.',
     'profiles.status.statistic' => 'Статистика анкет',
     'profiles.status.statistic.period' => 'за вибраний період',
+    'company.name' => 'Назва компаніі',
+    'company.address' => 'Адреса офісу (якщо їх децілька, то вкажіть центральний)',
+    'user.position' => 'Посада',
 );

@@ -10,6 +10,9 @@
  * @property string $email
  * @property string $first_name
  * @property string $last_name
+ * @property string $phone
+ * @property string $position
+ * @property string $additional_contact
  * @property string $role
  * @property string $signin_time
  * @property string $last_login
@@ -20,6 +23,7 @@
  * @property CvStatuses[] $cvStatuses
  * @property CvCategories[] $cvCategories
  * @property CitiesList[] $citiesList
+ * @property Company|null[] $company
  */
 class User extends CActiveRecord
 {
@@ -37,20 +41,25 @@ class User extends CActiveRecord
     private  $_roles = array();
 
     /**
-     * Returns the static model of the specified AR class.
-     * @return User the static model class
+     * @inheritdoc
      */
     public static function model($className = __CLASS__)
     {
         return parent::model($className);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
         $this->statusTypes = Yii::app()->getController()->loadConfigFromFile('user_statuses');
     }
 
+    /**
+     * @inheritdoc
+     */
     public function defaultScope()
     {
         return array(
@@ -59,7 +68,7 @@ class User extends CActiveRecord
     }
 
     /**
-     * @return string the associated database table name
+     * @inheritdoc
      */
     public function tableName()
     {
@@ -67,31 +76,30 @@ class User extends CActiveRecord
     }
 
     /**
-     * @return array validation rules for model attributes.
+     * @inheritdoc
      */
     public function rules()
     {
-        // NOTE: you should only define rules for those attributes that
-        // will receive user inputs.
         return array(
-            array('username', 'unique'),
-            array('username, role, email', 'required'),
-            array('password, password_repeat', 'length', 'max' => 32),
-            array('password, password_repeat', 'required', 'on' => 'create'),
-            array('password_repeat', 'compare', 'compareAttribute' => 'password', 'on' => 'create'),
+            ['username', 'unique'],
+            ['username, role, email', 'required'],
+            ['password, password_repeat, phone', 'length', 'max' => 32],
+            ['password, password_repeat', 'required', 'on' => 'create'],
+            ['password_repeat', 'compare', 'compareAttribute' => 'password', 'on' => 'create'],
+
+            ['password_repeat', 'compare', 'compareAttribute' => 'password_new', 'on' => 'update'],
+            ['password_new, password_repeat', 'safe', 'on' => 'update'],
             
-            array('password_repeat', 'compare', 'compareAttribute' => 'password_new', 'on' => 'update'),
-            array('password_new, password_repeat', 'safe', 'on' => 'update'),
-            
-            array('status', 'numerical', 'integerOnly' => true),
-            array('username, email, role, first_name, last_name', 'length', 'max' => 255),
-            array('signin_time, last_login', 'safe'),
-            array('username, role', 'safe', 'on' => 'search'),
+            ['status', 'numerical', 'integerOnly' => true],
+            ['username, email, role, first_name, last_name, additional_contact', 'length', 'max' => 255],
+            ['signin_time, last_login', 'safe'],
+            ['username, role', 'safe', 'on' => 'search'],
+            ['phone', 'match', 'pattern'=>'/^([+]?[0-9 \)\(\-]+)$/']
         );
     }
 
     /**
-     * @return array relational rules.
+     * @inheritdoc
      */
     public function relations()
     {
@@ -102,9 +110,14 @@ class User extends CActiveRecord
                 'user_to_cv_categories(user_id, cv_category_id)'),
             'citiesList'=>array(self::MANY_MANY, 'CitiesList',
                 'user_to_cities(user_id, city_index)'),
+            'companiesList' => [self::MANY_MANY, 'Company',
+                'user_to_company(user_id, company_id)']
         );
     }
 
+    /**
+     * @inheritdoc
+     */
     protected function beforeSave()
     {
         if (parent::beforeSave()) {
@@ -123,7 +136,7 @@ class User extends CActiveRecord
     }
 
     /**
-     * @return array customized attribute labels (name=>label)
+     * @inheritdoc
      */
     public function attributeLabels()
     {

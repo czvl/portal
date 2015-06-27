@@ -15,7 +15,15 @@
                                     array(
                                         'class' => 'bootstrap.widgets.TbNav',
                                         'items' => array(
-                                            array('label' => 'Анкети претендентів', 'url' => array('/manage/profiles'), 'visible' => !Yii::app()->user->isGuest),
+                                            array(
+                                                'label' => 'Анкети претендентів', 'url' => array('/manage/profiles'),
+                                                'visible' => Yii::app()->user->checkAccess(User::ROLE_ADMIN) || Yii::app()->user->checkAccess(User::ROLE_MANAGER)
+                                            ),
+                                            array(
+                                                'label' => 'Вакансіі',
+                                                'visible' => Yii::app()->user->checkAccess(User::ROLE_EMPL),
+                                                'url' => array('/manage/company'),
+                                            ),
                                             array('label' => 'Адміністративна частина', 'items' => array(
                                                     array('label' => 'Користувачі', 'url' => array('/manage/users')),
                                                     TbHtml::menuDivider(),
