@@ -3,10 +3,8 @@
 /**
  * @property $id
  * @property $name
- * @property $category_id
  * @property $site_url
- * @property $phone
- * @property $email
+ * @property $address
  * @property $status
  * @property $priority
  * @property $created_at
@@ -22,9 +20,9 @@ class Company extends CActiveRecord
     public function rules()
     {
         return [
-            ['name, phone, email', 'required'],
+            ['name, phone, address', 'required'],
+            ['address', 'length', 'max' => 1000],
             ['name', 'length', 'min' => 5],
-            ['email', 'email']
         ];
     }
 

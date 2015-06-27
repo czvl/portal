@@ -62,8 +62,6 @@ class RegisterCompanyForm extends CFormModel
         $company = new Company();
         $company->name = $this->name;
         $company->site_url = $this->site_url;
-        $company->phone = $this->phone;
-        $company->email = $this->email;
         $company->created_at = new CDbExpression('NOW()');
         $company->updated_at = new CDbExpression('NOW()');
 
