@@ -50,6 +50,7 @@ class RegisterCompanyForm extends CFormModel
         $user->first_name = $this->first_name;
         $user->last_name = $this->last_name;
         $user->email = $this->email;
+        $user->phone = $this->phone;
         $user->password = $this->password;
         $user->username = $this->username;
         $user->role = User::ROLE_EMPL;
