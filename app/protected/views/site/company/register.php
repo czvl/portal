@@ -30,6 +30,12 @@
         <?= $form->textField($model, 'name') ?>
         <?= $form->error($model, 'name'); ?>
 
+        <?= $form->label($model, 'address'); ?>
+        <?= $form->textArea($model, 'address') ?>
+        <?= $form->error($model, 'address'); ?>
+
+        <h2>Данные администратора</h2>
+
         <?= $form->label($model, 'phone'); ?>
         <?php
         $this->widget('CMaskedTextField', [
@@ -41,7 +47,7 @@
         echo $form->error($model, 'phone');
         ?>
 
-        <h2>Данные администратора</h2>
+
 
         <?= $form->label($model, 'first_name'); ?>
         <?= $form->textField($model, 'first_name') ?>

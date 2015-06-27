@@ -20,7 +20,7 @@ class Company extends CActiveRecord
     public function rules()
     {
         return [
-            ['name, phone, address', 'required'],
+            ['name, address', 'required'],
             ['address', 'length', 'max' => 1000],
             ['name', 'length', 'min' => 5],
         ];

@@ -9,8 +9,6 @@ class m150621_094237_create_company_tables extends CDbMigration
             'name' => 'varchar(255) NOT NULL',
             'address' => 'varchar(1000)',
             'site_url' => 'varchar(255) DEFAULT NULL',
-            'status' => 'int(11) NOT NULL DEFAULT 0',
-            'priority' => 'int(11) NOT NULL DEFAULT 0',
             'created_at' => 'datetime NOT NULL',
             'updated_at' => 'datetime NOT NULL'
 

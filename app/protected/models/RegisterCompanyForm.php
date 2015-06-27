@@ -3,21 +3,28 @@
 class RegisterCompanyForm extends CFormModel
 {
 
+    /**
+     * Company
+     */
     public $name;
-    public $phone;
     public $site_url;
+    public $address;
 
+    /**
+     * User
+     */
     public $first_name;
     public $last_name;
     public $username;
     public $email;
+    public $phone;
     public $password;
     public $repeat_password;
 
     public function rules()
     {
         return array(
-            ['username, email, name, phone, password, first_name, last_name, repeat_password', 'required'],
+            ['username, email, name, phone, password, first_name, last_name, repeat_password, address', 'required'],
             ['password, repeat_password', 'length', 'min' => 6, 'max' => 25],
             ['name', 'length', 'min' => 5, 'max' => 255],
             ['password', 'compare', 'compareAttribute' => 'repeat_password'],
@@ -63,6 +70,7 @@ class RegisterCompanyForm extends CFormModel
         $company = new Company();
         $company->name = $this->name;
         $company->site_url = $this->site_url;
+        $company->address = $this->address;
         $company->created_at = new CDbExpression('NOW()');
         $company->updated_at = new CDbExpression('NOW()');
 
