@@ -12,11 +12,17 @@
  */
 class Company extends CActiveRecord
 {
-   public function tableName()
-   {
-       return 'companies';
-   }
+    /**
+     * @inheritdoc
+     */
+    public function tableName()
+    {
+        return 'companies';
+    }
 
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
@@ -30,8 +36,25 @@ class Company extends CActiveRecord
      * @param string $className
      * @return Company
      */
-    public static function model($className=__CLASS__)
+    public static function model($className = __CLASS__)
     {
         return parent::model($className);
+    }
+
+    /**
+     * @return CActiveDataProvider
+     */
+    public function search()
+    {
+        $criteria = new CDbCriteria;
+
+        $criteria->compare('id', $this->id);
+        $criteria->compare('name', $this->name, true);
+        $criteria->compare('address', $this->address, true);
+        $criteria->compare('site_url', $this->site_url, true);
+
+        return new CActiveDataProvider($this, array(
+            'criteria' => $criteria,
+        ));
     }
 }

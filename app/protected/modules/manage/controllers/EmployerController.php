@@ -1,6 +1,6 @@
 <?php
 
-class CompanyController extends Controller
+class EmployerController extends Controller
 {
 
     public function actionIndex()

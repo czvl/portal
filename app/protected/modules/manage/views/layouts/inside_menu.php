@@ -16,13 +16,31 @@
                                         'class' => 'bootstrap.widgets.TbNav',
                                         'items' => array(
                                             array(
-                                                'label' => 'Анкети претендентів', 'url' => array('/manage/profiles'),
+                                                'label' => 'Анкети претендентів',
+                                                'url' => array('/manage/profiles'),
                                                 'visible' => Yii::app()->user->checkAccess(User::ROLE_ADMIN) || Yii::app()->user->checkAccess(User::ROLE_MANAGER)
                                             ),
-                                            array(
+                                            [
                                                 'label' => 'Вакансіі',
+                                                'items' => [
+                                                    [
+                                                        'label' => 'Перелік вакансій',
+                                                        'url' => array('/manage/vacancies'),
+                                                        'visible' => Yii::app()->user->checkAccess(User::ROLE_ADMIN) || Yii::app()->user->checkAccess(User::ROLE_MANAGER)
+                                                    ],
+                                                    [
+                                                        'label' => 'Компанії',
+                                                        'url' => array('/manage/companies'),
+                                                        'visible' => Yii::app()->user->checkAccess(User::ROLE_ADMIN) || Yii::app()->user->checkAccess(User::ROLE_MANAGER)
+                                                    ],
+
+                                                ],
+                                            ],
+
+                                            array(
+                                                'label' => 'Роботодавець',
                                                 'visible' => Yii::app()->user->checkAccess(User::ROLE_EMPL),
-                                                'url' => array('/manage/company'),
+                                                'url' => array('/manage/employer'),
                                             ),
                                             array('label' => 'Адміністративна частина', 'items' => array(
                                                     array('label' => 'Користувачі', 'url' => array('/manage/users')),
