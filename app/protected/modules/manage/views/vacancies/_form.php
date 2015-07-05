@@ -16,10 +16,10 @@
     ?>
 
     <?= $form->labelEx($model, 'user_id') ?>
-    <?= $form->dropDownList($model, 'user_id', CompanyHelper::userList($company->id), [
+    <?= $form->dropDownListControlGroup($model, 'user_id', CompanyHelper::userList($company->id), [
         'class' => 'span8',
     ]) ?>
-    <?= $form->error($model, 'user_id') ?>t
+    <?= $form->error($model, 'user_id') ?>
 
     <?= $form->textFieldControlGroup($model, 'name', ['size' => 200, 'class' => 'span8']) ?>
 
@@ -29,7 +29,7 @@
 
     <?= $form->textAreaControlGroup($model, 'requirements', ['rows' => 4, 'class' => 'span8']) ?>
 
-    <?= $form->dropDownListControlGroup($model, 'experience_id', ExperienceHelper::all()) ?>
+    <?= $form->dropDownListControlGroup($model, 'experience_id', ExperienceHelper::all(), ['class' => 'span4']) ?>
 
     <?= $form->checkBoxControlGroup($model, 'housing') ?>
 
