@@ -6,6 +6,7 @@
  * @property string $name
  * @property int $company_id
  * @property int $city_id
+ * @property int $experience_id
  * @property int $user_id
  * @property string $description
  * @property string $requirements
@@ -18,6 +19,7 @@
  * @property string $updated_by
  * @property Company $company
  * @property CitiesList $city
+ * @property Experience $experience
  * @property VacancyToCategory[] $categories
  * @property VacancyToEducation[] $educations
  */
@@ -49,8 +51,8 @@ class Vacancy extends CActiveRecord
     public function rules()
     {
         return [
-            ['name, company_id, city_id, user_id, status', 'required'],
-            ['company_id, city_id, user_id, status, housing', 'numerical'],
+            ['name, company_id, city_id, user_id, status, experience_id', 'required'],
+            ['company_id, city_id, user_id, status, housing, experience_id', 'numerical'],
             ['name', 'length', 'max' => 255],
             ['description, requirements', 'length', 'max' => 5000]
         ];
@@ -105,6 +107,11 @@ class Vacancy extends CActiveRecord
                 self::BELONGS_TO,
                 CitiesList::class,
                 'city_id',
+            ],
+            'experience' => [
+                self::BELONGS_TO,
+                Experience::class,
+                'experience_id'
             ],
             'categories' => [
                 self::MANY_MANY,

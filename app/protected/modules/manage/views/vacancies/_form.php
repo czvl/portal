@@ -30,6 +30,10 @@
     <?= $form->textArea($model, 'requirements', ['rows' => 4, 'class' => 'span8']) ?>
     <?= $form->error($model, 'requirements') ?>
 
+    <?= $form->labelEx($model, 'experience_id') ?>
+    <?= $form->dropDownList($model, 'experience_id', ExperienceHelper::all()) ?>
+    <?= $form->error($model, 'experience_id') ?>
+
     <?= $form->label($model, 'housing') ?>
     <?= $form->checkBox($model, 'housing') ?>
     <?= $form->error($model, 'housing') ?>
