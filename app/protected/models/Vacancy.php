@@ -106,6 +106,29 @@ class Vacancy extends CActiveRecord
     /**
      * @inheritdoc
      */
+    public function attributeLabels()
+    {
+        return [
+            'name' => Yii::t('main', 'vacancy.label.name'),
+            'company_id' => Yii::t('main', 'vacancy.label.company'),
+            'city_id' => Yii::t('main', 'vacancy.label.city_id'),
+            'user_id' => Yii::t('main', 'vacancy.label.user'),
+            'experience_id' => Yii::t('main', 'vacancy.label.experience_id'),
+            'housing' => Yii::t('main', 'vacancy.label.housing'),
+            'description' => Yii::t('main', 'vacancy.label.description'),
+            'requirements' => Yii::t('main', 'vacancy.label.requirements'),
+            'status' => Yii::t('main', 'vacancy.label.status'),
+            'categories' => Yii::t('main', 'vacancy.label.categories'),
+            'educations' => Yii::t('main', 'vacancy.label.educations'),
+            'positions' => Yii::t('main', 'vacancy.label.positions'),
+            'close_time' => Yii::t('main', 'vacancy.label.close_time'),
+            'updated_at' => Yii::t('main', 'vacancy.label.updated_at'),
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function relations()
     {
         return [

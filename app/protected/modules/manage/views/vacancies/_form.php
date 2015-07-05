@@ -9,41 +9,29 @@
 
 <div class="form">
     <?php
-    $form = $this->beginWidget('system.web.widgets.CActiveForm', array(
+    $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         'id' => 'vacancy-form',
         'enableAjaxValidation' => true,
-    )); /* @var $form CActiveForm */
+    )); /* @var $form TbActiveForm */
     ?>
 
     <?= $form->labelEx($model, 'user_id') ?>
     <?= $form->dropDownList($model, 'user_id', CompanyHelper::userList($company->id), [
         'class' => 'span8',
     ]) ?>
-    <?= $form->error($model, 'user_id') ?>
+    <?= $form->error($model, 'user_id') ?>t
 
-    <?= $form->labelEx($model, 'name') ?>
-    <?= $form->textField($model, 'name', ['size' => 200, 'class' => 'span8']) ?>
-    <?= $form->error($model, 'name') ?>
+    <?= $form->textFieldControlGroup($model, 'name', ['size' => 200, 'class' => 'span8']) ?>
 
-    <?= $form->labelEx($model, 'city_id') ?>
-    <?= $form->dropDownList($model, 'city_id', UserCitiesHelper::all()) ?>
-    <?= $form->error($model, 'city_id') ?>
+    <?= $form->dropDownListControlGroup($model, 'city_id', UserCitiesHelper::all()) ?>
 
-    <?= $form->labelEx($model, 'description') ?>
-    <?= $form->textArea($model, 'description', ['rows' => 8, 'class' => 'span8']) ?>
-    <?= $form->error($model, 'description') ?>
+    <?= $form->textAreaControlGroup($model, 'description', ['rows' => 8, 'class' => 'span8']) ?>
 
-    <?= $form->labelEx($model, 'requirements') ?>
-    <?= $form->textArea($model, 'requirements', ['rows' => 4, 'class' => 'span8']) ?>
-    <?= $form->error($model, 'requirements') ?>
+    <?= $form->textAreaControlGroup($model, 'requirements', ['rows' => 4, 'class' => 'span8']) ?>
 
-    <?= $form->labelEx($model, 'experience_id') ?>
-    <?= $form->dropDownList($model, 'experience_id', ExperienceHelper::all()) ?>
-    <?= $form->error($model, 'experience_id') ?>
+    <?= $form->dropDownListControlGroup($model, 'experience_id', ExperienceHelper::all()) ?>
 
-    <?= $form->label($model, 'housing') ?>
-    <?= $form->checkBox($model, 'housing') ?>
-    <?= $form->error($model, 'housing') ?>
+    <?= $form->checkBoxControlGroup($model, 'housing') ?>
 
     <hr />
     <?= $form->label($model, VacancyCategoriesHelper::fieldName()) ?>

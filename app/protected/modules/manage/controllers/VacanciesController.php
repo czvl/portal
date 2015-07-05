@@ -160,7 +160,6 @@ class VacanciesController extends Controller
         if(!empty($_POST['Vacancy'])) {
             $vacancy->attributes = $_POST['Vacancy'];
             $vacancy->company_id = $id;
-            $vacancy->user_id = 100;
             $vacancy->status = Vacancy::STATUS_OPEN;
 
             if($vacancy->save()){

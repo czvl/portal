@@ -18,7 +18,7 @@ $this->widget('bootstrap.widgets.TbGridView', [
                     return CHtml::link($object->company->name,'#');
             },
             'type' => 'raw',
-            'header' => 'Company',
+            'header' => Yii::t('main', 'vacancy.label.company'),
         ],
         'housing:boolean',
         [
@@ -26,9 +26,10 @@ $this->widget('bootstrap.widgets.TbGridView', [
             'value' => function(Vacancy $object){
                 return $object->user->first_name . " " . $object->user->phone;
             },
-            'header' => 'Contact',
+            'header' => Yii::t('main', 'vacancy.label.user'),
         ],
         'updated_at',
+        'close_time',
         [
             'class' => CDataColumn::class,
             'value' => function(Vacancy $object){
