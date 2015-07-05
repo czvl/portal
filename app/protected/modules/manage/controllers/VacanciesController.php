@@ -88,6 +88,7 @@ class VacanciesController extends Controller
 
         $this->render('update', [
             'vacancy' => $vacancy,
+            'company' => $vacancy->company,
         ]);
     }
 

@@ -9,6 +9,7 @@
  * @property $priority
  * @property $created_at
  * @property $updated_at
+ * @property User[] $users
  */
 class Company extends CActiveRecord
 {

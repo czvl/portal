@@ -11,4 +11,5 @@
 
 $this->renderPartial('_form', [
     'model' => $vacancy,
+    'company' => $company,
 ]);

@@ -54,8 +54,17 @@ class Vacancy extends CActiveRecord
             ['name, company_id, city_id, user_id, status, experience_id', 'required'],
             ['company_id, city_id, user_id, status, housing, experience_id', 'numerical'],
             ['name', 'length', 'max' => 255],
-            ['description, requirements', 'length', 'max' => 5000]
+            ['description, requirements', 'length', 'max' => 5000],
+            ['user_id', 'contactPersonValidator']
         ];
+    }
+
+    public function contactPersonValidator()
+    {
+        $userIds = array_keys(CompanyHelper::userList($this->company_id));
+        if(!in_array($this->user_id, $userIds)) {
+            $this->addError('user_id', 'Incorrect user_id');
+        }
     }
 
     /**

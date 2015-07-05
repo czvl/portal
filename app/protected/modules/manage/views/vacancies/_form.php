@@ -1,6 +1,7 @@
 <?php
 /**
  * @var $model Vacancy
+ * @var $company Company
  * @var $this CController
  */
 
@@ -13,6 +14,10 @@
         'enableAjaxValidation' => true,
     )); /* @var $form CActiveForm */
     ?>
+
+    <?= $form->labelEx($model, 'user_id') ?>
+    <?= $form->dropDownList($model, 'user_id', CompanyHelper::userList($company->id)) ?>
+    <?= $form->error($model, 'user_id') ?>
 
     <?= $form->labelEx($model, 'name') ?>
     <?= $form->textField($model, 'name', ['size' => 200, 'class' => 'span8']) ?>
@@ -40,7 +45,6 @@
 
     <hr />
     <?= $form->label($model, VacancyCategoriesHelper::fieldName()) ?>
-    <input type="text" name="categoryFilter" class="filter" size="10"/>
 
     <div class="div-overflow narrow">
         <?= VacancyCategoriesHelper::checkBoxList($model) ?>
