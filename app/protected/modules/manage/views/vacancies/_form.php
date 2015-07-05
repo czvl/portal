@@ -16,7 +16,9 @@
     ?>
 
     <?= $form->labelEx($model, 'user_id') ?>
-    <?= $form->dropDownList($model, 'user_id', CompanyHelper::userList($company->id)) ?>
+    <?= $form->dropDownList($model, 'user_id', CompanyHelper::userList($company->id), [
+        'class' => 'span8',
+    ]) ?>
     <?= $form->error($model, 'user_id') ?>
 
     <?= $form->labelEx($model, 'name') ?>

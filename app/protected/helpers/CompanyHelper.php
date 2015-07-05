@@ -11,7 +11,10 @@ class CompanyHelper
         }
         $result = [];
         foreach($company->users as $user) {
-            $result[$user->id] = $user->getFirstLastName();
+            $result[$user->id] = $user->getFirstLastName()
+            . " " . $user->position
+            . " " . $user->phone
+            ;
         }
 
         return $result;
