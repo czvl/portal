@@ -51,4 +51,8 @@ return array(
     'vacancy.label.positions' => 'Схожі посади',
     'vacancy.label.close_time' => 'Час закриття вакансіі',
     'vacancy.label.updated_at' => 'Час останньюго оновлення',
+    'vacancy.create.link' => 'Додати вакансію',
+
+    'form.button.add' => 'Додати',
+    'form.button.save' => 'Зберегти',
 );

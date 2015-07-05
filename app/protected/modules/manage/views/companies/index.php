@@ -15,7 +15,7 @@ $this->widget('bootstrap.widgets.TbGridView', [
         [
             'class' => CDataColumn::class,
             'value' => function(Company $object){
-                return CHtml::link(Yii::t('app', 'vacancy.create.link'),
+                return CHtml::link(Yii::t('main', 'vacancy.create.link'),
                     $this->createUrl("vacancies/create", ['id' => $object->id]));
             },
             'type' => 'raw'
