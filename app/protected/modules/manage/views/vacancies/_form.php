@@ -15,11 +15,9 @@
     )); /* @var $form TbActiveForm */
     ?>
 
-    <?= $form->labelEx($model, 'user_id') ?>
     <?= $form->dropDownListControlGroup($model, 'user_id', CompanyHelper::userList($company->id), [
         'class' => 'span8',
     ]) ?>
-    <?= $form->error($model, 'user_id') ?>
 
     <?= $form->textFieldControlGroup($model, 'name', ['size' => 200, 'class' => 'span8']) ?>
 
