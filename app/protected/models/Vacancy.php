@@ -17,7 +17,9 @@
  * @property string $created_by
  * @property string $updated_at
  * @property string $updated_by
+ *
  * @property Company $company
+ * @property User $user
  * @property CitiesList $city
  * @property Experience $experience
  * @property VacancyToCategory[] $categories
@@ -116,6 +118,11 @@ class Vacancy extends CActiveRecord
                 self::BELONGS_TO,
                 CitiesList::class,
                 'city_id',
+            ],
+            'user' => [
+                self::BELONGS_TO,
+                User::class,
+                'user_id',
             ],
             'experience' => [
                 self::BELONGS_TO,

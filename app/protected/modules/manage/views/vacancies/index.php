@@ -7,7 +7,7 @@
 
 $this->widget('bootstrap.widgets.TbGridView', [
     'dataProvider' => $dataProvider,
-    'filter' => $model,
+    'filter' => null,
     'columns' => [
         'id',
         'city.city_name',
@@ -17,9 +17,17 @@ $this->widget('bootstrap.widgets.TbGridView', [
             'value' => function(Vacancy $object){
                     return CHtml::link($object->company->name,'#');
             },
-            'type' => 'raw'
+            'type' => 'raw',
+            'header' => 'Company',
         ],
         'housing:boolean',
+        [
+            'class' => CDataColumn::class,
+            'value' => function(Vacancy $object){
+                return $object->user->first_name . " " . $object->user->phone;
+            },
+            'header' => 'Contact',
+        ],
         'updated_at',
         [
             'class' => CDataColumn::class,
@@ -28,7 +36,7 @@ $this->widget('bootstrap.widgets.TbGridView', [
                         "vacancies/update", 'id' => $object->id,
                     ]);
             },
-            'type' => 'raw'
+            'type' => 'raw',
         ],
     ],
 ]);
