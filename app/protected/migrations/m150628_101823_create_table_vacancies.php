@@ -8,7 +8,7 @@ class m150628_101823_create_table_vacancies extends CDbMigration
             'id' => 'pk',
             'name' => 'varchar(255) NOT NULL',
             'company_id' => 'int(11) NOT NULL',
-            'city_id' => 'int(11) NOT NULL',
+            'city_id' => 'char(5) NOT NULL',
             'user_id' => 'int(11) NOT NULL',
             'description' => 'text',
             'requirements' => 'text',

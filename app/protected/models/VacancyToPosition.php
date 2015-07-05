@@ -25,4 +25,13 @@ class VacancyToPosition extends CActiveRecord
             ['vacancy_id, position_id', 'numerical'],
         ];
     }
+
+    /**
+     * @inheritdoc
+     * @return VacancyToPosition
+     */
+    public static function model($modelName = __CLASS__)
+    {
+        return parent::model($modelName);
+    }
 }

@@ -15,6 +15,15 @@ class VacancyToCategory extends CActiveRecord
         return 'vacancy_to_category';
     }
 
+
+    /**
+     * @inheritdoc
+     */
+    public static function model($className=__CLASS__)
+    {
+        return parent::model($className);
+    }
+
     /**
      * @inheritdoc
      */
@@ -25,5 +34,4 @@ class VacancyToCategory extends CActiveRecord
             ['vacancy_id, category_id', 'numerical'],
         ];
     }
-
 }

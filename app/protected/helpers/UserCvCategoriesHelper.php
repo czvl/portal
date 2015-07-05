@@ -1,71 +1,21 @@
 <?php
 
-/**
- * Created by A.Belyakovskiy.
- * Date: 5/1/15
- * Time: 12:53 PM
- */
-class UserCvCategoriesHelper
+class UserCvCategoriesHelper extends CategoriesHelper
 {
-
     /**
-     * @param User $user
-     * @return string checkbox list
+     * @inheritdoc
      */
-    public static function checkBoxList(User $user)
+    static function attributeName()
     {
-
-        $list = CHtml::checkBoxList('categories', self::exists($user),
-            self::all(),
-            [
-                'template' => '{beginLabel}{input} {labelTitle}{endLabel}',
-                'separator' => '',
-            ]);
-
-        return $list;
+        return 'cvCategories';
     }
 
     /**
-     * Category ids bound for user
-     * @param User $user
-     * @return array
+     * @return string field name
      */
-    public static function exists(User $user)
+    static function fieldName()
     {
-        $checked = [];
-        foreach ($user->cvCategories as $category) {
-            array_push($checked, $category->id);
-        }
-
-        return $checked;
-    }
-
-    /**
-     * Key-value pairs of all categories
-     * @return array [category_id => category_name]
-     */
-    public static function all()
-    {
-        static $result;
-
-        if(!is_null($result)) {
-            return $result;
-        }
-
-        $command = Yii::app()->db;
-        /* @var CDbConnection $command */
-        $rows = $command->createCommand()
-            ->select('id, name')
-            ->from(CvCategories::model()->tableName())
-            ->queryAll();
-
-        $result = [];
-        foreach ($rows as $row) {
-            $result[$row['id']] = $row['name'];
-        }
-        asort($result);
-
-        return $result;
+        return 'categories';
     }
 
 }

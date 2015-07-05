@@ -42,6 +42,20 @@ class Company extends CActiveRecord
     }
 
     /**
+     * @inheritdoc
+     */
+    public function relations()
+    {
+        return [
+            'users' => [
+                self::MANY_MANY,
+                User::class,
+                'user_to_company(company_id, user_id)',
+            ]
+        ];
+    }
+
+    /**
      * @return CActiveDataProvider
      */
     public function search()

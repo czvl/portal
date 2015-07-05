@@ -2,6 +2,17 @@
 
 class CompaniesController extends Controller
 {
+
+    /**
+     * @inheritdoc
+     */
+    public function filters()
+    {
+        return [
+            'accessControl'
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -10,8 +21,7 @@ class CompaniesController extends Controller
         return [
             [
                 'allow',
-                'actions' => ['index'],
-                'roles' => [User::ROLE_MANAGER, User::ROLE_ADMIN]
+                'roles' => [User::ROLE_VOLONT]
             ],
             [
                 'deny',

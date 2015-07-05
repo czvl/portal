@@ -16,9 +16,16 @@
  * @property string $created_by
  * @property string $updated_at
  * @property string $updated_by
+ * @property Company $company
+ * @property CitiesList $city
+ * @property VacancyToCategory[] $categories
+ * @property VacancyToEducation[] $educations
  */
 class Vacancy extends CActiveRecord
 {
+
+    const STATUS_OPEN = 1;
+    const STATUS_CLOSED = 2;
 
     /**
      * @inheritdoc
@@ -29,12 +36,20 @@ class Vacancy extends CActiveRecord
     }
 
     /**
+     * @return Vacancy
+     */
+    public static function model($className = __CLASS__)
+    {
+        return parent::model($className);
+    }
+
+    /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            ['name, company_id, city_id, user_id, status, housing', 'required'],
+            ['name, company_id, city_id, user_id, status', 'required'],
             ['company_id, city_id, user_id, status, housing', 'numerical'],
             ['name', 'length', 'max' => 255],
             ['description, requirements', 'length', 'max' => 5000]
@@ -55,6 +70,58 @@ class Vacancy extends CActiveRecord
         }
 
         return parent::beforeSave();
+    }
+
+    /**
+     * @return CActiveDataProvider
+     */
+    public function search()
+    {
+        $criteria = new CDbCriteria;
+
+        $criteria->compare('id', $this->id);
+        $criteria->compare('name', $this->name, true);
+        $criteria->compare('description', $this->description, true);
+        $criteria->compare('created_at', $this->created_at, true);
+        $criteria->order = 'created_at DESC';
+
+        return new CActiveDataProvider($this, array(
+            'criteria' => $criteria,
+        ));
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function relations()
+    {
+        return [
+            'company' => [
+                self::BELONGS_TO,
+                Company::class,
+                'company_id',
+            ],
+            'city' => [
+                self::BELONGS_TO,
+                CitiesList::class,
+                'city_id',
+            ],
+            'categories' => [
+                self::MANY_MANY,
+                CvCategories::class,
+                'vacancy_to_category(vacancy_id, category_id)',
+            ],
+            'educations' => [
+                self::MANY_MANY,
+                Education::class,
+                'vacancy_to_education(vacancy_id, education_id)',
+            ],
+            'positions' => [
+                self::MANY_MANY,
+                CvPositions::class,
+                'vacancy_to_position(vacancy_id, position_id)',
+            ],
+        ];
     }
 
 }

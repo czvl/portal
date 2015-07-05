@@ -3,6 +3,16 @@
 class EmployerController extends Controller
 {
 
+    /**
+     * @inheritdoc
+     */
+    public function filters()
+    {
+        return [
+            'accessControl'
+        ];
+    }
+
     public function actionIndex()
     {
         $this->render('index', [
