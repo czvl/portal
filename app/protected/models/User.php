@@ -97,7 +97,7 @@ class User extends CActiveRecord
             ['password_new, password_repeat', 'safe', 'on' => 'update'],
             
             ['status', 'numerical', 'integerOnly' => true],
-            ['username, email, role, first_name, last_name, additional_contact', 'length', 'max' => 255],
+            ['username, email, role, first_name, last_name, additional_contact, position', 'length', 'max' => 255],
             ['signin_time, last_login, email_activated', 'safe'],
             ['username, role', 'safe', 'on' => 'search'],
             ['phone', 'match', 'pattern'=>'/^([+]?[0-9 \)\(\-]+)$/']
