@@ -105,10 +105,26 @@ class ProfilesController extends Controller {
 			'order'     => 'added_time DESC'
 		));
 
+        $criteria = new CDbCriteria();
+        $criteria->with = [
+            'positions' => [
+                'together' => true
+            ],
+        ];
+        $criteria->addInCondition('positions.id', $model->positionsIds);
+        $criteria->addInCondition('city_id', $model->jobLocationsIds);
+
+        $vacanciesDataProvider = new CActiveDataProvider('Vacancy', [
+                'criteria' => $criteria,
+            ]
+        );
+        $vacanciesDataProvider->sort = false;
+
 		$this->render('view', array(
 			'model'    => $model,
 			'status'   => $status,
-			'statuses' => $statuses
+			'statuses' => $statuses,
+            'vacanciesDataProvider' => $vacanciesDataProvider,
 		));
 	}
 

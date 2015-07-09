@@ -1,6 +1,9 @@
 <?php
-/* @var $this ProfilesController */
-/* @var $model CvList */
+/* @var $this ProfilesController
+ * @var $model CvList
+ * @var $vacanciesDataProvider CDataProvider
+ * @var $this CController
+ */
 ?>
 
 <?php
@@ -167,3 +170,50 @@ $this->widget('bootstrap.widgets.TbDetailView', array(
         )
     ),
 ));
+?>
+
+<?php echo TbHtml::lead('Можливі вакансії:'); ?>
+
+
+<?php
+$this->widget('bootstrap.widgets.TbGridView', [
+    'dataProvider' => $vacanciesDataProvider,
+    'filter' => null,
+    'columns' => [
+        'id',
+        'name',
+        'city.city_name',
+        [
+            'class' => CDataColumn::class,
+            'value' => function(Vacancy $object){
+                return $object->company->name;
+            },
+            'header' => Yii::t('main', 'vacancy.label.company'),
+        ],
+
+        [
+            'class' => CDataColumn::class,
+            'value' => function(Vacancy $object){
+                return $object->user->first_name . " " . $object->user->phone;
+            },
+            'header' => Yii::t('main', 'vacancy.label.user'),
+        ],
+        [
+            'name' => 'close_time',
+            'value' => function(Vacancy $vacancy) {
+                return Yii::app()->dateFormatter
+                    ->formatDateTime($vacancy->close_time, "long", false);
+            }
+        ],
+        [
+            'class' => CDataColumn::class,
+            'value' => function(Vacancy $object){
+                return CHtml::link(TbHtml::icon(TbHtml::ICON_EDIT), [
+                    "vacancies/update", 'id' => $object->id,
+                ]);
+            },
+            'type' => 'raw',
+        ],
+    ],
+]);
+
