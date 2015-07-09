@@ -27,11 +27,11 @@
         <h2>Данные о компании</h2>
 
         <?= $form->label($model, 'name'); ?>
-        <?= $form->textField($model, 'name') ?>
+        <?= $form->textField($model, 'name', ['class' => 'span8']) ?>
         <?= $form->error($model, 'name'); ?>
 
         <?= $form->label($model, 'address'); ?>
-        <?= $form->textArea($model, 'address') ?>
+        <?= $form->textArea($model, 'address', ['class' => 'span8']) ?>
         <?= $form->error($model, 'address'); ?>
 
         <h2>Данные администратора</h2>
@@ -41,8 +41,9 @@
         $this->widget('CMaskedTextField', [
             'model' => $model,
             'attribute' => 'phone',
-            'mask' => '+380 (99) 999-99-99',
+            'mask' => '+38 (999) 999-99-99',
             'placeholder' => '*',
+            'class' => 'span4',
         ]);
         echo $form->error($model, 'phone');
         ?>
@@ -50,36 +51,42 @@
 
 
         <?= $form->label($model, 'first_name'); ?>
-        <?= $form->textField($model, 'first_name') ?>
+        <?= $form->textField($model, 'first_name', ['class' => 'span4']) ?>
         <?= $form->error($model, 'first_name'); ?>
 
         <?= $form->label($model, 'last_name'); ?>
-        <?= $form->textField($model, 'last_name') ?>
+        <?= $form->textField($model, 'last_name', ['class' => 'span4']) ?>
         <?= $form->error($model, 'last_name'); ?>
 
         <?= $form->label($model, 'position'); ?>
-        <?= $form->textField($model, 'position') ?>
+        <?= $form->textField($model, 'position', ['class' => 'span4']) ?>
         <?= $form->error($model, 'position'); ?>
 
         <?= $form->label($model, 'email'); ?>
-        <?= $form->textField($model, 'email') ?>
+        <?= $form->textField($model, 'email', ['class' => 'span4']) ?>
         <?= $form->error($model, 'email'); ?>
 
         <?= $form->label($model, 'username'); ?>
-        <?= $form->textField($model, 'username') ?>
+        <?= $form->textField($model, 'username', ['class' => 'span4']) ?>
         <?= $form->error($model, 'username'); ?>
 
         <?= $form->label($model, 'password'); ?>
-        <?= $form->passwordField($model, 'password') ?>
+        <?= $form->passwordField($model, 'password', ['class' => 'span4']) ?>
         <?= $form->error($model, 'password'); ?>
 
         <?= $form->label($model, 'repeat_password'); ?>
-        <?= $form->passwordField($model, 'repeat_password') ?>
+        <?= $form->passwordField($model, 'repeat_password', ['class' => 'span4']) ?>
         <?= $form->error($model, 'repeat_password'); ?>
 
-        <p>
-            <?= CHtml::submitButton() ?>
-        </p>
+        <div class="form-actions">
+            <?php
+            echo TbHtml::submitButton(Yii::t('main', 'form.button.add'),
+                [
+                    'color' => TbHtml::BUTTON_COLOR_PRIMARY,
+                    'size' => TbHtml::BUTTON_SIZE_LARGE,
+                ]);
+            ?>
+        </div>
 
         <?php
         $this->endWidget();

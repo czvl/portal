@@ -34,6 +34,8 @@ return array(
     'profiles.status.statistic' => 'Статистика анкет',
     'profiles.status.statistic.period' => 'за вибраний період',
     'company.name' => 'Назва компаніі',
+    'company.register.success' => 'Ви успішно зареєстрували Вашу компанію. Будь ласка перевірте ваш email тa перейдіть за посиланням.',
+    'company.register.error' => 'У процессі реєстрації виникла несподівана помилка.',
     'company.address' => 'Адреса офісу (якщо їх децілька, то вкажіть центральний)',
     'user.position' => 'Посада',
 
@@ -52,6 +54,8 @@ return array(
     'vacancy.label.close_time' => 'Час закриття вакансіі',
     'vacancy.label.updated_at' => 'Час останньюго оновлення',
     'vacancy.create.link' => 'Додати вакансію',
+    'vacancy.saved.success' => 'Дані про вакансію успішно збережені',
+    'vacancy.created.success' => 'Вакансія успішно додана',
 
     'form.button.add' => 'Додати',
     'form.button.save' => 'Зберегти',

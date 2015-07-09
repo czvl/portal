@@ -8,12 +8,17 @@
 ?>
 
 <div class="form">
+
+
+
     <?php
     $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         'id' => 'vacancy-form',
         'enableAjaxValidation' => true,
     )); /* @var $form TbActiveForm */
     ?>
+
+    <?= $form->errorSummary($model) ?>
 
     <?= $form->dropDownListControlGroup($model, 'user_id', CompanyHelper::userList($company->id), [
         'class' => 'span8',

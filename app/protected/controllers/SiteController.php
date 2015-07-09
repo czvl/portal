@@ -82,11 +82,11 @@ class SiteController extends Controller
             $model->attributes = $_POST['RegisterCompanyForm'];
             if($model->register())
             {
-                Yii::app()->user->setFlash('success', 'Successfully registered. Please, check you email');
+                Yii::app()->user->setFlash('success', Yii::t('main', 'company.register.success'));
                 $this->redirect('/manage/login');
             }
 
-            Yii::app()->user->setFlash('error', 'Unexpected error during registration');
+            Yii::app()->user->setFlash('error', Yii::t('main', 'company.register.error'));
 
         }
 
