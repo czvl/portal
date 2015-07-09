@@ -17,7 +17,9 @@
  * @property string $signin_time
  * @property string $last_login
  * @property integer $status
- * 
+ * @property string $hash
+ * @property string $email_activated
+ *
  * The followings are the available model relations:
  * @property CvList[] $cvLists
  * @property CvStatuses[] $cvStatuses
@@ -33,6 +35,9 @@ class User extends CActiveRecord
     const ROLE_EMPL = 'employer';
     const ROLE_VOLONT = 'volunteer';
     const ROLE_APPLIC = 'applicant';
+
+    const STATUS_ACTIVE = 1;
+    const STATUS_DISABLED = 0;
 
     public $password_repeat = '';
     public $password_new = '';
@@ -83,7 +88,8 @@ class User extends CActiveRecord
         return array(
             ['username', 'unique'],
             ['username, role, email', 'required'],
-            ['password, password_repeat, phone', 'length', 'max' => 32],
+            ['email', 'email'],
+            ['password, password_repeat, phone, hash', 'length', 'max' => 32],
             ['password, password_repeat', 'required', 'on' => 'create'],
             ['password_repeat', 'compare', 'compareAttribute' => 'password', 'on' => 'create'],
 
@@ -92,7 +98,7 @@ class User extends CActiveRecord
             
             ['status', 'numerical', 'integerOnly' => true],
             ['username, email, role, first_name, last_name, additional_contact', 'length', 'max' => 255],
-            ['signin_time, last_login', 'safe'],
+            ['signin_time, last_login, email_activated', 'safe'],
             ['username, role', 'safe', 'on' => 'search'],
             ['phone', 'match', 'pattern'=>'/^([+]?[0-9 \)\(\-]+)$/']
         );
@@ -118,22 +124,22 @@ class User extends CActiveRecord
     /**
      * @inheritdoc
      */
-    protected function beforeSave()
-    {
-        if (parent::beforeSave()) {
-            $userSalt = base64_encode(mcrypt_create_iv(30));
-            if ($this->isNewRecord) {
-                $this->signin_time = new CDbExpression('NOW()');
-                $this->password = crypt($this->password, $userSalt);
-            }
-            if ($this->password_new) {
-                $this->password = crypt($this->password_new, $userSalt);
-            }
-            return true;
-        } else {
-            return false;
-        }
-    }
+//    protected function beforeSave()
+//    {
+//        if (parent::beforeSave()) {
+//            $userSalt = base64_encode(mcrypt_create_iv(30));
+//            if ($this->isNewRecord) {
+//                $this->signin_time = new CDbExpression('NOW()');
+//                $this->password = crypt($this->password, $userSalt);
+//            }
+//            if ($this->password_new) {
+//                $this->password = crypt($this->password_new, $userSalt);
+//            }
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
 
     /**
      * @inheritdoc

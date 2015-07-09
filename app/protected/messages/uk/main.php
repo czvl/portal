@@ -38,6 +38,8 @@ return array(
     'company.register.error' => 'У процессі реєстрації виникла несподівана помилка.',
     'company.address' => 'Адреса офісу (якщо їх децілька, то вкажіть центральний)',
     'user.position' => 'Посада',
+    'user.email.confirm.body' => 'Щоб підтвердити Ваш email, будь-ласка перейдіть за посиланням :link',
+    'user.email.confirm.subject' => 'Підтвердження email',
 
     'vacancy.label.name' => 'Назва посади',
     'vacancy.label.user' => 'Контактна особа',

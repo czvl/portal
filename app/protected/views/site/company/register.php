@@ -43,7 +43,6 @@
             'attribute' => 'phone',
             'mask' => '+38 (999) 999-99-99',
             'placeholder' => '*',
-            'class' => 'span4',
         ]);
         echo $form->error($model, 'phone');
         ?>

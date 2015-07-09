@@ -13,6 +13,8 @@ class UserIdentity extends CUserIdentity
         }
         if (($user === null) || ($user->password !== crypt($this->password, $user->password))) {
             $this->errorCode = self::ERROR_USERNAME_INVALID;
+        } elseif($user->status != User::STATUS_ACTIVE) {
+            $this->errorCode = self::ERROR_UNKNOWN_IDENTITY;
         } else {
             $this->_id = $user->id;
             

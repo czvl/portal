@@ -63,11 +63,15 @@ class RegisterCompanyForm extends CFormModel
         $user->password = $this->password;
         $user->username = $this->username;
         $user->role = User::ROLE_EMPL;
+        $user->status = User::STATUS_DISABLED;
+        $user->hash = md5(microtime(true).rand());
 
         if(!$user->save()) {
             $this->addError('username', 'Can`t create user '. serialize($user->getErrors()));
             return false;
         }
+
+        UserHelper::sendEmailConfirmation($user);
 
         $company = new Company();
         $company->name = $this->name;
