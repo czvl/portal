@@ -13,6 +13,24 @@ class EmployerController extends Controller
         ];
     }
 
+
+    /**
+     * @inheritdoc
+     */
+    public function accessRules()
+    {
+        return [
+            [
+                'allow',
+                'roles' => [User::ROLE_EMPL]
+            ],
+            [
+                'deny',
+                'users' => ['*'],
+            ],
+        ];
+    }
+
     public function actionIndex()
     {
         $model = new Vacancy();
