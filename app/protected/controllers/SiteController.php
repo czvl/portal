@@ -94,6 +94,31 @@ class SiteController extends Controller
     }
 
     /**
+     * Email confirmation
+     * @param $hash
+     */
+    public function actionConfirm_email($hash)
+    {
+        if(!empty($hash)) {
+            $user = User::model()->findByAttributes([
+                'hash' => $hash,
+            ]);
+            if(!empty($user)) {
+                $user->hash = null;
+                $user->status = User::STATUS_ACTIVE;
+                $user->save();
+
+                Yii::app()->user->setFlash('success',
+                    Yii::t('main', 'user.email.confirm.success'));
+                $this->redirect('/manage/login');
+            }
+
+            Yii::app()->user->setFlash('success',
+                Yii::t('main', 'user.email.confirm.error'));
+        }
+    }
+
+    /**
      * This is the action to handle external exceptions.
      */
     public function actionError()

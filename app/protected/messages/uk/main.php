@@ -40,6 +40,9 @@ return array(
     'user.position' => 'Посада',
     'user.email.confirm.body' => 'Щоб підтвердити Ваш email, будь-ласка перейдіть за посиланням :link',
     'user.email.confirm.subject' => 'Підтвердження email',
+    'user.email.confirm.success' => 'Email підтверджено. Вм можете увійти у систему.',
+    'user.email.confirm.error' => 'Помилка при підтвердженні email. Можливо email вже був підтверджений раніше.',
+    'user.edit.success' => 'Ваші дані збережені',
 
     'vacancy.label.name' => 'Назва посади',
     'vacancy.label.user' => 'Контактна особа',
