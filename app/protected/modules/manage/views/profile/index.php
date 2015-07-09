@@ -19,7 +19,7 @@
                     $this->widget('CMaskedTextField', array(
                         'model' => $model,
                         'attribute' => 'phone',
-                        'mask' => '+38 (099) 999-99-99',
+                        'mask' => UserHelper::PHONE_MASK,
                         'placeholder' => '*',
                     ));
                     ?>

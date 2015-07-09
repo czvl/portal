@@ -2,6 +2,8 @@
 
 class UserHelper
 {
+    const PHONE_MASK = '+38 (999) 999-99-99';
+
     public static function sendEmailConfirmation(User $user)
     {
         if(empty($user->hash) || !empty($user->email_activated)) {

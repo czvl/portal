@@ -41,7 +41,7 @@
         $this->widget('CMaskedTextField', [
             'model' => $model,
             'attribute' => 'phone',
-            'mask' => '+38 (999) 999-99-99',
+            'mask' => UserHelper::PHONE_MASK,
             'placeholder' => '*',
         ]);
         echo $form->error($model, 'phone');
