@@ -6,20 +6,25 @@ class UserHelper
 
     public static function sendEmailConfirmation(User $user)
     {
-        if(empty($user->hash) || !empty($user->email_activated)) {
+        if (empty($user->hash) || !empty($user->email_activated)) {
             return false;
         }
 
-        $message = new YiiMailMessage;
-        $message->setBody(Yii::t('main', 'user.email.confirm.body', [
+        $body = Yii::t('main', 'user.email.confirm.body', [
             ':link' => Yii::app()->createAbsoluteUrl('/site/confirm_email', [
                 'hash' => $user->hash
             ]),
-        ]), 'text/html');
-        $message->subject = Yii::t('main', 'user.email.confirm.subject');
-        $message->addTo($user->email);
-        $message->from = Yii::app()->params['noreply@czvl.org.ua'];
-        Yii::app()->mail->send($message);
+        ]);
+        $to = $user->first_name
+            . ' ' . $user->last_name
+            . ' <' . $user->email . '>';
+        $subject = Yii::t('main', 'user.email.confirm.subject');
+
+        $headers = "MIME-Version: 1.0\r\n";
+        $headers .= "Content-type: text/html; charset=utf8\r\n";
+        $headers .= "From: CZVL.ORG.UA <noreply@czvl.org.ua>\r\n";
+
+        mail($to, $subject, $body, $headers);
 
         return true;
 
