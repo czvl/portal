@@ -3,7 +3,11 @@
  * @var $model Company
  * @var $this CompaniesController
  */
+?>
 
+    <h1><?= Yii::t('main', 'companies')?></h1>
+
+<?php
 $this->widget('bootstrap.widgets.TbGridView', [
     'dataProvider' => $model->search(),
     'filter' => $model,

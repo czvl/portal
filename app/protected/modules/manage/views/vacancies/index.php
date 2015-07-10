@@ -4,7 +4,11 @@
  * @var $dataProvider CDataProvider
  * @var $this VacanciesController
  */
+?>
 
+    <h1><?= Yii::t('main', 'vacancy.list')?></h1>
+
+<?php
 $this->widget('bootstrap.widgets.TbGridView', [
     'dataProvider' => $dataProvider,
     'filter' => null,

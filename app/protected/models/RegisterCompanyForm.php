@@ -40,7 +40,7 @@ class RegisterCompanyForm extends CFormModel
     {
         $user = User::model()->find('username=:username', [':username' => $this->username]);
         if($user) {
-            $this->addError('username', 'Username already used');
+            $this->addError('username', Yii::t('main', 'user.username.used'));
         }
     }
 
@@ -48,7 +48,7 @@ class RegisterCompanyForm extends CFormModel
     {
         $user = User::model()->find('email=:email', [':email' => $this->email]);
         if($user) {
-            $this->addError('email', 'Email already used');
+            $this->addError('email', Yii::t('main', 'user.email.used'));
         }
     }
 
