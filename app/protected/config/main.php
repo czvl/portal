@@ -17,7 +17,7 @@ return array(
     'import' => array(
         'application.models.*',
         'application.components.*',
-        'application.helpers.*',
+        'application.components.helpers.*',
         'application.extensions.yii-mail.YiiMailMessage',
         'bootstrap.helpers.TbHtml',
         'bootstrap.helpers.TbArray',
@@ -73,17 +73,6 @@ return array(
             ),
         ),
         'db' => require($dbFileName),
-        'mail' => array(
-            'class' => 'application.extensions.yii-mail.YiiMail',
-            'transportType' => 'php',
-            'viewPath' => 'application.views.mail',
-            'logging' => true,
-            'dryRun' => false
-        ),
-        'image' => array(
-            'class' => 'application.extensions.image.CImageComponent',
-            'driver' => 'GD',
-        ),
         'clientScript' => array(
             'coreScriptPosition' => CClientScript::POS_END,
             'packages' => array(
@@ -132,54 +121,6 @@ return array(
 //                ),
             ),
         ),
-//        'cache' => array(
-//            'class' => 'CFileCache',
-//        ),
-//        'loid' => array(
-//            'class' => 'ext.lightopenid.loid',
-//        ),
-//        'eauth' => array(
-//            'class' => 'ext.eauth.EAuth',
-//            'popup' => true, // Use the popup window instead of redirecting.
-//            'services' => array(// You can change the providers and their classes.
-//                /* 'google' => array(
-//                  'class' => 'GoogleOpenIDService',
-//                  ), */
-//                'google-oauth' => array(
-//                    'class' => 'GoogleOAuthService',
-//                    'client_id' => '180893836341-vcn01hiq0f8okbbgfefs1fpg8nd7hu61.apps.googleusercontent.com',
-//                    'client_secret' => 'dIUp4JQarpWJtLd2mMEdr4rn',
-//                    'title' => 'Google (OAuth2)',
-//                ),
-//                'yandex' => array(
-//                    'class' => 'YandexOpenIDService',
-//                ),
-//                /*
-//                  'twitter' => array(
-//                  'class' => 'TwitterOAuthService',
-//                  'key' => '...',
-//                  'secret' => '...',
-//                  ),
-//                 */
-//                'facebook' => array(
-//                    'class' => 'FacebookOAuthService',
-//                    'client_id' => '1431396713804066',
-//                    'client_secret' => 'b56d111869e1dfc2aca8dc04c99da992',
-//                ),
-//            /*
-//              'vkontakte' => array(
-//              'class' => 'VKontakteOAuthService',
-//              'client_id' => '...',
-//              'client_secret' => '...',
-//              ),
-//              'mailru' => array(
-//              'class' => 'MailruOAuthService',
-//              'client_id' => '...',
-//              'client_secret' => '...',
-//              ),
-//             */
-//            ),
-//        ),
     ),
     'params' => array(
         'adminEmail' => 'shvaykovska@gmail.com',
