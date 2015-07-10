@@ -232,10 +232,7 @@ $listView = $this->widget('bootstrap.widgets.TbListView', array(
 
 <?php
 Yii::app()->clientScript->registerCoreScript('cookie');;
-Yii::app()->clientScript->registerScriptFile(
-    Yii::app()->assetManager->publish(
-        Yii::getPathOfAlias('ext.profiles-export.js').'/export.js'
-    ),
+Yii::app()->clientScript->registerScriptFile('/js/profile-export.js',
     CClientScript::POS_END
 );
 ?>
