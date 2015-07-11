@@ -78,6 +78,7 @@ class Company extends CActiveRecord
         $criteria->compare('name', $this->name, true);
         $criteria->compare('address', $this->address, true);
         $criteria->compare('site_url', $this->site_url, true);
+        $criteria->order = 'id DESC';
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
