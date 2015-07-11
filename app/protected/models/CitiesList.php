@@ -57,8 +57,8 @@ class CitiesList extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'city_index' => 'City Index',
-			'city_name' => 'City Name',
+			'city_index' => Yii::t('main', 'city.index'),
+			'city_name' =>  Yii::t('main', 'city.name'),
 		);
 	}
 

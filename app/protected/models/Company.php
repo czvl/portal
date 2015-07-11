@@ -42,6 +42,17 @@ class Company extends CActiveRecord
         return parent::model($className);
     }
 
+    public function attributeLabels()
+    {
+        return [
+            'name' => Yii::t('main', 'company.name'),
+            'address' => Yii::t('main', 'company.address'),
+            'site_url' => Yii::t('main', 'company.site_url'),
+            'created_at' => Yii::t('main', 'company.created_at'),
+            'updated_at' => Yii::t('main', 'company.updated_at'),
+        ];
+    }
+
     /**
      * @inheritdoc
      */

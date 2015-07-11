@@ -43,4 +43,22 @@ class CompaniesController extends Controller
         ]);
     }
 
+    public function actionView($id)
+    {
+        $company = Company::model()->findByPk($id);
+        if(!$company) {
+            throw new CHttpException(404, 'Company not found');
+        }
+
+        $usersDataProvider = new CActiveDataProvider(User::class);
+        $usersDataProvider->setData($company->users);
+        $usersDataProvider->sort = false;
+
+
+        $this->render('view', [
+            'company' => $company,
+            'usersDataProvider' => $usersDataProvider,
+        ]);
+    }
+
 }

@@ -19,7 +19,9 @@ $this->widget('bootstrap.widgets.TbGridView', [
         [
             'class' => CDataColumn::class,
             'value' => function(Vacancy $object){
-                    return CHtml::link($object->company->name,'#');
+                    return CHtml::link($object->company->name, [
+                        'companies/view', 'id' => $object->company_id
+                    ]);
             },
             'type' => 'raw',
             'header' => Yii::t('main', 'vacancy.label.company'),
@@ -46,10 +48,18 @@ $this->widget('bootstrap.widgets.TbGridView', [
         ],
         [
             'class' => CDataColumn::class,
-            'value' => function(Vacancy $object){
-                    return CHtml::link(TbHtml::icon(TbHtml::ICON_EDIT), [
-                        "vacancies/update", 'id' => $object->id,
+            'value' => function (Vacancy $object) {
+                return
+                    CHtml::link(TbHtml::icon(TbHtml::ICON_EYE_OPEN), [
+                        "vacancies/view",
+                        'id' => $object->id,
+                    ])
+                    . ' ' .
+                    CHtml::link(TbHtml::icon(TbHtml::ICON_EDIT), [
+                        "vacancies/update",
+                        'id' => $object->id,
                     ]);
+
             },
             'type' => 'raw',
         ],

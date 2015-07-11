@@ -49,10 +49,7 @@ class VacanciesController extends Controller
 
     public function actionUpdate($id)
     {
-        $vacancy = Vacancy::model()->findByPk($id);
-        if(empty($vacancy)) {
-            throw new CHttpException(404, 'Vacancy not found');
-        }
+        $vacancy = $this->getVacancy($id);
 
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'vacancy-form') {
             echo CActiveForm::validate($vacancy);
@@ -109,6 +106,23 @@ class VacanciesController extends Controller
             'company' => $company,
             'vacancy' => $vacancy
         ]);
+    }
+
+    public function actionView($id)
+    {
+        $this->render('view', [
+            'model' => $this->getVacancy($id),
+        ]);
+    }
+
+    private function getVacancy($id)
+    {
+        $vacancy = Vacancy::model()->findByPk($id);
+        if(empty($vacancy)) {
+            throw new CHttpException(404, 'Vacancy not found');
+        }
+
+        return $vacancy;
     }
 
 }

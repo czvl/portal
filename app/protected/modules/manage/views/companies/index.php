@@ -23,6 +23,18 @@ $this->widget('bootstrap.widgets.TbGridView', [
                     $this->createUrl("vacancies/create", ['id' => $object->id]));
             },
             'type' => 'raw'
-        ]
+        ],
+        [
+            'class' => CDataColumn::class,
+            'value' => function (Company $object) {
+                return
+                    CHtml::link(TbHtml::icon(TbHtml::ICON_EYE_OPEN), [
+                        "companies/view",
+                        'id' => $object->id,
+                    ]);
+
+            },
+            'type' => 'raw',
+        ],
     ]
 ]);

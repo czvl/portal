@@ -159,6 +159,8 @@ class User extends CActiveRecord
             'signin_time' => Yii::t('main', 'Registration time'),
             'last_login' => Yii::t('main', 'Last login at'), 
             'status' => Yii::t('main', 'Status'), 
+            'firstLastName' => Yii::t('main', 'user.firstLastName'),
+            'position' => Yii::t('main', 'user.position'),
         );
     }
 

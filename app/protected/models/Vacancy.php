@@ -22,8 +22,9 @@
  * @property User $user
  * @property CitiesList $city
  * @property Experience $experience
- * @property VacancyToCategory[] $categories
- * @property VacancyToEducation[] $educations
+ * @property CvCategories[] $categories
+ * @property Education[] $educations
+ * @property CvPositions[] $positions
  */
 class Vacancy extends CActiveRecord
 {
@@ -80,6 +81,10 @@ class Vacancy extends CActiveRecord
         if ($this->scenario = 'create') {
             $this->created_at = $now;
             $this->close_time = new CDbExpression('NOW() + INTERVAL 14 DAY');
+        }
+
+        if($this->status == self::STATUS_CLOSED) {
+            $this->close_time = null;
         }
 
         return parent::beforeSave();

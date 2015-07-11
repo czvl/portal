@@ -7,7 +7,7 @@
 
 ?>
 
-<h1 xmlns="http://www.w3.org/1999/html"><?=  $model->isNewRecord ? Yii::t('main', 'vacancy.title.create')
+<h1><?=  $model->isNewRecord ? Yii::t('main', 'vacancy.title.create')
         : Yii::t('main', 'vacancy.title.edit'); ?></h1>
 
 
