@@ -3,6 +3,14 @@
 class VacancyHelper
 {
 
+    public static function statuses()
+    {
+        return [
+            Vacancy::STATUS_OPEN => Yii::t('main', 'vacancy.status.open'),
+            Vacancy::STATUS_CLOSED => Yii::t('main', 'vacancy.status.closed'),
+        ];
+    }
+
     public static function saveAdditionalFields($vacancyId, $data)
     {
         self::deleteAllCategories($vacancyId);

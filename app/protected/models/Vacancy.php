@@ -123,6 +123,7 @@ class Vacancy extends CActiveRecord
             'positions' => Yii::t('main', 'vacancy.label.positions'),
             'close_time' => Yii::t('main', 'vacancy.label.close_time'),
             'updated_at' => Yii::t('main', 'vacancy.label.updated_at'),
+            'created_at' => Yii::t('main', 'vacancy.label.created_at'),
         ];
     }
 

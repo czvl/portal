@@ -7,9 +7,11 @@
 
 ?>
 
+<h1 xmlns="http://www.w3.org/1999/html"><?=  $model->isNewRecord ? Yii::t('main', 'vacancy.title.create')
+        : Yii::t('main', 'vacancy.title.edit'); ?></h1>
+
+
 <div class="form">
-
-
 
     <?php
     $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
@@ -17,16 +19,28 @@
         'enableAjaxValidation' => true,
     )); /* @var $form TbActiveForm */
     ?>
+    <div class="alert alert-block">
+        <?= Yii::t('main', 'company') . ': ' . $model->company->name ?>
+
+        <?php if (!$model->isNewRecord): ?>
+            [ <?= $model->getAttributeLabel('created_at') . ': ' . $model->created_at ?> ]
+            [ <?= $model->getAttributeLabel('updated_at') . ': ' . $model->updated_at ?>]
+        <?php endif; ?>
+
+    </div>
 
     <?= $form->errorSummary($model) ?>
+
+    <?= $form->dropDownListControlGroup($model, 'status', VacancyHelper::statuses(),['class' => 'span4']) ?>
+
+    <?= $form->textFieldControlGroup($model, 'name', ['size' => 200, 'class' => 'span8']) ?>
 
     <?= $form->dropDownListControlGroup($model, 'user_id', CompanyHelper::userList($company->id), [
         'class' => 'span8',
     ]) ?>
 
-    <?= $form->textFieldControlGroup($model, 'name', ['size' => 200, 'class' => 'span8']) ?>
-
     <?= $form->dropDownListControlGroup($model, 'city_id', UserCitiesHelper::all()) ?>
+
 
     <?= $form->textAreaControlGroup($model, 'description', ['rows' => 8, 'class' => 'span8']) ?>
 

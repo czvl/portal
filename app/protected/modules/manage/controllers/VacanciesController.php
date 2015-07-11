@@ -65,7 +65,7 @@ class VacanciesController extends Controller
 
                 VacancyHelper::saveAdditionalFields($id, $_POST);
 
-                Yii::app()->user->setFlash('success', 'vacancy.saved.success');
+                Yii::app()->user->setFlash('success', Yii::t('main', 'vacancy.saved.success'));
                 $this->redirect($this->createUrl('vacancies/index'));
             }
         }
@@ -84,6 +84,7 @@ class VacanciesController extends Controller
         if(!$company) {
             throw new CHttpException(404, 'Company not found');
         }
+        $vacancy->company = $company;
 
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'vacancy-form') {
             echo CActiveForm::validate($vacancy);
