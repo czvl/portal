@@ -207,8 +207,19 @@ $this->widget('bootstrap.widgets.TbGridView', [
         ],
         [
             'class' => CDataColumn::class,
+            'value' => function(Vacancy $vacancy){
+                return VacancyHelper::statusName($vacancy);
+            },
+            'header' => Yii::t('main', 'vacancy.label.status'),
+        ],
+        [
+            'class' => CDataColumn::class,
             'value' => function(Vacancy $object){
-                return CHtml::link(TbHtml::icon(TbHtml::ICON_EDIT), [
+                return
+                    CHtml::link(TbHtml::icon(TbHtml::ICON_EYE_OPEN), [
+                        "vacancies/view", 'id' => $object->id,
+                    ]) . ' ' .
+                    CHtml::link(TbHtml::icon(TbHtml::ICON_EDIT), [
                     "vacancies/update", 'id' => $object->id,
                 ]);
             },
