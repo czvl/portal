@@ -8,33 +8,32 @@
 
 <section id="services" class="single-page">
     <div class="container">
-        <h1>Добавить компанию</h1>
+        <h1>Додати компанію</h1>
 
         <?php
-        $form = $this->beginWidget('system.web.widgets.CActiveForm', array(
+        $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
             'id' => 'company-form',
             'enableAjaxValidation' => true,
             'enableClientValidation' => true,
             'clientOptions' => array(
                 'validateOnSubmit' => true,
             ),
-        )); /* @var $form CActiveForm */
+        ));  /* @var $form TbActiveForm */
         ?>
 
         <?= $form->errorSummary($model); ?>
 
 
-        <h2>Данные о компании</h2>
 
-        <?= $form->label($model, 'name'); ?>
-        <?= $form->textField($model, 'name', ['class' => 'span8']) ?>
-        <?= $form->error($model, 'name'); ?>
+        <fieldset>
+            <legend>Дані про компанію:</legend>
+            <?= $form->textFieldControlGroup($model, 'name', ['class' => 'span8 form-control']) ?>
+            <?= $form->textAreaControlGroup($model, 'address', ['class' => 'span8']) ?>
+        </fieldset>
 
-        <?= $form->label($model, 'address'); ?>
-        <?= $form->textArea($model, 'address', ['class' => 'span8']) ?>
-        <?= $form->error($model, 'address'); ?>
-
-        <h2>Данные администратора</h2>
+        <fieldset>
+            <legend>Дані особи, що буде адмініструвати вакансіі:</legend>
+            </fieldset>
 
         <?= $form->label($model, 'phone'); ?>
         <?php
@@ -48,34 +47,13 @@
         ?>
 
 
-
-        <?= $form->label($model, 'first_name'); ?>
-        <?= $form->textField($model, 'first_name', ['class' => 'span4']) ?>
-        <?= $form->error($model, 'first_name'); ?>
-
-        <?= $form->label($model, 'last_name'); ?>
-        <?= $form->textField($model, 'last_name', ['class' => 'span4']) ?>
-        <?= $form->error($model, 'last_name'); ?>
-
-        <?= $form->label($model, 'position'); ?>
-        <?= $form->textField($model, 'position', ['class' => 'span4']) ?>
-        <?= $form->error($model, 'position'); ?>
-
-        <?= $form->label($model, 'email'); ?>
-        <?= $form->textField($model, 'email', ['class' => 'span4']) ?>
-        <?= $form->error($model, 'email'); ?>
-
-        <?= $form->label($model, 'username'); ?>
-        <?= $form->textField($model, 'username', ['class' => 'span4']) ?>
-        <?= $form->error($model, 'username'); ?>
-
-        <?= $form->label($model, 'password'); ?>
+        <?= $form->textFieldControlGroup($model, 'first_name', ['class' => 'span4']) ?>
+        <?= $form->textFieldControlGroup($model, 'last_name', ['class' => 'span4']) ?>
+        <?= $form->textFieldControlGroup($model, 'position', ['class' => 'span4']) ?>
+        <?= $form->textFieldControlGroup($model, 'email', ['class' => 'span4']) ?>
+        <?= $form->textFieldControlGroup($model, 'username', ['class' => 'span4']) ?>
         <?= $form->passwordField($model, 'password', ['class' => 'span4']) ?>
-        <?= $form->error($model, 'password'); ?>
-
-        <?= $form->label($model, 'repeat_password'); ?>
-        <?= $form->passwordField($model, 'repeat_password', ['class' => 'span4']) ?>
-        <?= $form->error($model, 'repeat_password'); ?>
+        <?= $form->passwordFieldControlGroup($model, 'repeat_password', ['class' => 'span4']) ?>
 
         <div class="form-actions">
             <?php

@@ -78,7 +78,10 @@
                         <div class="align"> <i class="icon-thumbs-up sev_icon"></i> </div>
                         <h2>Як роботодавець:</h2>
                         <ul>
-                            <li>Заповнити Анкету Роботодавця &laquo;Центру зайнятості Вільних людей&raquo; - <a href="http://bit.ly/czslcomp" target="_blank">http://bit.ly/czslcomp</a>;</li>
+                            <li>Заповнити
+                                <?= CHtml::link('Анкету Роботодавця',
+                                    Yii::app()->createAbsoluteUrl('/site/registercompany'))?>  &laquo;Центру зайнятості Вільних людей&raquo;;
+                            </li>
                             <li>Повідомити &laquo;Центру зайнятості Вільних людей&raquo; про наявні та можливі вакансії;</li>
                             <li>Поширити інформацію про проект у професійних спільнотах, серед друзів та колег.</li>
                         </ul>
