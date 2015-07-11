@@ -61,6 +61,7 @@ return array(
     'user.edit.success' => 'Ваші дані збережені',
     'user.firstLastName' => 'П.І.Б',
     'user.additional_contact' => 'Додаткова контактна інформація',
+    'user.username.justletters' => 'Поле може містити лише маленькі латинськи літери.',
 
     'vacancy.label.name' => 'Назва посади',
     'vacancy.label.user' => 'Контактна особа',
