@@ -20,7 +20,7 @@
     )); /* @var $form TbActiveForm */
     ?>
     <div class="alert alert-block">
-        <?= Yii::t('main', 'company') . ': ' . $model->company->name ?>
+        <?= Yii::t('main', 'company') . ': ' . $company->name ?>
 
         <?php if (!$model->isNewRecord): ?>
             [ <?= $model->getAttributeLabel('created_at') . ': ' . $model->created_at ?> ]
