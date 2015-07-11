@@ -37,12 +37,8 @@ $this->widget('bootstrap.widgets.TbGridView', [
         'close_time',
         [
             'class' => CDataColumn::class,
-            'value' => function(Vacancy $object){
-                $statuses = VacancyHelper::statuses();
-                if(isset($statuses[$object->status])) {
-                    return $statuses[$object->status];
-                }
-                return 'incorrect status value';
+            'value' => function(Vacancy $vacancy){
+                VacancyHelper::statusName($vacancy);
             },
             'header' => Yii::t('main', 'vacancy.label.status'),
         ],

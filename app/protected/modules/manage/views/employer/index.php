@@ -27,6 +27,13 @@ $this->widget('bootstrap.widgets.TbGridView', [
         'close_time:date',
         [
             'class' => CDataColumn::class,
+            'value' => function(Vacancy $vacancy){
+                VacancyHelper::statusName($vacancy);
+            },
+            'header' => Yii::t('main', 'vacancy.label.status'),
+        ],
+        [
+            'class' => CDataColumn::class,
             'value' => function(Vacancy $object){
                 return CHtml::link(TbHtml::icon(TbHtml::ICON_EDIT), [
                     "update_vacancy", 'id' => $object->id,
