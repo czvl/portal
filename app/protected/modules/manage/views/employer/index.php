@@ -28,7 +28,7 @@ $this->widget('bootstrap.widgets.TbGridView', [
         [
             'class' => CDataColumn::class,
             'value' => function(Vacancy $vacancy){
-                VacancyHelper::statusName($vacancy);
+                return VacancyHelper::statusName($vacancy);
             },
             'header' => Yii::t('main', 'vacancy.label.status'),
         ],
