@@ -8,7 +8,7 @@
 
 <section id="services" class="single-page">
     <div class="container">
-        <h1>Додати компанію</h1>
+        <h1><?= Yii::t('main', 'company.register.title') ?></h1>
 
         <?php
         $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
@@ -26,14 +26,22 @@
 
 
         <fieldset>
-            <legend>Дані про компанію:</legend>
+            <legend><?= Yii::t('main', 'company.register.company') ?></legend>
             <?= $form->textFieldControlGroup($model, 'name', ['class' => 'span8 form-control']) ?>
-            <?= $form->textAreaControlGroup($model, 'address', ['class' => 'span8']) ?>
+            <?= $form->textAreaControlGroup($model, 'address', [
+                'class' => 'span8',
+                'label' => Yii::t('main', 'company.address.ext'),
+            ]) ?>
         </fieldset>
 
         <fieldset>
-            <legend>Дані особи, що буде адмініструвати вакансіі:</legend>
-            </fieldset>
+            <legend><?= Yii::t('main', 'company.register.user') ?></legend>
+        </fieldset>
+
+
+        <?= $form->textFieldControlGroup($model, 'first_name', ['class' => 'span4']) ?>
+        <?= $form->textFieldControlGroup($model, 'last_name', ['class' => 'span4']) ?>
+        <?= $form->textFieldControlGroup($model, 'position', ['class' => 'span4']) ?>
 
         <?= $form->label($model, 'phone'); ?>
         <?php
@@ -46,10 +54,6 @@
         echo $form->error($model, 'phone');
         ?>
 
-
-        <?= $form->textFieldControlGroup($model, 'first_name', ['class' => 'span4']) ?>
-        <?= $form->textFieldControlGroup($model, 'last_name', ['class' => 'span4']) ?>
-        <?= $form->textFieldControlGroup($model, 'position', ['class' => 'span4']) ?>
         <?= $form->textFieldControlGroup($model, 'email', ['class' => 'span4']) ?>
         <?= $form->textFieldControlGroup($model, 'username', ['class' => 'span4']) ?>
         <?= $form->passwordField($model, 'password', ['class' => 'span4']) ?>
