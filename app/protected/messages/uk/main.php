@@ -60,6 +60,7 @@ return array(
     'user.email.confirm.error' => 'Помилка при підтвердженні email. Можливо email вже був підтверджений раніше.',
     'user.edit.success' => 'Ваші дані збережені',
     'user.firstLastName' => 'П.І.Б',
+    'user.additional_contact' => 'Додаткова контактна інформація',
 
     'vacancy.label.name' => 'Назва посади',
     'vacancy.label.user' => 'Контактна особа',

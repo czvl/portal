@@ -27,11 +27,12 @@
 
         <fieldset>
             <legend><?= Yii::t('main', 'company.register.company') ?></legend>
-            <?= $form->textFieldControlGroup($model, 'name', ['class' => 'span8 form-control']) ?>
+            <?= $form->textFieldControlGroup($model, 'name', ['class' => 'span8 ']) ?>
             <?= $form->textAreaControlGroup($model, 'address', [
                 'class' => 'span8',
                 'label' => Yii::t('main', 'company.address.ext'),
             ]) ?>
+            <?= $form->textFieldControlGroup($model, 'site_url', ['class' => 'span8 ']) ?>
         </fieldset>
 
         <fieldset>
@@ -53,7 +54,7 @@
         ]);
         echo $form->error($model, 'phone');
         ?>
-
+        <?= $form->textAreaControlGroup($model, 'additional_contact', [ 'class' => 'span8']) ?>
         <?= $form->textFieldControlGroup($model, 'email', ['class' => 'span4']) ?>
         <?= $form->textFieldControlGroup($model, 'username', ['class' => 'span4']) ?>
         <?= $form->passwordField($model, 'password', ['class' => 'span4']) ?>
