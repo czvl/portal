@@ -16,15 +16,10 @@ class UserHelper
             ]),
         ]);
         $to = $user->first_name
-            . ' ' . $user->last_name
             . ' <' . $user->email . '>';
         $subject = Yii::t('main', 'user.email.confirm.subject');
 
-        $headers = "MIME-Version: 1.0\r\n";
-        $headers .= "Content-type: text/html; charset=utf8\r\n";
-        $headers .= "From: CZVL.ORG.UA <noreply@czvl.org.ua>\r\n";
-
-        mail($to, $subject, $body, $headers);
+        mail($to, $subject, $body, "From: CZVL.ORG.UA <service@dev.czvl.org.ua>\r\n");
 
         return true;
 
