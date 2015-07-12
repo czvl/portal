@@ -9,17 +9,18 @@ class UserHelper
         if (empty($user->hash) || !empty($user->email_activated)) {
             return false;
         }
-
         $body = Yii::t('main', 'user.email.confirm.body', [
             ':link' => Yii::app()->createAbsoluteUrl('/site/confirm_email', [
                 'hash' => $user->hash
             ]),
         ]);
-        $to = $user->first_name
-            . ' <' . $user->email . '>';
         $subject = Yii::t('main', 'user.email.confirm.subject');
+        $message = Yii::app()->mailer
+            ->createMessage($subject, $body)
+            ->setFrom(['noreply@czvl.org.ua' => 'Центр зайнятості'])
+            ->setTo([$user->email => $user->first_name]);
 
-        mail($to, $subject, $body, "From: CZVL.ORG.UA <service@dev.czvl.org.ua>\r\n");
+        Yii::app()->mailer->send($message);
 
         return true;
 

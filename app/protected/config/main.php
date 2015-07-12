@@ -1,7 +1,7 @@
 <?php
 
-// Yii::setPathOfAlias('local','path/to/local-folder');
 $dbFileName = file_exists(dirname(__FILE__) . '/db_local.php') ? dirname(__FILE__) . '/db_local.php' : dirname(__FILE__) . '/db.php';
+Yii::setPathOfAlias('vendor', dirname(__FILE__) . DIRECTORY_SEPARATOR . '../../vendor');
 
 return array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
@@ -57,8 +57,7 @@ return array(
             'showScriptName' => false,
             'rules' => array(
                 '/' => 'site/index',
-//                'login/<service:(google|google-oauth|yandex|yandex-oauth|twitter|linkedin|vkontakte|facebook|steam|yahoo|mailru|moikrug|github|live|odnoklassniki)>' => 'site/login',
-                
+
                 'gii' => 'gii',
                 'gii/<controller:\w+>' => 'gii/<controller>',
                 'gii/<controller:\w+>/<action:\w+>' => 'gii/<controller>/<action>',
@@ -71,6 +70,11 @@ return array(
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
             ),
+        ),
+        'mailer' => array(
+            'class' => 'vendor.janisto.yii-mailer.SwiftMailerComponent',
+            'type' => 'smtp',
+
         ),
         'db' => require($dbFileName),
         'clientScript' => array(
@@ -86,13 +90,11 @@ return array(
                 'inside' => array(
                     'baseUrl' => '/',
                     'js' => array(
-//                        'js/bootstrap-wysiwyg.js',
                         'js/inside.js'
                     ),
                     'css' => array(
                         'css/inside.css?v=1'
                     ),
-//                    'depends'=>array('jquery'),
                 ),
             ),
             'scriptMap' => array(
@@ -116,9 +118,9 @@ return array(
                     'class' => 'CFileLogRoute',
                     'levels' => 'error, warning',
                 ),
-//                array(
-//                    'class' => 'CWebLogRoute',
-//                ),
+                array(
+                    'class' => 'CWebLogRoute',
+                ),
             ),
         ),
     ),
