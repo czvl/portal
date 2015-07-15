@@ -53,6 +53,9 @@ return array(
     'company.site_url' => 'Сайт',
     'company.created_at' => 'Додано',
     'company.updated_at' => 'Останнє оновлення',
+    'company.register.username.label' => 'Ім’я користовуча (логін).  <br />Буде використовуватися для роботи з інформаційним порталом.',
+    'company.register.email.label' => 'Електронна адреса. <br />Будь ласка, перевірте правильність введення електронної адреси, адже на неї Вам буде надіслано підтвердження реєстрації',
+
     'user.position' => 'Посада',
     'user.email.confirm.body' => 'Щоб підтвердити Ваш email, будь-ласка перейдіть за посиланням :link',
     'user.email.confirm.subject' => 'Підтвердження email',

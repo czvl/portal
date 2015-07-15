@@ -30,7 +30,7 @@ class RegisterCompanyForm extends CFormModel
             ['password, repeat_password', 'length', 'min' => 6, 'max' => 25],
             ['name, position', 'length', 'min' => 5, 'max' => 255],
             ['additional_contact', 'length',  'max' => 255],
-            ['password', 'compare', 'compareAttribute' => 'repeat_password'],
+            ['repeat_password', 'compare', 'compareAttribute' => 'password'],
             ['username', 'usernameUniqueValidator'],
             ['username', 'match',
                 'pattern' => '/^[a-z]+$/',

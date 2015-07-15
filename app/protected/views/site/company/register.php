@@ -32,7 +32,7 @@
                 'class' => 'span8',
                 'label' => Yii::t('main', 'company.address.ext'),
             ]) ?>
-            <?= $form->textFieldControlGroup($model, 'site_url', ['class' => 'span8 ']) ?>
+            <?= $form->textFieldControlGroup($model, 'site_url', ['class' => 'span8', 'placeholder' => 'http://site.com.ua']) ?>
         </fieldset>
 
         <fieldset>
@@ -55,9 +55,9 @@
         echo $form->error($model, 'phone');
         ?>
         <?= $form->textAreaControlGroup($model, 'additional_contact', [ 'class' => 'span8']) ?>
-        <?= $form->textFieldControlGroup($model, 'email', ['class' => 'span4']) ?>
-        <?= $form->textFieldControlGroup($model, 'username', ['class' => 'span4']) ?>
-        <?= $form->passwordField($model, 'password', ['class' => 'span4']) ?>
+        <?= $form->textFieldControlGroup($model, 'email', ['class' => 'span4', 'label' => Yii::t('main', 'company.register.email.label') ]) ?>
+        <?= $form->textFieldControlGroup($model, 'username', ['class' => 'span4', 'label' => Yii::t('main', 'company.register.username.label')]) ?>
+        <?= $form->passwordFieldControlGroup($model, 'password', ['class' => 'span4']) ?>
         <?= $form->passwordFieldControlGroup($model, 'repeat_password', ['class' => 'span4']) ?>
 
         <div class="form-actions">
