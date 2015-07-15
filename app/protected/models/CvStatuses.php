@@ -13,9 +13,13 @@
  * The followings are the available model relations:
  * @property User $operator
  * @property CvList $cv
+ * @property Vacancy[] $vacancies
  */
 class CvStatuses extends CActiveRecord
 {
+
+    public $vacancyIds;
+    private $vacancyIdsArray;
 
     /**
      * @return string the associated database table name
@@ -30,32 +34,69 @@ class CvStatuses extends CActiveRecord
      */
     public function rules()
     {
-        // NOTE: you should only define rules for those attributes that
-        // will receive user inputs.
         return array(
-            array('cv_id, message', 'required'),
-            array('cv_id, operator_id', 'numerical', 'integerOnly' => true),
-            // The following rule is used by search().
-            // @todo Please remove those attributes that should not be searched.
-            array('id, cv_id, operator_id, message, added_time', 'safe', 'on' => 'search'),
+            ['cv_id, message', 'required'],
+            ['cv_id, operator_id', 'numerical', 'integerOnly' => true],
+            ['vacancyIds', 'validateVacancyIds'],
+            ['id, cv_id, operator_id, message, added_time', 'safe', 'on' => 'search'],
         );
     }
 
+    public function validateVacancyIds()
+    {
+        $ids = array_map(
+            function ($id) {
+                return (int)$id;
+            }, explode(",", trim( $this->vacancyIds, "\t\n\r\0\x0B,;.")));
+
+        if(!empty($this->vacancyIds)) {
+            if(!preg_match("/^[0-9\,\s]+$/", $this->vacancyIds)) {
+                $this->addError('vacancyIds', Yii::t('main', 'cv_status.incorrectVacancyIds'));
+                return;
+            }
+        } else {
+            return;
+        }
+
+        $db = Yii::app()->db->createCommand();
+        /* @var $db CDbCommand */
+
+        $exists = $db->select('id')
+            ->from('vacancies')
+            ->where(['in', 'id', $ids])
+            ->queryColumn();
+
+        if (count($exists) !== count($ids)) {
+
+            sort($exists);
+            sort($ids);
+
+            $this->addError('vacancyIds', Yii::t('main', 'cv_status.notFoundVacancyIds', [
+                ':ids' => implode(",", array_diff($ids, $exists)),
+            ]));
+        }
+
+        $this->vacancyIdsArray = $ids;
+    }
+
     /**
-     * @return array relational rules.
+     * @inheritdoc
      */
     public function relations()
     {
-        // NOTE: you may need to adjust the relation name and the related
-        // class name for the relations automatically generated below.
-        return array(
-            'operator' => array(self::BELONGS_TO, 'User', 'operator_id'),
-            'cv' => array(self::BELONGS_TO, 'CvList', 'cv_id'),
-        );
+        return [
+            'operator' => [self::BELONGS_TO, User::class, 'operator_id'],
+            'cv' => [self::BELONGS_TO, CvList::class, 'cv_id'],
+            'vacancies' => [
+                self::MANY_MANY,
+                Vacancy::class,
+                'cv_status_to_vacancy(cv_status_id, vacancy_id)',
+            ],
+        ];
     }
 
     /**
-     * @return array customized attribute labels (name=>label)
+     * @inheritdoc
      */
     public function attributeLabels()
     {
@@ -63,11 +104,15 @@ class CvStatuses extends CActiveRecord
             'id' => 'ID',
             'cv_id' => 'Cv',
             'operator_id' => 'Operator',
-            'message' => 'Message',
+            'message' => Yii::t('main', 'cv_status.massage.label'),
             'added_time' => 'Added Time',
+            'vacancyIds' => Yii::t('main', 'vacancy.ids.label'),
         );
     }
-    
+
+    /**
+     * @inheritdoc
+     */
     public function defaultScope()
     {
         return array(
@@ -75,6 +120,9 @@ class CvStatuses extends CActiveRecord
         );
     }
 
+    /**
+     * @inheritdoc
+     */
     protected function beforeSave()
     {
         parent::beforeSave();
@@ -90,20 +138,28 @@ class CvStatuses extends CActiveRecord
     }
 
     /**
-     * Retrieves a list of models based on the current search/filter conditions.
-     *
-     * Typical usecase:
-     * - Initialize the model fields with values from filter form.
-     * - Execute this method to get CActiveDataProvider instance which will filter
-     * models according to data in model fields.
-     * - Pass data provider to CGridView, CListView or any similar widget.
-     *
+     * @inheritdoc
+     */
+    protected function afterSave()
+    {
+        if($this->scenario == 'insert') {
+            foreach($this->vacancyIdsArray as $vacancyId) {
+                $cvStatusToVacancy = new CvStatusToVacancy();
+                $cvStatusToVacancy->cv_status_id = $this->id;
+                $cvStatusToVacancy->vacancy_id = $vacancyId;
+                $cvStatusToVacancy->save();
+//                var_dump($cvStatusToVacancy->getErrors());
+//                die;
+            }
+        }
+    }
+
+    /**     *
      * @return CActiveDataProvider the data provider that can return the models
      * based on the search/filter conditions.
      */
     public function search()
     {
-        // @todo Please modify the following code to remove attributes that should not be searched.
 
         $criteria = new CDbCriteria;
 
@@ -119,10 +175,7 @@ class CvStatuses extends CActiveRecord
     }
 
     /**
-     * Returns the static model of the specified AR class.
-     * Please note that you should have this exact method in all your CActiveRecord descendants!
-     * @param string $className active record class name.
-     * @return CvStatuses the static model class
+     * @inheritdoc
      */
     public static function model($className = __CLASS__)
     {

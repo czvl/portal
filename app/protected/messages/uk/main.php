@@ -88,6 +88,15 @@ return array(
     'vacancy.title.edit' => 'Редагування вакансіі',
     'vacancy.is_closed' => 'Увага! Вакансія закрита.',
     'vacancy.details' => 'Вакансія',
+    'vacancy.status.marked' => 'Відмічено вакансіі',
+    'vacancy.status.posted' => 'Опубліковано',
+    'vacancy.ids.label' => 'Ідентифікатори вакансій (через кому)',
+    'vacancy.ids.placeholder' => '1,2,3',
+
+    'cv_status.notFoundVacancyIds' => 'Вакансії з ідентифікаторами :ids не знайдені в базі.',
+    'cv_status.incorrectVacancyIds' => 'Поле може містити лише числові ідентифікатори, розділені комами',
+    'cv_status.massage.label' => 'Текст',
+    'cv_status.massage.placeholder' => 'Ваш комментар',
 
     'form.button.add' => 'Додати',
     'form.button.save' => 'Зберегти',
