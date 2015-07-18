@@ -17,7 +17,9 @@
  * @property string $signin_time
  * @property string $last_login
  * @property integer $status
- * 
+ * @property string $hash
+ * @property string $email_activated
+ *
  * The followings are the available model relations:
  * @property CvList[] $cvLists
  * @property CvStatuses[] $cvStatuses
@@ -33,6 +35,9 @@ class User extends CActiveRecord
     const ROLE_EMPL = 'employer';
     const ROLE_VOLONT = 'volunteer';
     const ROLE_APPLIC = 'applicant';
+
+    const STATUS_ACTIVE = 1;
+    const STATUS_DISABLED = 0;
 
     public $password_repeat = '';
     public $password_new = '';
@@ -83,7 +88,8 @@ class User extends CActiveRecord
         return array(
             ['username', 'unique'],
             ['username, role, email', 'required'],
-            ['password, password_repeat, phone', 'length', 'max' => 32],
+            ['email', 'email'],
+            ['password, password_repeat, phone, hash', 'length', 'max' => 32],
             ['password, password_repeat', 'required', 'on' => 'create'],
             ['password_repeat', 'compare', 'compareAttribute' => 'password', 'on' => 'create'],
 
@@ -91,8 +97,8 @@ class User extends CActiveRecord
             ['password_new, password_repeat', 'safe', 'on' => 'update'],
             
             ['status', 'numerical', 'integerOnly' => true],
-            ['username, email, role, first_name, last_name, additional_contact', 'length', 'max' => 255],
-            ['signin_time, last_login', 'safe'],
+            ['username, email, role, first_name, last_name, additional_contact, position', 'length', 'max' => 255],
+            ['signin_time, last_login, email_activated', 'safe'],
             ['username, role', 'safe', 'on' => 'search'],
             ['phone', 'match', 'pattern'=>'/^([+]?[0-9 \)\(\-]+)$/']
         );
@@ -153,6 +159,8 @@ class User extends CActiveRecord
             'signin_time' => Yii::t('main', 'Registration time'),
             'last_login' => Yii::t('main', 'Last login at'), 
             'status' => Yii::t('main', 'Status'), 
+            'firstLastName' => Yii::t('main', 'user.firstLastName'),
+            'position' => Yii::t('main', 'user.position'),
         );
     }
 

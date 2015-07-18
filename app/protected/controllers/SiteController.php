@@ -82,15 +82,40 @@ class SiteController extends Controller
             $model->attributes = $_POST['RegisterCompanyForm'];
             if($model->register())
             {
-                Yii::app()->user->setFlash('success', 'Successfully registered. Please, check you email');
+                Yii::app()->user->setFlash('success', Yii::t('main', 'company.register.success'));
                 $this->redirect('/manage/login');
             }
 
-            Yii::app()->user->setFlash('error', 'Unexpected error during registration');
+            Yii::app()->user->setFlash('error', Yii::t('main', 'company.register.error'));
 
         }
 
         return $this->render('company/register', ['model' => $model]);
+    }
+
+    /**
+     * Email confirmation
+     * @param $hash
+     */
+    public function actionConfirm_email($hash)
+    {
+        if(!empty($hash)) {
+            $user = User::model()->findByAttributes([
+                'hash' => $hash,
+            ]);
+            if(!empty($user)) {
+                $user->hash = null;
+                $user->status = User::STATUS_ACTIVE;
+                $user->save();
+
+                Yii::app()->user->setFlash('success',
+                    Yii::t('main', 'user.email.confirm.success'));
+                $this->redirect('/manage/login');
+            }
+
+            Yii::app()->user->setFlash('success',
+                Yii::t('main', 'user.email.confirm.error'));
+        }
     }
 
     /**
@@ -214,5 +239,12 @@ class SiteController extends Controller
         } else {
             return "/blog/wp-content/themes/point/images/mediumthumb.png";
         }
+    }
+
+    public function actionTest()
+    {
+
+        mail('2697024@gmail.com', 'test subject', 'test message');
+        echo "OK";
     }
 }

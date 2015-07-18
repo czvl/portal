@@ -11,6 +11,21 @@
                     ));
                     ?>
                     <?php echo $form->errorSummary($model); ?>
+                    <?php echo $form->textFieldControlGroup($model, 'first_name', array('span' => 5, 'maxlength' => 255)); ?>
+                    <?php echo $form->textFieldControlGroup($model, 'last_name', array('span' => 5, 'maxlength' => 255)); ?>
+
+                    <?php echo $form->labelEx($model, 'phone'); ?>
+                    <?php
+                    $this->widget('CMaskedTextField', array(
+                        'model' => $model,
+                        'attribute' => 'phone',
+                        'mask' => UserHelper::PHONE_MASK,
+                        'placeholder' => '*',
+                    ));
+                    ?>
+                    <?php echo $form->textFieldControlGroup($model, 'position', array('span' => 5, 'maxlength' => 255)); ?>
+                    <?php echo $form->textFieldControlGroup($model, 'additional_contact', array('span' => 5, 'maxlength' => 255)); ?>
+
                     <?php echo $form->passwordFieldControlGroup($model, 'password_new', array('span' => 5, 'maxlength' => 20)); ?>
                     <?php echo $form->passwordFieldControlGroup($model, 'password_repeat', array('span' => 5, 'maxlength' => 20)); ?>
 

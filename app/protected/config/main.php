@@ -1,7 +1,7 @@
 <?php
 
-// Yii::setPathOfAlias('local','path/to/local-folder');
 $dbFileName = file_exists(dirname(__FILE__) . '/db_local.php') ? dirname(__FILE__) . '/db_local.php' : dirname(__FILE__) . '/db.php';
+Yii::setPathOfAlias('vendor', dirname(__FILE__) . DIRECTORY_SEPARATOR . '../../vendor');
 
 return array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
@@ -17,7 +17,7 @@ return array(
     'import' => array(
         'application.models.*',
         'application.components.*',
-        'application.helpers.*',
+        'application.components.helpers.*',
         'application.extensions.yii-mail.YiiMailMessage',
         'bootstrap.helpers.TbHtml',
         'bootstrap.helpers.TbArray',
@@ -57,8 +57,7 @@ return array(
             'showScriptName' => false,
             'rules' => array(
                 '/' => 'site/index',
-//                'login/<service:(google|google-oauth|yandex|yandex-oauth|twitter|linkedin|vkontakte|facebook|steam|yahoo|mailru|moikrug|github|live|odnoklassniki)>' => 'site/login',
-                
+
                 'gii' => 'gii',
                 'gii/<controller:\w+>' => 'gii/<controller>',
                 'gii/<controller:\w+>/<action:\w+>' => 'gii/<controller>/<action>',
@@ -72,18 +71,12 @@ return array(
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
             ),
         ),
+        'mailer' => array(
+            'class' => 'vendor.janisto.yii-mailer.SwiftMailerComponent',
+            'type' => 'smtp',
+
+        ),
         'db' => require($dbFileName),
-        'mail' => array(
-            'class' => 'application.extensions.yii-mail.YiiMail',
-            'transportType' => 'php',
-            'viewPath' => 'application.views.mail',
-            'logging' => true,
-            'dryRun' => false
-        ),
-        'image' => array(
-            'class' => 'application.extensions.image.CImageComponent',
-            'driver' => 'GD',
-        ),
         'clientScript' => array(
             'coreScriptPosition' => CClientScript::POS_END,
             'packages' => array(
@@ -97,13 +90,11 @@ return array(
                 'inside' => array(
                     'baseUrl' => '/',
                     'js' => array(
-//                        'js/bootstrap-wysiwyg.js',
                         'js/inside.js'
                     ),
                     'css' => array(
                         'css/inside.css?v=1'
                     ),
-//                    'depends'=>array('jquery'),
                 ),
             ),
             'scriptMap' => array(
@@ -127,59 +118,11 @@ return array(
                     'class' => 'CFileLogRoute',
                     'levels' => 'error, warning',
                 ),
-//                array(
-//                    'class' => 'CWebLogRoute',
-//                ),
+                array(
+                    'class' => 'CWebLogRoute',
+                ),
             ),
         ),
-//        'cache' => array(
-//            'class' => 'CFileCache',
-//        ),
-//        'loid' => array(
-//            'class' => 'ext.lightopenid.loid',
-//        ),
-//        'eauth' => array(
-//            'class' => 'ext.eauth.EAuth',
-//            'popup' => true, // Use the popup window instead of redirecting.
-//            'services' => array(// You can change the providers and their classes.
-//                /* 'google' => array(
-//                  'class' => 'GoogleOpenIDService',
-//                  ), */
-//                'google-oauth' => array(
-//                    'class' => 'GoogleOAuthService',
-//                    'client_id' => '180893836341-vcn01hiq0f8okbbgfefs1fpg8nd7hu61.apps.googleusercontent.com',
-//                    'client_secret' => 'dIUp4JQarpWJtLd2mMEdr4rn',
-//                    'title' => 'Google (OAuth2)',
-//                ),
-//                'yandex' => array(
-//                    'class' => 'YandexOpenIDService',
-//                ),
-//                /*
-//                  'twitter' => array(
-//                  'class' => 'TwitterOAuthService',
-//                  'key' => '...',
-//                  'secret' => '...',
-//                  ),
-//                 */
-//                'facebook' => array(
-//                    'class' => 'FacebookOAuthService',
-//                    'client_id' => '1431396713804066',
-//                    'client_secret' => 'b56d111869e1dfc2aca8dc04c99da992',
-//                ),
-//            /*
-//              'vkontakte' => array(
-//              'class' => 'VKontakteOAuthService',
-//              'client_id' => '...',
-//              'client_secret' => '...',
-//              ),
-//              'mailru' => array(
-//              'class' => 'MailruOAuthService',
-//              'client_id' => '...',
-//              'client_secret' => '...',
-//              ),
-//             */
-//            ),
-//        ),
     ),
     'params' => array(
         'adminEmail' => 'shvaykovska@gmail.com',

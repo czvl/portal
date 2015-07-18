@@ -4,6 +4,7 @@
   "minimum-stability": "stable",
   "require": {
     "php": ">=5.5.0",
-    "yiisoft/yii": "1.1.16"
+    "yiisoft/yii": "1.1.16",
+    "janisto/yii-mailer": "1.0.0"
   }
 }

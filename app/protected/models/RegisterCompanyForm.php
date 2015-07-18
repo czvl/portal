@@ -21,6 +21,7 @@ class RegisterCompanyForm extends CFormModel
     public $phone;
     public $password;
     public $repeat_password;
+    public $additional_contact;
 
     public function rules()
     {
@@ -28,10 +29,15 @@ class RegisterCompanyForm extends CFormModel
             ['username, email, name, phone, password, first_name, last_name, repeat_password, address', 'required'],
             ['password, repeat_password', 'length', 'min' => 6, 'max' => 25],
             ['name, position', 'length', 'min' => 5, 'max' => 255],
-            ['password', 'compare', 'compareAttribute' => 'repeat_password'],
+            ['additional_contact', 'length',  'max' => 255],
+            ['repeat_password', 'compare', 'compareAttribute' => 'password'],
             ['username', 'usernameUniqueValidator'],
+            ['username', 'match',
+                'pattern' => '/^[a-z]+$/',
+                'message' => Yii::t('main', 'user.username.justletters')],
             ['username', 'length', 'min' => 3, 'max' => 25],
             ['email', 'email'],
+            ['site_url', 'url'],
             ['email', 'emailUniqueValidator'],
         );
     }
@@ -40,7 +46,7 @@ class RegisterCompanyForm extends CFormModel
     {
         $user = User::model()->find('username=:username', [':username' => $this->username]);
         if($user) {
-            $this->addError('username', 'Username already used');
+            $this->addError('username', Yii::t('main', 'user.username.used'));
         }
     }
 
@@ -48,7 +54,7 @@ class RegisterCompanyForm extends CFormModel
     {
         $user = User::model()->find('email=:email', [':email' => $this->email]);
         if($user) {
-            $this->addError('email', 'Email already used');
+            $this->addError('email', Yii::t('main', 'user.email.used'));
         }
     }
 
@@ -63,11 +69,16 @@ class RegisterCompanyForm extends CFormModel
         $user->password = $this->password;
         $user->username = $this->username;
         $user->role = User::ROLE_EMPL;
+        $user->status = User::STATUS_DISABLED;
+        $user->additional_contact = $this->additional_contact;
+        $user->hash = md5(microtime(true).rand());
 
         if(!$user->save()) {
             $this->addError('username', 'Can`t create user '. serialize($user->getErrors()));
             return false;
         }
+
+        UserHelper::sendEmailConfirmation($user);
 
         $company = new Company();
         $company->name = $this->name;
@@ -110,6 +121,8 @@ class RegisterCompanyForm extends CFormModel
             'email' => Yii::t('main', 'Email'),
             'first_name' => Yii::t('main', 'First name'),
             'last_name' => Yii::t('main', 'Last name'),
+            'additional_contact' => Yii::t('main', 'user.additional_contact'),
+            'site_url' => Yii::t('main', 'company.site_url'),
         );
     }
 

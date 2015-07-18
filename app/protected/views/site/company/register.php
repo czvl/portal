@@ -8,78 +8,67 @@
 
 <section id="services" class="single-page">
     <div class="container">
-        <h1>Добавить компанию</h1>
+        <h1><?= Yii::t('main', 'company.register.title') ?></h1>
 
         <?php
-        $form = $this->beginWidget('system.web.widgets.CActiveForm', array(
+        $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
             'id' => 'company-form',
             'enableAjaxValidation' => true,
             'enableClientValidation' => true,
             'clientOptions' => array(
                 'validateOnSubmit' => true,
             ),
-        )); /* @var $form CActiveForm */
+        ));  /* @var $form TbActiveForm */
         ?>
 
         <?= $form->errorSummary($model); ?>
 
 
-        <h2>Данные о компании</h2>
 
-        <?= $form->label($model, 'name'); ?>
-        <?= $form->textField($model, 'name') ?>
-        <?= $form->error($model, 'name'); ?>
+        <fieldset>
+            <legend><?= Yii::t('main', 'company.register.company') ?></legend>
+            <?= $form->textFieldControlGroup($model, 'name', ['class' => 'span8 ']) ?>
+            <?= $form->textAreaControlGroup($model, 'address', [
+                'class' => 'span8',
+                'label' => Yii::t('main', 'company.address.ext'),
+            ]) ?>
+            <?= $form->textFieldControlGroup($model, 'site_url', ['class' => 'span8', 'placeholder' => 'http://site.com.ua']) ?>
+        </fieldset>
 
-        <?= $form->label($model, 'address'); ?>
-        <?= $form->textArea($model, 'address') ?>
-        <?= $form->error($model, 'address'); ?>
+        <fieldset>
+            <legend><?= Yii::t('main', 'company.register.user') ?></legend>
+        </fieldset>
 
-        <h2>Данные администратора</h2>
+
+        <?= $form->textFieldControlGroup($model, 'first_name', ['class' => 'span4']) ?>
+        <?= $form->textFieldControlGroup($model, 'last_name', ['class' => 'span4']) ?>
+        <?= $form->textFieldControlGroup($model, 'position', ['class' => 'span4']) ?>
 
         <?= $form->label($model, 'phone'); ?>
         <?php
         $this->widget('CMaskedTextField', [
             'model' => $model,
             'attribute' => 'phone',
-            'mask' => '+380 (99) 999-99-99',
+            'mask' => UserHelper::PHONE_MASK,
             'placeholder' => '*',
         ]);
         echo $form->error($model, 'phone');
         ?>
+        <?= $form->textAreaControlGroup($model, 'additional_contact', [ 'class' => 'span8']) ?>
+        <?= $form->textFieldControlGroup($model, 'email', ['class' => 'span4', 'label' => Yii::t('main', 'company.register.email.label') ]) ?>
+        <?= $form->textFieldControlGroup($model, 'username', ['class' => 'span4', 'label' => Yii::t('main', 'company.register.username.label')]) ?>
+        <?= $form->passwordFieldControlGroup($model, 'password', ['class' => 'span4']) ?>
+        <?= $form->passwordFieldControlGroup($model, 'repeat_password', ['class' => 'span4']) ?>
 
-
-
-        <?= $form->label($model, 'first_name'); ?>
-        <?= $form->textField($model, 'first_name') ?>
-        <?= $form->error($model, 'first_name'); ?>
-
-        <?= $form->label($model, 'last_name'); ?>
-        <?= $form->textField($model, 'last_name') ?>
-        <?= $form->error($model, 'last_name'); ?>
-
-        <?= $form->label($model, 'position'); ?>
-        <?= $form->textField($model, 'position') ?>
-        <?= $form->error($model, 'position'); ?>
-
-        <?= $form->label($model, 'email'); ?>
-        <?= $form->textField($model, 'email') ?>
-        <?= $form->error($model, 'email'); ?>
-
-        <?= $form->label($model, 'username'); ?>
-        <?= $form->textField($model, 'username') ?>
-        <?= $form->error($model, 'username'); ?>
-
-        <?= $form->label($model, 'password'); ?>
-        <?= $form->passwordField($model, 'password') ?>
-        <?= $form->error($model, 'password'); ?>
-
-        <?= $form->label($model, 'repeat_password'); ?>
-        <?= $form->passwordField($model, 'repeat_password') ?>
-        <?= $form->error($model, 'repeat_password'); ?>
-
-        <p>
-            <?= CHtml::submitButton() ?>
-        </p>
+        <div class="form-actions">
+            <?php
+            echo TbHtml::submitButton(Yii::t('main', 'form.button.add'),
+                [
+                    'color' => TbHtml::BUTTON_COLOR_PRIMARY,
+                    'size' => TbHtml::BUTTON_SIZE_LARGE,
+                ]);
+            ?>
+        </div>
 
         <?php
         $this->endWidget();

@@ -1,6 +1,11 @@
 <?php
-/* @var $this ProfilesController */
-/* @var $model CvList */
+/* @var $this ProfilesController
+ * @var $model CvList
+ * @var $vacanciesDataProvider CDataProvider
+ * @var $this CController
+ * @var $statuses CvStatuses[]
+ * @var $status CvStatuses
+ */
 ?>
 
 <?php
@@ -45,7 +50,7 @@ $this->menu = array(
         'enableClientValidation' => true,
         'layout' => TbHtml::FORM_LAYOUT_HORIZONTAL,
         'clientOptions' => array('validateOnSubmit' => true),
-    ));
+    )); /* @var $form CActiveForm*/
 ?>
     <?php echo $form->dropDownList($model, 'status', $model->statusTypes, array('span' => 5)); ?>&nbsp;
     <?php echo TbHtml::submitButton('Оновити', array('color' => TbHtml::BUTTON_COLOR_PRIMARY, 'class' => 'inline')); ?>
@@ -56,14 +61,24 @@ $this->menu = array(
 echo TbHtml::lead('Статуси про претендента &laquo;' . $model->first_name . ' ' . $model->last_name . '&raquo;');
 
 $statusList = array();
-foreach ($statuses as $s) {
+foreach ($statuses as $s) { /* @var $s CvStatuses */
     $date = Yii::app()->dateFormatter->formatDateTime($s->added_time, "long");
-    $from = $s->operator->first_name . ' ' . $s->operator->last_name;
-    
-    echo TbHtml::quote(nl2br($s->message), array(
-        'source' => '',
-        'cite' => "Опубліковано " . $date . " (" . CHtml::link($from, array('/manage/reqruiter', 'id' => $s->operator->id)) . ")"
-    ));
+
+    $vacancies = '';
+    foreach($s->vacancies as $vacancy) {
+        $vacancies .= CHtml::link($vacancy->name , ['vacancies/view', 'id' => $vacancy->id])
+        . " (" . VacancyHelper::statusName($vacancy) . ")";
+    }
+
+    echo TbHtml::quote(nl2br($s->message), [
+            'site' => '',
+            'source' => Yii::t('main',
+                    'vacancy.status.posted') . ': ' . $date . " (" . CHtml::link($s->operator->getFirstLastName(),
+                    array('/manage/reqruiter', 'id' => $s->operator->id)) . ")"
+                . (!empty($vacancies) ? ' | ' . Yii::t('main',
+                        'vacancy.status.marked') . ': ' . $vacancies . ' ' : ''),
+        ]
+    );
 }
 ?>
 <hr />
@@ -72,22 +87,33 @@ foreach ($statuses as $s) {
 <?php
     $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         'id' => 'status-form',
-        'enableClientValidation' => true,
+        'enableAjaxValidation' => true,
         'layout' => TbHtml::FORM_LAYOUT_HORIZONTAL,
         'clientOptions' => array(
             'validateOnSubmit' => true,
         ),
-    ));
+    )); /* @var $form TbActiveForm */
 ?>
-        <fieldset>
-            <?php echo $form->hiddenField($status, 'cv_id',array('value'=> $model->id)); ?>
-            <?php echo $form->textArea($status, 'message', array('rows' => 5, 'cols' => 100, 'placeholder' => 'Ваш комментар', 'style' => 'width: 98%;')); ?>
-            <?php echo TbHtml::formActions(array(
-                TbHtml::submitButton('Додати', array('color' => TbHtml::BUTTON_COLOR_PRIMARY)),
-                TbHtml::resetButton('Очистити'),
-            )); ?>
-        </fieldset>
-        
+    <fieldset>
+        <?= $form->hiddenField($status, 'cv_id', ['value' => $model->id]); ?>
+
+        <?= $form->textAreaControlGroup($status, 'message', [
+            'rows' => 5,
+            'cols' => 100,
+            'placeholder' => Yii::t('main', 'cv_status.massage.placeholder'),
+            'style' => 'width: 98%;',
+        ]); ?>
+
+        <?= $form->textFieldControlGroup($status, 'vacancyIds', [
+            'placeholder' => Yii::t('main', 'vacancy.ids.placeholder')
+        ]) ?>
+
+        <?= TbHtml::formActions(array(
+            TbHtml::submitButton('Додати', array('color' => TbHtml::BUTTON_COLOR_PRIMARY)),
+            TbHtml::resetButton('Очистити'),
+        )); ?>
+    </fieldset>
+
 <?php $this->endWidget(); ?>
 
 <p><?php echo TbHtml::submitButton('Редагувати анкету', array('submit' => array('/manage/profiles/update', 'id' => $model->id), 'color' => TbHtml::BUTTON_COLOR_PRIMARY)); ?></p>
@@ -167,3 +193,61 @@ $this->widget('bootstrap.widgets.TbDetailView', array(
         )
     ),
 ));
+?>
+
+<?php echo TbHtml::lead('Можливі вакансії:'); ?>
+
+
+<?php
+$this->widget('bootstrap.widgets.TbGridView', [
+    'dataProvider' => $vacanciesDataProvider,
+    'filter' => null,
+    'columns' => [
+        'id',
+        'name',
+        'city.city_name',
+        [
+            'class' => CDataColumn::class,
+            'value' => function(Vacancy $object){
+                return $object->company->name;
+            },
+            'header' => Yii::t('main', 'vacancy.label.company'),
+        ],
+
+        [
+            'class' => CDataColumn::class,
+            'value' => function(Vacancy $object){
+                return $object->user->first_name . " " . $object->user->phone;
+            },
+            'header' => Yii::t('main', 'vacancy.label.user'),
+        ],
+        [
+            'name' => 'close_time',
+            'value' => function(Vacancy $vacancy) {
+                return Yii::app()->dateFormatter
+                    ->formatDateTime($vacancy->close_time, "long", false);
+            }
+        ],
+        [
+            'class' => CDataColumn::class,
+            'value' => function(Vacancy $vacancy){
+                return VacancyHelper::statusName($vacancy);
+            },
+            'header' => Yii::t('main', 'vacancy.label.status'),
+        ],
+        [
+            'class' => CDataColumn::class,
+            'value' => function(Vacancy $object){
+                return
+                    CHtml::link(TbHtml::icon(TbHtml::ICON_EYE_OPEN), [
+                        "vacancies/view", 'id' => $object->id,
+                    ]) . ' ' .
+                    CHtml::link(TbHtml::icon(TbHtml::ICON_EDIT), [
+                    "vacancies/update", 'id' => $object->id,
+                ]);
+            },
+            'type' => 'raw',
+        ],
+    ],
+]);
+

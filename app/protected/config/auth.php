@@ -42,7 +42,6 @@ return array(
         'children' => array(
             'manager',
             'volunteer',
-            'employer'
         ),
         'bizRule' => null,
         'data' => null

@@ -24,6 +24,9 @@
                 <?php echo $form->textFieldControlGroup($model, 'email', array('span' => 5, 'maxlength' => 255)); ?>
                 <?php echo $form->textFieldControlGroup($model, 'first_name', array('span' => 5, 'maxlength' => 255)); ?>
                 <?php echo $form->textFieldControlGroup($model, 'last_name', array('span' => 5, 'maxlength' => 255)); ?>
+                <?php echo $form->textFieldControlGroup($model, 'phone', array('span' => 5, 'maxlength' => 255)); ?>
+                <?php echo $form->textFieldControlGroup($model, 'position', array('span' => 5, 'maxlength' => 255)); ?>
+                <?php echo $form->textFieldControlGroup($model, 'additional_contact', array('span' => 5, 'maxlength' => 255)); ?>
                 <?php echo $form->dropDownListControlGroup($model, 'role', $model->roles, array('empty' => '', 'options' => array('volunteer' => array('selected' => 'selected')))); ?>
                 <?php echo $form->dropDownListControlGroup($model, 'status', $model->statusTypes); ?>
 
