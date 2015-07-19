@@ -107,10 +107,12 @@ class SiteController extends Controller
                 $user->hash = null;
                 $user->status = User::STATUS_ACTIVE;
                 $user->save();
-                Yii::app()->user->logout();
+                Yii::app()->user->logout(false);
                 Yii::app()->user->setFlash('success',
                     Yii::t('main', 'user.email.confirm.success'));
                 $this->redirect('/manage/login');
+            } else {
+                $this->redirect('/');
             }
 
             Yii::app()->user->setFlash('success',

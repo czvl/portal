@@ -68,7 +68,7 @@ return array(
 За більш детальною інформацією просимо Вас звертатись за електронною адресою: czvl.job@gmail.com',
 
     'user.email.confirm.subject' => 'Підтвердження email',
-    'user.email.confirm.success' => 'Email підтверджено. Вм можете увійти у систему.',
+    'user.email.confirm.success' => '"Шановний користувач/ка, дякуємо за Вашу реєстрацію! Тепер Ви можете зайти до порталу за допомогою Вашого логіну та паролю',
     'user.email.confirm.error' => 'Помилка при підтвердженні email. Можливо email вже був підтверджений раніше.',
     'user.edit.success' => 'Ваші дані збережені',
     'user.firstLastName' => 'П.І.Б',
