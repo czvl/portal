@@ -83,7 +83,7 @@ class SiteController extends Controller
             if($model->register())
             {
                 Yii::app()->user->setFlash('success', Yii::t('main', 'company.register.success'));
-                $this->redirect('/manage/login');
+                return $this->render('company/register_success');
             }
 
             Yii::app()->user->setFlash('error', Yii::t('main', 'company.register.error'));
