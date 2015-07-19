@@ -64,7 +64,7 @@
                 <input type="text" name="categoryFilter" class="filter span8" placeholder="<?= Yii::t('main', 'text.filter.placeholder')?>" />
 
                 <div class="div-overflow">
-                    <?= $form->checkBoxListControlGroup($model, 'categoryIds', CategoriesHelper::all()) ?>
+                    <?= $form->checkBoxList($model, 'categoryIds', CategoriesHelper::all()) ?>
 
                 </div>
             </td>
@@ -78,7 +78,7 @@
             <td valign="top">
                 <p></p>
                 <p>
-                <?= $form->checkBoxListControlGroup($model, 'educationIds', EducationHelper::all()) ?>
+                <?= $form->checkBoxList($model, 'educationIds', EducationHelper::all()) ?>
                 </p>
             </td>
         </tr>
