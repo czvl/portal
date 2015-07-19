@@ -112,11 +112,12 @@ class SiteController extends Controller
                     Yii::t('main', 'user.email.confirm.success'));
                 $this->redirect('/manage/login');
             } else {
+
+                Yii::app()->user->setFlash('success',
+                    Yii::t('main', 'user.email.confirm.error'));
                 $this->redirect('/');
             }
 
-            Yii::app()->user->setFlash('success',
-                Yii::t('main', 'user.email.confirm.error'));
         }
     }
 
