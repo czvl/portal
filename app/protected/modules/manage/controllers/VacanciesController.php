@@ -65,7 +65,7 @@ class VacanciesController extends Controller
                 'educations',
             ])){
                 Yii::app()->user->setFlash('success', Yii::t('main', 'vacancy.saved.success'));
-//                $this->redirect($this->createUrl('vacancies/index'));
+                $this->redirect($this->createUrl('vacancies/index'));
             }
         }
 
