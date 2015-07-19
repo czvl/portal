@@ -58,7 +58,7 @@
             <th align="left"><?= Yii::t('main', 'vacancy.label.educationIds')?></th>
         </tr>
 
-        <tr style="height: 500px">
+        <tr style="height: 300px">
 
             <td valign="top">
                 <input type="text" name="categoryFilter" class="filter span8" placeholder="<?= Yii::t('main', 'text.filter.placeholder')?>" />
