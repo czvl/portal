@@ -62,12 +62,15 @@
 
             <td valign="top">
                 <input type="text" name="categoryFilter" class="filter" size="10"/>
+                <?= $form->error($model, 'categoryIds');?>
 
                 <div class="div-overflow-500">
                     <?= $form->checkBoxList($model, 'categoryIds', CategoriesHelper::all()) ?>
+
                 </div>
             </td>
             <td>
+                <?= $form->error($model, 'positionIds');?>
                 <input type="text" name="positionFilter" class="filter" size="10"/>
 
                 <div class="div-overflow-500">
@@ -75,7 +78,7 @@
                 </div>
             </td>
             <td valign="top">
-                <p></p>
+                <p><?= $form->error($model, 'educationIds');?></p>
                 <p>
                 <?= $form->checkBoxList($model, 'educationIds', EducationHelper::all()) ?>
                 </p>
