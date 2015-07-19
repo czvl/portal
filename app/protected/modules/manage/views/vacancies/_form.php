@@ -61,26 +61,24 @@
         <tr style="height: 500px">
 
             <td valign="top">
-                <input type="text" name="categoryFilter" class="filter" size="10"/>
-                <?= $form->error($model, 'categoryIds');?>
+                <input type="text" name="categoryFilter" class="filter span8" placeholder="<?= Yii::t('main', 'text.filter.placeholder')?>" />
 
-                <div class="div-overflow-500">
-                    <?= $form->checkBoxList($model, 'categoryIds', CategoriesHelper::all()) ?>
+                <div class="div-overflow">
+                    <?= $form->checkBoxListControlGroup($model, 'categoryIds', CategoriesHelper::all()) ?>
 
                 </div>
             </td>
-            <td>
-                <?= $form->error($model, 'positionIds');?>
-                <input type="text" name="positionFilter" class="filter" size="10"/>
+            <td style="vertical-align: top; padding: 20px">
+                <input type="text" name="positionFilter" class="span8 filter " placeholder="<?= Yii::t('main', 'text.filter.placeholder')?>" />
 
-                <div class="div-overflow-500">
+                <div class="div-overflow">
                     <?= $form->checkBoxList($model, 'positionIds', PositionsHelper::all()) ?>
                 </div>
             </td>
             <td valign="top">
-                <p><?= $form->error($model, 'educationIds');?></p>
+                <p></p>
                 <p>
-                <?= $form->checkBoxList($model, 'educationIds', EducationHelper::all()) ?>
+                <?= $form->checkBoxListControlGroup($model, 'educationIds', EducationHelper::all()) ?>
                 </p>
             </td>
         </tr>

@@ -106,4 +106,6 @@ return array(
 
     'city.index' => 'Ідентифікатор міста',
     'city.name' => 'Назва міста',
+
+    'text.filter.placeholder' => 'Для фільтрації впишіть перші букви',
 );
