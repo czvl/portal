@@ -1140,7 +1140,12 @@ ul#menu-main > li > a.auth-link:hover {
     width: 400px;
     display: block;
 }
-
+.div-overflow-500 {
+    overflow-y: auto;
+    height: 500px;
+    width: 400px;
+    display: block;
+}
 div.form .div-overflow span label,
 div.form .controls span label {
     margin: 0px;

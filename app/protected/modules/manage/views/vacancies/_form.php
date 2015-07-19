@@ -50,25 +50,46 @@
 
     <?= $form->checkBoxControlGroup($model, 'housing') ?>
 
-    <hr />
-    <?= $form->label($model, VacancyCategoriesHelper::fieldName()) ?>
+    <hr/>
+    <table border="0">
+        <tr >
+            <th align="left"><?= Yii::t('main', 'vacancy.label.categoryIds')?></th>
+            <th align="left"><?= Yii::t('main', 'vacancy.label.positionIds')?></th>
+            <th align="left"><?= Yii::t('main', 'vacancy.label.educationIds')?></th>
+        </tr>
 
-    <div class="div-overflow narrow">
-        <?= VacancyCategoriesHelper::checkBoxList($model) ?>
-    </div>
+        <tr style="height: 500px">
 
-    <hr />
-    <?= $form->label($model, EducationHelper::fieldName()) ?>
-    <div class="div-overflow narrow">
-        <?= EducationHelper::checkBoxList($model) ?>
-    </div>
+            <td valign="top">
+                <input type="text" name="categoryFilter" class="filter" size="10"/>
 
-    <hr />
-    <?= $form->label($model, PositionsHelper::fieldName()) ?>
-    <div class="div-overflow narrow">
-        <?= PositionsHelper::checkBoxList($model) ?>
-    </div>
+                <div class="div-overflow-500">
+                    <?= $form->checkBoxList($model, 'categoryIds', CategoriesHelper::all()) ?>
+                </div>
+            </td>
+            <td>
+                <input type="text" name="positionFilter" class="filter" size="10"/>
 
+                <div class="div-overflow-500">
+                    <?= $form->checkBoxList($model, 'positionIds', PositionsHelper::all()) ?>
+                </div>
+            </td>
+            <td valign="top">
+                <p></p>
+                <p>
+                <?= $form->checkBoxList($model, 'educationIds', EducationHelper::all()) ?>
+                </p>
+            </td>
+        </tr>
+    </table>
+
+    <hr/>
+
+
+    <hr/>
+
+
+    <hr/>
 
     <div class="form-actions">
         <?php

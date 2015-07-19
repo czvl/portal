@@ -58,12 +58,14 @@ class VacanciesController extends Controller
 
         if(!empty($_POST['Vacancy'])) {
             $vacancy->attributes = $_POST['Vacancy'];
-            if($vacancy->save()){
-
-                VacancyHelper::saveAdditionalFields($id, $_POST);
-
+            /* @var $vacancy ESaveRelatedBehavior */
+            if($vacancy->saveWithRelated([
+                'categories',
+                'positions',
+                'educations',
+            ])){
                 Yii::app()->user->setFlash('success', Yii::t('main', 'vacancy.saved.success'));
-                $this->redirect($this->createUrl('vacancies/index'));
+//                $this->redirect($this->createUrl('vacancies/index'));
             }
         }
 
@@ -81,6 +83,8 @@ class VacanciesController extends Controller
         if(!$company) {
             throw new CHttpException(404, 'Company not found');
         }
+
+        $vacancy->company_id = $id;
         $vacancy->company = $company;
 
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'vacancy-form') {
@@ -90,13 +94,14 @@ class VacanciesController extends Controller
 
         if(!empty($_POST['Vacancy'])) {
             $vacancy->attributes = $_POST['Vacancy'];
-            $vacancy->company_id = $id;
-            $vacancy->status = Vacancy::STATUS_OPEN;
 
-            if($vacancy->save()){
 
-                VacancyHelper::saveAdditionalFields($id, $_POST);
-
+            /* @var $vacancy ESaveRelatedBehavior */
+            if($vacancy->saveWithRelated([
+                'categories',
+                'positions',
+                'educations',
+            ])){
                 Yii::app()->user->setFlash('success', 'vacancy.created.success');
                 $this->redirect($this->createUrl('vacancies/index'));
             }
