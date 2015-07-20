@@ -65,10 +65,12 @@ class EmployerController extends Controller
 
         if(!empty($_POST['Vacancy'])) {
             $vacancy->attributes = $_POST['Vacancy'];
-            if($vacancy->save()){
-
-                VacancyHelper::saveAdditionalFields($id, $_POST);
-
+            /* @var $vacancy ESaveRelatedBehavior */
+            if($vacancy->saveWithRelated([
+                'categories',
+                'positions',
+                'educations',
+            ])){
                 Yii::app()->user->setFlash('success', Yii::t('main', 'vacancy.saved.success'));
                 $this->redirect($this->createUrl('index'));
             }
@@ -96,11 +98,13 @@ class EmployerController extends Controller
             $vacancy->company_id = $company->id;
             $vacancy->user_id = Yii::app()->user->id;
             $vacancy->created_by = Yii::app()->user->id;
-            $vacancy->status = Vacancy::STATUS_OPEN;
 
-            if($vacancy->save()){
-
-                VacancyHelper::saveAdditionalFields($vacancy->id, $_POST);
+            /* @var $vacancy ESaveRelatedBehavior */
+            if($vacancy->saveWithRelated([
+                'categories',
+                'positions',
+                'educations',
+            ])){
 
                 Yii::app()->user->setFlash('success', Yii::t('main','vacancy.created.success'));
                 $this->redirect($this->createUrl('index'));

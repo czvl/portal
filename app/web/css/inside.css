@@ -77,6 +77,12 @@ span.time {
     width: 400px;
     display: block;
 }
+.div-overflow-500 {
+    overflow-y: auto;
+    height: 500px;
+    width: 400px;
+    display: block;
+}
 .scrollY {
     height: 250px;
     overflow-y: scroll;

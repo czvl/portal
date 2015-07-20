@@ -19,12 +19,12 @@ return array(
     'Login' => 'увійти',
     'Role' => 'Роль',
     'First name' => 'Ім’я',
-    'Last name' => 'Призвище',
+    'Last name' => 'Прiзвище',
     'Registration time' => 'Дата реєстрації',
     'Last login at' => 'Час останнього входу',
     'Status' => 'Статус',
     'Error' => 'Помилка',
-    'phone' => 'Контакний телефон',
+    'phone' => 'Контактний номер телефону',
     'position' => 'Посада у компаніі',
     'Successfully changed!' => 'Зміни успішно записані!',
     'user.profile.responsibility.title' => 'Зона відповідальності',
@@ -34,7 +34,7 @@ return array(
     'user.email.used' => 'Такий Email вже використовується',
     'applicant.error.tooYoung' => 'Вік претендента не може бути меншим ніж {years} років.',
     'profiles.status.statistic' => 'Статистика анкет',
-    'profiles.status.statistic.period' => 'за вибраний період',
+    'prfiles.status.statistic.period' => 'за вибраний період',
     'companies' => 'Компанії',
     'company' => 'Компанія',
     'company.label.name' => 'Назва компаніі',
@@ -43,9 +43,9 @@ return array(
     'company.label.created_at' => 'Додано',
     'company.label.updated_at' => 'Оновлено',
     'company.name' => 'Назва компаніі',
-    'company.register.success' => 'Ви успішно зареєстрували Вашу компанію. Будь ласка перевірте ваш email тa перейдіть за посиланням.',
+    'company.register.success' => 'Компанія успішно зареєстрована!',
     'company.register.error' => 'У процессі реєстрації виникла несподівана помилка.',
-    'company.register.user' => 'Дані особи, що буде адмініструвати вакансії:',
+    'company.register.user' => 'Контактні дані особи, яка буде адмініструвати вакансії Вашої компанії:',
     'company.register.company' => 'Дані про компанію:',
     'company.register.title' => 'Анкета роботодавця',
     'company.address' => 'Адреса офісу',
@@ -53,13 +53,22 @@ return array(
     'company.site_url' => 'Сайт',
     'company.created_at' => 'Додано',
     'company.updated_at' => 'Останнє оновлення',
-    'company.register.username.label' => 'Ім’я користовуча (логін).  <br />Буде використовуватися для роботи з інформаційним порталом.',
-    'company.register.email.label' => 'Електронна адреса. <br />Будь ласка, перевірте правильність введення електронної адреси, адже на неї Вам буде надіслано підтвердження реєстрації',
+    'company.register.username.label' => 'Ім’я користовуча (логін)  <br />Буде використовуватися для роботи з інформаційним порталом',
+    'company.register.email.label' => 'Електронна адреса <br />Будь ласка, перевірте правильність введення електронної адреси, адже на неї Вам буде надіслано підтвердження реєстрації',
 
     'user.position' => 'Посада',
-    'user.email.confirm.body' => 'Щоб підтвердити Ваш email, будь-ласка перейдіть за посиланням :link',
+    'user.email.confirm.body' => 'Вітаємо! Команда громадської організації "Центр зайнятості вільних людей" вдячна за Вашу участь і небайдужість до такої значущої соціальної проблеми як працевлаштування переселенців зі Сходу України та АРК Крим.
+Для продовження роботи із порталом просимо Вас перейти за цим посиланням: :link
+Додатково повідомляємо Вас, що на порталі громадської організації "Центр зайнятості вільних людей" інформація щодо відкритих вакансій зберігається 14 днів.
+
+
+Наші контакти:
+Сайт "ЦЗВЛ": http://czvl.org.ua
+Сторінка організації в мережі Facebook: www.facebook.com/czvl.staff
+За більш детальною інформацією просимо Вас звертатись за електронною адресою: czvl.job@gmail.com',
+
     'user.email.confirm.subject' => 'Підтвердження email',
-    'user.email.confirm.success' => 'Email підтверджено. Вм можете увійти у систему.',
+    'user.email.confirm.success' => 'Шановний користувач/ка, дякуємо за Вашу реєстрацію! Тепер Ви можете зайти до порталу за допомогою Вашого логіну та паролю',
     'user.email.confirm.error' => 'Помилка при підтвердженні email. Можливо email вже був підтверджений раніше.',
     'user.edit.success' => 'Ваші дані збережені',
     'user.firstLastName' => 'П.І.Б',
@@ -68,16 +77,16 @@ return array(
 
     'vacancy.label.name' => 'Назва посади',
     'vacancy.label.user' => 'Контактна особа',
-    'vacancy.label.city_id' => 'Місто',
+    'vacancy.label.city_id' => 'Місто (вкажіть будь ласка місто, в якому відкрито вакансію)',
     'vacancy.label.housing' => 'Чи надається житло',
     'vacancy.label.experience_id' => 'Досвід роботи',
     'vacancy.label.company' => 'Компанія',
-    'vacancy.label.description' => 'Опис вакансіі',
-    'vacancy.label.requirements' => 'Додаткові вимоги',
-    'vacancy.label.status' => 'Статус',
-    'vacancy.label.categories' => 'Категоріі',
-    'vacancy.label.educations' => 'Припустимі варіанти освіти',
-    'vacancy.label.positions' => 'Схожі посади',
+    'vacancy.label.description' => 'Опис вакансії (вкажіть необхіний для посади професійний досвід в цілому і на конкретній позиції, вимоги до наявності спеціальних навичок і документів, основні посадові обв’язки тощо)',
+    'vacancy.label.requirements' => 'Інші вимоги, які Ви висуваєте до кандидатів на Вашу вакансію',
+    'vacancy.label.status' => 'Статус вакансії',
+    'vacancy.label.categoryIds' => 'Професійна сфера',
+    'vacancy.label.educationIds' => 'Вкажіть вимоги до освітнього рівня кандидатів',
+    'vacancy.label.positionIds' => 'Будь ласка, вкажіть посаду, назва якої <br />співпадає (або є близькою) до Вашої',
     'vacancy.label.close_time' => 'Час закриття вакансіі',
     'vacancy.label.updated_at' => 'Останнє оновлення',
     'vacancy.label.created_at' => 'Додано',
@@ -106,4 +115,6 @@ return array(
 
     'city.index' => 'Ідентифікатор міста',
     'city.name' => 'Назва міста',
+
+    'text.filter.placeholder' => 'Для фільтрації впишіть перші букви',
 );

@@ -83,7 +83,7 @@ class SiteController extends Controller
             if($model->register())
             {
                 Yii::app()->user->setFlash('success', Yii::t('main', 'company.register.success'));
-                $this->redirect('/manage/login');
+                return $this->render('company/register_success');
             }
 
             Yii::app()->user->setFlash('error', Yii::t('main', 'company.register.error'));
@@ -107,14 +107,17 @@ class SiteController extends Controller
                 $user->hash = null;
                 $user->status = User::STATUS_ACTIVE;
                 $user->save();
-
+                Yii::app()->user->logout(false);
                 Yii::app()->user->setFlash('success',
                     Yii::t('main', 'user.email.confirm.success'));
                 $this->redirect('/manage/login');
+            } else {
+
+                Yii::app()->user->setFlash('success',
+                    Yii::t('main', 'user.email.confirm.error'));
+                $this->redirect('/');
             }
 
-            Yii::app()->user->setFlash('success',
-                Yii::t('main', 'user.email.confirm.error'));
         }
     }
 

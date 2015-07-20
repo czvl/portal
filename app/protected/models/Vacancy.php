@@ -32,6 +32,10 @@ class Vacancy extends CActiveRecord
     const STATUS_OPEN = 1;
     const STATUS_CLOSED = 2;
 
+    public $categoryIds;
+    public $positionIds;
+    public $educationIds;
+
     /**
      * @inheritdoc
      */
@@ -54,17 +58,28 @@ class Vacancy extends CActiveRecord
     public function rules()
     {
         return [
-            ['name, company_id, city_id, user_id, status, experience_id', 'required'],
+            ['name, company_id, city_id, user_id, status, experience_id, categoryIds', 'required'],
             ['company_id, city_id, user_id, status, housing, experience_id', 'numerical'],
             ['name', 'length', 'max' => 255],
             ['description, requirements', 'length', 'max' => 5000],
-            ['user_id', 'contactPersonValidator']
+            ['user_id', 'contactPersonValidator'],
+            ['positionIds, educationIds', 'safe']
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return array('ESaveRelatedBehavior' => array(
+            'class' => 'application.components.ESaveRelatedBehavior')
+        );
     }
 
     public function contactPersonValidator()
     {
-        $userIds = array_keys(CompanyHelper::userList($this->company_id));
+        $userIds = array_keys(CompanyHelper::userList($this->company->id));
         if(!in_array($this->user_id, $userIds)) {
             $this->addError('user_id', 'Incorrect user_id');
         }
@@ -87,7 +102,35 @@ class Vacancy extends CActiveRecord
             $this->close_time = null;
         }
 
+        $this->categories = $this->categoryIds;
+        $this->positions = $this->positionIds;
+        $this->educations = $this->educationIds;
+
         return parent::beforeSave();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function afterFind()
+    {
+        parent::afterFind();
+
+        if (empty($this->categoryIds)) {
+            foreach ($this->categories as $c) {
+                $this->categoryIds[] = $c->id;
+            }
+        }
+        if (empty($this->positionIds)) {
+            foreach ($this->positions as $p) {
+                $this->positionIds[] = $p->id;
+            }
+        }
+        if (empty($this->educationIds)) {
+            foreach ($this->educations as $e) {
+                $this->educationIds[] = $e->id;
+            }
+        }
     }
 
     /**
@@ -129,6 +172,10 @@ class Vacancy extends CActiveRecord
             'close_time' => Yii::t('main', 'vacancy.label.close_time'),
             'updated_at' => Yii::t('main', 'vacancy.label.updated_at'),
             'created_at' => Yii::t('main', 'vacancy.label.created_at'),
+
+            'categoryIds' => Yii::t('main', 'vacancy.label.categoryIds'),
+            'positionIds' => Yii::t('main', 'vacancy.label.positionIds'),
+            'educationIds' => Yii::t('main', 'vacancy.label.educationIds'),
         ];
     }
 
