@@ -5,7 +5,7 @@
 
 $this->menu = array(
     array('label' => 'Додати анкету', 'url' => array('create')),
-    array('label' => 'Анкети без категорій','url' => 'invalid')
+    array('label' => 'Анкети без категорій','url' => ['invalid'])
 
 );
 
