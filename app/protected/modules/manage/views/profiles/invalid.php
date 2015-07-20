@@ -21,6 +21,12 @@
             }
         ],
         [
+            'name' => CvList::model()->getAttributeLabel('status'),
+            'value' => function(CvList $cvList) {
+                return $cvList->statusTypes[$cvList->status];
+            }
+        ],
+        [
             'name' => CvList::model()->getAttributeLabel('categoryIds'),
             'value' => function(CvList $cvList) {
                 return !empty($cvList->categories) ? '+' : '-';
