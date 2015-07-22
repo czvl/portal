@@ -42,26 +42,15 @@ class SiteController extends Controller
 
         $blogArticles = Yii::app()->db->createCommand($sql)->queryAll();
 
-        $publicKey = 'i67040413486';
-        $privateKey = '2bBkcKXv67KddrAwaMFfBeZqefkGEWgZ1Sx1EeJF';
-        $liqpayConfig = array(
-            'version'        => '3',
-            'amount'         => '100',
-            'currency'       => 'UAH',
-            'description'    => 'Підтримка проекту Центр Зайнятості Вільних Людей',
-            'order_id'       => 'czvldonate' . date('ymdHi') . rand(100, 1000),
-            'type'          => 'donate'
-        );
 
-        $liqpay = new LiqPay($publicKey, $privateKey);
-        $liqpaySignature = $liqpay->cnb_signature($liqpayConfig);
-
-        $liqpayConfig['signature'] = $liqpaySignature;
-        $liqpayConfig['public_key'] = $publicKey;
+        $liqPayConfig = Yii::app()->params['payment']['liqpay'];
+        $liqpay = new LiqPay($liqPayConfig['public_key'], $liqPayConfig['private_key']);
+        $liqPayConfig['order_id'] = 'czvldonate' . date('ymdHi') . rand(100, 1000);
+        $liqPayConfig['signature'] = $liqpay->cnb_signature($liqPayConfig);
 
         $this->render('index', array(
             'blog_articles' => $blogArticles,
-            'liqpay' => $liqpayConfig
+            'liqpay' => $liqPayConfig
         ));
     }
 

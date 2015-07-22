@@ -1,6 +1,16 @@
 <?php
 
 $dbFileName = file_exists(dirname(__FILE__) . '/db_local.php') ? dirname(__FILE__) . '/db_local.php' : dirname(__FILE__) . '/db.php';
+
+if (file_exists(dirname(__FILE__) . '/payment_local.php')) {
+    $payment = CMap::mergeArray(
+        require(dirname(__FILE__) . '/payment.php'),
+        require(dirname(__FILE__) . '/payment_local.php')
+    );
+} else {
+    $payment = require(dirname(__FILE__) . '/payment.php');
+}
+
 Yii::setPathOfAlias('vendor', dirname(__FILE__) . DIRECTORY_SEPARATOR . '../../vendor');
 
 return array(
@@ -126,5 +136,6 @@ return array(
     ),
     'params' => array(
         'adminEmail' => 'shvaykovska@gmail.com',
+        'payment' => $payment,
     ),
 );
