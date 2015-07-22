@@ -63,7 +63,7 @@ class Vacancy extends CActiveRecord
             ['name', 'length', 'max' => 255],
             ['description, requirements', 'length', 'max' => 5000],
             ['user_id', 'contactPersonValidator'],
-            ['positionIds, educationIds', 'safe']
+            ['positionIds, educationIds', 'required']
         ];
     }
 
