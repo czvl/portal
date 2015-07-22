@@ -24,12 +24,17 @@
                         <div class="dblock">
                             <h3>Допомогти проекту</h3>
 
-                            <form method="POST" accept-charset="utf-8" action="https://www.liqpay.com/api/checkout">
-                                <input type="hidden" name="data"
-                                       value="eyJ2ZXJzaW9uIjozLCJwdWJsaWNfa2V5IjoiaTY3MDQwNDEzNDg2IiwiYW1vdW50IjoiNSIsImN1cnJlbmN5IjoiVUFIIiwiZGVzY3JpcHRpb24iOiLQnNC+0Lkg0YLQvtCy0LDRgCIsInR5cGUiOiJkb25hdGUiLCJsYW5ndWFnZSI6InJ1IiwicGF5X3dheSI6ImNhcmQsbGlxcGF5LHByaXZhdDI0In0="/>
-                                <input type="hidden" name="signature" value="FckB99XvpdEpLlSFts6t6OhDAuU="/> <input
-                                    type="image" src="//static.liqpay.com/buttons/d1ru.radius.png" name="btn_text"/>
+                            <form method="post" action="https://www.liqpay.com/api/pay" accept-charset="utf-8" style="display: inline;">
+                                <input type="hidden" name="amount" value="<?php echo $liqpay['amount']; ?>" />
+                                <input type="hidden" name="currency" value="<?php echo $liqpay['currency']; ?>" />
+                                <input type="hidden" name="description" value="<?php echo $liqpay['description']; ?>" />
+                                <input type="hidden" name="order_id" value="<?php echo $liqpay['order_id']; ?>" />
+                                <input type="hidden" name="type" value="<?php echo $liqpay['type']; ?>" />
+                                <input type="hidden" name="public_key" value="<?php echo $liqpay['public_key']; ?>" />
+                                <input type="hidden" name="signature" value="<?php echo $liqpay['signature']; ?>" />
+                                <input type="image" src="http://static.liqpay.com/buttons/d1ru.radius.png" name="btn_text" />
                             </form>
+
                         </div>
                     </div>
                 </div>
