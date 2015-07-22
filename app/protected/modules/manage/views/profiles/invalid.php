@@ -21,6 +21,12 @@
             }
         ],
         [
+            'name' => CvList::model()->getAttributeLabel('status'),
+            'value' => function(CvList $cvList) {
+                return $cvList->statusTypes[$cvList->status];
+            }
+        ],
+        [
             'name' => CvList::model()->getAttributeLabel('categoryIds'),
             'value' => function(CvList $cvList) {
                 return !empty($cvList->categories) ? '+' : '-';
@@ -44,6 +50,22 @@
                 return !empty($cvList->citiesResidence) ? '+' : '-';
             }
         ],
-        'last_update',
+        [
+            'name' => CvList::model()->getAttributeLabel('recruiter'),
+            'value' => function(CvList $cvList) {
+                $recruiter = $cvList->recruiter;
+                if(!empty($recruiter)) {
+                    return  CHtml::link($cvList->recruiter->firstLastName, [
+                        '/manage/reqruiter',
+                        'id' => $cvList->recruiter->id,
+                    ]);
+                }
+
+                return null;
+            },
+            'type' => 'raw',
+        ],
+        'added_time:datetime',
+        'last_update:datetime',
     ],
 ));?>
