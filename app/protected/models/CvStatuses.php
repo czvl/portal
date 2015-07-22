@@ -142,14 +142,12 @@ class CvStatuses extends CActiveRecord
      */
     protected function afterSave()
     {
-        if($this->scenario == 'insert') {
+        if($this->scenario == 'insert' && is_array($this->vacancyIdsArray)) {
             foreach($this->vacancyIdsArray as $vacancyId) {
                 $cvStatusToVacancy = new CvStatusToVacancy();
                 $cvStatusToVacancy->cv_status_id = $this->id;
                 $cvStatusToVacancy->vacancy_id = $vacancyId;
                 $cvStatusToVacancy->save();
-//                var_dump($cvStatusToVacancy->getErrors());
-//                die;
             }
         }
     }
