@@ -44,7 +44,7 @@
                                             array('label' => 'Адміністративна частина', 'items' => array(
                                                     array('label' => 'Користувачі', 'url' => array('/manage/users')),
                                                     TbHtml::menuDivider(),
-                                                    array('label' => 'Довідник категорій', 'url' => '#'),
+                                                    array('label' => 'Довідник категорій', 'url' => ['/manage/categories']),
                                                 ), 'visible' => Yii::app()->user->checkAccess(User::ROLE_ADMIN) || Yii::app()->user->checkAccess(User::ROLE_MANAGER)
                                             ),
                                         ),
