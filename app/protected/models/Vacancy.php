@@ -25,6 +25,8 @@
  * @property CvCategories[] $categories
  * @property Education[] $educations
  * @property CvPositions[] $positions
+ * @property User $creator
+ * @property User $updater
  */
 class Vacancy extends CActiveRecord
 {
@@ -199,6 +201,16 @@ class Vacancy extends CActiveRecord
                 self::BELONGS_TO,
                 User::class,
                 'user_id',
+            ],
+            'creator' => [
+                self::BELONGS_TO,
+                User::class,
+                'created_by',
+            ],
+            'updater' => [
+                self::BELONGS_TO,
+                User::class,
+                'updated_by',
             ],
             'experience' => [
                 self::BELONGS_TO,

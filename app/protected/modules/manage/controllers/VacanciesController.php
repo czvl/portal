@@ -58,6 +58,7 @@ class VacanciesController extends Controller
 
         if(!empty($_POST['Vacancy'])) {
             $vacancy->attributes = $_POST['Vacancy'];
+            $vacancy->updated_by = Yii::app()->user->id;
             /* @var $vacancy ESaveRelatedBehavior */
             if($vacancy->saveWithRelated([
                 'categories',
@@ -94,7 +95,7 @@ class VacanciesController extends Controller
 
         if(!empty($_POST['Vacancy'])) {
             $vacancy->attributes = $_POST['Vacancy'];
-
+            $vacancy->created_by = Yii::app()->user->id;
 
             /* @var $vacancy ESaveRelatedBehavior */
             if($vacancy->saveWithRelated([
@@ -120,6 +121,11 @@ class VacanciesController extends Controller
         ]);
     }
 
+    /**
+     * @param $id
+     * @return Vacancy
+     * @throws CHttpException
+     */
     private function getVacancy($id)
     {
         $vacancy = Vacancy::model()->findByPk($id);

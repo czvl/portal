@@ -65,6 +65,8 @@ class EmployerController extends Controller
 
         if(!empty($_POST['Vacancy'])) {
             $vacancy->attributes = $_POST['Vacancy'];
+            /* @var $vacancy Vacancy */
+            $vacancy->updated_by = Yii::app()->user->id;
             /* @var $vacancy ESaveRelatedBehavior */
             if($vacancy->saveWithRelated([
                 'categories',

@@ -45,7 +45,23 @@ $this->widget('bootstrap.widgets.TbDetailView', [
             'company.name',
             [
                 'name' => 'created_at',
-                'value' => Yii::app()->dateFormatter->formatDateTime($model->created_at, "long"),
+                'value' => function(Vacancy $vacancy) {
+                    $creator = '--';
+                    if(!empty($vacancy->creator)) {
+                        $creator = $vacancy->creator->getFirstLastName();
+                    }
+                    return $creator . ": " . Yii::app()->dateFormatter->formatDateTime($vacancy->created_at, "long");
+                },
+            ],
+            [
+                'name' => 'updated_at',
+                'value' => function(Vacancy $vacancy) {
+                    $updater = '--';
+                    if(!empty($vacancy->updater)) {
+                        $updater = $vacancy->updater->getFirstLastName();
+                    }
+                    return $updater . ": " . Yii::app()->dateFormatter->formatDateTime($vacancy->created_at, "long");
+                },
             ],
             [
                 'name' => 'close_time',
