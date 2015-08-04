@@ -1,11 +1,8 @@
 <?php
+$main = require "main.php";
 
-$dbFileName = file_exists(dirname(__FILE__) . '/db_local.php') ? dirname(__FILE__) . '/db_local.php' : dirname(__FILE__) . '/db.php';
-return array(
-	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'preload'=>array('log'),
+$config =  [
 	'components'=>array(
-		'db'=> require $dbFileName,
 		'log'=>array(
 			'class'=>'CLogRouter',
 			'routes'=>array(
@@ -15,21 +12,11 @@ return array(
 				),
 			),
 		),
-        'config' => array(
-            'class' => 'Config'
+        'urlManager' => array(
+            'baseUrl' => 'http://czvl.org.ua',
         ),
 	),
-    'aliases' => array(
-        'bootstrap' => 'ext.bootstrap'
-    ),
-    'import' => array(
-        'application.models.*',
-        'application.components.*',
-        'application.components.helpers.*',
-        'application.extensions.yii-mail.YiiMailMessage',
-        'bootstrap.helpers.TbHtml',
-        'bootstrap.helpers.TbArray',
-        'bootstrap.behaviors.TbWidget',
-        'bootstrap.widgets.*'
-    ),
-);
+];
+
+return CMap::mergeArray($main, $config);
+

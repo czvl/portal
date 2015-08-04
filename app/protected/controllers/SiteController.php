@@ -43,7 +43,7 @@ class SiteController extends Controller
         $blogArticles = Yii::app()->db->createCommand($sql)->queryAll();
 
 
-        $liqPayConfig = Yii::app()->params['payment']['liqpay'];
+        $liqPayConfig = Yii::app()->config->payment['liqpay'];
         $liqpay = new LiqPay($liqPayConfig['public_key'], $liqPayConfig['private_key']);
         $liqPayConfig['order_id'] = 'czvldonate' . date('ymdHi') . rand(100, 1000);
         $liqPayConfig['signature'] = $liqpay->cnb_signature($liqPayConfig);
