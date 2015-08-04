@@ -8,6 +8,6 @@ defined('YII_DEBUG') or define('YII_DEBUG', true);
 defined('YII_TRACE_LEVEL') or define('YII_TRACE_LEVEL', 3);
 
 require(__DIR__ . '/../vendor/autoload.php');
-$config = __DIR__ . '/../protected/config/main.php';
+$config = __DIR__ . '/../protected/config/web.php';
 
 Yii::createWebApplication($config)->run();

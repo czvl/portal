@@ -56,10 +56,10 @@ class CvList extends CActiveRecord
     public function init()
     {
         parent::init();
-        $this->genderTypes = $this->loadConfigFromFile('gender_types');
-        $this->educationTypes = $this->loadConfigFromFile('education_types');
-        $this->statusTypes = $this->loadConfigFromFile('statuses');
-        $this->maritalStatuses = $this->loadConfigFromFile('marital_statuses');
+        $this->genderTypes = Yii::app()->config->gender_types;
+        $this->educationTypes = Yii::app()->config->education_types;
+        $this->statusTypes = Yii::app()->config->statuses;
+        $this->maritalStatuses = Yii::app()->config->marital_statuses;
     }
 
     /**
@@ -102,7 +102,7 @@ class CvList extends CActiveRecord
         }
     }
     
-    public function existentUser($attribute, $params)
+    public function existentUser($attribute)
     {
         if (!empty($this->first_name) && !empty($this->last_name) && !empty($this->contact_phone)) {
             $this->contact_phone = preg_replace('/[^0-9]/', '', $this->contact_phone);
@@ -309,13 +309,13 @@ class CvList extends CActiveRecord
     
     public function getStatusTypes()
     {
-        $this->statusTypes = $this->loadConfigFromFile('statuses');
+        $this->statusTypes = Yii::app()->config->statuses;
         return $this->statusTypes;
     }
 
 	public function getGenderTypes()
 	{
-		$this->genderTypes = $this->loadConfigFromFile('gender_types');
+		$this->genderTypes = Yii::app()->config->gender_types;
 		return $this->genderTypes;
 	}
 
@@ -360,17 +360,6 @@ class CvList extends CActiveRecord
     public function getFirstLastName()
     {
         return $this->first_name . " " . $this->last_name;
-    }
-
-    private function loadConfigFromFile($file)
-    {
-        $filePath = Yii::getPathOfAlias('application.config.' . $file).'.php';
-        
-        if (is_file($filePath)) {
-            return require($filePath);
-        } else {
-            return array();
-        }
     }
 
     public function getItemsByList(array $list)

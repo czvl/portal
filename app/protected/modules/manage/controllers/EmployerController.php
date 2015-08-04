@@ -22,6 +22,11 @@ class EmployerController extends Controller
         return [
             [
                 'allow',
+                'actions' => array('activate_vacancy'),
+                'users' => array('?'),
+            ],
+            [
+                'allow',
                 'roles' => [User::ROLE_EMPL]
             ],
             [
@@ -117,6 +122,56 @@ class EmployerController extends Controller
             'company' => $company,
             'vacancy' => $vacancy
         ]);
+    }
+
+    /**
+     * Activating vacancy form email link
+     * @param $hash
+     */
+    public function actionActivate_vacancy($hash)
+    {
+        $hasError = true;
+        $errorMessage = '';
+
+        if (!empty($hash)) {
+            $vacancy = Vacancy::model()->findByAttributes([
+                'hash' => $hash
+            ]);
+
+            if(!empty($vacancy)) {
+                $vacancy->status = Vacancy::STATUS_OPEN;
+                $vacancy->updated_by = $vacancy->user->id;
+                $vacancy->close_time = new CDbExpression('NOW() + INTERVAL ' . Vacancy::INTERVAL_OPENED . ' DAY');
+                $vacancy->hash = null;
+
+                if($vacancy->save()) {
+                    $hasError = false;
+                    Yii::app()->user->setFlash('success',
+                        Yii::t('main', 'vacancy.email.deactivate.message.success', [
+                            ':date' => date("Y-m-d H:i:s", strtotime('+14day')),
+                        ]));
+                } else {
+                    foreach($vacancy->getErrors() as $err)
+                    {
+                        $errorMessage .= " " . implode(";", $err);
+                    }
+                }
+            }
+        }
+
+        if($hasError) {
+            Yii::app()->user->setFlash('error',
+                Yii::t('main', 'vacancy.email.deactivate.message.error', [
+                    ':message' => $errorMessage,
+                ]));
+        }
+
+        if(Yii::app()->user->isGuest) {
+            $this->redirect('/manage/login');
+        } else {
+            $this->redirect('/manage/employer/index');
+        }
+
     }
 
 
