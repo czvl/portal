@@ -59,7 +59,7 @@ class User extends CActiveRecord
     public function init()
     {
         parent::init();
-        $this->statusTypes = Yii::app()->getController()->loadConfigFromFile('user_statuses');
+        $this->statusTypes = Yii::app()->config->user_statuses;
     }
 
     /**
@@ -195,7 +195,7 @@ class User extends CActiveRecord
     public function getRoles()
     {
         if (empty($this->_roles)) {
-            $authRoles = Yii::app()->getController()->loadConfigFromFile('auth');
+            $authRoles = Yii::app()->config->auth;
 
             foreach ($authRoles as $key => $item) {
                 if (Yii::app()->user->role == "administrator" || !in_array($key, array('guest', 'manager', 'administrator'))) {

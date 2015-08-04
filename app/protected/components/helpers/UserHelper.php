@@ -23,6 +23,5 @@ class UserHelper
         Yii::app()->mailer->send($message);
 
         return true;
-
     }
 }

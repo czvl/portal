@@ -62,6 +62,9 @@ return array(
             'class' => 'PhpAuthManager',
             'defaultRoles' => array('guest'),
         ),
+        'config' => array(
+            'class' => 'Config'
+        ),
         'urlManager' => array(
             'urlFormat' => 'path',
             'showScriptName' => false,

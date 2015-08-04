@@ -15,5 +15,21 @@ return array(
 				),
 			),
 		),
+        'config' => array(
+            'class' => 'Config'
+        ),
 	),
+    'aliases' => array(
+        'bootstrap' => 'ext.bootstrap'
+    ),
+    'import' => array(
+        'application.models.*',
+        'application.components.*',
+        'application.components.helpers.*',
+        'application.extensions.yii-mail.YiiMailMessage',
+        'bootstrap.helpers.TbHtml',
+        'bootstrap.helpers.TbArray',
+        'bootstrap.behaviors.TbWidget',
+        'bootstrap.widgets.*'
+    ),
 );
