@@ -131,17 +131,17 @@ class EmployerController extends Controller
     public function actionActivate_vacancy($hash)
     {
         $hasError = true;
+        $errorMessage = '';
 
         if (!empty($hash)) {
             $vacancy = Vacancy::model()->findByAttributes([
                 'hash' => $hash
             ]);
-            $date = new CDbExpression('NOW() + INTERVAL ' . Vacancy::INTERVAL_OPENED . ' DAY');
 
             if(!empty($vacancy)) {
                 $vacancy->status = Vacancy::STATUS_OPEN;
                 $vacancy->updated_by = $vacancy->user->id;
-                $vacancy->close_time = $date;
+                $vacancy->close_time = new CDbExpression('NOW() + INTERVAL ' . Vacancy::INTERVAL_OPENED . ' DAY');
                 $vacancy->hash = null;
 
                 if($vacancy->save()) {
@@ -150,13 +150,20 @@ class EmployerController extends Controller
                         Yii::t('main', 'vacancy.email.deactivate.message.success', [
                             ':date' => date("Y-m-d H:i:s", strtotime('+14day')),
                         ]));
+                } else {
+                    foreach($vacancy->getErrors() as $err)
+                    {
+                        $errorMessage .= " " . implode(";", $err);
+                    }
                 }
             }
         }
 
         if($hasError) {
             Yii::app()->user->setFlash('error',
-                Yii::t('main', 'vacancy.email.deactivate.message.error'));
+                Yii::t('main', 'vacancy.email.deactivate.message.error', [
+                    ':message' => $errorMessage,
+                ]));
         }
 
         if(Yii::app()->user->isGuest) {

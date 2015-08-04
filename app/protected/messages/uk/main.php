@@ -117,7 +117,7 @@ return array(
 Центр зайнятості вільних людей.
 http://czvl.org.ua',
     'vacancy.email.deactivate.message.success' => 'Вакансію успішно активовано до :date.',
-    'vacancy.email.deactivate.message.error' => 'Виникла помилка при активаціі - можливо вакансія була активована раніше.',
+    'vacancy.email.deactivate.message.error' => 'Виникла помилка при активаціі - можливо вакансія була активована раніше. Додатково: :message',
     'cv_status.notFoundVacancyIds' => 'Вакансії з ідентифікаторами :ids не знайдені в базі.',
     'cv_status.incorrectVacancyIds' => 'Поле може містити лише числові ідентифікатори, розділені комами',
     'cv_status.massage.label' => 'Текст',
