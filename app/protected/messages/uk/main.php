@@ -108,7 +108,7 @@ return array(
     'vacancy.ids.label' => 'Ідентифікатори вакансій (через кому)',
     'vacancy.ids.placeholder' => '1,2,3',
 
-    'vacancy.email.deactivate.subject' => 'Вакансію {name} автоматично закрито.',
+    'vacancy.email.deactivate.subject' => 'Вакансію :name автоматично закрито.',
     'vacancy.email.deactivate.body' => 'Вашу вакансію ":name" було автоматично закрито по досяненню нею кінцевого терміну діі.
 Якщо ви бажаєте активувати вакансію ще на :days діб, будь-ласка, перейдіть за цим посиланням:
 :link
