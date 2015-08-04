@@ -142,12 +142,13 @@ class EmployerController extends Controller
                 $vacancy->status = Vacancy::STATUS_OPEN;
                 $vacancy->updated_by = $vacancy->user->id;
                 $vacancy->close_time = $date;
+                $vacancy->hash = null;
 
                 if($vacancy->save()) {
                     $hasError = false;
                     Yii::app()->user->setFlash('success',
                         Yii::t('main', 'vacancy.email.deactivate.message.success', [
-                            ':date' => $vacancy->close_time,
+                            ':date' => date("Y-m-d H:i:s", strtotime('+14day')),
                         ]));
                 }
             }

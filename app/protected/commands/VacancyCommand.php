@@ -30,7 +30,7 @@ class VacancyCommand extends CConsoleCommand
         $vacancy->updated_by = 0;
         $vacancy->hash = md5(microtime(true). $vacancy->user_id);
 
-        $vacancy->save();
+        $vacancy->save(false);
     }
 
     /**
