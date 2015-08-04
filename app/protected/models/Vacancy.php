@@ -10,6 +10,7 @@
  * @property int $user_id
  * @property string $description
  * @property string $requirements
+ * @property string $hash
  * @property int $status
  * @property int $housing
  * @property string $close_time
@@ -33,6 +34,7 @@ class Vacancy extends CActiveRecord
 
     const STATUS_OPEN = 1;
     const STATUS_CLOSED = 2;
+    const INTERVAL_OPENED = 14; // days vacancy is open
 
     public $categoryIds;
     public $positionIds;
@@ -63,6 +65,7 @@ class Vacancy extends CActiveRecord
             ['name, company_id, city_id, user_id, status, experience_id, categoryIds', 'required'],
             ['company_id, city_id, user_id, status, housing, experience_id', 'numerical'],
             ['name', 'length', 'max' => 255],
+            ['hash', 'length', 'is' => 32],
             ['description, requirements', 'length', 'max' => 5000],
             ['user_id', 'contactPersonValidator'],
             ['positionIds, educationIds', 'required']
@@ -97,7 +100,7 @@ class Vacancy extends CActiveRecord
         $this->updated_at = $now;
         if ($this->scenario = 'create') {
             $this->created_at = $now;
-            $this->close_time = new CDbExpression('NOW() + INTERVAL 14 DAY');
+            $this->close_time = new CDbExpression('NOW() + INTERVAL '.self::INTERVAL_OPENED.' DAY');
         }
 
         if($this->status == self::STATUS_CLOSED) {

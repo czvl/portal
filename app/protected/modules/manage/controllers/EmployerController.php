@@ -22,6 +22,11 @@ class EmployerController extends Controller
         return [
             [
                 'allow',
+                'actions' => array('refresh_vacancy'),
+                'users' => array('?'),
+            ],
+            [
+                'allow',
                 'roles' => [User::ROLE_EMPL]
             ],
             [
@@ -117,6 +122,48 @@ class EmployerController extends Controller
             'company' => $company,
             'vacancy' => $vacancy
         ]);
+    }
+
+    /**
+     * Activating vacancy form email link
+     * @param $hash
+     */
+    public function actionActivate_vacancy($hash)
+    {
+        $hasError = true;
+
+        if (!empty($hash)) {
+            $vacancy = Vacancy::model()->findByAttributes([
+                'hash' => $hash
+            ]);
+            $date = new CDbExpression('NOW() + INTERVAL ' . Vacancy::INTERVAL_OPENED . ' DAY');
+
+            if(!empty($vacancy)) {
+                $vacancy->status = Vacancy::STATUS_OPEN;
+                $vacancy->updated_by = $vacancy->user->id;
+                $vacancy->close_time = $date;
+
+                if($vacancy->save()) {
+                    $hasError = false;
+                    Yii::app()->user->setFlash('success',
+                        Yii::t('main', 'vacancy.email.deactivate.message.success', [
+                            ':date' => $vacancy->close_time,
+                        ]));
+                }
+            }
+        }
+
+        if($hasError) {
+            Yii::app()->user->setFlash('error',
+                Yii::t('main', 'vacancy.email.deactivate.message.error'));
+        }
+
+        if(Yii::app()->user->isGuest) {
+            $this->redirect('/manage/login');
+        } else {
+            $this->redirect('/manage/employer/index');
+        }
+
     }
 
 
