@@ -7,6 +7,7 @@ class VacancyCommand extends CConsoleCommand
      */
     public function actionDeactivate()
     {
+        echo "Start.." . PHP_EOL;
         $vacancies = Vacancy::model()->findAll(
             'status=:status AND close_time < :close_time'            ,
             [
@@ -16,6 +17,7 @@ class VacancyCommand extends CConsoleCommand
         );
 
         foreach($vacancies as $vacancy) { /* @var $vacancy Vacancy */
+            echo $vacancy->id . PHP_EOL;
             $this->deactivateVacancy($vacancy);
             $this->sendMessage($vacancy);
         }
@@ -58,7 +60,7 @@ class VacancyCommand extends CConsoleCommand
 
         $message = Yii::app()->mailer
             ->createMessage($subject, $body)
-            ->setFrom(['noreply@czvl.org.ua' => 'Центр зайнятості вільних людей'])
+            ->setFrom(['noreply@czvl.org.ua' => 'ЦЗВЛ'])
             ->setTo([$user->email => $user->first_name]);
 
         if(Yii::app()->mailer->send($message)) {
