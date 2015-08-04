@@ -22,7 +22,7 @@ class EmployerController extends Controller
         return [
             [
                 'allow',
-                'actions' => array('refresh_vacancy'),
+                'actions' => array('activate_vacancy'),
                 'users' => array('?'),
             ],
             [

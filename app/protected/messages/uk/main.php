@@ -109,14 +109,14 @@ return array(
     'vacancy.ids.placeholder' => '1,2,3',
 
     'vacancy.email.deactivate.subject' => 'Вакансію {name} автоматично закрито.',
-    'vacancy.email.deactivate.body' => 'Вашу вакансію "{name}" було автоматично закрито по досяненню нею кінцевого терміну діі.
-Якщо ви бажаєте активувати вакансію ще на {:days} діб, будь-ласка, перейдіть за цим посиланням:
-{:link}
+    'vacancy.email.deactivate.body' => 'Вашу вакансію ":name" було автоматично закрито по досяненню нею кінцевого терміну діі.
+Якщо ви бажаєте активувати вакансію ще на :days діб, будь-ласка, перейдіть за цим посиланням:
+:link
 
 З повагою,
 Центр зайнятості вільних людей.
 http://czvl.org.ua',
-    'vacancy.email.deactivate.message.success' => 'Вакансію успішно активовано до {date}.',
+    'vacancy.email.deactivate.message.success' => 'Вакансію успішно активовано до :date.',
     'vacancy.email.deactivate.message.error' => 'Виникла помилка при активаціі - можливо вакансія була активована раніше.',
     'cv_status.notFoundVacancyIds' => 'Вакансії з ідентифікаторами :ids не знайдені в базі.',
     'cv_status.incorrectVacancyIds' => 'Поле може містити лише числові ідентифікатори, розділені комами',
