@@ -60,7 +60,7 @@ class VacancyCommand extends CConsoleCommand
 
         $message = Yii::app()->mailer
             ->createMessage($subject, $body)
-            ->setFrom(['noreply@czvl.org.ua' => 'ЦЗВЛ'])
+            ->setFrom([Yii::app()->mailer->username => 'ЦЗВЛ'])
             ->setTo([$user->email => $user->first_name]);
 
         if(Yii::app()->mailer->send($message)) {

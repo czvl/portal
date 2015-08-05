@@ -2,18 +2,10 @@
 
 $dbFileName = file_exists(dirname(__FILE__) . '/db_local.php') ? dirname(__FILE__) . '/db_local.php' : dirname(__FILE__) . '/db.php';
 
-if (file_exists(dirname(__FILE__) . '/payment_local.php')) {
-    $payment = CMap::mergeArray(
-        require(dirname(__FILE__) . '/payment.php'),
-        require(dirname(__FILE__) . '/payment_local.php')
-    );
-} else {
-    $payment = require(dirname(__FILE__) . '/payment.php');
-}
-
 Yii::setPathOfAlias('vendor', dirname(__FILE__) . DIRECTORY_SEPARATOR . '../../vendor');
+$local = file_exists(dirname(__FILE__) . "/main_local.php") ? require dirname(__FILE__) . "/main_local.php" : [];
 
-return array(
+return CMap::mergeArray(array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name' => 'Employment center of free people',
     'charset' => 'utf-8',
@@ -85,4 +77,5 @@ return array(
     'params' => array(
         'adminEmail' => 'shvaykovska@gmail.com',
     ),
-);
+), $local );
+

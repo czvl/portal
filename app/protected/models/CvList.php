@@ -39,6 +39,7 @@ class CvList extends CActiveRecord
 {
     const IS_ACTIVE_PRESENT = 'yes';
     const IS_ACTIVE_DELETED = 'no';
+    const AGE_MINIMUM = 16;
 
     public $genderTypes = array();
     public $categoryIds = array();
@@ -84,7 +85,11 @@ class CvList extends CActiveRecord
             array('contact_phone', 'length', 'max' => 19),
             array('birth_date', 'type', 'type' => 'date', 'message' => 'Поле "Дата нарождення" має бути датою.',  'dateFormat' => 'yyyy-MM-dd'),
             array('birth_date', 'birthDateValidator'),
-            array('birth_date, other_contacts, eduction_info, work_experience, skills, summary, documents, applicant_type, recruiter_comments, residenciesIds, jobLocationsIds, driverLicensesIds, assistanceIds, personal_data', 'safe'),
+            array('email', 'email'),
+            array('birth_date, other_contacts, eduction_info, work_experience, skills,
+            summary, documents, applicant_type,
+            recruiter_comments, residenciesIds, jobLocationsIds,
+            driverLicensesIds, assistanceIds, personal_data, positionsIds', 'safe'),
             
             array('contact_phone', 'existentUser', 'on' => 'public'),
             array('personal_data', 'required', 'on' => 'public'),
@@ -96,9 +101,8 @@ class CvList extends CActiveRecord
 
     public function birthDateValidator()
     {
-        $years = 16;
-        if(strtotime('-'.$years.'year') < strtotime($this->birth_date)) {
-            $this->addError('birth_date', Yii::t('main', 'applicant.error.tooYoung', ['{years}' => $years]));
+        if (strtotime('-' . self::AGE_MINIMUM . 'year') < strtotime($this->birth_date)) {
+            $this->addError('birth_date', Yii::t('main', 'applicant.error.tooYoung', ['{years}' => self::AGE_MINIMUM]));
         }
     }
     
