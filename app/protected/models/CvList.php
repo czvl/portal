@@ -39,6 +39,7 @@ class CvList extends CActiveRecord
 {
     const IS_ACTIVE_PRESENT = 'yes';
     const IS_ACTIVE_DELETED = 'no';
+    const AGE_MINIMUM = 16;
 
     public $genderTypes = array();
     public $categoryIds = array();
@@ -96,9 +97,8 @@ class CvList extends CActiveRecord
 
     public function birthDateValidator()
     {
-        $years = 16;
-        if(strtotime('-'.$years.'year') < strtotime($this->birth_date)) {
-            $this->addError('birth_date', Yii::t('main', 'applicant.error.tooYoung', ['{years}' => $years]));
+        if (strtotime('-' . self::AGE_MINIMUM . 'year') < strtotime($this->birth_date)) {
+            $this->addError('birth_date', Yii::t('main', 'applicant.error.tooYoung', ['{years}' => self::AGE_MINIMUM]));
         }
     }
     
