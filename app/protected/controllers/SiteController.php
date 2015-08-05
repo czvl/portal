@@ -153,6 +153,17 @@ class SiteController extends Controller
                     }
                 }
 
+                if (!empty($_POST['CvList']['positionsIds'])) {
+                    foreach($_POST['CvList']['positionsIds'] as $positionId) {
+                        $cvToPosition = new CvToPosition();
+                        $cvToPosition->cv_id = $model->id;
+                        $cvToPosition->position_id = $positionId;
+                        if (!$cvToPosition->save()) {
+                            $result[] = false;
+                        }
+                    }
+                }
+
                 if (!empty($_POST['CvList']['driverLicensesIds'])) {
                     foreach ($_POST['CvList']['driverLicensesIds'] as $dl) {
                         $license = new CvToDriverLicense();

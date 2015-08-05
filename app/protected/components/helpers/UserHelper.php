@@ -17,7 +17,7 @@ class UserHelper
         $subject = Yii::t('main', 'user.email.confirm.subject');
         $message = Yii::app()->mailer
             ->createMessage($subject, $body)
-            ->setFrom(['noreply@czvl.org.ua' => 'Центр зайнятості вільних людей'])
+            ->setFrom([Yii::app()->mailer->username => 'ЦЗВЛ'])
             ->setTo([$user->email => $user->first_name]);
 
         Yii::app()->mailer->send($message);

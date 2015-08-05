@@ -138,11 +138,23 @@
             <?= $form->textField($model, 'desired_position', ['class' => 'span8', 'maxlength' => 255]) ?>
             <?= $form->error($model, 'desired_position') ?>
 
+            <?php echo $form->labelEx($model, 'positionsIds'); ?>
+            <input type="text" name="positionsFilter" class="filter span8"
+                   placeholder="<?= Yii::t('main', 'text.filter.placeholder') ?>"/>
+
+            <div class="div-overflow">
+                <?= $form->checkBoxList($model, 'positionsIds', PositionsHelper::all(), [
+                    'template' => '{beginLabel}{input} {labelTitle}{endLabel}',
+                    'separator' => '',
+                ]) ?>
+            </div>
+
             <?= $form->labelEx($model, 'salary') ?>
             <?= $form->textField($model, 'salary', ['class' => 'span8', 'maxlength' => 255]) ?>
             <?= $form->error($model, 'salary') ?>
 
             <?= $form->labelEx($model, 'jobLocationsIds'); ?>
+
             <div class="div-overflow">
                 <?php echo $form->checkBoxList($model, 'jobLocationsIds',
                     CHtml::listData(CitiesList::model()->findAll(['order' => 'city_name']), 'city_index', 'city_name'),
@@ -151,6 +163,7 @@
                         'separator' => '',
                     ]); ?>
             </div>
+            <?= $form->error($model, 'jobLocationsIds'); ?>
 
 
             <?= $form->labelEx($model, 'documents') ?>
