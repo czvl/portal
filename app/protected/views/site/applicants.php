@@ -5,7 +5,7 @@
  */
 ?>
 <section id="services" class="single-page scrollblock">
-    <div class="container">
+    <div class="container" >
         <h1>Додати анкету</h1>
 
         <div class="notice">
@@ -57,6 +57,11 @@
                 'attribute' => 'birth_date',
                 'mask' => '9999-99-99',
                 'placeholder' => '*',
+                'htmlOptions' => [
+                    'class' => 'span4',
+                    'style' => 'font-size: 18px;'
+                ]
+
             ));
             ?>
             <?= $form->error($model, 'birth_date') ?>
