@@ -96,7 +96,15 @@ class ProfilesController extends Controller {
 
 				Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS, 'Статус анкети був оновлений!');
 				$this->redirect(array('/manage/profiles/view/', 'id' => $id));
-			}
+			} else {
+                $errors = $model->getErrors();
+                $errString = '';
+                foreach($errors as $e) {
+                    $errString .= implode(", ", $e);
+                }
+
+                Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_ERROR, 'Виникли помилки: '. $errString);
+            }
 		}
 
 		$statuses = CvStatuses::model()->findAll(array(
