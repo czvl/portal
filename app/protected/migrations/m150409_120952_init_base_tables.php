@@ -4,8 +4,6 @@ class m150409_120952_init_base_tables extends CDbMigration
 {
 	public function up()
 	{
-        return true;
-
         $this->execute(
 <<<SQL
 
