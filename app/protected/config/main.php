@@ -28,7 +28,7 @@ return CMap::mergeArray(array(
     ),
     'components' => array(
         'bootstrap' => array(
-            'class' => 'bootstrap.components.TbApi',   
+            'class' => 'bootstrap.components.TbApi',
         ),
         'BsHtml' => array(
             'class' => 'bootstrap.helpers.BsHtml'
@@ -51,11 +51,11 @@ return CMap::mergeArray(array(
                 'gii' => 'gii',
                 'gii/<controller:\w+>' => 'gii/<controller>',
                 'gii/<controller:\w+>/<action:\w+>' => 'gii/<controller>/<action>',
-                
+
                 'manage/login' => 'manage/default/login',
                 'manage/logout' => 'manage/default/logout',
                 'applicants' => 'site/applicants',
-                
+
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
@@ -63,7 +63,8 @@ return CMap::mergeArray(array(
         ),
         'mailer' => array(
             'class' => 'vendor.janisto.yii-mailer.SwiftMailerComponent',
-            'type' => 'smtp',
+            // 'class' => 'vendor.swiftmailer.SwiftMailer',
+            'type' => 'file',
 
         ),
         'db' => require($dbFileName),
@@ -78,4 +79,3 @@ return CMap::mergeArray(array(
         'adminEmail' => 'shvaykovska@gmail.com',
     ),
 ), $local );
-

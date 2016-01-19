@@ -51,7 +51,8 @@ class CvList extends CActiveRecord
     public $residenciesIds = array();
     public $jobLocationsIds = array();
     public $maritalStatuses = array();
-    
+    public $desiredPositionsIds = array();
+
     public $personal_data;
 
     public function init()
@@ -77,7 +78,7 @@ class CvList extends CActiveRecord
     public function rules()
     {
         return array(
-            array('first_name, last_name, gender, contact_phone, birth_date, residenciesIds, education, jobLocationsIds, desired_position, work_experience, skills, summary, applicant_type', 'required'),
+            array('first_name, last_name, gender, contact_phone, birth_date, residenciesIds, education, jobLocationsIds, work_experience, skills, summary, applicant_type, desiredPositionsIds', 'required'),
             array('marital_status, education, recruiter_id, status', 'numerical', 'integerOnly' => true),
             array('first_name, last_name, email, salary, desired_position, cv_file, who_filled', 'length', 'max' => 255),
             array('gender', 'length', 'max' => 1),
@@ -89,8 +90,8 @@ class CvList extends CActiveRecord
             array('birth_date, other_contacts, eduction_info, work_experience, skills,
             summary, documents, applicant_type,
             recruiter_comments, residenciesIds, jobLocationsIds,
-            driverLicensesIds, assistanceIds, personal_data, positionsIds', 'safe'),
-            
+            driverLicensesIds, assistanceIds, personal_data, positionsIds, desiredPositionsIds', 'safe'),
+
             array('contact_phone', 'existentUser', 'on' => 'public'),
             array('personal_data', 'required', 'on' => 'public'),
             array('personal_data', 'compare', 'compareValue' => true, 'message' => 'Вам потрібно погодитись надати нам Ваші персональні дані.', 'on' => 'public'),
@@ -105,7 +106,7 @@ class CvList extends CActiveRecord
             $this->addError('birth_date', Yii::t('main', 'applicant.error.tooYoung', ['{years}' => self::AGE_MINIMUM]));
         }
     }
-    
+
     public function existentUser($attribute)
     {
         if (!empty($this->first_name) && !empty($this->last_name) && !empty($this->contact_phone)) {
@@ -116,7 +117,7 @@ class CvList extends CActiveRecord
             }
         }
     }
-    
+
     public function behaviors()
     {
         return array('ESaveRelatedBehavior' => array(
@@ -144,6 +145,7 @@ class CvList extends CActiveRecord
             'cvStatuses' => array(self::HAS_MANY, 'CvStatuses', 'cv_id'),
             'categories' => array(self::MANY_MANY, 'CvCategories', 'cv_to_category(cv_id, category_id)'),
             'positions' => array(self::MANY_MANY, 'CvPositions', 'cv_to_position(cv_id, position_id)'),
+            'desiredPositions' => array(self::MANY_MANY, 'CvPositions', 'cv_to_position_desired(cv_id, position_id)'),
             'driverLicensesTypes' => array(self::MANY_MANY, 'DriverLicenses', 'cv_to_driver_license(cv_id, license_id)'),
             'assistanceTypes' => array(self::MANY_MANY, 'AssistanceTypes', 'cv_to_assistance(cv_id, assistance_type_id)'),
             'citiesResidence' => array(self::MANY_MANY, 'CitiesList', 'cv_to_residence(cv_id, city_id)'),
@@ -167,14 +169,15 @@ class CvList extends CActiveRecord
             'marital_status' => 'Сімейний стан',
             'birth_date' => 'Дата народження',
             'contact_phone' => 'Телефон',
-            'other_contacts' => 'Інші контакти',
+            'other_contacts' => 'Інші контакти (якщо є ще один телефон або пошта, скайп, соціальні мережі)',
             'email' => 'Електронна пошта',
             'education' => 'Освіта',
             'eduction_info' => 'Про освіту',
             'work_experience' => 'Досвід роботи',
             'skills' => 'Навички',
-            'summary' => 'Про себе',
+            'summary' => 'Про себе',    // TODO: Change this for https://github.com/czvl/portal/issues/19
             'desired_position' => 'Бажана посада',
+            'desiredPositionsIds' => 'Бажана посада',
             'positionsIds' => 'Можливі посади',
             'salary' => 'Побажання по зар.платні',
             'jobLocationsIds' => 'Бажане місто роботи',
@@ -194,30 +197,30 @@ class CvList extends CActiveRecord
             'personal_data' => 'Я згоден(на) з обробкою та використанням моїх персональних даних'
         );
     }
-    
+
     protected function beforeSave()
     {
         if (parent::beforeSave()) {
             if ($this->isNewRecord) {
                 $this->added_time = new CDbExpression('NOW()');
-                
+
                 if (!Yii::app()->user->isGuest) {
                     $this->who_filled = Yii::app()->user->id;
                 }
             }
             $this->last_update = new CDbExpression('NOW()');
             $this->contact_phone = preg_replace('/[^0-9]/', '', $this->contact_phone);
-            
+
             return true;
         } else {
             return false;
         }
     }
-    
+
     public function afterFind()
     {
         parent::afterFind();
-        
+
         if (empty($this->residenciesIds)) {
             foreach ($this->citiesResidence as $name) {
                 $this->residenciesIds[] = $name->city_index;
@@ -246,6 +249,11 @@ class CvList extends CActiveRecord
         if (empty($this->positionsIds)) {
             foreach ($this->positions as $p) {
                 $this->positionsIds[] = $p->id;
+            }
+        }
+        if (empty($this->desiredPositionsIds)) {
+            foreach ($this->desiredPositions as $dp) {
+                $this->desiredPositionsIds[] = $dp->id;
             }
         }
     }
@@ -310,7 +318,7 @@ class CvList extends CActiveRecord
     {
         return parent::model($className);
     }
-    
+
     public function getStatusTypes()
     {
         $this->statusTypes = Yii::app()->config->statuses;
@@ -357,7 +365,7 @@ class CvList extends CActiveRecord
         $criteria->params = array(':cv_id' => $this->id);
         $criteria->order = "added_time DESC";
         $criteria->limit = 3;
-        
+
         return CvStatuses::model()->findAll($criteria);
     }
 

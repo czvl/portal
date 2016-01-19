@@ -134,9 +134,22 @@
             <?= $form->error($model, 'cv_file') ?>
 
 
-            <?= $form->labelEx($model, 'desired_position') ?>
+            <!-- <?= $form->labelEx($model, 'desired_position') ?>
             <?= $form->textField($model, 'desired_position', ['class' => 'span8', 'maxlength' => 255]) ?>
-            <?= $form->error($model, 'desired_position') ?>
+            <?= $form->error($model, 'desired_position') ?> -->
+
+            <?php echo $form->labelEx($model, 'desiredPositionsIds'); ?>
+            <input type="text" name="desiredPositionsFilter" class="filter span8"
+                   placeholder="<?= Yii::t('main', 'text.filter.placeholder') ?>"/>
+
+            <div class="div-overflow">
+                <?= $form->checkBoxList($model, 'desiredPositionsIds', PositionsHelper::all(), [
+                    'template' => '{beginLabel}{input} {labelTitle}{endLabel}',
+                    'separator' => '',
+                ]) ?>
+            </div>
+            <?= $form->error($model, 'desiredPositionsIds') ?>
+
 
             <?php echo $form->labelEx($model, 'positionsIds'); ?>
             <input type="text" name="positionsFilter" class="filter span8"

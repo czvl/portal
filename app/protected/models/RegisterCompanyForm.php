@@ -78,7 +78,8 @@ class RegisterCompanyForm extends CFormModel
             return false;
         }
 
-        UserHelper::sendEmailConfirmation($user);
+        // debug. !!!Uncomment this in prod!!!
+        // UserHelper::sendEmailConfirmation($user);
 
         $company = new Company();
         $company->name = $this->name;

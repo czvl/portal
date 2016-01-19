@@ -127,20 +127,20 @@ class SiteController extends Controller
     {
         $model = new CvList();
         $model->scenario = 'public';
-        
+
         $this->performAjaxValidation($model);
-        
+
         if (isset($_POST['CvList'])) {
-            
+
             $model->attributes = $_POST['CvList'];
-            
+
             $result = array();
             $t = false;
-            
+
             if (!Yii::app()->db->currentTransaction) {
                 $t = Yii::app()->db->beginTransaction();
             }
-            
+
             if ($model->save()) {
                 if (!empty($_POST['CvList']['residenciesIds'])) {
                     foreach($_POST['CvList']['residenciesIds'] as $r) {
@@ -164,6 +164,17 @@ class SiteController extends Controller
                     }
                 }
 
+                if (!empty($_POST['CvList']['desiredPositionsIds'])) {
+                    foreach($_POST['CvList']['desiredPositionsIds'] as $desiredPositionId) {
+                        $cvToPositionDesired = new CvToPositionDesired();
+                        $cvToPositionDesired->cv_id = $model->id;
+                        $cvToPositionDesired->position_id = $desiredPositionId;
+                        if (!$cvToPositionDesired->save()) {
+                            $result[] = false;
+                        }
+                    }
+                }
+
                 if (!empty($_POST['CvList']['driverLicensesIds'])) {
                     foreach ($_POST['CvList']['driverLicensesIds'] as $dl) {
                         $license = new CvToDriverLicense();
@@ -174,7 +185,7 @@ class SiteController extends Controller
                         }
                     }
                 }
-                
+
                 if (!empty($_POST['CvList']['jobLocationsIds'])) {
                     foreach ($_POST['CvList']['jobLocationsIds'] as $jl) {
                         $jobLocation = new CvToJobLocation();
@@ -185,7 +196,7 @@ class SiteController extends Controller
                         }
                     }
                 }
-                
+
                 if (!empty($_POST['CvList']['assistanceIds'])) {
                     foreach ($_POST['CvList']['assistanceIds'] as $ai) {
                         $assistance = new CvToAssistance();
@@ -196,11 +207,11 @@ class SiteController extends Controller
                         }
                     }
                 }
-                
+
             } else {
                 $result[] = false;
             }
-            
+
             if ($t && !in_array(false, $result)) {
                 $t->commit();
                 $this->redirect(array('applicants', 'success' => true));
