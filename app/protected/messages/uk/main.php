@@ -132,7 +132,7 @@ http://czvl.org.ua',
     'text.filter.placeholder' => 'Для фільтрації списку введіть перші літери',
 
     'user.resume.form.birth.text' => 'наприклад, 1985-08-01',
-    'user.resume.form.email.text' => 'Будь ласка, перевірте коректність введених телефона та електронної пошти',
+    'user.resume.form.email.text' => 'Будь-ласка, перевірте коректність введених данних. У випадку помилки ми не зможемо з Вами зв\'язатися.',
     'user.resume.form.exp.text' => 'Досвід роботи - заклади, в яких працювали, посада, період',
     'user.resume.form.skills.label' => 'Навички, вміння',
     'user.resume.form.skills.text' => "Приклади.

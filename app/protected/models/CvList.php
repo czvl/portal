@@ -178,7 +178,7 @@ class CvList extends CActiveRecord
             'eduction_info' => 'Про освіту',
             'work_experience' => 'Досвід роботи',
             'skills' => 'Навички',
-            'summary' => 'Про себе',    // TODO: Change this for https://github.com/czvl/portal/issues/19
+            'summary' => 'Додаткова інформація',
             'desired_position' => 'Бажана посада',
             'desiredPositionsIds' => 'Бажана посада',
             'positionsIds' => 'Можливі посади',
