@@ -124,8 +124,6 @@ class User extends CActiveRecord
     /**
      * @inheritdoc
      */
-    // TODO: crypt() causes the timeout. Uncomment before adding new user, comment for logging in manage
-    //
     protected function beforeSave()
     {
         if (parent::beforeSave()) {

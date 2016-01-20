@@ -63,9 +63,7 @@ return CMap::mergeArray(array(
         ),
         'mailer' => array(
             'class' => 'vendor.janisto.yii-mailer.SwiftMailerComponent',
-            // 'class' => 'vendor.swiftmailer.SwiftMailer',
-            'type' => 'file',
-
+            'type' => 'smtp',
         ),
         'db' => require($dbFileName),
         'cache' => array(

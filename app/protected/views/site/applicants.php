@@ -138,10 +138,6 @@
             <?= $form->error($model, 'cv_file') ?>
 
 
-            <!-- <?= $form->labelEx($model, 'desired_position') ?>
-            <?= $form->textField($model, 'desired_position', ['class' => 'span8', 'maxlength' => 255]) ?>
-            <?= $form->error($model, 'desired_position') ?> -->
-
             <?php echo $form->labelEx($model, 'desiredPositionsIds'); ?>
             <input type="text" name="desiredPositionsFilter" class="filter span8"
                    placeholder="<?= Yii::t('main', 'text.filter.placeholder') ?>"/>
