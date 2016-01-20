@@ -80,8 +80,8 @@
 
             <?= $form->labelEx($model, 'email') ?>
             <?= $form->textField($model, 'email', ['class' => 'span8', 'maxlength' => 255]) ?>
+            <p><?= Yii::t('main', 'user.resume.form.email.text') ?></p>
             <?= $form->error($model, 'email') ?>
-
 
             <?= $form->labelEx($model, 'other_contacts') ?>
             <?= $form->textArea($model, 'other_contacts', ['rows' => 6, 'class' => 'span8']) ?>
