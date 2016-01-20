@@ -31,6 +31,7 @@
  * @property string $added_time
  * @property integer $status
  * @property integer $is_active
+ * @property integer $disability
  *
  * The followings are the available model relations:
  * @property User $recruiter
@@ -52,6 +53,7 @@ class CvList extends CActiveRecord
     public $jobLocationsIds = array();
     public $maritalStatuses = array();
     public $desiredPositionsIds = array();
+    public $disabilityGroups = array();
 
     public $personal_data;
 
@@ -62,6 +64,7 @@ class CvList extends CActiveRecord
         $this->educationTypes = Yii::app()->config->education_types;
         $this->statusTypes = Yii::app()->config->statuses;
         $this->maritalStatuses = Yii::app()->config->marital_statuses;
+        $this->disabilityGroups = Yii::app()->config->disability_groups;
     }
 
     /**
@@ -79,7 +82,7 @@ class CvList extends CActiveRecord
     {
         return array(
             array('first_name, last_name, gender, contact_phone, birth_date, residenciesIds, education, jobLocationsIds, work_experience, skills, summary, applicant_type, desiredPositionsIds', 'required'),
-            array('marital_status, education, recruiter_id, status', 'numerical', 'integerOnly' => true),
+            array('marital_status, education, recruiter_id, status, disability', 'numerical', 'integerOnly' => true),
             array('first_name, last_name, email, salary, desired_position, cv_file, who_filled', 'length', 'max' => 255),
             array('gender', 'length', 'max' => 1),
             array('contact_phone', 'match', 'pattern'=>'/^([+]?[0-9 \)\(\-]+)$/'),
@@ -96,7 +99,7 @@ class CvList extends CActiveRecord
             array('personal_data', 'required', 'on' => 'public'),
             array('personal_data', 'compare', 'compareValue' => true, 'message' => 'Вам потрібно погодитись надати нам Ваші персональні дані.', 'on' => 'public'),
 
-            array('id, first_name, last_name, gender, marital_status, birth_date, contact_phone, other_contacts, email, education, eduction_info, work_experience, skills, summary, salary, desired_position, documents, applicant_type, cv_file, recruiter_id, recruiter_comments, who_filled, last_update, added_time, status', 'safe', 'on' => 'search'),
+            array('id, first_name, last_name, gender, marital_status, birth_date, contact_phone, other_contacts, email, education, eduction_info, work_experience, skills, summary, salary, desired_position, documents, applicant_type, cv_file, recruiter_id, recruiter_comments, who_filled, last_update, added_time, status, disability', 'safe', 'on' => 'search'),
         );
     }
 
@@ -194,7 +197,8 @@ class CvList extends CActiveRecord
             'added_time' => 'Додано',
             'status' => 'Стан',
             'is_active' => 'Включений/Вимкнений',
-            'personal_data' => 'Я згоден(на) з обробкою та використанням моїх персональних даних'
+            'personal_data' => 'Я згоден(на) з обробкою та використанням моїх персональних даних',
+            'disability' => 'Наяність інвалідності (вкажіть, будь ласка, групу)'
         );
     }
 
@@ -302,6 +306,7 @@ class CvList extends CActiveRecord
         $criteria->compare('last_update', $this->last_update, true);
         $criteria->compare('added_time', $this->added_time, true);
         $criteria->compare('status', $this->status);
+        $criteria->compare('disability', $this->disability);
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
@@ -331,6 +336,11 @@ class CvList extends CActiveRecord
 		return $this->genderTypes;
 	}
 
+    public function getDisabilityGroups()
+    {
+        $this->disabilityGroups = Yii::app()->config->disability_groups;
+        return $this->disabilityGroups;
+    }
 
     public function getAssistances()
     {

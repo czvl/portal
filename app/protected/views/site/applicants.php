@@ -128,6 +128,11 @@
             <?= $form->textArea($model, 'summary', ['rows' => 6, 'class' => 'span8']) ?>
             <?= $form->error($model, 'summary') ?>
 
+            <!-- добавить в views/applicants.php дропдаун с disability после блока "Про себе" (summary) -->
+            <?= $form->label($model, 'disability') ?>
+            <?= $form->dropDownList($model, 'disability', $model->disabilityGroups) ?>
+            <?= $form->error($model, 'disability') ?>
+
 
             <?= $form->labelEx($model, 'cv_file') ?>
             <?= $form->textField($model, 'cv_file', ['class' => 'span8', 'maxlength' => 255]) ?>
