@@ -7,9 +7,21 @@ $config =  [
 			'class'=>'CLogRouter',
 			'routes'=>array(
 				array(
-					'class'=>'CFileLogRoute',
-					'levels'=>'error, warning',
+					'class' => 'CFileLogRoute',
+					'levels' => 'error, warning, trace, info',
+                    // 'logPath' => '/tmp',
+                    // 'logFile' => 'application.log',
+                    'enabled' => true,
+
+                    // 'categories' => 'application',
 				),
+                // array(
+                //     'class' => 'CWebLogRoute',
+                //     'levels'=>'error, warning, trace, info, notice',
+                //     'showInFireBug' => true,
+                //     'enabled' => true,
+                //     'categories' => 'application',
+                // ),
 			),
 		),
         'urlManager' => array(
@@ -19,4 +31,3 @@ $config =  [
 ];
 
 return CMap::mergeArray($main, $config);
-

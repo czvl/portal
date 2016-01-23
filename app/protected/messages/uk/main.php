@@ -34,7 +34,7 @@ return array(
     'user.email.used' => 'Такий Email вже використовується',
     'applicant.error.tooYoung' => 'Вік претендента не може бути меншим ніж {years} років.',
     'profiles.status.statistic' => 'Статистика анкет',
-    'prfiles.status.statistic.period' => 'за вибраний період',
+    'profiles.status.statistic.period' => 'за вибраний період',
     'companies' => 'Компанії',
     'company' => 'Компанія',
     'company.label.name' => 'Назва компаніі',

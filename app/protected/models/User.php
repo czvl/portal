@@ -124,22 +124,22 @@ class User extends CActiveRecord
     /**
      * @inheritdoc
      */
-    protected function beforeSave()
-    {
-        if (parent::beforeSave()) {
-            $userSalt = base64_encode(mcrypt_create_iv(30));
-            if ($this->isNewRecord) {
-                $this->signin_time = new CDbExpression('NOW()');
-                $this->password = crypt($this->password, $userSalt);
-            }
-            if ($this->password_new) {
-                $this->password = crypt($this->password_new, $userSalt);
-            }
-            return true;
-        } else {
-            return false;
-        }
-    }
+    // protected function reSave()
+    // {
+    //     if (parent::beforeSave()) {
+    //         $userSalt = base64_encode(mcrypt_create_iv(30));
+    //         if ($this->isNewRecord) {
+    //             $this->signin_time = new CDbExpression('NOW()');
+    //             $this->password = crypt($this->password, $userSalt);
+    //         }
+    //         if ($this->password_new) {
+    //             $this->password = crypt($this->password_new, $userSalt);
+    //         }
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
 
     /**
      * @inheritdoc

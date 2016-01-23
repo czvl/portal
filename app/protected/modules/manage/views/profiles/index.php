@@ -29,6 +29,12 @@ $assistanceIdsFilter    = $this->fetchVariable('assistanceIds');
 $licensesIdsFilter      = $this->fetchVariable('licensesIds');
 $addedTimeFrom          = $this->fetchVariable('added_time_from');
 $addedTimeTo            = $this->fetchVariable('added_time_to');
+$desiredPositionsFilter = $this->fetchVariable('desiredPositions');
+$disabilityFilter       = $this->fetchVariable('disability');
+
+// debug
+// var_dump(serialize($desiredPositionsFilter));
+// var_dump(serialize($positionsFilter));
 
 if (!$ageMinFilter) $ageMinFilter = $ageMinDefault;
 if (!$ageMaxFilter) $ageMaxFilter = $ageMaxDefault;
@@ -77,6 +83,9 @@ function getOrder($fieldValue, $orderField = 'id')
 	                    <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('gender')); ?></strong><br />
 	                    <?php echo CHtml::dropDownList('gender', $genderFilter, CvList::model()->getGenderTypes(), array('empty' => '---', 'class' => getClassName($genderFilter))); ?>
 	                    <br />
+                        <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('disability')); ?></strong><br />
+                        <?php echo CHtml::dropDownList('disability', $disabilityFilter, CvList::model()->getDisabilityGroups(), array('empty' => '---', 'class' => getClassName($disabilityFilter))); ?>
+                        <br />
 	                    <strong>Вік</strong><br />
 	                    <input type="hidden" name="age_min" value="<?php echo $ageMinFilter; ?>" />
 	                    <input type="hidden" name="age_max" value="<?php echo $ageMaxFilter; ?>" />
@@ -154,8 +163,19 @@ function getOrder($fieldValue, $orderField = 'id')
                         <?php echo CHtml::checkBoxList('categories', $categoriesFilter, CHtml::listData(CvCategories::model()->findAll(array('order' => getOrder($categoriesFilter) . 'name ASC')), 'id', 'name'), array('template' => '{beginLabel}{input} {labelTitle}{endLabel}', 'separator' => '')); ?>
                     </div>
                 </td>
+                <td class="<?php echo getClassName($desiredPositionsFilter); ?>">
+                     <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('desiredPositionsIds')); ?></strong><br />
+                     <input type="text" name="desiredPositionsFilter" class="filter" size="10" />
+                     <div class="div-overflow narrow">
+                         <?php echo CHtml::checkBoxList(
+                            'desiredPositions',
+                            $desiredPositionsFilter,
+                            CHtml::listData(CvPositions::model()->findAll(array('order' => getOrder($desiredPositionsFilter) . 'name ASC')), 'id', 'name'), array('template' => '{beginLabel}{input} {labelTitle}{endLabel}', 'separator' => '')); ?>
+                    </div>
+                </td>
                 <td class="<?php echo getClassName($positionsFilter); ?>">
                     <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('positionsIds')); ?></strong><br />
+
                     <input type="text" name="positionsFilter" class="filter" size="10" />
                     <div class="div-overflow narrow">
                         <?php echo CHtml::checkBoxList('positions', $positionsFilter, CHtml::listData(CvPositions::model()->findAll(array('order' => getOrder($positionsFilter) . 'name ASC')), 'id', 'name'), array('template' => '{beginLabel}{input} {labelTitle}{endLabel}', 'separator' => '')); ?>
@@ -219,13 +239,13 @@ echo ' ', CHtml::link('Скинути', '#reset', $params);
         </tr>
     </thead>
     <tbody>
-<?php
+        <?php
 
-$listView = $this->widget('bootstrap.widgets.TbListView', array(
-    'dataProvider' => $dataProvider,
-    'itemView' => '_list'
-));
-?>
+        $listView = $this->widget('bootstrap.widgets.TbListView', array(
+            'dataProvider' => $dataProvider,
+            'itemView' => '_list'
+        ));
+        ?>
     </tbody>
 </table>
 <?php $listView->renderPager(); ?>

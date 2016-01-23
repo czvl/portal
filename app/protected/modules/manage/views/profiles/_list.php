@@ -16,15 +16,15 @@
                 </span>
             </td>
             <td colspan="3">
-                <strong><?php echo CHtml::link($data->firstLastName, array("profiles/view", 'id' => $data->id)); ?></strong> - 
-                <?php echo $data->genderTypes[$data->gender]; ?>, 
+                <strong><?php echo CHtml::link($data->firstLastName, array("profiles/view", 'id' => $data->id)); ?></strong> -
+                <?php echo $data->genderTypes[$data->gender]; ?>,
                 <?php
                     if (isset($data->birth_date)) {
                         echo $age . ", ";
                     }
                 ?>
                 <?php if ($data->marital_status) { ?>
-                <?php echo $data->maritalStatuses[$data->gender][$data->marital_status]; ?>, 
+                <?php echo $data->maritalStatuses[$data->gender][$data->marital_status]; ?>,
                 <?php } ?>
                 <?php
                     if (!empty($data->citiesResidence)) {
@@ -37,7 +37,7 @@
                 <?php } ?>
             </td>
             <td>
-                <?php echo $data->desired_position; ?> 
+                <?php echo $data->desired_position; ?>
             <?php if (!empty($data->citiesJobLocations)) { ?>
                 у м. <?php echo implode(', ', array_values(CHtml::listData($data->citiesJobLocations, 'city_index', 'city_name'))); ?>
             <?php } ?>
@@ -46,6 +46,10 @@
                 <strong><?php echo $data->getAttributeLabel('categoryIds'); ?>:</strong><br />
                 <?php echo implode(', ', array_values(CHtml::listData($data->categories, 'id', 'name'))); ?>
                 <br />
+            <?php } ?>
+            <?php if (!empty($data->desiredPositions)) { ?>
+                <strong><?php echo $data->getAttributeLabel('desiredPositionsIds'); ?>:</strong><br />
+                <?php echo implode(', ', array_values(CHtml::listData($data->desiredPositions, 'id', 'name'))); ?>
             <?php } ?>
             <?php if (!empty($data->positions)) { ?>
                 <strong><?php echo $data->getAttributeLabel('positionsIds'); ?>:</strong><br />
@@ -77,7 +81,7 @@
                 <strong><?php echo $data->getAttributeLabel('summary'); ?>:</strong><br />
                 <?php echo nl2br(stripslashes($data->summary)); ?>
                 <br /><br />
-                <strong><?php echo $data->getAttributeLabel('education'); ?>:</strong> <?php echo $data->educationTypes[$data->education]; ?>, 
+                <strong><?php echo $data->getAttributeLabel('education'); ?>:</strong> <?php echo $data->educationTypes[$data->education]; ?>,
                 <?php echo stripslashes($data->eduction_info); ?>
                 <br /><br />
                 <strong><?php echo $data->getAttributeLabel('skills'); ?>:</strong> <?php echo stripslashes($data->skills); ?>
@@ -85,22 +89,26 @@
             <td colspan="2">
                 <strong><?php echo $data->getAttributeLabel('work_experience'); ?>:</strong><br />
                 <?php echo stripslashes($data->work_experience); ?>
+                <br /><br />
+                <strong><?php echo $data->getAttributeLabel('disability'); ?>:</strong><br />
+                <?php echo $data->disabilityGroups[$data->disability]; ?>
+                <br /><br />
             </td>
             <td>
                 <strong><?php echo $data->getAttributeLabel('assistanceIds'); ?>:</strong>
                 <?php echo $data->assistances; ?>
-                
+
             <?php if (!empty($data->latestStatuses)) { ?>
                 <strong><?php echo $data->getAttributeLabel('statuses'); ?>:</strong><br />
                 <?php foreach($data->latestStatuses as $status) { ?>
                 <div class="list-statuses">
                     <?php echo $status->message; ?><br />
-                    <em>[<?php echo Yii::app()->dateFormatter->formatDateTime($status->added_time, "short"); ?> 
+                    <em>[<?php echo Yii::app()->dateFormatter->formatDateTime($status->added_time, "short"); ?>
                     - <?php echo CHtml::link($status->operator->first_name . ' ' . $status->operator->last_name, array('/manage/reqruiter', 'id' => $status->operator->id)); ?>]</em>
                 </div>
                 <?php } ?>
             <?php } ?>
-                 
+
             </td>
             <td>
                 <?php if ($data->recruiter) { ?>
@@ -114,4 +122,3 @@
                 <strong><?php echo $data->getAttributeLabel('who_filled'); ?>:</strong> <?php echo $data->who_filled; ?>
             </td>
         </tr>
-

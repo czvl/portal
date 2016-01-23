@@ -332,10 +332,14 @@ class ProfilesController extends Controller {
 		if (isset($_GET['post'])) {
 			$get           = $this->removeMark();
 			$this->filters = UsersFilter::model()->setFilter(Yii::app()->user->id, $get);
+
 			Yii::app()->cache->set('filter_' . Yii::app()->user->id, $this->filters);
 			$this->redirect(Yii::app()->createUrl('manage/profiles/index') . '?' . http_build_query($get));
 		} else {
 			$content = Yii::app()->cache->get('filter_' . Yii::app()->user->id);
+            // debug
+            // var_dump($content);
+
 			if ($content === false) {
 				$content = UsersFilter::model()->getFilter(Yii::app()->user->id);
 				Yii::app()->cache->set('filter_' . Yii::app()->user->id, $content);
@@ -383,6 +387,9 @@ class ProfilesController extends Controller {
 		if (($gender = $this->fetchVariable('gender')) !== false) {
 			$criteria->addCondition('gender = "' . $gender . '"');
 		}
+        if (($disability = $this->fetchVariable('disability')) !== false) {
+			$criteria->addCondition('disability = "' . $disability . '"');
+		}
 		if (($ageMin = $this->fetchVariable('age_min')) !== false) {
 			$criteria->addCondition("birth_date IS NULL OR ((birth_date IS NOT NULL) AND (DATE_FORMAT(FROM_DAYS(DATEDIFF(NOW(), birth_date)), '%Y')+0) >= " . $ageMin . ")");
 		}
@@ -401,8 +408,15 @@ class ProfilesController extends Controller {
 			$with[] = 'categories';
 			$criteria->addInCondition('category_id', $categories);
 		}
+        if ($desiredPositions = $this->fetchVariable('desiredPositions')) {
+			$with[] = 'desiredPositions'; // what is this?
+			$criteria->addInCondition('position_id', $desiredPositions);
+		}
 		if ($positions = $this->fetchVariable('positions')) {
-			$with[] = 'positions';
+            // debug
+            Yii::log    (serialize((array) $positions));
+
+            $with[] = 'positions';
 			$criteria->addInCondition('position_id', $positions);
 		}
 		if ($assistanceIds = $this->fetchVariable('assistanceIds')) {
@@ -435,6 +449,9 @@ class ProfilesController extends Controller {
 		}
 
 		$criteria->order = 'last_update DESC';
+
+        // debug
+        Yii::trace(serialize((array) $criteria));
 
 		$dataProvider = new CActiveDataProvider('CvList', array(
 				'criteria'   => $criteria,

@@ -40,7 +40,7 @@ $config = [
             'routes' => array(
                 array(
                     'class' => 'CFileLogRoute',
-                    'levels' => 'error, warning',
+                    'levels' => 'error, warning, trace, info',
                 ),
             ),
         ),
@@ -49,10 +49,12 @@ $config = [
         'gii' => array(
             'class' => 'system.gii.GiiModule',
             'password' => 'czvl0',
-            'ipFilters' => array('127.0.0.1', '::1'),
+            'ipFilters' => array('127.0.0.1', '::1', $_SERVER['REMOTE_ADDR'], '10.0.2.2'),
             'generatorPaths' => array(
                 'bootstrap.gii'
             ),
+            // 'newFileMode'=>0666,
+            // 'newDirMode'=>0777,
         ),
         'manage',
     ),

@@ -27,6 +27,12 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        // debug
+        Yii::log("Logging test in actionIndex.", 'trace', 'application' );
+        Yii::getLogger()->flush(true);
+
+        // var_dump("Logging test in actionIndex.");
+
         $this->layout = 'main';
 
         $sql = "SELECT

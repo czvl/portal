@@ -12,7 +12,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "www-data",
         :mount_options =>  ['dmode=775', 'fmode=755']
 
-  config.vm.boot_timeout = 1500
+  config.vm.boot_timeout = 15000
 
   config.ssh.username = "vagrant"
   config.ssh.password = "vagrant"
