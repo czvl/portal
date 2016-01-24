@@ -337,8 +337,6 @@ class ProfilesController extends Controller {
 			$this->redirect(Yii::app()->createUrl('manage/profiles/index') . '?' . http_build_query($get));
 		} else {
 			$content = Yii::app()->cache->get('filter_' . Yii::app()->user->id);
-            // debug
-            // var_dump($content);
 
 			if ($content === false) {
 				$content = UsersFilter::model()->getFilter(Yii::app()->user->id);
@@ -413,9 +411,6 @@ class ProfilesController extends Controller {
 			$criteria->addInCondition('position_id', $desiredPositions);
 		}
 		if ($positions = $this->fetchVariable('positions')) {
-            // debug
-            Yii::log    (serialize((array) $positions));
-
             $with[] = 'positions';
 			$criteria->addInCondition('position_id', $positions);
 		}
@@ -449,9 +444,6 @@ class ProfilesController extends Controller {
 		}
 
 		$criteria->order = 'last_update DESC';
-
-        // debug
-        Yii::trace(serialize((array) $criteria));
 
 		$dataProvider = new CActiveDataProvider('CvList', array(
 				'criteria'   => $criteria,

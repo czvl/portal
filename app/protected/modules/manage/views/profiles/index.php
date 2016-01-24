@@ -32,10 +32,6 @@ $addedTimeTo            = $this->fetchVariable('added_time_to');
 $desiredPositionsFilter = $this->fetchVariable('desiredPositions');
 $disabilityFilter       = $this->fetchVariable('disability');
 
-// debug
-// var_dump(serialize($desiredPositionsFilter));
-// var_dump(serialize($positionsFilter));
-
 if (!$ageMinFilter) $ageMinFilter = $ageMinDefault;
 if (!$ageMaxFilter) $ageMaxFilter = $ageMaxDefault;
 

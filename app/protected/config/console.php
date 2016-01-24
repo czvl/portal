@@ -8,20 +8,9 @@ $config =  [
 			'routes'=>array(
 				array(
 					'class' => 'CFileLogRoute',
-					'levels' => 'error, warning, trace, info',
-                    // 'logPath' => '/tmp',
-                    // 'logFile' => 'application.log',
+					'levels' => 'error, warning',
                     'enabled' => true,
-
-                    // 'categories' => 'application',
-				),
-                // array(
-                //     'class' => 'CWebLogRoute',
-                //     'levels'=>'error, warning, trace, info, notice',
-                //     'showInFireBug' => true,
-                //     'enabled' => true,
-                //     'categories' => 'application',
-                // ),
+                ),
 			),
 		),
         'urlManager' => array(
