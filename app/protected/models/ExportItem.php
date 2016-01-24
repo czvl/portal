@@ -22,6 +22,7 @@ class ExportItem extends CModel {
     public $birth_date;
     public $documents;
     public $assistance;
+    public $disability;
 
 
     public function attributeNames() {
@@ -50,7 +51,8 @@ class ExportItem extends CModel {
             'marital_status' => 'Сімейний стан',
             'birth_date' => 'Дата народження',
             'documents' => 'Наявні документи',
-            'assistance' => 'Потрібна допомога'
+            'assistance' => 'Потрібна допомога',
+            'disability' => 'Наявність інвалідності',
         );
     }
 
@@ -59,7 +61,7 @@ class ExportItem extends CModel {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('id, first_name, last_name, contact_phone, email, other_contacts, desired_position, desired_place, residencies, education, eduction_info, work_experience, skills, driver_licenses, summary, gender, marital_status, birth_date, documents, assistance', 'safe'),
+            array('id, first_name, last_name, contact_phone, email, other_contacts, desired_position, desired_place, residencies, education, eduction_info, work_experience, skills, driver_licenses, summary, gender, marital_status, birth_date, documents, assistance, disability', 'safe'),
         );
     }
 }

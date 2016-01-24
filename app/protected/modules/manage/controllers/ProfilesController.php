@@ -518,10 +518,13 @@ class ProfilesController extends Controller {
 				$export_item->driver_licenses  = implode(', ', array_values(CHtml::listData($item->driverLicensesTypes, 'id', 'name')));
 				$export_item->summary          = $item->summary;
 				$export_item->gender           = $item->genderTypes[ $item->gender ];
+
 				$export_item->marital_status   = $item->maritalStatuses[ $item->gender ][ (int) $item->marital_status ];
 				$export_item->birth_date       = $item->birth_date;
 				$export_item->documents        = $item->documents;
 				$export_item->assistance       = $item->flat_assistances;
+                $export_item->disability       = $item->disabilityGroups[ $item->disability ]; 
+                //  $item->disabilityGroups;
 				$rows[]                        = $export_item;
 			}
 
@@ -541,6 +544,7 @@ class ProfilesController extends Controller {
 				'skills',
 				'driver_licenses',
 				'summary',
+                'disability',
 				'gender',
 				'marital_status',
 				'birth_date',
