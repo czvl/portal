@@ -1,7 +1,7 @@
 <?php
 
 date_default_timezone_set('Europe/Kiev');
-$isLocalhost = (filter_input(INPUT_SERVER, 'SERVER_ADDR') == '127.0.0.1'  ? true : false);
+$isLocalhost = (filter_input(INPUT_SERVER, 'SERVER_ADDR') == '127.0.0.1' ? true : false);
 
 
 defined('IS_LOCALHOST') or define('IS_LOCALHOST', $isLocalhost);
