@@ -9,7 +9,6 @@ $config =  [
 				array(
 					'class' => 'CFileLogRoute',
 					'levels' => 'error, warning',
-                    'enabled' => true,
                 ),
 			),
 		),
