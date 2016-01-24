@@ -275,13 +275,15 @@ class ProfilesController extends Controller {
 			$model->driverLicensesTypes = $_POST['CvList']['driverLicensesIds'];
 			$model->citiesJobLocations  = $_POST['CvList']['jobLocationsIds'];
 			$model->assistanceTypes     = $_POST['CvList']['assistanceIds'];
+            $model->desiredPositions    = $_POST['CvList']['desiredPositionsIds'];
 			if ($model->saveWithRelated(array(
 				'categories',
 				'positions',
 				'citiesResidence',
 				'citiesJobLocations',
 				'driverLicensesTypes',
-				'assistanceTypes'
+				'assistanceTypes',
+                'desiredPositions',
 			))
 			) {
 

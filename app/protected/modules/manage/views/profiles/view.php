@@ -21,10 +21,10 @@ $this->menu = array(
     TbHtml::menuDivider(),
     array('label' => 'Адмінистративна частина'),
     array(
-        'label' => 'Видалити анкету', 
-        'url' => '#', 
+        'label' => 'Видалити анкету',
+        'url' => '#',
         'linkOptions' => array(
-            'submit' => array('delete', 'id' => $model->id), 
+            'submit' => array('delete', 'id' => $model->id),
             'confirm' => 'Ви впевнені, що бажаєте видатили цю анкету?'
         ),
         'visible' => Yii::app()->user->checkAccess(User::ROLE_ADMIN)
@@ -56,7 +56,7 @@ $this->menu = array(
     <?php echo TbHtml::submitButton('Оновити', array('color' => TbHtml::BUTTON_COLOR_PRIMARY, 'class' => 'inline')); ?>
 <?php $this->endWidget(); ?>
 
-<?php 
+<?php
 
 echo TbHtml::lead('Статуси про претендента &laquo;' . $model->first_name . ' ' . $model->last_name . '&raquo;');
 
@@ -153,11 +153,19 @@ $this->widget('bootstrap.widgets.TbDetailView', array(
         'skills:ntext',
         'summary:ntext',
         array(
+            'name' => 'disability',
+            'value' => $model->disabilityGroups[$model->disability]
+        ),
+        array(
             'name' => 'categoryIds',
             'value' => implode(', ', array_values(CHtml::listData($model->categories, 'id', 'name'))),
             'type' => 'html'
         ),
         'desired_position',
+        array(
+            'name' => 'desiredPositionsIds',
+            'value' => implode(', ', array_values(CHtml::listData($model->desiredPositions, 'id', 'name')))
+        ),
         array(
             'name' => 'positionsIds',
             'value' => implode(', ', array_values(CHtml::listData($model->positions, 'id', 'name')))
@@ -250,4 +258,3 @@ $this->widget('bootstrap.widgets.TbGridView', [
         ],
     ],
 ]);
-
