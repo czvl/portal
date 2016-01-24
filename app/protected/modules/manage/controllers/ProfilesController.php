@@ -508,7 +508,8 @@ class ProfilesController extends Controller {
 				$export_item->contact_phone    = $item->contact_phone;
 				$export_item->email            = $item->email;
 				$export_item->other_contacts   = $item->other_contacts;
-				$export_item->desired_position = $item->desired_position;
+				$export_item->desired_position = $item->desired_position;   // old textarea desired position field
+                $export_item->desired_positions     = implode(', ', array_values(CHtml::listData($item->desiredPositions, 'id', 'name')));  // candidate's desired positions list
 				$export_item->desired_place    = implode(', ', array_values(CHtml::listData($item->citiesJobLocations, 'city_index', 'city_name')));
 				$export_item->residencies      = implode(', ', array_values(CHtml::listData($item->citiesResidence, 'city_index', 'city_name')));
 				$export_item->education        = $item->educationTypes[ $item->education ];
@@ -523,8 +524,7 @@ class ProfilesController extends Controller {
 				$export_item->birth_date       = $item->birth_date;
 				$export_item->documents        = $item->documents;
 				$export_item->assistance       = $item->flat_assistances;
-                $export_item->disability       = $item->disabilityGroups[ $item->disability ]; 
-                //  $item->disabilityGroups;
+                $export_item->disability       = $item->disabilityGroups[  $item->disability ];
 				$rows[]                        = $export_item;
 			}
 
@@ -536,6 +536,7 @@ class ProfilesController extends Controller {
 				'email',
 				'other_contacts',
 				'desired_position',
+                'desired_positions',
 				'desired_place',
 				'residencies',
 				'education',
