@@ -95,7 +95,7 @@ class User extends CActiveRecord
 
             ['password_repeat', 'compare', 'compareAttribute' => 'password_new', 'on' => 'update'],
             ['password_new, password_repeat', 'safe', 'on' => 'update'],
-            
+
             ['status', 'numerical', 'integerOnly' => true],
             ['username, email, role, first_name, last_name, additional_contact, position', 'length', 'max' => 255],
             ['signin_time, last_login, email_activated', 'safe'],
@@ -157,8 +157,8 @@ class User extends CActiveRecord
             'first_name' => Yii::t('main', 'First name'),
             'last_name' => Yii::t('main', 'Last name'),
             'signin_time' => Yii::t('main', 'Registration time'),
-            'last_login' => Yii::t('main', 'Last login at'), 
-            'status' => Yii::t('main', 'Status'), 
+            'last_login' => Yii::t('main', 'Last login at'),
+            'status' => Yii::t('main', 'Status'),
             'firstLastName' => Yii::t('main', 'user.firstLastName'),
             'position' => Yii::t('main', 'user.position'),
         );
@@ -206,23 +206,23 @@ class User extends CActiveRecord
 
         return $this->_roles;
     }
-    
+
     public function getFirstLastName()
     {
         return $this->first_name . " " . $this->last_name;
     }
-    
+
     public function getRecruiters()
     {
         $recruitersRoles = array(self::ROLE_VOLONT, self::ROLE_ADMIN);
-        
+
         $criteria = new CDbCriteria;
         $criteria->addInCondition('role', $recruitersRoles);
         $criteria->order = 'first_name';
 
         $models = User::model()->findAll($criteria);
         $list = CHtml::listData($models, 'id', 'firstLastName');
-        
+
         return $list;
     }
 

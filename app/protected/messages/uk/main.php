@@ -34,7 +34,7 @@ return array(
     'user.email.used' => 'Такий Email вже використовується',
     'applicant.error.tooYoung' => 'Вік претендента не може бути меншим ніж {years} років.',
     'profiles.status.statistic' => 'Статистика анкет',
-    'prfiles.status.statistic.period' => 'за вибраний період',
+    'profiles.status.statistic.period' => 'за вибраний період',
     'companies' => 'Компанії',
     'company' => 'Компанія',
     'company.label.name' => 'Назва компаніі',
@@ -132,6 +132,7 @@ http://czvl.org.ua',
     'text.filter.placeholder' => 'Для фільтрації списку введіть перші літери',
 
     'user.resume.form.birth.text' => 'наприклад, 1985-08-01',
+    'user.resume.form.email.text' => 'Будь-ласка, перевірте коректність введених контактних данних',
     'user.resume.form.exp.text' => 'Досвід роботи - заклади, в яких працювали, посада, період',
     'user.resume.form.skills.label' => 'Навички, вміння',
     'user.resume.form.skills.text' => "Приклади.

@@ -275,13 +275,15 @@ class ProfilesController extends Controller {
 			$model->driverLicensesTypes = $_POST['CvList']['driverLicensesIds'];
 			$model->citiesJobLocations  = $_POST['CvList']['jobLocationsIds'];
 			$model->assistanceTypes     = $_POST['CvList']['assistanceIds'];
+            $model->desiredPositions    = $_POST['CvList']['desiredPositionsIds'];
 			if ($model->saveWithRelated(array(
 				'categories',
 				'positions',
 				'citiesResidence',
 				'citiesJobLocations',
 				'driverLicensesTypes',
-				'assistanceTypes'
+				'assistanceTypes',
+                'desiredPositions',
 			))
 			) {
 
@@ -332,10 +334,12 @@ class ProfilesController extends Controller {
 		if (isset($_GET['post'])) {
 			$get           = $this->removeMark();
 			$this->filters = UsersFilter::model()->setFilter(Yii::app()->user->id, $get);
+
 			Yii::app()->cache->set('filter_' . Yii::app()->user->id, $this->filters);
 			$this->redirect(Yii::app()->createUrl('manage/profiles/index') . '?' . http_build_query($get));
 		} else {
 			$content = Yii::app()->cache->get('filter_' . Yii::app()->user->id);
+
 			if ($content === false) {
 				$content = UsersFilter::model()->getFilter(Yii::app()->user->id);
 				Yii::app()->cache->set('filter_' . Yii::app()->user->id, $content);
@@ -383,6 +387,9 @@ class ProfilesController extends Controller {
 		if (($gender = $this->fetchVariable('gender')) !== false) {
 			$criteria->addCondition('gender = "' . $gender . '"');
 		}
+        if (($disability = $this->fetchVariable('disability')) !== false) {
+			$criteria->addCondition('disability = "' . $disability . '"');
+		}
 		if (($ageMin = $this->fetchVariable('age_min')) !== false) {
 			$criteria->addCondition("birth_date IS NULL OR ((birth_date IS NOT NULL) AND (DATE_FORMAT(FROM_DAYS(DATEDIFF(NOW(), birth_date)), '%Y')+0) >= " . $ageMin . ")");
 		}
@@ -401,8 +408,12 @@ class ProfilesController extends Controller {
 			$with[] = 'categories';
 			$criteria->addInCondition('category_id', $categories);
 		}
+        if ($desiredPositions = $this->fetchVariable('desiredPositions')) {
+			$with[] = 'desiredPositions'; // what is this?
+			$criteria->addInCondition('position_id', $desiredPositions);
+		}
 		if ($positions = $this->fetchVariable('positions')) {
-			$with[] = 'positions';
+            $with[] = 'positions';
 			$criteria->addInCondition('position_id', $positions);
 		}
 		if ($assistanceIds = $this->fetchVariable('assistanceIds')) {
@@ -491,7 +502,8 @@ class ProfilesController extends Controller {
 				$export_item->contact_phone    = $item->contact_phone;
 				$export_item->email            = $item->email;
 				$export_item->other_contacts   = $item->other_contacts;
-				$export_item->desired_position = $item->desired_position;
+				$export_item->desired_position = $item->desired_position;   // old textarea desired position field
+                $export_item->desired_positions     = implode(', ', array_values(CHtml::listData($item->desiredPositions, 'id', 'name')));  // candidate's desired positions list
 				$export_item->desired_place    = implode(', ', array_values(CHtml::listData($item->citiesJobLocations, 'city_index', 'city_name')));
 				$export_item->residencies      = implode(', ', array_values(CHtml::listData($item->citiesResidence, 'city_index', 'city_name')));
 				$export_item->education        = $item->educationTypes[ $item->education ];
@@ -501,10 +513,12 @@ class ProfilesController extends Controller {
 				$export_item->driver_licenses  = implode(', ', array_values(CHtml::listData($item->driverLicensesTypes, 'id', 'name')));
 				$export_item->summary          = $item->summary;
 				$export_item->gender           = $item->genderTypes[ $item->gender ];
+
 				$export_item->marital_status   = $item->maritalStatuses[ $item->gender ][ (int) $item->marital_status ];
 				$export_item->birth_date       = $item->birth_date;
 				$export_item->documents        = $item->documents;
 				$export_item->assistance       = $item->flat_assistances;
+                $export_item->disability       = $item->disabilityGroups[  $item->disability ];
 				$rows[]                        = $export_item;
 			}
 
@@ -516,6 +530,7 @@ class ProfilesController extends Controller {
 				'email',
 				'other_contacts',
 				'desired_position',
+                'desired_positions',
 				'desired_place',
 				'residencies',
 				'education',
@@ -524,6 +539,7 @@ class ProfilesController extends Controller {
 				'skills',
 				'driver_licenses',
 				'summary',
+                'disability',
 				'gender',
 				'marital_status',
 				'birth_date',

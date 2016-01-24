@@ -80,8 +80,8 @@
 
             <?= $form->labelEx($model, 'email') ?>
             <?= $form->textField($model, 'email', ['class' => 'span8', 'maxlength' => 255]) ?>
+            <p><?= Yii::t('main', 'user.resume.form.email.text') ?></p>
             <?= $form->error($model, 'email') ?>
-
 
             <?= $form->labelEx($model, 'other_contacts') ?>
             <?= $form->textArea($model, 'other_contacts', ['rows' => 6, 'class' => 'span8']) ?>
@@ -128,15 +128,28 @@
             <?= $form->textArea($model, 'summary', ['rows' => 6, 'class' => 'span8']) ?>
             <?= $form->error($model, 'summary') ?>
 
+            <?= $form->label($model, 'disability') ?>
+            <?= $form->dropDownList($model, 'disability', $model->disabilityGroups) ?>
+            <?= $form->error($model, 'disability') ?>
+
 
             <?= $form->labelEx($model, 'cv_file') ?>
             <?= $form->textField($model, 'cv_file', ['class' => 'span8', 'maxlength' => 255]) ?>
             <?= $form->error($model, 'cv_file') ?>
 
 
-            <?= $form->labelEx($model, 'desired_position') ?>
-            <?= $form->textField($model, 'desired_position', ['class' => 'span8', 'maxlength' => 255]) ?>
-            <?= $form->error($model, 'desired_position') ?>
+            <?php echo $form->labelEx($model, 'desiredPositionsIds'); ?>
+            <input type="text" name="desiredPositionsFilter" class="filter span8"
+                   placeholder="<?= Yii::t('main', 'text.filter.placeholder') ?>"/>
+
+            <div class="div-overflow">
+                <?= $form->checkBoxList($model, 'desiredPositionsIds', PositionsHelper::all(), [
+                    'template' => '{beginLabel}{input} {labelTitle}{endLabel}',
+                    'separator' => '',
+                ]) ?>
+            </div>
+            <?= $form->error($model, 'desiredPositionsIds') ?>
+
 
             <?php echo $form->labelEx($model, 'positionsIds'); ?>
             <input type="text" name="positionsFilter" class="filter span8"

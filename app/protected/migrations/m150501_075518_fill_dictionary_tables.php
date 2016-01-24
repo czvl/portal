@@ -4,8 +4,6 @@ class m150501_075518_fill_dictionary_tables extends CDbMigration
 {
 	public function up()
 	{
-        return true;
-
         $this->execute(<<<SQL
 
 INSERT INTO `assistance_types` (`id`, `name`) VALUES

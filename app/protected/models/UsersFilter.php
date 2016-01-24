@@ -119,6 +119,8 @@ class UsersFilter extends CActiveRecord
 			'licensesIds',
             'added_time_from',
             'added_time_to',
+            'desiredPositions',
+            'disability',
 		];
 	}
 
