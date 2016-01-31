@@ -15,6 +15,9 @@ class m160128_152440_add_field_active_to_assistance_types extends CDbMigration
             ['id' => 10, 'name' => 'Консультація юриста'],
         ]);
 
+        // Rename Житло
+        $this->update('assistance_types', ['name' => 'Робота з наданням житла'], 'id = 6');
+
         // Mark values inactive according to https://github.com/czvl/portal/issues/36
         $this->update('assistance_types', ['active' => false], 'id IN (1, 2)');
 
@@ -22,6 +25,7 @@ class m160128_152440_add_field_active_to_assistance_types extends CDbMigration
 
 	public function down()
 	{
+        $this->update('assistance_types', ['name' => 'Житло'], ['id = 6']);
         $this->update('assistance_types', ['active' => true], 'id IN (1, 2)');
         $this->delete('assistance_types', 'id IN (7, 8, 9, 10)');
         $this->dropColumn('assistance_types', 'active');
