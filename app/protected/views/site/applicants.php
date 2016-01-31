@@ -203,12 +203,14 @@
             <?= $form->labelEx($model, 'assistanceIds'); ?>
             <div class="div-overflow">
                 <?= $form->checkBoxList($model, 'assistanceIds',
-                    CHtml::listData(AssistanceTypes::model()->findAll(array('order' => 'id')), 'id', 'name'),
+                    CHtml::listData(ActiveAssistanceTypes::model()->findAll(array('order' => 'name')), 'id', 'name'),
                     [
                         'template' => '{beginLabel}{input} {labelTitle}{endLabel}',
                         'separator' => '',
                     ]); ?>
             </div>
+
+            <br/>
 
             <?= $form->error($model, 'assistanceIds') ?>
 

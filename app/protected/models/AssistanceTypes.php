@@ -97,4 +97,22 @@ class AssistanceTypes extends CActiveRecord
         return parent::model($className);
     }
 
+    /**
+     * Перекрываем метод для заполнения результатов findAll() и подобных
+     * методов нужными нам моделями.
+     *
+     * @param array $attributes
+     * @return Car
+     */
+    protected function instantiate($attributes){
+        switch($attributes['active']){
+            case true:
+                $class = 'ActiveAssistanceTypes';
+            break;
+            default:
+                $class=get_class($this);
+        }
+        $model=new $class(null);
+        return $model;
+    }
 }
