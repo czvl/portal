@@ -236,8 +236,6 @@ echo ' ', CHtml::link('Скинути', '#reset', $params);
     </thead>
     <tbody>
         <?php
-        // debug
-        var_dump($dataProvider);
         $listView = $this->widget('bootstrap.widgets.TbListView', array(
             'dataProvider' => $dataProvider,
             'itemView' => '_list'
