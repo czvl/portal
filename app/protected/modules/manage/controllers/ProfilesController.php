@@ -409,12 +409,12 @@ class ProfilesController extends Controller {
 			$criteria->addInCondition('category_id', $categories);
 		}
         if ($desiredPositions = $this->fetchVariable('desiredPositions')) {
-			$with[] = 'desiredPositions'; // what is this?
-			$criteria->addInCondition('position_id', $desiredPositions);
+			$with[] = 'desiredPositions';
+			$criteria->addInCondition('desiredPositions_desiredPositions.position_id', $desiredPositions);
 		}
 		if ($positions = $this->fetchVariable('positions')) {
             $with[] = 'positions';
-			$criteria->addInCondition('position_id', $positions);
+			$criteria->addInCondition('positions_positions.position_id', $positions);
 		}
 		if ($assistanceIds = $this->fetchVariable('assistanceIds')) {
 			$with[] = 'assistanceTypes';
