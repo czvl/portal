@@ -139,6 +139,7 @@ $this->widget('bootstrap.widgets.TbDetailView', array(
             'value' => Yii::app()->dateFormatter->formatDateTime($model->birth_date, "long", false) . " (" . $this->getTimeDiff($model->birth_date) . ")"
         ),
         'contact_phone',
+        'other_contacts',
         'email:email',
         array(
             'name' => 'residenciesIds',
