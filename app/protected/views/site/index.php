@@ -160,7 +160,6 @@
                 <div class="row">
                     <div class="span12">
                         <p>Для претендентів Гаряча лінія: +380 (67) 507-09-30 (<strong>Kyivstar</strong>), +380 (66) 500-35-75 (<strong>MTS</strong>), +380 (93) 167-37-81 (<strong>Life</strong>), <a href="mailto:czsl.staff@gmail.com">czsl.staff@gmail.com</a></p>
-                        <p><a href="mailto:ilyas.karikov@gmail.com">Ильяс Кариков</a> - координатор по роботі з партнерами, +380 (63) 922-10-00.</p>
                         <p><a href="mailto:mariayemelyanenko@gmail.com">Марія Ємельяненко</a> - координаторка зв'язків з громадськістю, +380 (67) 296-66-43.</p>
                         <p>Адреси і телефони офісів та консультаційних центрів ЦЗВЛ та партнерів Центру у <strong>Києві</strong> та регіонах знаходьте на сторінці <a href="/blog/counseling/">Кар’єрне консультування</a>.</p>
                         <p>Проект “<a href="http://www.czvl.org.ua/blog/work4warrior/%20" target="_blank" rel="nofollow">Воїну-гідна праця</a>”: координатор Оксана Воропай +380 (63) 802-61-51, сторінка проекту в <a href="https://www.facebook.com/jobsoldiers" target="_blank" rel="nofollow">Facebook</a>.</p>
