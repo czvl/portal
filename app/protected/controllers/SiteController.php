@@ -208,6 +208,17 @@ class SiteController extends Controller
                     }
                 }
 
+                if (!empty($_POST['CvList']['applicantTypeIds'])) {
+                    foreach ($_POST['CvList']['applicantTypeIds'] as $ati) {
+                        $applicantType = new CvToApplicantType();
+                        $applicantType->cv_id = $model->id;
+                        $applicantType->applicant_type_id = $ati;
+                        if (!$applicantType->save()) {
+                            $result[] = false;
+                        }
+                    }
+                }
+
             } else {
                 $result[] = false;
             }

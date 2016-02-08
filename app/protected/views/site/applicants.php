@@ -194,11 +194,13 @@
             </div>
             <?= $form->error($model, 'driverLicensesIds') ?>
 
-
-            <?= $form->labelEx($model, 'applicant_type') ?>
-            <p>Учасник протестів на Майдані / Внутрішньо Переміщена Особа (з Криму, зі Сходу України).</p>
-            <?= $form->textArea($model, 'applicant_type', ['rows' => 2, 'class' => 'span8']) ?>
-            <?= $form->error($model, 'applicant_type') ?>
+            <?= $form->labelEx($model, 'applicantTypeIds'); ?>
+            <div class="div-overflow">
+                <?= $form->checkBoxList($model, 'applicantTypeIds', ApplicantTypesHelper::all(), [
+                        'template' => '{beginLabel}{input} {labelTitle}{endLabel}',
+                        'separator' => '',
+                    ]) ?>
+            </div>
 
             <?= $form->labelEx($model, 'assistanceIds'); ?>
             <div class="div-overflow">

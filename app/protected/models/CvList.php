@@ -20,9 +20,9 @@
  * @property string $skills
  * @property string $summary
  * @property string $salary
- * @property string $desired_position
+ * @property string $desired_position   // deprecated
  * @property string $documents
- * @property string $applicant_type
+ * @property string $applicant_type     // deprecated
  * @property string $cv_file
  * @property integer $recruiter_id
  * @property string $recruiter_comments
@@ -31,7 +31,7 @@
  * @property string $added_time
  * @property integer $status
  * @property integer $is_active
- * @property integer $disability
+ * @property integer $disability        // deprecated
  *
  * The followings are the available model relations:
  * @property User $recruiter
@@ -54,6 +54,7 @@ class CvList extends CActiveRecord
     public $maritalStatuses = array();
     public $desiredPositionsIds = array();
     public $disabilityGroups = array();
+    public $applicantTypeIds = array();
 
     public $personal_data;
 
@@ -81,7 +82,7 @@ class CvList extends CActiveRecord
     public function rules()
     {
         return array(
-            array('first_name, last_name, gender, contact_phone, birth_date, residenciesIds, education, jobLocationsIds, work_experience, skills, summary, applicant_type, desiredPositionsIds', 'required'),
+            array('first_name, last_name, gender, contact_phone, birth_date, residenciesIds, education, jobLocationsIds, work_experience, skills, summary, desiredPositionsIds, applicantTypeIds', 'required'),
             array('marital_status, education, recruiter_id, status, disability', 'numerical', 'integerOnly' => true),
             array('first_name, last_name, email, salary, desired_position, cv_file, who_filled', 'length', 'max' => 255),
             array('gender', 'length', 'max' => 1),
@@ -91,15 +92,15 @@ class CvList extends CActiveRecord
             array('birth_date', 'birthDateValidator'),
             array('email', 'email'),
             array('birth_date, other_contacts, eduction_info, work_experience, skills,
-            summary, documents, applicant_type,
+            summary, documents,
             recruiter_comments, residenciesIds, jobLocationsIds,
-            driverLicensesIds, assistanceIds, personal_data, positionsIds, desiredPositionsIds', 'safe'),
+            driverLicensesIds, assistanceIds, personal_data, positionsIds, desiredPositionsIds, applicantTypeIds', 'safe'),
 
             array('contact_phone', 'existentUser', 'on' => 'public'),
             array('personal_data', 'required', 'on' => 'public'),
             array('personal_data', 'compare', 'compareValue' => true, 'message' => 'Вам потрібно погодитись надати нам Ваші персональні дані.', 'on' => 'public'),
 
-            array('id, first_name, last_name, gender, marital_status, birth_date, contact_phone, other_contacts, email, education, eduction_info, work_experience, skills, summary, salary, desired_position, documents, applicant_type, cv_file, recruiter_id, recruiter_comments, who_filled, last_update, added_time, status, disability', 'safe', 'on' => 'search'),
+            array('id, first_name, last_name, gender, marital_status, birth_date, contact_phone, other_contacts, email, education, eduction_info, work_experience, skills, summary, salary, desired_position, documents, cv_file, recruiter_id, recruiter_comments, who_filled, last_update, added_time, status, disability', 'safe', 'on' => 'search'),
         );
     }
 
@@ -153,6 +154,8 @@ class CvList extends CActiveRecord
             'assistanceTypes' => array(self::MANY_MANY, 'AssistanceTypes', 'cv_to_assistance(cv_id, assistance_type_id)'),
             'citiesResidence' => array(self::MANY_MANY, 'CitiesList', 'cv_to_residence(cv_id, city_id)'),
             'citiesJobLocations' => array(self::MANY_MANY, 'CitiesList', 'cv_to_job_location(cv_id, city_id)'),
+            'applicantTypes' => array(self::MANY_MANY, 'CvApplicantTypes', 'cv_to_applicant_type(cv_id, applicant_type_id)'),
+
         );
     }
 
@@ -186,7 +189,6 @@ class CvList extends CActiveRecord
             'jobLocationsIds' => 'Бажане місто роботи',
             'documents' => 'Наявні документи (паспорт, права, диплом, трудова книжка)',
             'driverLicensesIds' => 'Водійські права',
-            'applicant_type' => 'Інформація про претендента ЦЗВЛ',
             'assistanceIds' => 'Потрібна допомога',
             'residenciesIds' => 'Місто проживання, знаходження',
             'cv_file' => 'Файл резюме (посилання)',
@@ -198,7 +200,8 @@ class CvList extends CActiveRecord
             'status' => 'Стан',
             'is_active' => 'Включений/Вимкнений',
             'personal_data' => 'Я згоден(на) з обробкою та використанням моїх персональних даних',
-            'disability' => 'Наяність інвалідності (вкажіть, будь ласка, групу)'
+            'disability' => 'Наявність інвалідності (вкажіть, будь ласка, групу)',
+            'applicantTypeIds' => 'Інформація про претендента ЦЗВЛ',
         );
     }
 
@@ -260,6 +263,12 @@ class CvList extends CActiveRecord
                 $this->desiredPositionsIds[] = $dp->id;
             }
         }
+        if (empty($this->applicantTypeIds)) {
+            foreach ($this->applicantTypes as $at) {
+                $this->applicantTypeIds[] = $at->id;
+            }
+        }
+
     }
 
     /**
@@ -298,7 +307,6 @@ class CvList extends CActiveRecord
         $criteria->compare('salary', $this->salary, true);
         $criteria->compare('desired_position', $this->desired_position, true);
         $criteria->compare('documents', $this->documents, true);
-        $criteria->compare('applicant_type', $this->applicant_type, true);
         $criteria->compare('cv_file', $this->cv_file, true);
         $criteria->compare('recruiter_id', $this->recruiter_id);
         $criteria->compare('recruiter_comments', $this->recruiter_comments, true);
