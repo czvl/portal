@@ -31,6 +31,7 @@ class CvToApplicantType extends CActiveRecord
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('cv_id, applicant_type_id', 'safe', 'on' => 'search'),
+            array('cv_id', 'limitSelect', 'min'=>1, 'max'=>2),
         );
     }
 
@@ -92,5 +93,17 @@ class CvToApplicantType extends CActiveRecord
     {
         return parent::model($className);
     }
+
+    public function limitSelect($attribute,$params)
+    {
+        $count = $this->countByAttributes(['cv_id' => $this->cv_id]);
+
+        // if($count < $params['min'])
+        //     $this->addError('cv_id','at least one applicant type should be selected');
+        if($count >= $params['max']) {
+            $this->addError('cv_id',' can\'t select more than 2 applicant types');
+        }
+    }
+
 
 }

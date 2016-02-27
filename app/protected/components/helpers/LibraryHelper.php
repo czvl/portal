@@ -49,7 +49,7 @@ abstract class LibraryHelper
     /**
      * The same as CHtml::checkBoxList, but with js handlers to limit the number
      * of choices in the list
-     * 
+     *
      * @param  [type] $model       [description]
      * @param  [type] $attribute   [description]
      * @param  [type] $data        [description]
@@ -91,7 +91,18 @@ function checkboxClickedLimit(maxLimit){
 }
 EOD;
 
+            $css = <<<EOD
+            .checkbox-disabled {
+                color: gray;
+            }
+
+            .checkbox-enabled {
+                color: #312a1e;
+            }
+EOD;
+
             $cs=Yii::app()->getClientScript();
+            $cs->registerCss('checkboxAppearance', $css);
             $cs->registerScript('checkboxClickedLimit', $js,  CClientScript::POS_END);
 
             // add event to all of the checkboxes in a list

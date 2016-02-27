@@ -213,7 +213,8 @@ class SiteController extends Controller
                         $applicantType = new CvToApplicantType();
                         $applicantType->cv_id = $model->id;
                         $applicantType->applicant_type_id = $ati;
-                        if (!$applicantType->save()) {
+                        if (!($applicantType->validate(null, false) && $applicantType->save(false))) {
+                            $model->addError('applicantTypeIds', $applicantType->getError('cv_id'));
                             $result[] = false;
                         }
                     }
