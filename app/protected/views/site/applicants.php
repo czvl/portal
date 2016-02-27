@@ -4,6 +4,47 @@
  * @var $model CvList
  */
 ?>
+
+<style type="text/css" scoped>
+    .checkbox-disabled {
+        color: gray;
+    }
+
+    .checkbox-enabled {
+        color: #312a1e;
+    }
+</style>
+
+<script type = "text/javascript">
+// function clickedVal(){
+//     var maxLimit = 2
+//
+//     var checkboxes = arguments[0].parentNode.parentNode.getElementsByTagName("input");
+//
+//     // Get number of checked checkboxes
+//     var checkedCounter = 0;
+//     for (var i = 0; i < checkboxes.length; i++) {
+//         if (checkboxes[i].checked)
+//             checkedCounter++;
+//     }
+//
+//     // If limit of checked succeeded mark all other checkboxes as read only, otherwise make all checkboxes updateable
+//     if (checkedCounter >= maxLimit) {
+//         for (var i = 0; i < checkboxes.length; i++) {
+//             if (!checkboxes[i].checked) {
+//                 checkboxes[i].disabled = true;
+//                 checkboxes[i].parentNode.className = "checkbox-disabled";
+//             }
+//         }
+//     } else {
+//         for (var i = 0; i < checkboxes.length; i++) {
+//                 checkboxes[i].disabled = false;
+//                 checkboxes[i].parentNode.className = "checkbox-enabled";
+//         }
+//     }
+// }
+</script>
+
 <section id="services" class="single-page scrollblock">
     <div class="container" >
         <h1>Додати анкету</h1>
@@ -19,6 +60,7 @@
         </div>
 
         <div class="form">
+
             <?php if (filter_input(INPUT_GET, 'success')) { ?>
                 <p>Ваші дані були збережені. Найближчим часом з Вами зв’яжуться наші представники.</p>
             <?php } else { ?>
@@ -195,11 +237,15 @@
             <?= $form->error($model, 'driverLicensesIds') ?>
 
             <?= $form->labelEx($model, 'applicantTypeIds'); ?>
+
             <div class="div-overflow">
-                <?= $form->checkBoxList($model, 'applicantTypeIds', ApplicantTypesHelper::all(), [
+                <?= LibraryHelper::checkBoxListLimited($model, 'applicantTypeIds',
+                    ApplicantTypesHelper::all(),
+                    [
                         'template' => '{beginLabel}{input} {labelTitle}{endLabel}',
                         'separator' => '',
-                    ]) ?>
+                    ], 2); ?>
+
             </div>
 
             <?= $form->labelEx($model, 'assistanceIds'); ?>
@@ -236,3 +282,20 @@
         <?php } ?>
     </div>
 </section>
+<!-- <?php
+// Yii::app()->clientScript->registerSCript('restrictSelection','$("#butt").click(function() {
+//
+//     var arr=$("#brand-grid").yiiGridView("getChecked","brand-grid_c4");
+//
+//     if(arr.length>2)
+//      {
+//          alert("select only 5 items or less");
+//          return false;
+//      }
+//
+//     else console.log(arr);
+//
+//     });');
+?> -->
+
+ ?>

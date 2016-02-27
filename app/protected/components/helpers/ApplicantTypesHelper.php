@@ -41,4 +41,5 @@ class ApplicantTypesHelper extends LibraryHelper
 
         return $result;
     }
+    
 }
