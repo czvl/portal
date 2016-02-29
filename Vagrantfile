@@ -21,6 +21,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
        v.name = "czvl-ua"
        v.memory = 2048
        v.cpus = 2
+
   end
 
   config.vm.provision :ansible do |a|
