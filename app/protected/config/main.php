@@ -5,10 +5,6 @@ $dbFileName = file_exists(dirname(__FILE__) . '/db_local.php') ? dirname(__FILE_
 Yii::setPathOfAlias('vendor', dirname(__FILE__) . DIRECTORY_SEPARATOR . '../../vendor');
 $local = file_exists(dirname(__FILE__) . "/main_local.php") ? require dirname(__FILE__) . "/main_local.php" : [];
 
-Yii::getLogger()->autoDump = true;
-Yii::getLogger()->autoFlush = 1;
-
-
 return CMap::mergeArray(array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name' => 'Employment center of free people',

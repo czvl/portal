@@ -40,7 +40,7 @@ $config = [
             'routes' => array(
                 array(
                     'class' => 'CFileLogRoute',
-                    'levels' => 'error, warning, trace, info',
+                    'levels' => 'error, warning',
                 ),
             ),
         ),
