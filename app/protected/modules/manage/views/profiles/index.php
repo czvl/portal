@@ -31,6 +31,9 @@ $addedTimeFrom          = $this->fetchVariable('added_time_from');
 $addedTimeTo            = $this->fetchVariable('added_time_to');
 $desiredPositionsFilter = $this->fetchVariable('desiredPositions');
 $disabilityFilter       = $this->fetchVariable('disability');
+$applicantTypeIdsFilter    = $this->fetchVariable('applicantTypeIds');
+
+
 
 if (!$ageMinFilter) $ageMinFilter = $ageMinDefault;
 if (!$ageMaxFilter) $ageMaxFilter = $ageMaxDefault;
@@ -189,6 +192,13 @@ function getOrder($fieldValue, $orderField = 'id')
                     <input type="text" name="licensesFilter" class="filter" size="10" />
                     <div class="div-overflow narrow">
                         <?php echo CHtml::checkBoxList('licensesIds', $licensesIdsFilter, CHtml::listData(DriverLicenses::model()->findAll(array('order' => getOrder($licensesIdsFilter) . 'name ASC')), 'id', 'name'), array('template' => '{beginLabel}{input} {labelTitle}{endLabel}', 'separator' => '')); ?>
+                    </div>
+                </td>
+                <td class="<?php echo getClassName($applicantTypeIdsFilter); ?>">
+                    <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('applicantTypeIds')); ?></strong><br />
+                    <input type="text" name="applicantTypesFilter" class="filter" size="10" />
+                    <div class="div-overflow narrow">
+                        <?php echo CHtml::checkBoxList('applicantTypeIds', $applicantTypeIdsFilter, CHtml::listData(CvApplicantTypes::model()->findAll(array('order' => getOrder($applicantTypeIdsFilter) . 'name ASC')), 'id', 'name'), array('template' => '{beginLabel}{input} {labelTitle}{endLabel}', 'separator' => '')); ?>
                     </div>
                 </td>
             </tr>

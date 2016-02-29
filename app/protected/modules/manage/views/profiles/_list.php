@@ -50,6 +50,7 @@
             <?php if (!empty($data->desiredPositions)) { ?>
                 <strong><?php echo $data->getAttributeLabel('desiredPositionsIds'); ?>:</strong><br />
                 <?php echo implode(', ', array_values(CHtml::listData($data->desiredPositions, 'id', 'name'))); ?>
+                <br />
             <?php } ?>
             <?php if (!empty($data->positions)) { ?>
                 <strong><?php echo $data->getAttributeLabel('positionsIds'); ?>:</strong><br />
@@ -93,21 +94,27 @@
                 <strong><?php echo $data->getAttributeLabel('disability'); ?>:</strong><br />
                 <?php echo $data->disabilityGroups[$data->disability]; ?>
                 <br /><br />
+                <strong><?php echo $data->getAttributeLabel('applicantTypeIds'); ?>:</strong>
+                <?php
+                //echo $data->applicantTypes;
+                echo implode(', ', array_values(CHtml::listData($data->applicantTypes, 'id', 'name')));
+                ?>
+
             </td>
             <td>
                 <strong><?php echo $data->getAttributeLabel('assistanceIds'); ?>:</strong>
                 <?php echo $data->assistances; ?>
 
-            <?php if (!empty($data->latestStatuses)) { ?>
-                <strong><?php echo $data->getAttributeLabel('statuses'); ?>:</strong><br />
-                <?php foreach($data->latestStatuses as $status) { ?>
-                <div class="list-statuses">
-                    <?php echo $status->message; ?><br />
-                    <em>[<?php echo Yii::app()->dateFormatter->formatDateTime($status->added_time, "short"); ?>
-                    - <?php echo CHtml::link($status->operator->first_name . ' ' . $status->operator->last_name, array('/manage/reqruiter', 'id' => $status->operator->id)); ?>]</em>
-                </div>
+                <?php if (!empty($data->latestStatuses)) { ?>
+                    <strong><?php echo $data->getAttributeLabel('statuses'); ?>:</strong><br />
+                    <?php foreach($data->latestStatuses as $status) { ?>
+                    <div class="list-statuses">
+                        <?php echo $status->message; ?><br />
+                        <em>[<?php echo Yii::app()->dateFormatter->formatDateTime($status->added_time, "short"); ?>
+                        - <?php echo CHtml::link($status->operator->first_name . ' ' . $status->operator->last_name, array('/manage/reqruiter', 'id' => $status->operator->id)); ?>]</em>
+                    </div>
+                    <?php } ?>
                 <?php } ?>
-            <?php } ?>
 
             </td>
             <td>

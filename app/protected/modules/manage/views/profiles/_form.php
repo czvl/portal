@@ -146,6 +146,8 @@
             <p><small>Участь у Майдані / Вимушений переселенець з окупованої території (Крим), зони проведення АТО та Сходу України.</small></p>
             <?php echo $form->textArea($model, 'applicant_type', array('rows' => 6, 'span' => 8)); ?>
 
+            <?php echo $form->checkBoxListControlGroup($model, 'applicantTypeIds', CHtml::listData(CvApplicantTypes::model()->findAll(array('order' => 'id')), 'id', 'name')); ?>
+
             <?php echo $form->checkBoxListControlGroup($model, 'assistanceIds', CHtml::listData(AssistanceTypes::model()->findAll(array('order' => 'id')), 'id', 'name')); ?>
 
             <?php echo $form->urlFieldControlGroup($model, 'cv_file', array('span' => 5, 'maxlength' => 255)); ?>

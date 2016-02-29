@@ -4,6 +4,7 @@
  * @var $model CvList
  */
 ?>
+
 <section id="services" class="single-page scrollblock">
     <div class="container" >
         <h1>Додати анкету</h1>
@@ -19,6 +20,7 @@
         </div>
 
         <div class="form">
+
             <?php if (filter_input(INPUT_GET, 'success')) { ?>
                 <p>Ваші дані були збережені. Найближчим часом з Вами зв’яжуться наші представники.</p>
             <?php } else { ?>
@@ -194,11 +196,16 @@
             </div>
             <?= $form->error($model, 'driverLicensesIds') ?>
 
-
-            <?= $form->labelEx($model, 'applicant_type') ?>
-            <p>Учасник протестів на Майдані / Внутрішньо Переміщена Особа (з Криму, зі Сходу України).</p>
-            <?= $form->textArea($model, 'applicant_type', ['rows' => 2, 'class' => 'span8']) ?>
-            <?= $form->error($model, 'applicant_type') ?>
+            <?= $form->labelEx($model, 'applicantTypeIds'); ?>
+            <div class="div-overflow">
+                <?= LibraryHelper::checkBoxListLimited($model, 'applicantTypeIds',
+                    ApplicantTypesHelper::all(),
+                    [
+                        'template' => '{beginLabel}{input} {labelTitle}{endLabel}',
+                        'separator' => '',
+                    ], 2); ?>
+            </div>
+            <?= $form->error($model, 'applicantTypeIds') ?>
 
             <?= $form->labelEx($model, 'assistanceIds'); ?>
             <div class="div-overflow">

@@ -184,6 +184,10 @@ $this->widget('bootstrap.widgets.TbDetailView', array(
         'applicant_type',
         'cv_file:url',
         array(
+            'name' => 'applicantTypeIds',
+            'value' => implode(', ', array_values(CHtml::listData($model->applicantTypes, 'id', 'name')))
+        ),
+        array(
             'name' => 'assistanceIds',
             'value' => $model->assistances,
             'type' => 'html'
