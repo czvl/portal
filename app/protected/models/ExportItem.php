@@ -24,6 +24,7 @@ class ExportItem extends CModel {
     public $assistance;
     public $disability;
     public $desired_positions;
+    public $applicant_types;
 
 
     public function attributeNames() {
@@ -54,7 +55,8 @@ class ExportItem extends CModel {
             'documents' => 'Наявні документи',
             'assistance' => 'Потрібна допомога',
             'disability' => 'Наявність інвалідності',
-            'desired_positions' => 'Бажана посада (перелік)'
+            'desired_positions' => 'Бажана посада (перелік)',
+            'applicant_types' => 'Інформація про претендента ЦЗВЛ',
         );
     }
 

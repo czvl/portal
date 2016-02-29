@@ -276,6 +276,8 @@ class ProfilesController extends Controller {
 			$model->citiesJobLocations  = $_POST['CvList']['jobLocationsIds'];
 			$model->assistanceTypes     = $_POST['CvList']['assistanceIds'];
             $model->desiredPositions    = $_POST['CvList']['desiredPositionsIds'];
+            $model->applicantTypes      = $_POST['CvList']['applicantTypeIds'];
+
 			if ($model->saveWithRelated(array(
 				'categories',
 				'positions',
@@ -284,6 +286,7 @@ class ProfilesController extends Controller {
 				'driverLicensesTypes',
 				'assistanceTypes',
                 'desiredPositions',
+                'applicantTypes',
 			))
 			) {
 
@@ -523,6 +526,8 @@ class ProfilesController extends Controller {
 				$export_item->documents        = $item->documents;
 				$export_item->assistance       = $item->flat_assistances;
                 $export_item->disability       = $item->disabilityGroups[  $item->disability ];
+                $export_item->applicant_types     = implode(', ', array_values(CHtml::listData($item->applicantTypes, 'id', 'name')));  // candidate's desired positions list
+
 				$rows[]                        = $export_item;
 			}
 
@@ -548,6 +553,7 @@ class ProfilesController extends Controller {
 				'marital_status',
 				'birth_date',
 				'documents',
+                'applicant_types',
 				'assistance'
 			),
 				'CZVL-profiles-export-' . date('Ymd-His'),
