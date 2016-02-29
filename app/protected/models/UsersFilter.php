@@ -121,6 +121,7 @@ class UsersFilter extends CActiveRecord
             'added_time_to',
             'desiredPositions',
             'disability',
+            'applicantTypeIds'
 		];
 	}
 

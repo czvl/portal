@@ -420,6 +420,10 @@ class ProfilesController extends Controller {
 			$with[] = 'assistanceTypes';
 			$criteria->addInCondition('assistance_type_id', $assistanceIds);
 		}
+        if ($applicantTypeIds = $this->fetchVariable('applicantTypeIds')) {
+            $with[] = 'applicantTypes';
+            $criteria->addInCondition('applicant_type_id', $applicantTypeIds);
+        }
 		if ($licensesIds = $this->fetchVariable('licensesIds')) {
 			$with[] = 'driverLicensesTypes';
 			$criteria->addInCondition('license_id', $licensesIds);
