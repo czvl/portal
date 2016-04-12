@@ -28,8 +28,9 @@ class Company extends CActiveRecord
     {
         return [
             ['name, address', 'required'],
-            ['address', 'length', 'max' => 1000],
+            ['address, site_url', 'length', 'max' => 1000],
             ['name', 'length', 'min' => 5],
+            ['id', 'safe'],
         ];
     }
 
