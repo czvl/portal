@@ -29,6 +29,7 @@
  * @property string $who_filled
  * @property string $last_update
  * @property string $added_time
+ * @property string $verifyCode
  * @property integer $status
  * @property integer $is_active
  * @property integer $disability        // deprecated
@@ -57,6 +58,7 @@ class CvList extends CActiveRecord
     public $applicantTypeIds = array();
 
     public $personal_data;
+    public $verifyCode;
 
     public function init()
     {
@@ -82,6 +84,7 @@ class CvList extends CActiveRecord
     public function rules()
     {
         return array(
+            array('verifyCode','captcha','allowEmpty'=>!CCaptcha::checkRequirements(),),
             array('first_name, last_name, gender, contact_phone, birth_date, residenciesIds, education, jobLocationsIds, work_experience, skills, summary, desiredPositionsIds, applicantTypeIds', 'required'),
             array('marital_status, education, recruiter_id, status, disability', 'numerical', 'integerOnly' => true),
             array('first_name, last_name, email, salary, desired_position, cv_file, who_filled', 'length', 'max' => 255),
@@ -173,6 +176,7 @@ class CvList extends CActiveRecord
             'first_last_name' => 'Ім’я Прізвище',
             'gender' => 'Стать',
             'marital_status' => 'Сімейний стан',
+            'language_type' => 'Знання іноземних мов',
             'birth_date' => 'Дата народження',
             'contact_phone' => 'Телефон',
             'other_contacts' => 'Інші контакти (якщо є ще один телефон або пошта, скайп, соціальні мережі)',
@@ -202,6 +206,7 @@ class CvList extends CActiveRecord
             'personal_data' => 'Я згоден(на) з обробкою та використанням моїх персональних даних',
             'disability' => 'Наявність інвалідності (вкажіть, будь ласка, групу)',
             'applicantTypeIds' => 'Інформація про претендента ЦЗВЛ',
+            'verifyCode' => 'Код перевiрки'
         );
     }
 

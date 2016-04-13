@@ -51,6 +51,7 @@
             <?= $form->dropDownList($model, 'marital_status', $model->maritalStatuses['m']) ?>
             <?= $form->error($model, 'marital_status') ?>
 
+
             <?= $form->labelEx($model, 'birth_date'); ?>
             <p><?= Yii::t('main', 'user.resume.form.birth.text') ?></p>
             <?php
@@ -223,6 +224,10 @@
 
             <?= $form->checkBox($model, 'personal_data'); ?>
             <?= $form->labelEx($model, 'personal_data', array('class' => 'inline')); ?>
+
+            <?=CHtml::activeLabelEx($model, 'verifyCode')?>
+            <?$this->widget('CCaptcha')?>
+            <?=CHtml::activeTextField($model, 'verifyCode')?>
 
             <p><strong>Якщо бажаєте приєднатися до команди волонтерів, <a href="http://bit.ly/czslvlntr"
                                                                           target="_blank">заповніть форму</a>.</strong>
