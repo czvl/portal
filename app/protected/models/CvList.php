@@ -176,7 +176,7 @@ class CvList extends CActiveRecord
             'first_last_name' => 'Ім’я Прізвище',
             'gender' => 'Стать',
             'marital_status' => 'Сімейний стан',
-            'language_type' => 'Знання іноземних мов',
+            //'language_type' => 'Знання іноземних мов',
             'birth_date' => 'Дата народження',
             'contact_phone' => 'Телефон',
             'other_contacts' => 'Інші контакти (якщо є ще один телефон або пошта, скайп, соціальні мережі)',
