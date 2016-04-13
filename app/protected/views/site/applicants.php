@@ -68,7 +68,6 @@
             ?>
             <?= $form->error($model, 'birth_date') ?>
 
-
             <?= $form->labelEx($model, 'contact_phone'); ?>
             <?php
             $this->widget('CMaskedTextField', array(
@@ -133,7 +132,6 @@
             <?= $form->label($model, 'disability') ?>
             <?= $form->dropDownList($model, 'disability', $model->disabilityGroups) ?>
             <?= $form->error($model, 'disability') ?>
-
 
             <?= $form->labelEx($model, 'cv_file') ?>
             <?= $form->textField($model, 'cv_file', ['class' => 'span8', 'maxlength' => 255]) ?>
@@ -223,6 +221,10 @@
 
             <?= $form->checkBox($model, 'personal_data'); ?>
             <?= $form->labelEx($model, 'personal_data', array('class' => 'inline')); ?>
+
+            <?=CHtml::activeLabelEx($model, 'verifyCode')?>
+            <?$this->widget('CCaptcha')?>
+            <?=CHtml::activeTextField($model, 'verifyCode')?>
 
             <p><strong>Якщо бажаєте приєднатися до команди волонтерів, <a href="http://bit.ly/czslvlntr"
                                                                           target="_blank">заповніть форму</a>.</strong>
