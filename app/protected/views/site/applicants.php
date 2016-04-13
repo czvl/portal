@@ -51,7 +51,6 @@
             <?= $form->dropDownList($model, 'marital_status', $model->maritalStatuses['m']) ?>
             <?= $form->error($model, 'marital_status') ?>
 
-
             <?= $form->labelEx($model, 'birth_date'); ?>
             <p><?= Yii::t('main', 'user.resume.form.birth.text') ?></p>
             <?php
@@ -68,7 +67,6 @@
             ));
             ?>
             <?= $form->error($model, 'birth_date') ?>
-
 
             <?= $form->labelEx($model, 'contact_phone'); ?>
             <?php
@@ -134,7 +132,6 @@
             <?= $form->label($model, 'disability') ?>
             <?= $form->dropDownList($model, 'disability', $model->disabilityGroups) ?>
             <?= $form->error($model, 'disability') ?>
-
 
             <?= $form->labelEx($model, 'cv_file') ?>
             <?= $form->textField($model, 'cv_file', ['class' => 'span8', 'maxlength' => 255]) ?>
