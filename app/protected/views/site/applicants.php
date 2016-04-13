@@ -223,7 +223,7 @@
             <?= $form->labelEx($model, 'personal_data', array('class' => 'inline')); ?>
 
             <?=CHtml::activeLabelEx($model, 'verifyCode')?>
-            <?$this->widget('CCaptcha')?>
+            <?php $this->widget('CCaptcha')?>
             <?=CHtml::activeTextField($model, 'verifyCode')?>
 
             <p><strong>Якщо бажаєте приєднатися до команди волонтерів, <a href="http://bit.ly/czslvlntr"

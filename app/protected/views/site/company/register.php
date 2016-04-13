@@ -58,7 +58,7 @@
         <?= $form->passwordFieldControlGroup($model, 'repeat_password', ['class' => 'span4']) ?>
         <?=CHtml::activeLabelEx($model, 'verifyCode')?>
         <?= $form->error($model, 'verifyCode',['style'=>'color:#b94a48']);?>
-        <?$this->widget('CCaptcha')?>
+        <?php $this->widget('CCaptcha')?>
         <?=CHtml::activeTextField($model, 'verifyCode')?>
         <div class="form-actions">
             <?php
