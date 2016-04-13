@@ -23,8 +23,6 @@
 
         <?= $form->errorSummary($model); ?>
 
-
-
         <fieldset>
             <legend><?= Yii::t('main', 'company.register.company') ?></legend>
             <?= $form->textFieldControlGroup($model, 'name', ['class' => 'span8 ']) ?>
@@ -38,7 +36,6 @@
         <fieldset>
             <legend><?= Yii::t('main', 'company.register.user') ?></legend>
         </fieldset>
-
 
         <?= $form->textFieldControlGroup($model, 'first_name', ['class' => 'span4']) ?>
         <?= $form->textFieldControlGroup($model, 'last_name', ['class' => 'span4']) ?>
@@ -59,7 +56,10 @@
         <?= $form->textFieldControlGroup($model, 'username', ['class' => 'span4', 'label' => Yii::t('main', 'company.register.username.label')]) ?>
         <?= $form->passwordFieldControlGroup($model, 'password', ['class' => 'span4']) ?>
         <?= $form->passwordFieldControlGroup($model, 'repeat_password', ['class' => 'span4']) ?>
-
+        <?=CHtml::activeLabelEx($model, 'verifyCode')?>
+        <?= $form->error($model, 'verifyCode',['style'=>'color:#b94a48']);?>
+        <?$this->widget('CCaptcha')?>
+        <?=CHtml::activeTextField($model, 'verifyCode')?>
         <div class="form-actions">
             <?php
             echo TbHtml::submitButton(Yii::t('main', 'form.button.add'),

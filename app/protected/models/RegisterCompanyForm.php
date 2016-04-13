@@ -22,6 +22,7 @@ class RegisterCompanyForm extends CFormModel
     public $password;
     public $repeat_password;
     public $additional_contact;
+    public $verifyCode;
 
     public function rules()
     {
@@ -39,6 +40,7 @@ class RegisterCompanyForm extends CFormModel
             ['email', 'email'],
             ['site_url', 'url'],
             ['email', 'emailUniqueValidator'],
+            ['verifyCode','captcha','allowEmpty'=>!CCaptcha::checkRequirements(),],
         );
     }
 
@@ -123,6 +125,7 @@ class RegisterCompanyForm extends CFormModel
             'last_name' => Yii::t('main', 'Last name'),
             'additional_contact' => Yii::t('main', 'user.additional_contact'),
             'site_url' => Yii::t('main', 'company.site_url'),
+            'verifyCode' => 'Код перевiрки'
         );
     }
 
