@@ -84,7 +84,7 @@ class CvList extends CActiveRecord
     public function rules()
     {
         return array(
-            array('verifyCode','captcha','allowEmpty'=>!CCaptcha::checkRequirements(),),
+            array('verifyCode','captcha','allowEmpty'=>!CCaptcha::checkRequirements(),'on'=>'public'),
             array('first_name, last_name, gender, contact_phone, birth_date, residenciesIds, education, jobLocationsIds, work_experience, skills, summary, desiredPositionsIds, applicantTypeIds', 'required'),
             array('marital_status, education, recruiter_id, status, disability', 'numerical', 'integerOnly' => true),
             array('first_name, last_name, email, salary, desired_position, cv_file, who_filled', 'length', 'max' => 255),
