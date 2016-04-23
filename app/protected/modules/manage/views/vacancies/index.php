@@ -11,32 +11,62 @@
 <?php
 $this->widget('bootstrap.widgets.TbGridView', [
     'dataProvider' => $dataProvider,
-    'filter' => null,
+    'afterAjaxUpdate' => "function(id,data){
+        var close_time = $('#Vacancy_close_time').val();
+        jQuery('#Vacancy_close_time').datepicker(jQuery.extend({showMonthAfterYear:false},
+        jQuery.datepicker.regional['ru'],{'dateFormat':'yy-mm-dd'}));
+    }",
+    'filter' => $model,
     'columns' => [
         'id',
-        'city.city_name',
-        'name',
         [
             'class' => CDataColumn::class,
+            'name' => 'city_id',
             'value' => function(Vacancy $object){
-                    return CHtml::link($object->company->name, [
-                        'companies/view', 'id' => $object->company_id
+                return $object->city->city_name;
+            },
+            'type' => 'raw',
+            'header' => Yii::t('main', 'city.name'),
+        ],        'name',
+        [
+            'class' => CDataColumn::class,
+            'name' => 'company_id',
+            'value' => function(Vacancy $company){
+                    return CHtml::link($company->company->name, [
+                        'companies/view', 'id' => $company->company_id
                     ]);
             },
             'type' => 'raw',
-            'header' => Yii::t('main', 'vacancy.label.company'),
+            'header' => Yii::t('main', 'company.name'),
         ],
-        'housing:boolean',
         [
-            'class' => CDataColumn::class,
+            'name'=>'housing',
+            'value' => "housing?'Так':'Нi'",
+            'filter' => array(0 => Yii::t('app', 'Так'), 1 => Yii::t('app', 'Нi')),
+        ],
+        [
+            'name' => 'user_id',
             'value' => function(Vacancy $object){
                 return $object->user->first_name . " " . $object->user->phone;
             },
             'header' => Yii::t('main', 'vacancy.label.user'),
         ],
-        'close_time',
+        array(
+            'name' => 'close_time',
+            'filter' => $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+                'model'=>$model,
+                'attribute'=>'close_time',
+                'language' => 'ru',
+
+            'options' => array(
+                'dateFormat'=>'yy-mm-dd',
+            ),
+            ),
+                true), // (#4)
+        ),
         [
-            'class' => CDataColumn::class,
+            'name' => 'status',
+            'filter' => array(0 => Yii::t('app', 'Закрита'), 1 => Yii::t('app', 'Вiдкрита')),
             'value' => function(Vacancy $vacancy){
                 return VacancyHelper::statusName($vacancy);
             },

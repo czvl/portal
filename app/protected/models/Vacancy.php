@@ -63,12 +63,13 @@ class Vacancy extends CActiveRecord
     {
         return [
             ['name, company_id, city_id, user_id, status, experience_id, categoryIds', 'required'],
-            ['company_id, city_id, user_id, status, housing, experience_id', 'numerical'],
+            ['id, company_id, city_id, user_id, status, housing, experience_id', 'numerical'],
             ['name', 'length', 'max' => 255],
             ['hash', 'length', 'is' => 32],
             ['description, requirements', 'length', 'max' => 5000],
             ['user_id', 'contactPersonValidator'],
-            ['positionIds, educationIds', 'required']
+            ['positionIds, educationIds', 'required'],
+            ['created_at, close_time','safe']
         ];
     }
 
@@ -145,11 +146,20 @@ class Vacancy extends CActiveRecord
     {
         $criteria = new CDbCriteria;
 
-        $criteria->compare('id', $this->id);
-        $criteria->compare('name', $this->name, true);
+        $criteria->together = true;
+        $criteria->with = array("user","company","city");
+        $criteria->alias = "t";
+        $criteria->compare('t.id', $this->id);
+        $criteria->compare('housing', $this->housing);
+        $criteria->compare('t.name', $this->name, true);
+        $criteria->compare('t.status', $this->status, true);
+        $criteria->compare('close_time', $this->close_time, true);
         $criteria->compare('description', $this->description, true);
-        $criteria->compare('created_at', $this->created_at, true);
-        $criteria->order = 'created_at DESC';
+        $criteria->compare('user.first_name', $this->user_id, true);
+        $criteria->compare('company.name', $this->company_id, true);
+        $criteria->compare('city.city_name', $this->city_id, true);
+        $criteria->compare('t.created_at', $this->created_at, true);
+        $criteria->order = 't.created_at DESC';
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,

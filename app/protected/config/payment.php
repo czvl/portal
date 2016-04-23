@@ -2,8 +2,8 @@
 
 return [
     'liqpay' => [
-        'public_key' => '',
-        'private_key' => '',
+        'public_key' => '12345',
+        'private_key' => 'qwerty',
         'version' => '3',
         'amount' => '100',
         'currency' => 'UAH',
