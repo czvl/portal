@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var $model Vacancy
  * @var $dataProvider CDataProvider
@@ -41,7 +42,7 @@ $this->widget('bootstrap.widgets.TbGridView', [
         ],
         [
             'name'=>'housing',
-            'value' => "housing?'Так':'Нi'",
+            'value' => "'housing'?'Так':'Нi'",
             'filter' => array(0 => Yii::t('app', 'Так'), 1 => Yii::t('app', 'Нi')),
         ],
         [
