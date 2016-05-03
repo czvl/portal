@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @var $model Vacancy
  * @var $dataProvider CDataProvider
@@ -42,8 +41,13 @@ $this->widget('bootstrap.widgets.TbGridView', [
         ],
         [
             'name'=>'housing',
-            'value' => "'housing'?'Так':'Нi'",
-            'filter' => array(0 => Yii::t('app', 'Так'), 1 => Yii::t('app', 'Нi')),
+            'value' => function(Vacancy $obj){
+                if($obj->housing == 1)
+                    return 'Так';
+                else
+                    return 'Нi';
+            },
+            'filter' => array(1 => Yii::t('app', 'Так'), 0 => Yii::t('app', 'Нi')),
         ],
         [
             'name' => 'user_id',
