@@ -57,6 +57,12 @@ class CvList extends CActiveRecord
     public $disabilityGroups = array();
     public $applicantTypeIds = array();
 
+    public $foreignEnglishIds= array();
+    public $foreignGermanIds = array();
+    public $foreignFrenchIds = array();
+    public $foreignChinaIds= array();
+    public $foreignSpainIds= array();
+
     public $personal_data;
     public $verifyCode;
 
@@ -158,6 +164,7 @@ class CvList extends CActiveRecord
             'citiesResidence' => array(self::MANY_MANY, 'CitiesList', 'cv_to_residence(cv_id, city_id)'),
             'citiesJobLocations' => array(self::MANY_MANY, 'CitiesList', 'cv_to_job_location(cv_id, city_id)'),
             'applicantTypes' => array(self::MANY_MANY, 'CvApplicantTypes', 'cv_to_applicant_type(cv_id, applicant_type_id)'),
+            'foreignLanguageTypes' => array(self::MANY_MANY, 'ForeignLanguages', 'cv_to_language(cv_id, language_id)'),
 
         );
     }
@@ -206,7 +213,13 @@ class CvList extends CActiveRecord
             'personal_data' => 'Я згоден(на) з обробкою та використанням моїх персональних даних',
             'disability' => 'Наявність інвалідності (вкажіть, будь ласка, групу)',
             'applicantTypeIds' => 'Інформація про претендента ЦЗВЛ',
-            'verifyCode' => 'Код перевiрки'
+            'verifyCode' => 'Код перевiрки',
+            'foreignLanguageTypes' => 'Іноземні мови',
+            'foreignEnglishIds' => 'Англійська мова',
+            'foreignGermanIds' => 'Німецька мова',
+            'foreignFrenchIds' => 'Французька мова',
+            'foreignChinaIds' => 'Китайська мова',
+            'foreignSpainIds' => 'Іспанська мова'
         );
     }
 
@@ -273,6 +286,7 @@ class CvList extends CActiveRecord
                 $this->applicantTypeIds[] = $at->id;
             }
         }
+
 
     }
 

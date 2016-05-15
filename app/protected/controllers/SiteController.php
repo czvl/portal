@@ -220,6 +220,61 @@ class SiteController extends Controller
                     }
                 }
 
+                if (!empty($_POST['CvList']['foreignEnglishIds'])) {
+                    $fl = $_POST['CvList']['foreignEnglishIds'];
+                    $language = new CvToLanguage();
+                    $language->cv_id = $model->id;
+                    $language->language_id = $fl;
+                    if (!$language->save()) {
+                        $result[] = false;
+                    }
+
+                }
+
+                if (!empty($_POST['CvList']['foreignGermanIds'])) {
+                    $fl = $_POST['CvList']['foreignGermanIds'];
+                        $language = new CvToLanguage();
+                        $language->cv_id = $model->id;
+                        $language->language_id = $fl;
+                        if (!$language->save()) {
+                            $result[] = false;
+                        }
+
+                }
+
+                if (!empty($_POST['CvList']['foreignFrenchIds'])) {
+                    $fl = $_POST['CvList']['foreignFrenchIds'];
+                    $language = new CvToLanguage();
+                    $language->cv_id = $model->id;
+                    $language->language_id = $fl;
+                    if (!$language->save()) {
+                        $result[] = false;
+                    }
+
+                }
+
+                if (!empty($_POST['CvList']['foreignChinaIds'])) {
+                    $fl = $_POST['CvList']['foreignChinaIds'];
+                    $language = new CvToLanguage();
+                    $language->cv_id = $model->id;
+                    $language->language_id = $fl;
+                    if (!$language->save()) {
+                        $result[] = false;
+                    }
+
+                }
+
+                if (!empty($_POST['CvList']['foreignSpainIds'])) {
+                    $fl = $_POST['CvList']['foreignSpainIds'];
+                    $language = new CvToLanguage();
+                    $language->cv_id = $model->id;
+                    $language->language_id = $fl;
+                    if (!$language->save()) {
+                        $result[] = false;
+                    }
+
+                }
+
             } else {
                 $result[] = false;
             }

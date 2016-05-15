@@ -98,6 +98,42 @@
                         'separator' => '',
                     ]) ?>
             </div>
+
+
+            <?= CHtml::label("Володіння іноземними мовами", "foreignLanguages")?>
+
+            <?= CHtml::label("Англійська", "foreignEnglishIds") ?>
+
+            <?=$form->dropDownList($model, 'foreignEnglishIds',
+                CHtml::listData(ForeignLanguages::model()->findByLanguage("English"), 'id', 'level'))
+                    ?>
+
+            <?= CHtml::label("Німецька", "foreignGermanIds") ?>
+
+            <?=$form->dropDownList($model, 'foreignGermanIds',
+                CHtml::listData(ForeignLanguages::model()->findByLanguage("German"), 'id', 'level'))
+            ?>
+
+            <?= CHtml::label("Французька", "foreignFrenchIds") ?>
+
+            <?=$form->dropDownList($model, 'foreignFrenchIds',
+                CHtml::listData(ForeignLanguages::model()->findByLanguage("French"), 'id', 'level'))
+            ?>
+
+            <?= CHtml::label("Китайська", "foreignChinaIds") ?>
+
+            <?=$form->dropDownList($model, 'foreignChinaIds',
+                CHtml::listData(ForeignLanguages::model()->findByLanguage("China"), 'id', 'level'))
+            ?>
+
+            <?= CHtml::label("Іспанська", "foreignSpainIds") ?>
+
+            <?=$form->dropDownList($model, 'foreignSpainIds',
+                CHtml::listData(ForeignLanguages::model()->findByLanguage("Spain"), 'id', 'level'))
+            ?>
+
+
+
             <?= $form->error($model, 'residenciesIds') ?>
 
             <?= $form->labelEx($model, 'education') ?>

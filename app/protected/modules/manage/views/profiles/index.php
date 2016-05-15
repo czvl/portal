@@ -32,6 +32,12 @@ $addedTimeTo            = $this->fetchVariable('added_time_to');
 $desiredPositionsFilter = $this->fetchVariable('desiredPositions');
 $disabilityFilter       = $this->fetchVariable('disability');
 $applicantTypeIdsFilter    = $this->fetchVariable('applicantTypeIds');
+//Foreign languages filter
+$foreignEnglishFilter = $this->fetchVariable('foreignEnglishIds');
+$foreignGermanFilter = $this->fetchVariable('foreignGermanIds');
+$foreignFrenchFilter = $this->fetchVariable('foreignFrenchIds');
+$foreignChinaFilter = $this->fetchVariable('foreignChinaIds');
+$foreignSpainFilter = $this->fetchVariable('foreignSpainIds');
 
 
 
@@ -200,6 +206,28 @@ function getOrder($fieldValue, $orderField = 'id')
                     <div class="div-overflow narrow">
                         <?php echo CHtml::checkBoxList('applicantTypeIds', $applicantTypeIdsFilter, CHtml::listData(CvApplicantTypes::model()->findAll(array('order' => getOrder($applicantTypeIdsFilter) . 'name ASC')), 'id', 'name'), array('template' => '{beginLabel}{input} {labelTitle}{endLabel}', 'separator' => '')); ?>
                     </div>
+                </td>
+
+                <td class="foreignLanguages">
+                    <div class="scrollY">
+                    <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('foreignLanguagesType')); ?></strong><br />
+                    <!--English language-->
+                    <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('foreignEnglishIds')); ?></strong><br />
+                    <?php echo CHtml::dropDownList('foreignEnglishIds', $foreignEnglishFilter, CHtml::listData(ForeignLanguages::model()->findByLanguage("English"), 'id', 'level'), array('empty' => '---')) ?>
+                    <!--German language-->
+                    <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('foreignGermanIds')); ?></strong><br />
+                    <?php echo CHtml::dropDownList('foreignGermanIds', $foreignGermanFilter, CHtml::listData(ForeignLanguages::model()->findByLanguage("German"), 'id', 'level'), array('empty' => '---')) ?>
+                    <!--French language-->
+                    <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('foreignFrenchIds')); ?></strong><br />
+                    <?php echo CHtml::dropDownList('foreignFrenchIds', $foreignFrenchFilter, CHtml::listData(ForeignLanguages::model()->findByLanguage("French"), 'id', 'level'), array('empty' => '---')) ?>
+                    <!--China language-->
+                    <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('foreignChinaIds')); ?></strong><br />
+                    <?php echo CHtml::dropDownList('foreignChinaIds', $foreignChinaFilter, CHtml::listData(ForeignLanguages::model()->findByLanguage("China"), 'id', 'level'), array('empty' => '---')) ?>
+                    <!--Spain language-->
+                    <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('foreignSpainIds')); ?></strong><br />
+                    <?php echo CHtml::dropDownList('foreignSpainIds', $foreignSpainFilter, CHtml::listData(ForeignLanguages::model()->findByLanguage("Spain"), 'id', 'level'), array('empty' => '---')) ?>
+                    </div>
+
                 </td>
             </tr>
         </table>
