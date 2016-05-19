@@ -93,7 +93,6 @@ class CvList extends CActiveRecord
             array('marital_status, education, recruiter_id, status, disability', 'numerical', 'integerOnly' => true),
             array('first_name, last_name, email, salary, desired_position, cv_file, who_filled', 'length', 'max' => 255),
             array('gender', 'length', 'max' => 1),
-            array('foreign_english', 'length', 'max' => 1),
             array('contact_phone', 'match', 'pattern'=>'/^([+]?[0-9 \)\(\-]+)$/'),
             array('contact_phone', 'length', 'max' => 19),
             array('birth_date', 'type', 'type' => 'date', 'message' => 'Поле "Дата нарождення" має бути датою.',  'dateFormat' => 'yyyy-MM-dd'),
@@ -163,7 +162,6 @@ class CvList extends CActiveRecord
             'citiesResidence' => array(self::MANY_MANY, 'CitiesList', 'cv_to_residence(cv_id, city_id)'),
             'citiesJobLocations' => array(self::MANY_MANY, 'CitiesList', 'cv_to_job_location(cv_id, city_id)'),
             'applicantTypes' => array(self::MANY_MANY, 'CvApplicantTypes', 'cv_to_applicant_type(cv_id, applicant_type_id)'),
-            'foreignLanguageTypes' => array(self::MANY_MANY, 'ForeignLanguages', 'cv_to_language(cv_id, language_id)'),
 
         );
     }
@@ -215,7 +213,7 @@ class CvList extends CActiveRecord
             'verifyCode' => 'Код перевiрки',
             'foreignLanguageTypes' => 'Іноземні мови',
             'foreign_english' => 'Англійська мова',
-            'foreign_german' => 'Німецька мова',
+            'foreign_germany' => 'Німецька мова',
             'foreign_french' => 'Французька мова',
             'foreign_china' => 'Китайська мова',
             'foreign_spain' => 'Іспанська мова'
@@ -333,6 +331,7 @@ class CvList extends CActiveRecord
         $criteria->compare('added_time', $this->added_time, true);
         $criteria->compare('status', $this->status);
         $criteria->compare('disability', $this->disability);
+        $criteria->compare('foreign_english', $this->foreign_english, true);
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,

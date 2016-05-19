@@ -15,9 +15,9 @@ class m160519_144043_create_foreign_languages_field_in_cv_list extends CDbMigrat
 	{
 		$this->dropColumn('cv_list', 'foreign_english');
     $this->dropColumn('cv_list', 'foreign_germany');
-    $this->dropolumn('cv_list', 'foreign_french');
+    $this->dropColumn('cv_list', 'foreign_french');
     $this->dropColumn('cv_list', 'foreign_spain');
-    $this->dropoColumn('cv_list', 'foreign_china');
+    $this->dropColumn('cv_list', 'foreign_china');
 	}
 
 	/*

@@ -34,7 +34,7 @@ $disabilityFilter       = $this->fetchVariable('disability');
 $applicantTypeIdsFilter    = $this->fetchVariable('applicantTypeIds');
 //Foreign languages filter
 $foreignEnglishFilter = $this->fetchVariable('foreign_english');
-$foreignGermanFilter = $this->fetchVariable('foreign_german');
+$foreignGermanFilter = $this->fetchVariable('foreign_germany');
 $foreignFrenchFilter = $this->fetchVariable('foreign_french');
 $foreignChinaFilter = $this->fetchVariable('foreign_china');
 $foreignSpainFilter = $this->fetchVariable('foreign_spain');
@@ -213,9 +213,9 @@ function getOrder($fieldValue, $orderField = 'id')
                     <strong>Знання іноземних мов</strong><br />
                     <!--English language-->
                     <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('foreign_english')); ?></strong><br />
-                    <?php echo CHtml::dropDownList('foreign_english', $foreignEnglishFilter, CvList::model()->getForeignTypes(), array('empty' => '---')) ?>
+                    <?php echo CHtml::dropDownList('foreign_english', $foreignEnglishFilter, CvList::model()->getForeignTypes(), array('empty' => '---', 'class' => getClassName($foreignEnglishFilter))) ?>
                     <!--German language-->
-                    <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('foreign_german')); ?></strong><br />
+                    <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('foreign_germany')); ?></strong><br />
                     <?php echo CHtml::dropDownList('foreign_german', $foreignGermanFilter, CvList::model()->getForeignTypes(), array('empty' => '---')) ?>
                     <!--French language-->
                     <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('foreign_french')); ?></strong><br />
