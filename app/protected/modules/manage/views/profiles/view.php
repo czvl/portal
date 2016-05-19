@@ -187,7 +187,7 @@ $this->widget('bootstrap.widgets.TbDetailView', array(
         ),
 
       array(
-            'name'=> 'foreign_german',
+            'name'=> 'foreign_germany',
             'value' => $model->foreignTypes[$model->foreign_germany]
         ),
 
