@@ -134,6 +134,16 @@
 
             <?php echo $form->textAreaControlGroup($model, 'eduction_info', array('rows' => 3, 'span' => 8)); ?>
 
+            <?php echo $form->dropDownListControlGroup($model, 'foreign_english', $model->foreignTypes, array('span' => 5)); ?>
+
+            <?php echo $form->dropDownListControlGroup($model, 'foreign_germany', $model->foreignTypes, array('span' => 5)); ?>
+
+            <?php echo $form->dropDownListControlGroup($model, 'foreign_french', $model->foreignTypes, array('span' => 5)); ?>
+
+            <?php echo $form->dropDownListControlGroup($model, 'foreign_china', $model->foreignTypes, array('span' => 5)); ?>
+
+            <?php echo $form->dropDownListControlGroup($model, 'foreign_spain', $model->foreignTypes, array('span' => 5)); ?>
+
             <?php echo $form->textAreaControlGroup($model, 'work_experience', array('rows' => 4, 'span' => 8)); ?>
 
             <?php echo $form->textAreaControlGroup($model, 'skills', array('rows' => 4, 'span' => 8)); ?>
