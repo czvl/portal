@@ -447,6 +447,14 @@ class ProfilesController extends Controller {
 			$criteria->addSearchCondition('email', $email);
 		}
 
+    if ($english = $this->fetchVariable('foreign_english')) {
+			$criteria->addSearchCondition('foreign_english', $english);
+		}
+    if ($german = $this->fetchVariable('foreign_german')) {
+			$criteria->addSearchCondition('foreign_german', $german);
+		}
+
+
 		if (!empty($with)) {
 			$criteria->with     = $with;
 			$criteria->together = true;

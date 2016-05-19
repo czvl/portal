@@ -98,43 +98,40 @@
                         'separator' => '',
                     ]) ?>
             </div>
+          <?= $form->error($model, 'residenciesIds') ?>
 
 
             <?= CHtml::label("Володіння іноземними мовами", "foreignLanguages")?>
 
-            <?= CHtml::label("Англійська", "foreignEnglishIds") ?>
+            <?= CHtml::label("Англійська", "foreign_english") ?>
 
-            <?=$form->dropDownList($model, 'foreignEnglishIds',
-                CHtml::listData(ForeignLanguages::model()->findByLanguage("English"), 'id', 'level'))
+            <?=$form->dropDownList($model, 'foreign_english',
+                $model->foreignTypes)
                     ?>
 
-            <?= CHtml::label("Німецька", "foreignGermanIds") ?>
+            <?= CHtml::label("Німецька", "foreign_germany") ?>
 
-            <?=$form->dropDownList($model, 'foreignGermanIds',
-                CHtml::listData(ForeignLanguages::model()->findByLanguage("German"), 'id', 'level'))
+            <?=$form->dropDownList($model, 'foreign_germany',
+                $model->foreignTypes)
+                    ?>
+
+            <?= CHtml::label("Французька", "foreign_french") ?>
+
+            <?=$form->dropDownList($model, 'foreign_french',
+                $model->foreignTypes)
             ?>
 
-            <?= CHtml::label("Французька", "foreignFrenchIds") ?>
+            <?= CHtml::label("Китайська", "foreign_china") ?>
 
-            <?=$form->dropDownList($model, 'foreignFrenchIds',
-                CHtml::listData(ForeignLanguages::model()->findByLanguage("French"), 'id', 'level'))
+            <?=$form->dropDownList($model, 'foreign_china',
+                $model->foreignTypes)
             ?>
 
-            <?= CHtml::label("Китайська", "foreignChinaIds") ?>
+            <?= CHtml::label("Іспанська", "foreign_spain") ?>
 
-            <?=$form->dropDownList($model, 'foreignChinaIds',
-                CHtml::listData(ForeignLanguages::model()->findByLanguage("China"), 'id', 'level'))
+            <?=$form->dropDownList($model, 'foreign_spain',
+                $model->foreignTypes)
             ?>
-
-            <?= CHtml::label("Іспанська", "foreignSpainIds") ?>
-
-            <?=$form->dropDownList($model, 'foreignSpainIds',
-                CHtml::listData(ForeignLanguages::model()->findByLanguage("Spain"), 'id', 'level'))
-            ?>
-
-
-
-            <?= $form->error($model, 'residenciesIds') ?>
 
             <?= $form->labelEx($model, 'education') ?>
             <?= $form->dropDownList($model, 'education', $model->educationTypes, ['class' => 'span8']) ?>

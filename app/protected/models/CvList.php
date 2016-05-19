@@ -57,11 +57,7 @@ class CvList extends CActiveRecord
     public $disabilityGroups = array();
     public $applicantTypeIds = array();
 
-    public $foreignEnglishIds= array();
-    public $foreignGermanIds = array();
-    public $foreignFrenchIds = array();
-    public $foreignChinaIds= array();
-    public $foreignSpainIds= array();
+    public $foreignTypes= array();
 
     public $personal_data;
     public $verifyCode;
@@ -74,6 +70,8 @@ class CvList extends CActiveRecord
         $this->statusTypes = Yii::app()->config->statuses;
         $this->maritalStatuses = Yii::app()->config->marital_statuses;
         $this->disabilityGroups = Yii::app()->config->disability_groups;
+
+        $this->foreignTypes = Yii::app()->config->foreign_types;
     }
 
     /**
@@ -95,6 +93,7 @@ class CvList extends CActiveRecord
             array('marital_status, education, recruiter_id, status, disability', 'numerical', 'integerOnly' => true),
             array('first_name, last_name, email, salary, desired_position, cv_file, who_filled', 'length', 'max' => 255),
             array('gender', 'length', 'max' => 1),
+            array('foreign_english', 'length', 'max' => 1),
             array('contact_phone', 'match', 'pattern'=>'/^([+]?[0-9 \)\(\-]+)$/'),
             array('contact_phone', 'length', 'max' => 19),
             array('birth_date', 'type', 'type' => 'date', 'message' => 'Поле "Дата нарождення" має бути датою.',  'dateFormat' => 'yyyy-MM-dd'),
@@ -103,13 +102,13 @@ class CvList extends CActiveRecord
             array('birth_date, other_contacts, eduction_info, work_experience, skills,
             summary, documents,
             recruiter_comments, residenciesIds, jobLocationsIds,
-            driverLicensesIds, assistanceIds, personal_data, positionsIds, desiredPositionsIds, applicantTypeIds', 'safe'),
+            driverLicensesIds, assistanceIds, personal_data, positionsIds, desiredPositionsIds, applicantTypeIds, foreign_english, foreign_germany, foreign_french, foreign_china, foreign_spain', 'safe'),
 
             array('contact_phone', 'existentUser', 'on' => 'public'),
             array('personal_data', 'required', 'on' => 'public'),
             array('personal_data', 'compare', 'compareValue' => true, 'message' => 'Вам потрібно погодитись надати нам Ваші персональні дані.', 'on' => 'public'),
 
-            array('id, first_name, last_name, gender, marital_status, birth_date, contact_phone, other_contacts, email, education, eduction_info, work_experience, skills, summary, salary, desired_position, documents, cv_file, recruiter_id, recruiter_comments, who_filled, last_update, added_time, status, disability', 'safe', 'on' => 'search'),
+            array('id, first_name, last_name, gender, marital_status, birth_date, contact_phone, other_contacts, email, education, eduction_info, work_experience, skills, summary, salary, desired_position, documents, cv_file, recruiter_id, recruiter_comments, who_filled, last_update, added_time, status, disability, foreign_english, foreign_germany, foreign_french, foreign_china, foreign_spain', 'safe', 'on' => 'search'),
         );
     }
 
@@ -215,11 +214,11 @@ class CvList extends CActiveRecord
             'applicantTypeIds' => 'Інформація про претендента ЦЗВЛ',
             'verifyCode' => 'Код перевiрки',
             'foreignLanguageTypes' => 'Іноземні мови',
-            'foreignEnglishIds' => 'Англійська мова',
-            'foreignGermanIds' => 'Німецька мова',
-            'foreignFrenchIds' => 'Французька мова',
-            'foreignChinaIds' => 'Китайська мова',
-            'foreignSpainIds' => 'Іспанська мова'
+            'foreign_english' => 'Англійська мова',
+            'foreign_german' => 'Німецька мова',
+            'foreign_french' => 'Французька мова',
+            'foreign_china' => 'Китайська мова',
+            'foreign_spain' => 'Іспанська мова'
         );
     }
 
@@ -361,6 +360,12 @@ class CvList extends CActiveRecord
 	{
 		$this->genderTypes = Yii::app()->config->gender_types;
 		return $this->genderTypes;
+	}
+
+  public function getForeignTypes()
+	{
+		$this->foreignTypes = Yii::app()->config->foreign_types;
+		return $this->foreignTypes;
 	}
 
     public function getDisabilityGroups()

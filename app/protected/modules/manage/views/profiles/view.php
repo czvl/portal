@@ -182,9 +182,30 @@ $this->widget('bootstrap.widgets.TbDetailView', array(
             'value' => implode(', ', array_values(CHtml::listData($model->driverLicensesTypes, 'id', 'name')))
         ),
         array(
-            'name'=> 'foreignLanguagesType',
-            'value' => implode(', ', array_values(CHtml::listData($model->foreignLanguageTypes, 'id', 'levelformat')))
+            'name'=> 'foreign_english',
+            'value' => $model->foreignTypes[$model->foreign_english]
         ),
+
+      array(
+            'name'=> 'foreign_germany',
+            'value' => $model->foreignTypes[$model->foreign_germany]
+        ),
+
+      array(
+            'name'=> 'foreign_french',
+            'value' => $model->foreignTypes[$model->foreign_french]
+        ),
+
+      array(
+            'name'=> 'foreign_china',
+            'value' => $model->foreignTypes[$model->foreign_china]
+        ),
+
+      array(
+            'name'=> 'foreign_spain',
+            'value' => $model->foreignTypes[$model->foreign_spain]
+        ),
+
         'applicant_type',
         'cv_file:url',
         array(
