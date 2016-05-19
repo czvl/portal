@@ -57,6 +57,8 @@ class CvList extends CActiveRecord
     public $disabilityGroups = array();
     public $applicantTypeIds = array();
 
+    public $foreignTypes= array();
+
     public $personal_data;
     public $verifyCode;
 
@@ -68,6 +70,8 @@ class CvList extends CActiveRecord
         $this->statusTypes = Yii::app()->config->statuses;
         $this->maritalStatuses = Yii::app()->config->marital_statuses;
         $this->disabilityGroups = Yii::app()->config->disability_groups;
+
+        $this->foreignTypes = Yii::app()->config->foreign_types;
     }
 
     /**
@@ -97,13 +101,13 @@ class CvList extends CActiveRecord
             array('birth_date, other_contacts, eduction_info, work_experience, skills,
             summary, documents,
             recruiter_comments, residenciesIds, jobLocationsIds,
-            driverLicensesIds, assistanceIds, personal_data, positionsIds, desiredPositionsIds, applicantTypeIds', 'safe'),
+            driverLicensesIds, assistanceIds, personal_data, positionsIds, desiredPositionsIds, applicantTypeIds, foreign_english, foreign_germany, foreign_french, foreign_china, foreign_spain', 'safe'),
 
             array('contact_phone', 'existentUser', 'on' => 'public'),
             array('personal_data', 'required', 'on' => 'public'),
             array('personal_data', 'compare', 'compareValue' => true, 'message' => 'Вам потрібно погодитись надати нам Ваші персональні дані.', 'on' => 'public'),
 
-            array('id, first_name, last_name, gender, marital_status, birth_date, contact_phone, other_contacts, email, education, eduction_info, work_experience, skills, summary, salary, desired_position, documents, cv_file, recruiter_id, recruiter_comments, who_filled, last_update, added_time, status, disability', 'safe', 'on' => 'search'),
+            array('id, first_name, last_name, gender, marital_status, birth_date, contact_phone, other_contacts, email, education, eduction_info, work_experience, skills, summary, salary, desired_position, documents, cv_file, recruiter_id, recruiter_comments, who_filled, last_update, added_time, status, disability, foreign_english, foreign_germany, foreign_french, foreign_china, foreign_spain', 'safe', 'on' => 'search'),
         );
     }
 
@@ -206,7 +210,13 @@ class CvList extends CActiveRecord
             'personal_data' => 'Я згоден(на) з обробкою та використанням моїх персональних даних',
             'disability' => 'Наявність інвалідності (вкажіть, будь ласка, групу)',
             'applicantTypeIds' => 'Інформація про претендента ЦЗВЛ',
-            'verifyCode' => 'Код перевiрки'
+            'verifyCode' => 'Код перевiрки',
+            'foreignLanguageTypes' => 'Іноземні мови',
+            'foreign_english' => 'Англійська мова',
+            'foreign_germany' => 'Німецька мова',
+            'foreign_french' => 'Французька мова',
+            'foreign_china' => 'Китайська мова',
+            'foreign_spain' => 'Іспанська мова'
         );
     }
 
@@ -274,6 +284,7 @@ class CvList extends CActiveRecord
             }
         }
 
+
     }
 
     /**
@@ -320,6 +331,7 @@ class CvList extends CActiveRecord
         $criteria->compare('added_time', $this->added_time, true);
         $criteria->compare('status', $this->status);
         $criteria->compare('disability', $this->disability);
+        $criteria->compare('foreign_english', $this->foreign_english, true);
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
@@ -347,6 +359,12 @@ class CvList extends CActiveRecord
 	{
 		$this->genderTypes = Yii::app()->config->gender_types;
 		return $this->genderTypes;
+	}
+
+  public function getForeignTypes()
+	{
+		$this->foreignTypes = Yii::app()->config->foreign_types;
+		return $this->foreignTypes;
 	}
 
     public function getDisabilityGroups()

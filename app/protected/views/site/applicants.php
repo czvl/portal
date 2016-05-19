@@ -98,7 +98,40 @@
                         'separator' => '',
                     ]) ?>
             </div>
-            <?= $form->error($model, 'residenciesIds') ?>
+          <?= $form->error($model, 'residenciesIds') ?>
+
+
+            <?= CHtml::label("Володіння іноземними мовами", "foreignLanguages")?>
+
+            <?= CHtml::label("Англійська", "foreign_english") ?>
+
+            <?=$form->dropDownList($model, 'foreign_english',
+                $model->foreignTypes)
+                    ?>
+
+            <?= CHtml::label("Німецька", "foreign_germany") ?>
+
+            <?=$form->dropDownList($model, 'foreign_germany',
+                $model->foreignTypes)
+                    ?>
+
+            <?= CHtml::label("Французька", "foreign_french") ?>
+
+            <?=$form->dropDownList($model, 'foreign_french',
+                $model->foreignTypes)
+            ?>
+
+            <?= CHtml::label("Китайська", "foreign_china") ?>
+
+            <?=$form->dropDownList($model, 'foreign_china',
+                $model->foreignTypes)
+            ?>
+
+            <?= CHtml::label("Іспанська", "foreign_spain") ?>
+
+            <?=$form->dropDownList($model, 'foreign_spain',
+                $model->foreignTypes)
+            ?>
 
             <?= $form->labelEx($model, 'education') ?>
             <?= $form->dropDownList($model, 'education', $model->educationTypes, ['class' => 'span8']) ?>
