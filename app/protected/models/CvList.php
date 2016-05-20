@@ -33,6 +33,11 @@
  * @property integer $status
  * @property integer $is_active
  * @property integer $disability        // deprecated
+ * @property string $foreign_english
+ * @property string $foreign_germany
+ * @property string $foreign_french
+ * @property string $foreign_china
+ * @property string $foreign_spain
  *
  * The followings are the available model relations:
  * @property User $recruiter
@@ -180,7 +185,6 @@ class CvList extends CActiveRecord
             'first_last_name' => 'Ім’я Прізвище',
             'gender' => 'Стать',
             'marital_status' => 'Сімейний стан',
-            //'language_type' => 'Знання іноземних мов',
             'birth_date' => 'Дата народження',
             'contact_phone' => 'Телефон',
             'other_contacts' => 'Інші контакти (якщо є ще один телефон або пошта, скайп, соціальні мережі)',
@@ -331,6 +335,7 @@ class CvList extends CActiveRecord
         $criteria->compare('added_time', $this->added_time, true);
         $criteria->compare('status', $this->status);
         $criteria->compare('disability', $this->disability);
+        // Add to search criteries foreign languges
         $criteria->compare('foreign_english', $this->foreign_english);
         $criteria->compare('foreign_germany', $this->foreign_germany);
         $criteria->compare('foreign_french', $this->foreign_french);
@@ -364,7 +369,7 @@ class CvList extends CActiveRecord
 		$this->genderTypes = Yii::app()->config->gender_types;
 		return $this->genderTypes;
 	}
-
+  // Return all level types of foreign languages
   public function getForeignTypes()
 	{
 		$this->foreignTypes = Yii::app()->config->foreign_types;

@@ -11,7 +11,7 @@ $this->menu = array(
 
 $ageMinDefault = 16;
 $ageMaxDefault = 99;
-
+// Filters /models/userFilter.php
 $statusFilter           = $this->fetchVariable('status');
 $lastNameFilter         = $this->fetchVariable('last_name');
 $firstNameFilter        = $this->fetchVariable('first_name');
@@ -38,10 +38,6 @@ $foreignGermanFilter    = $this->fetchVariable('foreign_germany');
 $foreignFrenchFilter    = $this->fetchVariable('foreign_french');
 $foreignChinaFilter     = $this->fetchVariable('foreign_china');
 $foreignSpainFilter     = $this->fetchVariable('foreign_spain');
-
-var_dump($this->fetchVariable('foreign_english'));
-
-
 
 if (!$ageMinFilter) $ageMinFilter = $ageMinDefault;
 if (!$ageMaxFilter) $ageMaxFilter = $ageMaxDefault;
