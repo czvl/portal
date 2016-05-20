@@ -447,6 +447,22 @@ class ProfilesController extends Controller {
 			$criteria->addSearchCondition('email', $email);
 		}
 
+    if (($english = $this->fetchVariable('foreign_english')) !== false) {
+			$criteria->addCondition('foreign_english = "' . $english . '"');
+		}
+    if (($germany = $this->fetchVariable('foreign_germany')) !== false) {
+			$criteria->addCondition('foreign_germany = "' . $germany . '"');
+		}
+    if (($french = $this->fetchVariable('foreign_french')) !== false) {
+			$criteria->addCondition('foreign_french = "' . $french. '"');
+		}
+    if (($china = $this->fetchVariable('foreign_china')) !== false) {
+			$criteria->addCondition('foreign_china = "' . $china . '"');
+		}
+    if (($spain = $this->fetchVariable('foreign_spain')) !== false) {
+			$criteria->addCondition('foreign_spain = "' . $spain. '"');
+		}
+
 		if (!empty($with)) {
 			$criteria->with     = $with;
 			$criteria->together = true;
