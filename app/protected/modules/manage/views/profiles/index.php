@@ -214,16 +214,16 @@ function getOrder($fieldValue, $orderField = 'id')
                     <?php echo CHtml::dropDownList('foreign_english', $foreignEnglishFilter, CvList::model()->getForeignTypes(), array('empty' => '---', 'class' => getClassName($foreignEnglishFilter))) ?>
                     <!--German language-->
                     <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('foreign_germany')); ?></strong><br />
-                    <?php echo CHtml::dropDownList('foreign_germany', $foreignGermanFilter, CvList::model()->getForeignTypes(), array('empty' => '---')) ?>
+                    <?php echo CHtml::dropDownList('foreign_germany', $foreignGermanFilter, CvList::model()->getForeignTypes(), array('empty' => '---', 'class' => getClassName($foreignGermanFilter))) ?>
                     <!--French language-->
                     <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('foreign_french')); ?></strong><br />
-                    <?php echo CHtml::dropDownList('foreign_french', $foreignFrenchFilter, CvList::model()->getForeignTypes(), array('empty' => '---')) ?>
+                    <?php echo CHtml::dropDownList('foreign_french', $foreignFrenchFilter, CvList::model()->getForeignTypes(), array('empty' => '---', 'class' => getClassName($foreignFrenchFilter))) ?>
                     <!--China language-->
                     <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('foreign_china')); ?></strong><br />
-                    <?php echo CHtml::dropDownList('foreign_china', $foreignChinaFilter, CvList::model()->getForeignTypes(), array('empty' => '---')) ?>
+                    <?php echo CHtml::dropDownList('foreign_china', $foreignChinaFilter, CvList::model()->getForeignTypes(), array('empty' => '---', 'class' => getClassName($foreignChinaFilter))) ?>
                     <!--Spain language-->
                     <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('foreign_spain')); ?></strong><br />
-                    <?php echo CHtml::dropDownList('foreign_spain', $foreignSpainFilter, CvList::model()->getForeignTypes(), array('empty' => '---')) ?>
+                    <?php echo CHtml::dropDownList('foreign_spain', $foreignSpainFilter, CvList::model()->getForeignTypes(), array('empty' => '---', 'class' => getClassName($foreignSpainFilter))) ?>
                     </div>
 
                 </td>
