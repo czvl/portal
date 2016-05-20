@@ -373,6 +373,7 @@ class CvList extends CActiveRecord
   public function getForeignTypes()
 	{
 		$this->foreignTypes = Yii::app()->config->foreign_types;
+    unset($this->foreignTypes['n']);
 		return $this->foreignTypes;
 	}
 
