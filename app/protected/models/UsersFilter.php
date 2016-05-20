@@ -121,7 +121,12 @@ class UsersFilter extends CActiveRecord
             'added_time_to',
             'desiredPositions',
             'disability',
-            'applicantTypeIds'
+            'applicantTypeIds',
+            'foreign_english',
+            'foreign_germany',
+            'foreign_french',
+            'foreign_china',
+            'foreign_spain',
 		];
 	}
 

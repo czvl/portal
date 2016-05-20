@@ -331,7 +331,11 @@ class CvList extends CActiveRecord
         $criteria->compare('added_time', $this->added_time, true);
         $criteria->compare('status', $this->status);
         $criteria->compare('disability', $this->disability);
-        $criteria->compare('foreign_english', $this->foreign_english, true);
+        $criteria->compare('foreign_english', $this->foreign_english);
+        $criteria->compare('foreign_germany', $this->foreign_germany);
+        $criteria->compare('foreign_french', $this->foreign_french);
+        $criteria->compare('foreign_china', $this->foreign_china);
+        $criteria->compare('foreign_spain', $this->foreign_spain);
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
