@@ -116,7 +116,10 @@ foreach ($statuses as $s) { /* @var $s CvStatuses */
 
 <?php $this->endWidget(); ?>
 
-<p><?php echo TbHtml::submitButton('Редагувати анкету', array('submit' => array('/manage/profiles/update', 'id' => $model->id), 'color' => TbHtml::BUTTON_COLOR_PRIMARY)); ?></p>
+<p><?php echo TbHtml::submitButton('Редагувати анкету', array('submit' => array('/manage/profiles/update', 'id' => $model->id), 'color' => TbHtml::BUTTON_COLOR_PRIMARY)); ?>
+    <?php if(Yii::app()->user->role == 'administrator'):?>
+    <?php echo TbHtml::submitButton('Видалити анкету', array('submit' => array('/manage/profiles/delete',  'id' => $model->id), 'color' => TbHtml::BUTTON_COLOR_DANGER)); ?></p>
+    <?php endif; ?>
 
 <?php
 
