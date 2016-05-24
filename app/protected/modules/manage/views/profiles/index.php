@@ -18,7 +18,6 @@ $firstNameFilter        = $this->fetchVariable('first_name');
 $genderFilter           = $this->fetchVariable('gender');
 $ageMinFilter           = $this->fetchVariable('age_min');
 $ageMaxFilter           = $this->fetchVariable('age_max');
-$recruiterIdFilter      = $this->fetchVariable('recruiter_id');
 $contactPhoneFilter     = $this->fetchVariable('contact_phone');
 $emailFilter            = $this->fetchVariable('email');
 $locationsFilter        = $this->fetchVariable('locations');
