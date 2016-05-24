@@ -38,6 +38,9 @@ $foreignGermanFilter    = $this->fetchVariable('foreign_germany');
 $foreignFrenchFilter    = $this->fetchVariable('foreign_french');
 $foreignChinaFilter     = $this->fetchVariable('foreign_china');
 $foreignSpainFilter     = $this->fetchVariable('foreign_spain');
+// Only user filter
+//$onlyUserComment = $this->fetchVariable('foreign_spain');
+
 
 if (!$ageMinFilter) $ageMinFilter = $ageMinDefault;
 if (!$ageMaxFilter) $ageMaxFilter = $ageMaxDefault;
@@ -72,8 +75,11 @@ function getOrder($fieldValue, $orderField = 'id')
 	                    <?php echo CHtml::checkBoxList('status', $statusFilter, CvList::model()->getStatusTypes(), array('template' => '{beginLabel}{input} {labelTitle}{endLabel}', 'separator' => '')); ?>
 		            </div>
 		            <br />
-		            <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('recruiter_id')); ?></strong><br />
-		            <?php echo CHtml::dropDownList('recruiter_id', $recruiterIdFilter, User::model()->recruiters, array('empty' => '---', 'class' => getClassName($recruiterIdFilter))); ?>
+
+
+		            <?php echo CHtml::CheckBox('only_my',''); ?>
+                <?php echo CHtml::label('Тільки мої', 'Label',array('style'=>'display:inline;')); ?>
+
 	            </td>
                 <td>
                     <div class="scrollY">
