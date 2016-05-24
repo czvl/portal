@@ -468,7 +468,7 @@ class ProfilesController extends Controller {
     if(($onlyMy = $this->fetchVariable('only_my')) !==false) {
       $criteria->join = 'INNER JOIN cv_statuses ON t.id = cv_statuses.cv_id';
       $criteria->addCondition('cv_statuses.operator_id = ' .  Yii::app()->user->id);
-      //$criteria->select = 'id';
+      $criteria->distinct = true;
     }
 
 		if (!empty($with)) {

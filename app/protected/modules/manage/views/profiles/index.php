@@ -38,8 +38,8 @@ $foreignGermanFilter    = $this->fetchVariable('foreign_germany');
 $foreignFrenchFilter    = $this->fetchVariable('foreign_french');
 $foreignChinaFilter     = $this->fetchVariable('foreign_china');
 $foreignSpainFilter     = $this->fetchVariable('foreign_spain');
-// Only user filter
-//$onlyUserComment = $this->fetchVariable('foreign_spain');
+//Only user filter
+$onlyUserCommentFilter = $this->fetchVariable('only_my');
 
 
 if (!$ageMinFilter) $ageMinFilter = $ageMinDefault;
@@ -77,7 +77,7 @@ function getOrder($fieldValue, $orderField = 'id')
 		            <br />
 
 
-		            <?php echo CHtml::CheckBox('only_my',''); ?>
+		            <?php echo CHtml::CheckBox('only_my', $onlyUserCommentFilter); ?>
                 <?php echo CHtml::label('Тільки мої', 'Label',array('style'=>'display:inline;')); ?>
 
 	            </td>
