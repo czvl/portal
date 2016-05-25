@@ -37,8 +37,9 @@ $foreignGermanFilter    = $this->fetchVariable('foreign_germany');
 $foreignFrenchFilter    = $this->fetchVariable('foreign_french');
 $foreignChinaFilter     = $this->fetchVariable('foreign_china');
 $foreignSpainFilter     = $this->fetchVariable('foreign_spain');
-//Only user filter
-$onlyUserCommentFilter = $this->fetchVariable('only_my');
+//Only user comments filter
+$onlyMyCommentsFilter = $this->fetchVariable('only_my_comments');
+$meRecruiterFilter = $this->fetchVariable('me_recruiter');
 
 
 if (!$ageMinFilter) $ageMinFilter = $ageMinDefault;
@@ -76,8 +77,12 @@ function getOrder($fieldValue, $orderField = 'id')
 		            <br />
 
 
-		            <?php echo CHtml::CheckBox('only_my', $onlyUserCommentFilter); ?>
-                <?php echo CHtml::label('Тільки мої', 'Label',array('style'=>'display:inline;')); ?>
+                     <strong>Для мене</strong><br />
+		            <?php echo CHtml::CheckBox('only_my_comments', $onlyMyCommentsFilter); ?>
+                <?php echo CHtml::label('З моїми комментарями', 'Label',array('style'=>'display:inline;')); ?>
+                      <br />
+                    <?php echo CHtml::CheckBox('me_recruiter', $meRecruiterFilter); ?>
+                <?php echo CHtml::label('Де я рекрутер', 'Label',array('style'=>'display:inline;')); ?>
 
 	            </td>
                 <td>
