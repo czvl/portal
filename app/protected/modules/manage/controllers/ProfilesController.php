@@ -459,9 +459,17 @@ class ProfilesController extends Controller {
     if (($china = $this->fetchVariable('foreign_china')) !== false) {
 			$criteria->addCondition('foreign_china = "' . $china . '"');
 		}
+
     if (($spain = $this->fetchVariable('foreign_spain')) !== false) {
 			$criteria->addCondition('foreign_spain = "' . $spain. '"');
 		}
+
+    //Search only volunter models when have added status
+    if(($onlyMy = $this->fetchVariable('only_my')) !==false) {
+      $criteria->join = 'INNER JOIN cv_statuses ON t.id = cv_statuses.cv_id';
+      $criteria->addCondition('cv_statuses.operator_id = ' .  Yii::app()->user->id);
+      $criteria->distinct = true;
+    }
 
 		if (!empty($with)) {
 			$criteria->with     = $with;
