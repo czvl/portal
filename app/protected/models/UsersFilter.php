@@ -127,7 +127,8 @@ class UsersFilter extends CActiveRecord
             'foreign_french',
             'foreign_china',
             'foreign_spain',
-            'only_my',
+            'only_my_comments',
+            'me_recruiter',
 		];
 	}
 

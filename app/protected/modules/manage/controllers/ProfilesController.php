@@ -465,10 +465,13 @@ class ProfilesController extends Controller {
 		}
 
     //Search only volunter models when have added status
-    if(($onlyMy = $this->fetchVariable('only_my')) !==false) {
+    if(($onlyMy = $this->fetchVariable('only_my_comments')) !==false) {
       $criteria->join = 'INNER JOIN cv_statuses ON t.id = cv_statuses.cv_id';
       $criteria->addCondition('cv_statuses.operator_id = ' .  Yii::app()->user->id);
       $criteria->distinct = true;
+    }
+    if(($meRecruiter = $this->fetchVariable('me_recruiter')) !==false) {
+        $criteria->addCondition('t.recruiter_id = ' .  Yii::app()->user->id);
     }
 
 		if (!empty($with)) {
