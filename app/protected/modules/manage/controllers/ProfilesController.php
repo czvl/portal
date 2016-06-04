@@ -81,6 +81,15 @@ class ProfilesController extends Controller {
 				$log->action = 'add_status_to_user_' . $id;
 				$log->save();
 
+				// Send email when add status
+				if($model->recruiter_id) {
+					$user = User::model()->findByPk($model->recruiter_id);
+					$comment = $status->message;
+					$sendTo = $user->email;
+					$body = "До вашої анкети був доданий новий коментар - {$comment}";
+					$this->sendMail("Новий коментар до анкеты {$id}", $body, $sendTo, $id);
+				}
+
 				Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS, 'Ваш статус був доданий!');
 				$this->redirect(array('/manage/profiles/view/', 'id' => $id, '#' => 'statuses'));
 			}
@@ -93,6 +102,16 @@ class ProfilesController extends Controller {
 				$log         = new Log();
 				$log->action = 'change_status_to_user_' . $id . "_to_" . $_POST['CvList']['status'];
 				$log->save();
+
+				//Send mail notify if status update
+				if($model->recruiter_id) {
+					$user = User::model()->findByPk($model->recruiter_id);
+					$status = Yii::app()->config->statuses[$_POST['CvList']['status']];
+					$sendTo = $user->email;
+					$body = "Статус вашої анкети було змінено. Новий статус - {$status}";
+					$this->sendMail("Новий статус анкеты {$id}", $body, $sendTo, $id);
+				}
+
 
 				Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS, 'Статус анкети був оновлений!');
 				$this->redirect(array('/manage/profiles/view/', 'id' => $id));
@@ -277,6 +296,7 @@ class ProfilesController extends Controller {
 			$model->assistanceTypes     = $_POST['CvList']['assistanceIds'];
             $model->desiredPositions    = $_POST['CvList']['desiredPositionsIds'];
             $model->applicantTypes      = $_POST['CvList']['applicantTypeIds'];
+			$model->status              = $_POST['CvList']['status'];
 
 			if ($model->saveWithRelated(array(
 				'categories',
@@ -293,7 +313,6 @@ class ProfilesController extends Controller {
 				$log         = new Log();
 				$log->action = 'update_user_info_' . $id;
 				$log->save();
-
 				$this->redirect(array('view', 'id' => $model->id));
 			}
 		}
@@ -520,6 +539,18 @@ class ProfilesController extends Controller {
 		if (isset($_POST['ajax']) && $_POST['ajax'] === 'cv-list-form') {
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
+		}
+	}
+
+	private function sendMail($title, $body, $sendTo, $id) {
+		if($sendTo) {
+			$detailUrl = "http://czvl.org.ua/manage/profiles/view/id/{$id}";
+			$message = Yii::app()->mailer
+				->createMessage("[ЦЗВЛ] {$title}", "{$body} \n Деталі: {$detailUrl}")
+				->setFrom(array('czvl-support@ukr.net'=>'Центр Зайнятості Вільних Людей'))
+				->setTo(array($sendTo, $sendTo));
+
+			Yii::app()->mailer->send($message);
 		}
 	}
 
