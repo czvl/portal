@@ -82,12 +82,12 @@ class ProfilesController extends Controller {
 				$log->save();
 
 				// Send email when add status
-				if($model->recruiter_id) {
+				if($model->recruiter_id and $model->recruiter_id != Yii::app()->user->id) {
 					$user = User::model()->findByPk($model->recruiter_id);
 					$comment = $status->message;
 					$sendTo = $user->email;
 					$body = "До вашої анкети був доданий новий коментар - {$comment}";
-					$this->sendMail("Новий коментар до анкеты {$id}", $body, $sendTo, $id);
+					$this->sendMail("Новий коментар до анкети {$id}", $body, $sendTo, $id);
 				}
 
 				Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS, 'Ваш статус був доданий!');
@@ -104,12 +104,12 @@ class ProfilesController extends Controller {
 				$log->save();
 
 				//Send mail notify if status update
-				if($model->recruiter_id) {
+				if($model->recruiter_id and $model->recruiter_id != Yii::app()->user->id) {
 					$user = User::model()->findByPk($model->recruiter_id);
 					$status = Yii::app()->config->statuses[$_POST['CvList']['status']];
 					$sendTo = $user->email;
 					$body = "Статус вашої анкети було змінено. Новий статус - {$status}";
-					$this->sendMail("Новий статус анкеты {$id}", $body, $sendTo, $id);
+					$this->sendMail("Новий статус анкети {$id}", $body, $sendTo, $id);
 				}
 
 
