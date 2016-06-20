@@ -21,8 +21,16 @@ class CompaniesController extends Controller
         return [
             [
                 'allow',
+                'actions' => array('view', 'index'),
                 'roles' => [User::ROLE_VOLONT]
             ],
+
+            [
+				'allow',
+				'actions' => array('delete', 'create', 'update'),
+				'roles'   => array('administrator', 'manager'),
+			],
+
             [
                 'deny',
                 'users' => ['*'],
@@ -59,6 +67,19 @@ class CompaniesController extends Controller
             'company' => $company,
             'usersDataProvider' => $usersDataProvider,
         ]);
+    }
+
+    public function actionDelete($id) {
+
+        $company = Company::model()->findByPk($id);
+        if(!$company) {
+            throw new CHttpException(404, 'Company not found');
+        }
+        else {
+            $company->delete();
+            Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS, "Компанiя '{$company->name}' була видалена з бази!");
+            return $this->redirect('/manage/companies/index');
+        }
     }
 
 }
