@@ -12,7 +12,7 @@ $this->menu = [
 
     <h1><?= Yii::t('main', 'company') ?> <?= $company->name ?></h1>
 
-<?php if(Yii::app()->user->checkAccess(User::ROLE_ADMIN)): ?>
+<?php if(Yii::app()->user->checkAccess(User::ROLE_ADMIN) || Yii::app()->user->checkAccess(User::ROLE_MANAGER)): ?>
 
 <p><?= CHtml::link('Видалити',
                    array("companies/delete/id/{$company->id}"),

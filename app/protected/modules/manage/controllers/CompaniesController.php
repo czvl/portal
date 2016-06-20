@@ -78,6 +78,9 @@ class CompaniesController extends Controller
         else {
             $company->delete();
             Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS, "Компанiя '{$company->name}' була видалена з бази!");
+            $log = new Log();
+			$log->action = "delete_company_{$id}_name_{$company->name}";
+			$log->save();
             return $this->redirect('/manage/companies/index');
         }
     }
