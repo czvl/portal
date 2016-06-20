@@ -27,9 +27,15 @@ class CompaniesController extends Controller
 
             [
 				'allow',
-				'actions' => array('delete', 'create', 'update'),
+				'actions' => array('create', 'update'),
 				'roles'   => array('administrator', 'manager'),
 			],
+
+            [
+                'allow',
+                'actions' => array('delete'),
+                'roles'   => array('adminisrator'),
+            ],
 
             [
                 'deny',
