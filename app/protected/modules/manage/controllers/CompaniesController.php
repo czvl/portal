@@ -27,9 +27,15 @@ class CompaniesController extends Controller
 
             [
 				'allow',
-				'actions' => array('delete', 'create', 'update'),
+				'actions' => array('create', 'update'),
 				'roles'   => array('administrator', 'manager'),
 			],
+
+            [
+                'allow',
+                'actions' => array('delete'),
+                'roles'   => array('adminisrator'),
+            ],
 
             [
                 'deny',
@@ -77,6 +83,7 @@ class CompaniesController extends Controller
         }
         else {
             $company->delete();
+            Vacancy::model()->deleteAll("company_id={$id}");
             Yii::app()->user->setFlash(TbHtml::ALERT_COLOR_SUCCESS, "Компанiя '{$company->name}' була видалена з бази!");
             $log = new Log();
 			$log->action = "delete_company_{$id}_name_{$company->name}";
