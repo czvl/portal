@@ -212,7 +212,22 @@ function getOrder($fieldValue, $orderField = 'id')
                     <strong><?php echo CHtml::encode(CvList::model()->getAttributeLabel('applicantTypeIds')); ?></strong><br />
                     <input type="text" name="applicantTypesFilter" class="filter" size="10" />
                     <div class="div-overflow narrow">
-                        <?php echo CHtml::checkBoxList('applicantTypeIds', $applicantTypeIdsFilter, CHtml::listData(CvApplicantTypes::model()->findAll(array('order' => getOrder($applicantTypeIdsFilter) . 'name ASC')), 'id', 'name'), array('template' => '{beginLabel}{input} {labelTitle}{endLabel}', 'separator' => '')); ?>
+                        <?php
+
+                        // if user not ATO VOLONT OR ADMIN OR MANAGER - exclude filter by ATO profiles
+                        if(Yii::app()->user->checkAccess(User::ROLE_VOLONT_ATO) ||
+                           Yii::app()->user->checkAccess(User::ROLE_MANAGER)    ||
+                           Yii::app()->user->checkAccess(User::ROLE_ADMIN)
+                            )
+                        {
+                            $exclude =  "";
+                        }
+
+                        else {
+                            $exclude =  "id!=3";
+                        }
+
+                        echo CHtml::checkBoxList('applicantTypeIds', $applicantTypeIdsFilter, CHtml::listData(CvApplicantTypes::model()->findAll(array('condition'=>$exclude, 'order' => getOrder($applicantTypeIdsFilter) . 'name ASC ')), 'id', 'name'), array('template' => '{beginLabel}{input} {labelTitle}{endLabel}', 'separator' => '')); ?>
                     </div>
                 </td>
 
