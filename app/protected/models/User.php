@@ -34,6 +34,7 @@ class User extends CActiveRecord
     const ROLE_MANAGER = 'manager';
     const ROLE_EMPL = 'employer';
     const ROLE_VOLONT = 'volunteer';
+    const ROLE_VOLONT_ATO = 'volunteer_ato';
     const ROLE_APPLIC = 'applicant';
 
     const STATUS_ACTIVE = 1;
@@ -214,7 +215,7 @@ class User extends CActiveRecord
 
     public function getRecruiters()
     {
-        $recruitersRoles = array(self::ROLE_VOLONT, self::ROLE_ADMIN);
+        $recruitersRoles = array(self::ROLE_VOLONT, self::ROLE_VOLONT_ATO, self::ROLE_ADMIN);
 
         $criteria = new CDbCriteria;
         $criteria->addInCondition('role', $recruitersRoles);
