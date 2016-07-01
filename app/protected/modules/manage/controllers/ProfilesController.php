@@ -390,12 +390,12 @@ class ProfilesController extends Controller {
 	/**
 	 * Lists all models.
 	 */
-	public function actionIndex() {
-
+	public function actionIndex()
+	{
 		$this->prepareFilter();
 
 		$criteria = new CDbCriteria();
-		$with     = array();
+		$with = array();
 
 		if (($status = $this->fetchVariable('status')) !== false) {
 			$criteria->addInCondition('status', $status);
@@ -409,7 +409,7 @@ class ProfilesController extends Controller {
 		if (($gender = $this->fetchVariable('gender')) !== false) {
 			$criteria->addCondition('gender = "' . $gender . '"');
 		}
-        if (($disability = $this->fetchVariable('disability')) !== false) {
+		if (($disability = $this->fetchVariable('disability')) !== false) {
 			$criteria->addCondition('disability = "' . $disability . '"');
 		}
 		if (($ageMin = $this->fetchVariable('age_min')) !== false) {
@@ -430,22 +430,22 @@ class ProfilesController extends Controller {
 			$with[] = 'categories';
 			$criteria->addInCondition('category_id', $categories);
 		}
-        if ($desiredPositions = $this->fetchVariable('desiredPositions')) {
+		if ($desiredPositions = $this->fetchVariable('desiredPositions')) {
 			$with[] = 'desiredPositions';
 			$criteria->addInCondition('desiredPositions_desiredPositions.position_id', $desiredPositions);
 		}
 		if ($positions = $this->fetchVariable('positions')) {
-            $with[] = 'positions';
+			$with[] = 'positions';
 			$criteria->addInCondition('positions_positions.position_id', $positions);
 		}
 		if ($assistanceIds = $this->fetchVariable('assistanceIds')) {
 			$with[] = 'assistanceTypes';
 			$criteria->addInCondition('assistance_type_id', $assistanceIds);
 		}
-        if ($applicantTypeIds = $this->fetchVariable('applicantTypeIds')) {
-            $with[] = 'applicantTypes';
-            $criteria->addInCondition('applicant_type_id', $applicantTypeIds);
-        }
+		if ($applicantTypeIds = $this->fetchVariable('applicantTypeIds')) {
+			$with[] = 'applicantTypes';
+			$criteria->addInCondition('applicant_type_id', $applicantTypeIds);
+		}
 		if ($licensesIds = $this->fetchVariable('licensesIds')) {
 			$with[] = 'driverLicensesTypes';
 			$criteria->addInCondition('license_id', $licensesIds);
@@ -453,12 +453,12 @@ class ProfilesController extends Controller {
 		if ($recruiterId = $this->fetchVariable('recruiter_id')) {
 			$criteria->addCondition('recruiter_id = ' . $recruiterId);
 		}
-        if($addedTimeFrom = $this->fetchVariable('added_time_from')) {
-            $criteria->addCondition('added_time >= "'. date('Y-m-d 00:00:00', strtotime($addedTimeFrom)) . '"');
-        }
-        if($addedTimeTo = $this->fetchVariable('added_time_to')) {
-            $criteria->addCondition('added_time <= "'. date('Y-m-d 23:59:59', strtotime($addedTimeTo)) . '"');
-        }
+		if ($addedTimeFrom = $this->fetchVariable('added_time_from')) {
+			$criteria->addCondition('t.added_time >= "' . date('Y-m-d 00:00:00', strtotime($addedTimeFrom)) . '"');
+		}
+		if ($addedTimeTo = $this->fetchVariable('added_time_to')) {
+			$criteria->addCondition('t.added_time <= "' . date('Y-m-d 23:59:59', strtotime($addedTimeTo)) . '"');
+		}
 		if ($contactPhone = $this->fetchVariable('contact_phone')) {
 			$criteria->addSearchCondition('contact_phone', $contactPhone);
 		}
@@ -466,45 +466,45 @@ class ProfilesController extends Controller {
 			$criteria->addSearchCondition('email', $email);
 		}
 
-    if (($english = $this->fetchVariable('foreign_english')) !== false) {
+		if (($english = $this->fetchVariable('foreign_english')) !== false) {
 			$criteria->addCondition('foreign_english = "' . $english . '"');
 		}
-    if (($germany = $this->fetchVariable('foreign_germany')) !== false) {
+		if (($germany = $this->fetchVariable('foreign_germany')) !== false) {
 			$criteria->addCondition('foreign_germany = "' . $germany . '"');
 		}
-    if (($french = $this->fetchVariable('foreign_french')) !== false) {
-			$criteria->addCondition('foreign_french = "' . $french. '"');
+		if (($french = $this->fetchVariable('foreign_french')) !== false) {
+			$criteria->addCondition('foreign_french = "' . $french . '"');
 		}
-    if (($china = $this->fetchVariable('foreign_china')) !== false) {
+		if (($china = $this->fetchVariable('foreign_china')) !== false) {
 			$criteria->addCondition('foreign_china = "' . $china . '"');
 		}
 
-    if (($spain = $this->fetchVariable('foreign_spain')) !== false) {
-			$criteria->addCondition('foreign_spain = "' . $spain. '"');
+		if (($spain = $this->fetchVariable('foreign_spain')) !== false) {
+			$criteria->addCondition('foreign_spain = "' . $spain . '"');
 		}
 
-    //Search only volunter models when have added status
-    if(($onlyMy = $this->fetchVariable('only_my_comments')) !==false) {
-      $criteria->join = 'INNER JOIN cv_statuses ON t.id = cv_statuses.cv_id';
-      $criteria->addCondition('cv_statuses.operator_id = ' .  Yii::app()->user->id);
-      $criteria->distinct = true;
-    }
-    if(($meRecruiter = $this->fetchVariable('me_recruiter')) !==false) {
-        $criteria->addCondition('t.recruiter_id = ' .  Yii::app()->user->id);
-    }
+		//Search only volunter models when have added status
+		if (($onlyMy = $this->fetchVariable('only_my_comments')) !== false) {
+			$criteria->join = 'INNER JOIN cv_statuses ON t.id = cv_statuses.cv_id';
+			$criteria->addCondition('cv_statuses.operator_id = ' . Yii::app()->user->id);
+			$criteria->distinct = true;
+		}
+		if (($meRecruiter = $this->fetchVariable('me_recruiter')) !== false) {
+			$criteria->addCondition('t.recruiter_id = ' . Yii::app()->user->id);
+		}
 
 		if (!empty($with)) {
-			$criteria->with     = $with;
+			$criteria->with = $with;
 			$criteria->together = true;
 		}
 
 		$criteria->order = 'last_update DESC';
 
 		$dataProvider = new CActiveDataProvider('CvList', array(
-				'criteria'   => $criteria,
+				'criteria' => $criteria,
 				'pagination' => array(
 					'pageSize' => 20,
-					'pageVar'  => 'page',
+					'pageVar' => 'page',
 				),
 			)
 		);
