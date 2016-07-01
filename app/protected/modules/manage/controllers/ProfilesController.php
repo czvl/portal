@@ -24,15 +24,9 @@ class ProfilesController extends Controller {
 		return array(
 			array(
 				'allow',
-				'actions' => array('index', 'create'),
+				'actions' => array('index', 'view', 'create', 'update', 'export', 'invalid'),
 				'users'   => array('@'),
 			),
-            array('allow',
-                 'actions'=> array('view', 'update', 'export', 'invalid'),
-                 'expression' => array('ProfilesController', 'checkAtoAccess'),
-
-                 ),
-
 			array(
 				'allow',
 				'actions' => array('delete'),
@@ -262,7 +256,6 @@ class ProfilesController extends Controller {
                 position_id IS NULL',
         ]);
         $criteria->addCondition('is_active="yes"');
-
         $criteria->with = [
             'categories',
             'citiesJobLocations',
@@ -404,11 +397,6 @@ class ProfilesController extends Controller {
 		$criteria = new CDbCriteria();
 		$with     = array();
 
-         if((!Yii::app()->user->checkAccess(User::ROLE_VOLONT_ATO) )) {
-            $with[] = 'applicantTypes';
-            $criteria->addCondition('applicant_type_id !=3');
-            }
-
 		if (($status = $this->fetchVariable('status')) !== false) {
 			$criteria->addInCondition('status', $status);
 		}
@@ -509,6 +497,7 @@ class ProfilesController extends Controller {
 			$criteria->with     = $with;
 			$criteria->together = true;
 		}
+
 		$criteria->order = 'last_update DESC';
 
 		$dataProvider = new CActiveDataProvider('CvList', array(
@@ -565,26 +554,6 @@ class ProfilesController extends Controller {
 		}
 	}
 
-    // check ato profile for access
-    public function checkAtoAccess() {
-
-        $loadModel = new CvList();
-        $model = $loadModel->find('id=' . $_GET['id']);
-        // If profile is Ato profile
-        if(in_array('3', $model->applicantTypeIds)) {
-            // Check if user Ato Volont or manager/admin
-            if(Yii::app()->user->checkAccess(User::ROLE_VOLONT_ATO)) {
-                return true;
-                // if no - access denied
-            }   else {
-                return false;
-            }
-        }
-        // if profile not Ato - grant access
-        else {
-            return true;
-        }
-    }
 
 	public function actionExport() {
 		if (sizeof($this->toExport)) {

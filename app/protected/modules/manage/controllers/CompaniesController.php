@@ -30,10 +30,11 @@ class CompaniesController extends Controller
 				'actions' => array('create', 'update'),
 				'roles'   => array('administrator', 'manager'),
 			],
+
             [
                 'allow',
                 'actions' => array('delete'),
-                'roles'   => [User::ROLE_ADMIN],
+                'roles'   => array('adminisrator'),
             ],
 
             [
