@@ -21,16 +21,6 @@ return array(
         'bizRule' => null,
         'data' => null
     ),
-    'volunteer_ato' => array(
-        'type' => CAuthItem::TYPE_ROLE,
-        'description' => 'Волонтер АТО',
-        'bizRule' =>null,
-        'data'=> null,
-        'children' => array(
-            'volunteer'
-        ),
-
-    ),
     'employer' => array(
         'type' => CAuthItem::TYPE_ROLE,
         'description' => 'Роботодавець',
@@ -41,8 +31,7 @@ return array(
         'type' => CAuthItem::TYPE_ROLE,
         'description' => 'Менеджер',
         'children' => array(
-            'volunteer',
-            'volunteer_ato',
+            'volunteer'
         ),
         'bizRule' => null,
         'data' => null
@@ -53,7 +42,6 @@ return array(
         'children' => array(
             'manager',
             'volunteer',
-            'volunteer_ato',
         ),
         'bizRule' => null,
         'data' => null
