@@ -27,12 +27,21 @@ class ProfilesController extends Controller
         return array(
             array(
                 'allow',
-                'actions' => array('index', 'view', 'create', 'update', 'export', 'invalid'),
+                'actions' => array('index'),
                 'users' => array('@'),
             ),
+            array('allow',
+                 'actions' => array('view', 'update'),
+                  'expression' => array('ProfilesController', 'groupFilter')
+                 ),
+            array('allow',
+                 'actions' => array('create'),
+                  'roles' => array('volunteer', 'volunteer_ato')
+                 ),
+
             array(
                 'allow',
-                'actions' => array('delete'),
+                'actions' => array('delete', 'export'),
                 'roles' => array('administrator', 'manager'),
             ),
             array(
@@ -40,6 +49,26 @@ class ProfilesController extends Controller
                 'users' => array('*'),
             ),
         );
+    }
+
+    public function groupFilter() {
+
+       $loadModel = new CvList();
+       $model = $loadModel->find('id=' . $_GET['id']);
+       // If profile is Ato profile
+        if(in_array('3', $model->applicantTypeIds)) {
+           // Check if user Ato Volont or manager/admin
+           if(Yii::app()->user->checkAccess(User::ROLE_VOLONT_ATO)) {
+               return true;
+               // if no - access denied
+           }   else {
+              return false;
+           }
+       }
+       // if profile not Ato - grant access
+        else {
+            return true;
+       }
     }
 
 
@@ -454,10 +483,27 @@ class ProfilesController extends Controller
             $with[] = 'assistanceTypes';
             $criteria->addInCondition('assistance_type_id', $assistanceIds);
         }
+
+       if((!Yii::app()->user->checkAccess(User::ROLE_VOLONT_ATO))) {
+           //$with[] = 'applicantTypes';
+           //$criteria->addCondition('applicant_type_id', [1]);
+           $criteria->join = "JOIN ( SELECT DISTINCT cv_id
+                             FROM cv_to_applicant_type
+                             WHERE cv_id NOT IN
+                             (
+                             SELECT cv_id
+                             FROM cv_to_applicant_type
+                             WHERE applicant_type_id = 3
+                             )
+                             ) t2 ON t.id = t2.cv_id";
+
+          }
+
         if ($applicantTypeIds = $this->fetchVariable('applicantTypeIds')) {
             $with[] = 'applicantTypes';
             $criteria->addInCondition('applicant_type_id', $applicantTypeIds);
         }
+
         if ($licensesIds = $this->fetchVariable('licensesIds')) {
             $with[] = 'driverLicensesTypes';
             $criteria->addInCondition('license_id', $licensesIds);
@@ -504,6 +550,8 @@ class ProfilesController extends Controller
         if (($meRecruiter = $this->fetchVariable('me_recruiter')) !== false) {
             $criteria->addCondition('t.recruiter_id = ' . Yii::app()->user->id);
         }
+
+
 
         if (!empty($with)) {
             $criteria->with = $with;
