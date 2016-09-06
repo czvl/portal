@@ -484,18 +484,22 @@ class ProfilesController extends Controller
             $criteria->addInCondition('assistance_type_id', $assistanceIds);
         }
 
+        /** Check if user group has access to ATO profiles
+            IF ACCESS DENIED:
+            Select only profiles where not in ATO profiles list
+        */
        if((!Yii::app()->user->checkAccess(User::ROLE_VOLONT_ATO))) {
            //$with[] = 'applicantTypes';
            //$criteria->addCondition('applicant_type_id', [1]);
-           $criteria->join = "JOIN ( SELECT DISTINCT cv_id
-                             FROM cv_to_applicant_type
-                             WHERE cv_id NOT IN
+           $criteria->join = "JOIN ( SELECT DISTINCT id
+                             FROM cv_list
+                             WHERE id NOT IN
                              (
                              SELECT cv_id
                              FROM cv_to_applicant_type
                              WHERE applicant_type_id = 3
                              )
-                             ) t2 ON t.id = t2.cv_id";
+                             ) t2 ON t.id = t2.id";
 
           }
 
