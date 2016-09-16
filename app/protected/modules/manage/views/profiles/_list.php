@@ -114,6 +114,8 @@
                         - <?php if (!empty($status->operator)) {
                             echo CHtml::link($status->operator->first_name . ' ' 
                             . $status->operator->last_name, array('/manage/reqruiter', 'id' => $status->operator->id)); 
+                        } else {
+                            echo "Оператор не визначений";
                         }
                         ?>] </em>
                     </div>
