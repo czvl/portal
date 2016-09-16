@@ -35,13 +35,13 @@ class ProfilesController extends Controller
                   'expression' => array('ProfilesController', 'groupFilter')
                  ),
             array('allow',
-                 'actions' => array('create'),
+                 'actions' => array('create', 'export'),
                   'roles' => array('volunteer', 'volunteer_ato')
                  ),
 
             array(
                 'allow',
-                'actions' => array('delete', 'export'),
+                'actions' => array('delete'),
                 'roles' => array('administrator', 'manager'),
             ),
             array(
@@ -61,9 +61,14 @@ class ProfilesController extends Controller
            if(Yii::app()->user->checkAccess(User::ROLE_VOLONT_ATO)) {
                return true;
                // if no - access denied
-           }   else {
+           }
+            else {
               return false;
            }
+       }
+       // if categories is empty - grant access
+       if(empty($model->applicantTypeIds)) {
+           return true;
        }
        // if profile not Ato - grant access
         else {
