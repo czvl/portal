@@ -111,11 +111,11 @@
                     <div class="list-statuses">
                         <?php echo $status->message; ?><br />
                         <em>[<?php echo Yii::app()->dateFormatter->formatDateTime($status->added_time, "short"); ?>
-                        - <?php echo 
-                        ( $status->operator )
-                        ? CHtml::link($status->operator->first_name . ' ' . $status->operator->last_name, array('/manage/reqruiter', 'id' => $status->operator->id)); 
-                        : 'Operator not found'
-                        ?>]</em>
+                        - <?php if (!empty($status->operator)) {
+                            echo CHtml::link($status->operator->first_name . ' ' 
+                            . $status->operator->last_name, array('/manage/reqruiter', 'id' => $status->operator->id)); 
+                        }
+                        ?>] </em>
                     </div>
                     <?php } ?>
                 <?php } ?>
