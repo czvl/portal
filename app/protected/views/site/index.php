@@ -184,19 +184,21 @@
 
 
                         <h2  style="color: #f0bf00">Дніпро</h2>
-
-                        +380 (95) 726-80-40, czvl.dp@gmail.com
+                            <p> +380 (95) 726-80-40, czvl.dp@gmail.com</p>
                         <h2 style="color: #f0bf00">Запоріжжя</h2>
-                        +380 (99) 290-67-71, czvl.zp@gmail.com
+                        <p>+380 (99) 290-67-71, czvl.zp@gmail.com</p>
                         <h2 style="color: #f0bf00">Харків</h2>
-                        +380 (50) 400-98-67, +380 (97) 365-95-05, kharkov.czvl@gmail.com
+                        <p>+380 (50) 400-98-67, +380 (97) 365-95-05, kharkov.czvl@gmail.com</p>
                         <h2 style="color: #f0bf00">Краматорськ</h2>
-                        +380 (99) 539-00-23, +380 (95) 919 4416, kram.czvl@gmail.com
+                        <p>+380 (99) 539-00-23, +380 (95) 919 4416, kram.czvl@gmail.com</p>
                         <h2 style="color: #f0bf00">Маріуполь</h2>
-                        +380 (97) 073-18-77, bcmariupol@gmail.com, cторінка проекту BizClub в Маріуполі на Facebook
+                        <p>
+                            +380 (97) 073-18-77, bcmariupol@gmail.com, cторінка проекту BizClub в Маріуполі на
+                            <a href="https://www.facebook.com/BcMariupol/?fref=ts" target="_blank">Facebook</a>
+                        </p>
 
-
-                        <h2>Для ЗМІ: +380 (63) 415-44-79</h2>
+                        <h2>Для ЗМІ:</h2>
+                        <p> +380 (63) 415-44-79</p>
 
                         <p>Наша сторінка у <a href="https://facebook.com/czvl.staff" target="_blank" rel="nofollow">Facebook</a>.</p>
                         <p>Наш <a href="/blog/">Блог</a>.</p>
